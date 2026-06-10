@@ -41,7 +41,7 @@
 
                     <!-- Logo -->
                     <img class="img-fluid mb-5 mh-70" alt="Logo"
-                        src="{{ url('assets/img/' . $setting->logo) }}">
+                        src="{{ url('assets/img/02_stacked.png') }}">
 
                 </div>
             </div> <!-- / .row -->

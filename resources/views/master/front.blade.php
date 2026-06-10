@@ -35,11 +35,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon Icons-->
-    <link rel="icon" type="image/png" href="{{ url('assets/img/' . $setting->favicon) }}">
-    <link rel="apple-touch-icon" href="{{ url('assets/img/' . $setting->favicon) }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ url('assets/img/' . $setting->favicon) }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets/img/' . $setting->favicon) }}">
-    <link rel="apple-touch-icon" sizes="167x167" href="{{ url('assets/img/' . $setting->favicon) }}">
+    <link rel="icon" type="image/png" href="{{ url('assets/img/04_icon_only.png') }}">
+    <link rel="apple-touch-icon" href="{{ url('assets/img/04_icon_only.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url('assets/img/04_icon_only.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets/img/04_icon_only.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ url('assets/img/04_icon_only.png') }}">
 
     <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
     <link rel="stylesheet" media="screen" href="{{ asset('assets/front/css/plugins.min.css') }}">
@@ -529,7 +529,7 @@ body_theme4 @endif
                             <!-- Logo-->
                             <div class="site-branding topbar-logo">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
-                                    <img src="{{ url('assets/img/' . $setting->logo) }}" alt="{{ $setting->title }}">
+                                    <img src="{{ url('assets/img/01_icon_wordmark_horizontal.png') }}" alt="{{ $setting->title }}">
                                 </a>
                             </div>
 
@@ -885,6 +885,9 @@ body_theme4 @endif
                 <div class="col-lg-4 col-md-6">
                     <!-- Contact Info-->
                     <section class="widget widget-light-skin">
+                        <div class="mb-4">
+                            <img src="{{ url('assets/img/03_monochrome_horizontal.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
+                        </div>
                         <h3 class="widget-title">{{ __('Get In Touch') }}</h3>
                         <p class="mb-1"><strong>{{ __('Address') }}: </strong> {{ $setting->footer_address }}</p>
                         <p class="mb-1"><strong>{{ __('Phone') }}: </strong> {{ $setting->footer_phone }}</p>

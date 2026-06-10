@@ -41,7 +41,7 @@
             <div class="logo-header">
 
                 <a href="{{ route('back.dashboard') }}" class="logo">
-                    <img src="{{ $setting->logo ? url('assets/img/' . $setting->logo) : url('assets/img/placeholder.png') }}"
+                    <img src="{{ url('assets/img/05_vertical_stacked.png') }}"
                         alt="navbar brand" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
