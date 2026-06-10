@@ -100,6 +100,7 @@
                           </div>
                         </div>
                         <input type="text" name="honeypot" id="honeypot" value="" style="display:none;">
+                        {{-- 
                         @if ($setting->recaptcha == 1)
                         <div class="col-lg-12">
                             {!! NoCaptcha::renderJs() !!}
@@ -112,6 +113,7 @@
                             @endif
                         </div>
                         @endif
+                        --}}
 
                         <div class="col-lg-12 mb-4">
                           <p>{{ __("Already have an account ?") }} <a class="text-base-color" href="{{ route("user.login") }}">{{ __('Login now') }}</a></p>

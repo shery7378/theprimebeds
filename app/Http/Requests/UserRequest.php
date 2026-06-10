@@ -32,7 +32,8 @@ class UserRequest extends FormRequest
         $check = Auth::check() ? 'nullable|min:6|max:16' : "min:6|max:16|confirmed";
 
         return [
-            'g-recaptcha-response' => $setting->recaptcha == 1 ? 'required|captcha' : 'nullable',
+            // 'g-recaptcha-response' => $setting->recaptcha == 1 ? 'required|captcha' : 'nullable',
+            'g-recaptcha-response' => 'nullable',
             'first_name' => $password.'|max:255',
             'photo'      => [
             'mimes:jpeg,jpg,png,svg', 
