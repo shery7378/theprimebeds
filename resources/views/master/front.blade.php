@@ -545,9 +545,9 @@ body_theme4 @endif
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="topbar-inner d-flex align-items-center" style="gap: 30px;">
+                        <div class="topbar-inner d-flex align-items-center justify-content-between" style="gap: 30px;">
                             <!-- Logo-->
-                            <div class="site-branding topbar-logo" style="margin-right: auto;">
+                            <div class="site-branding topbar-logo">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
                                     <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}">
                                 </a>
@@ -808,12 +808,7 @@ body_theme4 @endif
         <div class="navbar">
             <div class="container">
                 <div class="row g-3 w-100">
-                    @if ($setting->is_show_category == 1)
-                        <div class="col-lg-3">
-                            @include('includes.categories')
-                        </div>
-                    @endif
-                    <div class="{{ $setting->is_show_category == 1 ? 'col-lg-9' : 'col-lg-12' }} d-flex justify-content-center">
+                    <div class="col-lg-12 d-flex justify-content-center">
                         <div class="nav-inner">
                             @include('master.inc.site-menu')
                         </div>
