@@ -529,7 +529,7 @@ body_theme4 @endif
                             <!-- Logo-->
                             <div class="site-branding topbar-logo">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
-                                    <img src="{{ url('assets/img/01_icon_wordmark_horizontal.png') }}" alt="{{ $setting->title }}">
+                                    <img src="{{ url('assets/img/prime_beds_logo_transparent.png') }}" alt="{{ $setting->title }}">
                                 </a>
                             </div>
 
@@ -886,7 +886,7 @@ body_theme4 @endif
                     <!-- Contact Info-->
                     <section class="widget widget-light-skin">
                         <div class="mb-4">
-                            <img src="{{ url('assets/img/03_monochrome_horizontal.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
+                            <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
                         </div>
                         <h3 class="widget-title">{{ __('Get In Touch') }}</h3>
                         <p class="mb-1"><strong>{{ __('Address') }}: </strong> {{ $setting->footer_address }}</p>

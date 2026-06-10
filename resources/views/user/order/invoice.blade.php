@@ -41,7 +41,7 @@
 
                     <!-- Logo -->
                     <img class="img-fluid mb-5 mh-70" alt="Logo"
-                        src="{{ url('assets/img/02_stacked.png') }}">
+                        src="{{ url('assets/img/prime_beds_logo5_transparent.png') }}">
 
                 </div>
             </div> <!-- / .row -->
