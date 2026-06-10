@@ -618,7 +618,7 @@ body_theme4 @endif
                                 {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
 
                                 {{-- User Login / Profile --}}
-                                <div class="toolbar-item d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px;">
+                                <div class="d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px; margin-right: 20px;">
                                     @if (!Auth::user())
                                         <a href="{{ route('user.login') }}"
                                            style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
