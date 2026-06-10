@@ -255,7 +255,7 @@
                     @if (isset($hero_banner))
                         <div class="col-lg-4 d-none d-lg-block">
                             <a href="{{ $hero_banner['url1'] }}" class="sright-image">
-                                <img src="{{ url('assets/img/' . $hero_banner['img1']) }}" alt="">
+                                <img src="{{ url('assets/img/' . $hero_banner['img1']) }}" alt="" style="object-fit: cover; width: 100%; height: 100%;">
                                 <div class="inner-content">
 
                                     @if (isset($hero_banner['subtitle1']))
@@ -272,7 +272,7 @@
                                 </div>
                             </a>
                             <a href="{{ $hero_banner['url2'] }}" class="sright-image mb-0">
-                                <img src="{{ url('assets/img/' . $hero_banner['img2']) }}" alt="">
+                                <img src="{{ url('assets/img/' . $hero_banner['img2']) }}" alt="" style="object-fit: cover; width: 100%; height: 100%;">
                                 <div class="inner-content">
                                     @if (isset($hero_banner['subtitle2']))
                                         <p
