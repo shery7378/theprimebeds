@@ -178,7 +178,7 @@
     {{-- ==================== NEW TOP BANNER (from new column) ==================== --}}
     @if (isset($top_banner) && $top_banner && isset($top_banner['top_banner_img']))
         <div class="top-banner-section mb-4">
-            <div class="container-fluid" style="padding: 5px 30px;">
+            <div class="container">
                 <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block position-relative top-banner-link">
                     <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" class="w-100 rounded" style="height: auto;">
                     @if (isset($top_banner['top_banner_title']) && $top_banner['top_banner_title'])
@@ -194,7 +194,7 @@
 
     @if ($setting->is_slider == 1)
         <div class="slider-area-wrapper">
-            <div class="container-fluid" style="padding: 5px 30px;">
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
                         <!-- Main Slider-->
@@ -860,7 +860,7 @@
     @endif
 
     {{-- ==================== CLIENT TESTIMONIALS SECTION ==================== --}}
-    <section class="testimonials-section mt-50 mb-50" style="background: linear-gradient(135deg, #f8f9fb 0%, #e8ecf5 100%); padding: 60px 0; border-radius: 15px; margin: 0 15px;">
+    <section class="testimonials-section mt-50 mb-50 container" style="background: linear-gradient(135deg, #f8f9fb 0%, #e8ecf5 100%); padding: 60px 40px; border-radius: 15px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -1324,7 +1324,7 @@
 
 
     {{-- Interactive Animated Counters Section --}}
-    <section class="animated-counters-section mt-50 mb-50" style="background: linear-gradient(135deg, #f8f9fb 0%, #e2e6ec 100%); padding: 60px 0; border-radius: 12px; margin: 0 15px;">
+    <section class="animated-counters-section mt-50 mb-50 container" style="background: linear-gradient(135deg, #f8f9fb 0%, #e2e6ec 100%); padding: 60px 40px; border-radius: 12px;">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4 col-sm-6 mb-4">
