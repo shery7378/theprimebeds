@@ -427,6 +427,7 @@
         }
     </style>
 
+    @stack('styles')
 </head>
 <!-- Body-->
 
