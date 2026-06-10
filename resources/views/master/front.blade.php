@@ -89,7 +89,7 @@
             transition: opacity 0.25s ease;
         }
         .topbar-redesigned .topbar-logo .site-logo:hover {
-            opacity: 0.85;
+            opacity: 0.85;   
         }
 
         /* --- Search Box Wrapper --- */
