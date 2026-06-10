@@ -185,16 +185,16 @@
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
-                    <div class="carousel-inner rounded" style="overflow: hidden; max-height: 400px;">
+                    <div class="carousel-inner rounded" style="overflow: hidden; max-height: 650px;">
                         <!-- Slide 1 -->
                         <div class="carousel-item active">
                             <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block w-100">
-                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="d-block w-100" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" style="object-fit: cover; max-height: 400px;">
+                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="d-block w-100" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" style="object-fit: cover; max-height: 650px;">
                             </a>
                         </div>
                         <!-- Slide 2 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 2" style="object-fit: cover; max-height: 400px;">
+                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 2" style="object-fit: cover; max-height: 650px;">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Save Up To 30%</h3>
                                 <p>Enjoy massive discounts on selected items this holiday season.</p>
@@ -202,7 +202,7 @@
                         </div>
                         <!-- Slide 3 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 3" style="object-fit: cover; max-height: 400px;">
+                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 3" style="object-fit: cover; max-height: 650px;">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Elegant Designs</h3>
                                 <p>Transform your bedroom with our modern and classic styles.</p>
