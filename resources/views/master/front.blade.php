@@ -64,6 +64,19 @@
         {{ $setting->custom_css }}
 
         /* =============================================
+           EXPAND CONTAINER ON LARGE SCREENS
+           ============================================= */
+        @media (min-width: 1400px) {
+            .container { max-width: 1320px; }
+        }
+        @media (min-width: 1600px) {
+            .container { max-width: 1500px; }
+        }
+        @media (min-width: 1900px) {
+            .container { max-width: 1700px; }
+        }
+
+        /* =============================================
            TOPBAR REDESIGN — Premium Header Styles
            ============================================= */
 
