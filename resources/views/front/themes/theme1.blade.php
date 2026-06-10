@@ -179,14 +179,37 @@
     @if (isset($top_banner) && $top_banner && isset($top_banner['top_banner_img']))
         <div class="top-banner-section mb-4">
             <div class="container">
-                <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block position-relative top-banner-link">
-                    <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" class="w-100 rounded" style="height: auto;">
-                    @if (isset($top_banner['top_banner_title']) && $top_banner['top_banner_title'])
-                        <div class="top-banner-overlay" style="position:absolute; bottom:0; left:0; right:0; padding:20px 30px; background:linear-gradient(transparent, rgba(0,0,0,0.6)); border-bottom-left-radius: 0.25rem; border-bottom-right-radius: 0.25rem;">
-                            <h2 style="color:{{ isset($top_banner['top_banner_title_color']) && $top_banner['top_banner_title_color'] ? $top_banner['top_banner_title_color'] : '#fff' }}; margin:0; font-size:24px; font-weight:700;">{{ $top_banner['top_banner_title'] }}</h2>
+                <div id="topBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner rounded" style="overflow: hidden; max-height: 400px;">
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active">
+                            <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block w-100">
+                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="d-block w-100" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" style="object-fit: cover; max-height: 400px;">
+                            </a>
                         </div>
-                    @endif
-                </a>
+                        <!-- Slide 2 -->
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 2" style="object-fit: cover; max-height: 400px;">
+                            <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
+                                <h3 class="text-white">Save Up To 30%</h3>
+                                <p>Enjoy massive discounts on selected items this holiday season.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 3" style="object-fit: cover; max-height: 400px;">
+                            <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
+                                <h3 class="text-white">Elegant Designs</h3>
+                                <p>Transform your bedroom with our modern and classic styles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endif
