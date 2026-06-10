@@ -226,7 +226,7 @@
                                 @foreach ($sliders as $slider)
                                     <div class="item
                                                 @if (DB::table('languages')->where('is_default', 1)->first()->rtl == 1) d-flex justify-content-end @endif
-                                                " style="background: url('{{ url('assets/img/' . $slider->photo) }}')">
+                                                " style="background: url('{{ url('assets/img/' . $slider->photo) }}') center/cover no-repeat;">
                                         <div class="item-inner">
                                             <div class="from-bottom">
                                                 {{-- @if ($slider->logo)
