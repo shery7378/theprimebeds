@@ -15,8 +15,16 @@
     }
 @endphp
 
+<style>
+    .site-menu ul li a.main-link {
+        white-space: nowrap !important;
+    }
+</style>
 <nav class="site-menu">
     <ul>
+        <li>
+            <a class="main-link" href="{{ route('front.index') }}">{{ __('Home') }}</a>
+        </li>
         @foreach ($categories as $category)
             @php
                 $categoryHref = route('front.catalog') . '?category=' . $category->slug;
@@ -54,6 +62,9 @@
         </li>
         <li>
             <a class="main-link" href="{{ route('front.page', 'about-us') }}">{{ __('About Us') }}</a>
+        </li>
+        <li>
+            <a class="main-link" href="{{ route('front.order.track') }}">{{ __('Track Order') }}</a>
         </li>
     </ul>
 </nav>

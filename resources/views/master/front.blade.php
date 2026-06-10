@@ -68,7 +68,7 @@
            ============================================= */
 
         .topbar-redesigned {
-            padding: 12px 0;
+            padding: 0;
             background: #ffffff;
             border-bottom: 1px solid #e8ecf1;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
@@ -85,7 +85,7 @@
         }
         .topbar-redesigned .topbar-logo .site-logo {
             display: block;
-            width: 100px;
+            width: 140px;
             transition: opacity 0.25s ease;
         }
         .topbar-redesigned .topbar-logo .site-logo:hover {
@@ -95,8 +95,10 @@
         /* --- Search Box Wrapper --- */
         .topbar-redesigned .topbar-search-wrap {
             flex: 1 1 auto;
-            max-width: 520px;
+            max-width: 290px;
+            min-width: 200px;
             padding: 0;
+            margin: 0 15px;
         }
         .topbar-redesigned .topbar-search-wrap .search-box-inner {
             width: 100%;
@@ -147,6 +149,11 @@
             color: #3c4858 !important;
             box-shadow: none !important;
             height: auto !important;
+        }
+        
+        /* Reduce Footer Padding */
+        .site-footer {
+            padding-top: 10px !important;
         }
         .topbar-redesigned .topbar-search-input::placeholder {
             color: #a0aec0;
@@ -213,7 +220,7 @@
             width: 1px;
             height: 36px;
             background: linear-gradient(to bottom, transparent, #d0d6e0, transparent);
-            margin: 0 14px;
+            margin: 0 8px;
             flex-shrink: 0;
         }
 
@@ -454,7 +461,7 @@ body_theme4 @endif
     <!-- Header-->
 
     <header class="site-header navbar-sticky">
-        <div class="menu-top-area">
+        <div class="menu-top-area d-none">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -525,11 +532,11 @@ body_theme4 @endif
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="topbar-inner d-flex align-items-center justify-content-between">
+                        <div class="topbar-inner d-flex align-items-center" style="gap: 30px;">
                             <!-- Logo-->
-                            <div class="site-branding topbar-logo">
+                            <div class="site-branding topbar-logo" style="margin-right: auto;">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
-                                    <img src="{{ url('assets/img/prime_beds_logo_transparent.png') }}" alt="{{ $setting->title }}">
+                                    <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}">
                                 </a>
                             </div>
 
@@ -548,7 +555,7 @@ body_theme4 @endif
                                             <input type="hidden" name="category" value="" id="search__category">
                                             <input class="form-control topbar-search-input" type="text"
                                                 data-target="{{ route('front.search.suggest') }}" id="__product__search"
-                                                name="search" placeholder="{{ __('Search by product name...') }}">
+                                                name="search" placeholder="{{ __('Search...') }}">
                                             <span class="input-group-btn">
                                                 <button type="submit" class="topbar-search-btn"><i class="icon-search"></i></button>
                                             </span>
@@ -588,6 +595,7 @@ body_theme4 @endif
                                 <div class="topbar-divider d-none d-md-block"></div>
 
                                 {{-- Contact Info --}}
+                                {{--
                                 @if (isset($setting->contact_number))
                                 <div class="d-none d-md-flex align-items-center topbar-contact-wrap">
                                     <div class="topbar-contact-icon">
@@ -606,11 +614,11 @@ body_theme4 @endif
                                 </div>
                                 @endif
 
-                                {{-- Divider --}}
-                                <div class="topbar-divider d-none d-md-block"></div>
+                                --}}
+                                {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
 
                                 {{-- User Login / Profile --}}
-                                <div class="toolbar-item d-none d-md-flex align-items-center">
+                                <div class="toolbar-item d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px;">
                                     @if (!Auth::user())
                                         <a href="{{ route('user.login') }}"
                                            style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
@@ -619,21 +627,19 @@ body_theme4 @endif
                                             <span style="display:inline-flex;align-items:center;justify-content:center;
                                                          width:32px;height:32px;border-radius:50%;
                                                          border:2px solid currentColor;">
-                                                <i class="icon-user" style="font-size:15px;line-height:1;"></i>
+                                                <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
                                             </span>
                                             <span class="d-none d-lg-inline">{{ __('Login') }}</span>
                                         </a>
                                     @else
                                         <div class="t-h-dropdown">
-                                            <div class="main-link" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:.85rem;font-weight:600;">
+                                            <div class="main-link" style="display:inline-flex;align-items:center;cursor:pointer;">
                                                 <span style="display:inline-flex;align-items:center;justify-content:center;
                                                              width:32px;height:32px;border-radius:50%;
                                                              background:{{ $setting->primary_color ?? '#4e73df' }};
                                                              color:#fff;flex-shrink:0;">
-                                                    <i class="icon-user" style="font-size:15px;line-height:1;"></i>
+                                                    <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
                                                 </span>
-                                                <span class="d-none d-lg-inline">{{ Auth::user()->first_name }}</span>
-                                                <i class="icon-chevron-down" style="font-size:10px;"></i>
                                             </div>
                                             <div class="t-h-dropdown-menu" style="min-width:160px;">
                                                 <a href="{{ route('user.dashboard') }}">
@@ -794,11 +800,11 @@ body_theme4 @endif
                             @include('includes.categories')
                         </div>
                     @endif
-                    <div class="col-lg-8 d-flex justify-content-between">
+                    <div class="{{ $setting->is_show_category == 1 ? 'col-lg-9' : 'col-lg-12' }} d-flex justify-content-center" style="padding-right: 280px;">
                         <div class="nav-inner">
                             @include('master.inc.site-menu')
                         </div>
-                        {{-- ===== Navbar Social Icons ===== --}}
+                        {{-- ===== Navbar Social Icons =====
                         @if($socials->isNotEmpty())
                         <div class="d-none d-lg-flex align-items-center" style="gap:8px;margin-left:auto;padding-left:20px;">
                             @php
@@ -824,7 +830,7 @@ body_theme4 @endif
                                 @endif
                             @endforeach
                         </div>
-                        @endif
+                        @endif --}}
                         @php
                             $free_shipping = DB::table('shipping_services')
                                 ->whereStatus(1)
@@ -886,7 +892,7 @@ body_theme4 @endif
                     <!-- Contact Info-->
                     <section class="widget widget-light-skin">
                         <div class="mb-4">
-                            <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
+                            <img src="{{ url('assets/img/prime_beds_logo_transparent.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
                         </div>
                         <h3 class="widget-title">{{ __('Get In Touch') }}</h3>
                         <p class="mb-1"><strong>{{ __('Address') }}: </strong> {{ $setting->footer_address }}</p>
