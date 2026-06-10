@@ -813,7 +813,7 @@ body_theme4 @endif
                             @include('includes.categories')
                         </div>
                     @endif
-                    <div class="{{ $setting->is_show_category == 1 ? 'col-lg-9' : 'col-lg-12' }} d-flex justify-content-center" style="padding-right: 280px;">
+                    <div class="{{ $setting->is_show_category == 1 ? 'col-lg-9' : 'col-lg-12' }} d-flex justify-content-center">
                         <div class="nav-inner">
                             @include('master.inc.site-menu')
                         </div>
