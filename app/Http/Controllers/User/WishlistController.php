@@ -40,9 +40,11 @@ class WishlistController extends Controller
         $user = Auth::user();
 
         if($user){
-            if(Wishlist::where('user_id','=',$user->id)->where('item_id','=',$id)->exists())
+            $wishlist = Wishlist::where('user_id','=',$user->id)->where('item_id','=',$id)->first();
+            if($wishlist)
             {
-                return response()->json(['status'=>2,'message'=>__('Already Added To Wishlist.')]);
+                $wishlist->delete();
+                return response()->json(['count' => Wishlist::where('user_id','=',$user->id)->count() ,'status'=>3,'message'=>__('Successfully Removed From Wishlist.')]);
             }
     
             $user->wishlists()->create([

@@ -1283,7 +1283,17 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/scripts.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.plugin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=2') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=4') }}"></script>
+    
+    @if(Auth::check())
+    @php
+        $wishlist_item_ids = \App\Models\Wishlist::where('user_id', Auth::user()->id)->pluck('item_id')->toArray();
+    @endphp
+    <script>
+        window.user_wishlist_items = @json($wishlist_item_ids);
+    </script>
+    @endif
+
     <script>
         $(document).ready(function() {
             $(document).on('click', '.product-card', function(e) {

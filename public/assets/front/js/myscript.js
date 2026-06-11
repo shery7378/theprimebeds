@@ -704,6 +704,11 @@ $(function ($) {
           location.href = response.link;
         } else if (response.status == 2) {
           dangerNotification(response.message);
+        } else if (response.status == 3) {
+          $(".wishlist_count").text(response.count);
+          $btn.removeClass("added");
+          $btn.html('<i class="icon-heart"></i>');
+          successNotification(response.message);
         } else {
           $(".wishlist1").addClass("d-none");
           $(".wishlist2").removeClass("d-none");
@@ -1384,4 +1389,20 @@ $(window).on("load", function (event) {
       }, mainbs.announcement_delay * 1000);
     }
   }
+});
+
+$(document).ready(function() {
+    if (typeof window.user_wishlist_items !== 'undefined' && window.user_wishlist_items.length > 0) {
+        $('.wishlist_store').each(function() {
+            let href = $(this).attr('href');
+            if (href) {
+                let parts = href.split('/');
+                let id = parseInt(parts[parts.length - 1]);
+                if (window.user_wishlist_items.includes(id)) {
+                    $(this).addClass("added");
+                    $(this).html('<svg viewBox="0 0 24 24" width="26" height="26" stroke="#E33535" stroke-width="2" fill="#E33535" stroke-linecap="round" stroke-linejoin="round" style="position: relative; top: -1px; left: -1px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
+                }
+            }
+        });
+    }
 });
