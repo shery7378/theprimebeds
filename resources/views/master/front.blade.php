@@ -1252,7 +1252,7 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/scripts.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.plugin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=2') }}"></script>
     <script>
         $(document).ready(function() {
             $(document).on('click', '.product-card', function(e) {
