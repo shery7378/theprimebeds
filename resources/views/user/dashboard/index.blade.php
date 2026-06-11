@@ -23,20 +23,12 @@
   <div class="row">
          @include('includes.user_sitebar')
           <div class="col-lg-8">
-            <div class="card">
+            <div class="card" style="border-radius: 20px; box-shadow: 0 4px 24px rgba(26,58,92,.10); border: none;">
                 <div class="card-body">
                     <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                         <form  class="row" action="{{route('user.profile.update')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="avater" class="form-label">Default file input example</label>
-                                    <input class="form-control" type="file" name="photo" id="avater">
-                                @error('photo')
-                                <p class="text-danger">{{$message}}</p>
-                                @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                 <label for="account-fn">{{__('First Name')}}</label>
