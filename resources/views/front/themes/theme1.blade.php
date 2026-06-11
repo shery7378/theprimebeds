@@ -226,7 +226,8 @@
                                 items.forEach(function(img) {
                                     if (img !== firstImg) {
                                         img.style.height = targetHeight + 'px';
-                                        img.style.objectFit = 'cover';
+                                        img.style.objectFit = 'fill';
+                                        img.style.width = '100%';
                                     }
                                 });
                             }
