@@ -108,8 +108,8 @@
         /* --- Search Box Wrapper --- */
         .topbar-redesigned .topbar-search-wrap {
             flex: 1 1 auto;
-            max-width: 290px;
-            min-width: 200px;
+            max-width: 420px;
+            min-width: 250px;
             padding: 0;
             margin: 0 15px;
         }
@@ -134,7 +134,7 @@
             border: none;
             border-right: 1px solid #e2e6ec;
             background: transparent;
-            padding: 10px 16px;
+            padding: 11px 18px;
             font-size: 13px;
             font-weight: 500;
             color: #3c4858;
@@ -157,7 +157,7 @@
         .topbar-redesigned .topbar-search-input {
             border: none !important;
             background: transparent !important;
-            padding: 10px 16px !important;
+            padding: 11px 18px !important;
             font-size: 14px !important;
             color: #3c4858 !important;
             box-shadow: none !important;
