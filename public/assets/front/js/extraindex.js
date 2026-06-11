@@ -20,12 +20,15 @@ $(function ($) {
   // Flash Deal Area Start
   var $hero_slider_main = $(".hero-slider-main");
   $hero_slider_main.owlCarousel({
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
     navText: [],
     nav: true,
     dots: true,
     loop: true,
     autoplay: true,
-    autoplayTimeout: 7000,
+    autoplayTimeout: 3000,
+    smartSpeed: 800,
     items: 1,
   });
 

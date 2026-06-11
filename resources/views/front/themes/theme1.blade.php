@@ -203,9 +203,28 @@
                 @media (max-width: 575px) {
                     .top-banner-img { height: 260px !important; }
                 }
+                
+                /* Custom Fade Transition for Carousel */
+                .carousel-fade .carousel-item {
+                    opacity: 0;
+                    transition: opacity 0.3s ease-in-out;
+                    transform: none !important;
+                }
+                .carousel-fade .carousel-item.active,
+                .carousel-fade .carousel-item-next.carousel-item-left,
+                .carousel-fade .carousel-item-prev.carousel-item-right {
+                    z-index: 1;
+                    opacity: 1;
+                }
+                .carousel-fade .active.carousel-item-left,
+                .carousel-fade .active.carousel-item-right {
+                    z-index: 0;
+                    opacity: 0;
+                    transition: opacity 0s 0.3s;
+                }
             </style>
             <div class="container-fluid p-0">
-                <div id="topBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div id="topBannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
