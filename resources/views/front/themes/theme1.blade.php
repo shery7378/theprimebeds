@@ -212,6 +212,37 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var bannerCarousel = document.getElementById('topBannerCarousel');
+                if (bannerCarousel) {
+                    var firstImg = bannerCarousel.querySelector('.carousel-item:first-child img');
+                    function setBannerHeight() {
+                        if (firstImg) {
+                            firstImg.style.height = 'auto';
+                            var targetHeight = firstImg.offsetHeight;
+                            if (targetHeight > 0) {
+                                var items = bannerCarousel.querySelectorAll('.carousel-item img');
+                                items.forEach(function(img) {
+                                    if (img !== firstImg) {
+                                        img.style.height = targetHeight + 'px';
+                                        img.style.objectFit = 'cover';
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    // Run on load
+                    if (firstImg.complete) {
+                        setBannerHeight();
+                    } else {
+                        firstImg.addEventListener('load', setBannerHeight);
+                    }
+                    // Run on resize
+                    window.addEventListener('resize', setBannerHeight);
+                }
+            });
+        </script>
     @endif
     {{-- ==================== END NEW TOP BANNER ==================== --}}
 
