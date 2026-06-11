@@ -52,7 +52,51 @@
                 </div>
             </div>
 
-            {{-- ===== STATS GRID ===== --}}
+            {{-- ===== QUICK ACTIONS ===== --}}
+            {{--
+            <div class="merchant-quick-actions mb-4">
+                <h6 class="merchant-section-title mb-3">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    {{ __('Quick Actions') }}
+                </h6>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <a href="{{ route('user.merchant.catalog') }}" class="merchant-quick-card">
+                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#6366f1,#818cf8)">
+                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            </span>
+                            <span>{{ __('Add to Store') }}</span>
+                        </a>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <a href="{{ route('user.merchant.my_products') }}" class="merchant-quick-card">
+                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">
+                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                            </span>
+                            <span>{{ __('Manage Products') }}</span>
+                        </a>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <a href="{{ route('front.merchant.store', $user->store_name) }}" target="_blank" class="merchant-quick-card">
+                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#22c55e,#4ade80)">
+                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </span>
+                            <span>{{ __('View My Store') }}</span>
+                        </a>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <a href="{{ route('user.profile') }}" class="merchant-quick-card">
+                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">
+                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            </span>
+                            <span>{{ __('Edit Profile') }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            --}}
+
+{{-- ===== STATS GRID ===== --}}
             <div class="row merchant-stats-grid mb-4">
 
                 {{-- Total Earnings --}}
@@ -171,49 +215,7 @@
                 @endif
             </div>
 
-            {{-- ===== QUICK ACTIONS ===== --}}
-            <div class="merchant-quick-actions mt-4">
-                <h6 class="merchant-section-title mb-3">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    {{ __('Quick Actions') }}
-                </h6>
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <a href="{{ route('user.merchant.catalog') }}" class="merchant-quick-card">
-                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#6366f1,#818cf8)">
-                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                            </span>
-                            <span>{{ __('Add to Store') }}</span>
-                        </a>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <a href="{{ route('user.merchant.my_products') }}" class="merchant-quick-card">
-                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">
-                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                            </span>
-                            <span>{{ __('Manage Products') }}</span>
-                        </a>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <a href="{{ route('front.merchant.store', $user->store_name) }}" target="_blank" class="merchant-quick-card">
-                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#22c55e,#4ade80)">
-                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            </span>
-                            <span>{{ __('View My Store') }}</span>
-                        </a>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <a href="{{ route('user.profile') }}" class="merchant-quick-card">
-                            <span class="merchant-quick-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">
-                                <svg width="22" height="22" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                            </span>
-                            <span>{{ __('Edit Profile') }}</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>{{-- /col-lg-8 --}}
+                    </div>{{-- /col-lg-8 --}}
     </div>
 </div>
 

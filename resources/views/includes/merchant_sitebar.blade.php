@@ -15,7 +15,19 @@
                      alt="Merchant Avatar"
                      class="merchant-avatar">
                 <span class="merchant-badge-dot"></span>
+                <button type="button" class="merchant-avatar-edit" onclick="document.getElementById('merchant_avatar_upload').click()" title="{{ __('Edit Avatar') }}">
+                    <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                </button>
             </div>
+
+            <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data" id="merchant_avatar_form" style="display:none;">
+                @csrf
+                <input type="file" name="photo" id="merchant_avatar_upload" accept="image/jpeg,image/jpg,image/png,image/svg+xml" onchange="document.getElementById('merchant_avatar_form').submit();">
+                <input type="hidden" name="first_name" value="{{ $user->first_name }}">
+                <input type="hidden" name="last_name" value="{{ $user->last_name }}">
+                <input type="hidden" name="email" value="{{ $user->email }}">
+                <input type="hidden" name="phone" value="{{ $user->phone }}">
+            </form>
             <h5 class="merchant-name">{{ $user->first_name }} {{ $user->last_name }}</h5>
             <span class="merchant-role-tag">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;margin-bottom:2px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -164,17 +176,39 @@
     height: 76px;
     border-radius: 50%;
     border: 4px solid #fff;
+    background-color: #fff;
     object-fit: cover;
+    object-position: center;
     box-shadow: 0 4px 14px rgba(26,58,92,.22);
     display: block;
 }
 .merchant-badge-dot {
     position: absolute;
-    bottom: 5px; right: 5px;
+    bottom: 5px; left: 5px;
     width: 14px; height: 14px;
     background: #22c55e;
     border-radius: 50%;
     border: 2px solid #fff;
+}
+.merchant-avatar-edit {
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 20px; height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    display: flex; align-items: center; justify-content: center;
+    color: #4b5563;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all .2s;
+    padding: 0;
+    z-index: 10;
+}
+.merchant-avatar-edit:hover {
+    color: var(--pb-navy);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transform: scale(1.05);
 }
 .merchant-name {
     font-size: 1.05rem;
