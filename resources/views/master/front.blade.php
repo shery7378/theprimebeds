@@ -545,9 +545,9 @@ body_theme4 @endif
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="topbar-inner d-flex align-items-center justify-content-between" style="gap: 30px;">
+                        <div class="topbar-inner d-flex align-items-center" style="gap: 30px;">
                             <!-- Logo-->
-                            <div class="site-branding topbar-logo">
+                            <div class="site-branding topbar-logo" style="margin-right: auto;">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
                                     <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}">
                                 </a>
