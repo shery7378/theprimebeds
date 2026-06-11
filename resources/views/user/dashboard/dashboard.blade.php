@@ -514,12 +514,14 @@
                     {{ __('Wishlist') }}
                 </a>
 
-                <div class="nav-divider"></div>
+                @if(auth()->check() && auth()->user()->is_merchant == 1)
+                    <div class="nav-divider"></div>
 
-                <a href="{{ route('user.merchant.dashboard') }}" class="nav-link">
-                    <i class="ti ti-store"></i>
-                    {{ __('Merchant Dashboard') }}
-                </a>
+                    <a href="{{ route('user.merchant.dashboard') }}" class="nav-link">
+                        <i class="ti ti-store"></i>
+                        {{ __('Merchant Dashboard') }}
+                    </a>
+                @endif
             </nav>
         </aside>
 
