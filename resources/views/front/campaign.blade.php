@@ -73,11 +73,11 @@
                             @endif
 
                         <img src="{{url('assets/img/'.$compaign_item->item->thumbnail)}}" alt="Product">
-                        {{-- <div class="product-button-group">
+                        <div class="product-button-group">
                             <a class="product-button wishlist_store" href="{{route('user.wishlist.store',$compaign_item->item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                             <a data-target="{{route('fornt.compare.product',$compaign_item->item->id)}}" class="product-button product_compare" href="javascript:;" title="{{__('Compare')}}"><i class="icon-repeat"></i></a>
                             @include('includes.item_footer',['sitem' => $compaign_item->item])
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="product-card-body">
 

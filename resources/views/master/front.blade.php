@@ -144,30 +144,54 @@
             top: 55px !important; 
         }
 
+        /* Add to Cart Hover Bar (ONLY for Popular Products Section) */
         .product-card .product-button-group {
+            display: none !important; /* Hide it everywhere by default */
+        }
+        
+        .popular-category-slider .product-card .product-button-group {
+            position: absolute !important;
+            bottom: -50px !important; /* Start hidden below the image */
+            left: 0 !important;
+            width: 100% !important;
+            display: flex !important;
+            transition: bottom 0.3s ease !important;
+            z-index: 10 !important;
+            background: transparent !important; /* Move color to button */
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .popular-category-slider .product-card .product-thumb:hover .product-button-group {
+            bottom: 0 !important; /* Slide up on hover */
+        }
+        
+        /* Hide everything else in the group since wishlist is moved */
+        .popular-category-slider .product-card .product-button-group .wishlist_store,
+        .popular-category-slider .product-card .product-button-group .product_compare {
             display: none !important;
         }
-        .product-card .product-button {
-            width: 40px !important;
-            height: 40px !important;
-            border-radius: 50% !important;
-            background: #ffffff !important;
-            border: none !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
+        
+        /* Style the remaining button (Add to Cart / Details) */
+        .popular-category-slider .product-card .product-button-group a.product-button {
+            width: 100% !important;
+            height: 45px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            color: #332B23 !important;
+            color: #ffffff !important;
             text-decoration: none !important;
-            cursor: pointer !important;
-            transition: all 0.2s ease !important;
-            font-size: 15px !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: #8C7558 !important; /* Solid Theme Color */
+            transition: background 0.2s ease !important;
             margin: 0 !important;
         }
-        .product-card .product-button:hover {
-            background: #332B23 !important;
-            color: #fff !important;
-            transform: scale(1.08) !important;
+        .popular-category-slider .product-card .product-button-group a.product-button:hover {
+            background: #735D43 !important; /* Darker solid color on hover */
+        }
+        .popular-category-slider .product-card .product-button-group a.product-button i {
+            margin-right: 0 !important; /* Removed margin since there is no text */
+            font-size: 18px !important; /* Slightly larger icon since it's alone */
         }
 
         /* Body */
@@ -215,6 +239,10 @@
             top: -4px !important; /* Nudge up slightly from top */
             right: 6px !important; /* Move left slightly */
             font-size: 26px !important;
+            transition: color 0.3s ease !important;
+        }
+        .product-card-body .wishlist_store.added {
+            color: #E33535 !important; /* Red color when added */
         }
 
         /* Price Row */

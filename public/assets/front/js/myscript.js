@@ -697,7 +697,8 @@ $(function ($) {
 
     $(document).on("click", ".wishlist_store", function (e) {
       e.preventDefault();
-      let wishlist_url = $(this).attr("href");
+      let $btn = $(this);
+      let wishlist_url = $btn.attr("href");
       $.get(wishlist_url, function (response) {
         if (response.status == 0) {
           location.href = response.link;
@@ -707,6 +708,8 @@ $(function ($) {
           $(".wishlist1").addClass("d-none");
           $(".wishlist2").removeClass("d-none");
           $(".wishlist_count").text(response.count);
+          $btn.addClass("added");
+          $btn.html('<svg viewBox="0 0 24 24" width="26" height="26" stroke="#E33535" stroke-width="2" fill="#E33535" stroke-linecap="round" stroke-linejoin="round" style="position: relative; top: -1px; left: -1px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
           successNotification(response.message);
         }
       });

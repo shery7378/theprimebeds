@@ -604,12 +604,7 @@
                                                 data-src="{{ url('assets/img/' . $popular_category_item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group">
-                                                <a class="product-button wishlist_store"
-                                                    href="{{ route('user.wishlist.store', $popular_category_item->id) }}"
-                                                    title="{{ __('Wishlist') }}"><i class="icon-heart"></i></a>
-                                                <a class="product-button"
-                                                    href="{{ route('front.product', $popular_category_item->slug) }}"
-                                                    title="{{ __('Details') }}"><i class="icon-search"></i></a>
+
                                                 @include('includes.item_footer', [
                                                 'sitem' => $popular_category_item,
                                                 ])
