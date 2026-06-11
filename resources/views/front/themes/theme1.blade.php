@@ -322,6 +322,12 @@
                             .hero-slider-main .item .item-inner * {
                                 pointer-events: auto; /* Re-enable clicks on buttons inside */
                             }
+                            
+                            @media (min-width: 1400px) {
+                                .sright-image {
+                                    height: 311px !important;
+                                }
+                            }
                         </style>
                         <div class="hero-slider">
                             <div class="hero-slider-main owl-carousel dots-inside">
