@@ -41,8 +41,9 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        \Log::info('addToCart called', $request->all());
         $msg = $this->repository->store($request);
-
+        \Log::info('addToCart result', $msg);
 
         if ($request->ajax()) {
             if (!empty($msg['buystatus']) && $msg['buystatus'] === "true") {
@@ -51,6 +52,9 @@ class CartController extends Controller
 
             return $msg;
         }
+        
+        \Log::info('addToCart NOT AJAX!');
+        return response()->json($msg);
     }
 
     public function store(Request $request)

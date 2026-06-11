@@ -245,11 +245,11 @@ class CartRepository
             // --- END BUNDLE DISCOUNT LOGIC ---
             $cart[$item->id . "-" . $cart_item_key] = [
                 "sample_image" => $input["sample_images"] ?? null,
-                "preference_description" => ($input["preferences"] =
-                    $input["preferences"] === "undefined" ||
-                    $input["preferences"] === ""
-                        ? null
-                        : $input["preferences"]),
+                "preference_description" => (isset($input["preferences"]) && 
+                    $input["preferences"] !== "undefined" && 
+                    $input["preferences"] !== "" 
+                        ? $input["preferences"] 
+                        : null),
                 "options_id" => $option_id,
                 "attribute" => $attribute,
                 "attribute_price" => $option_price,

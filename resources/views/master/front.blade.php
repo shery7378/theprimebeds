@@ -144,12 +144,8 @@
             top: 55px !important; 
         }
 
-        /* Add to Cart Hover Bar (ONLY for Popular Products Section) */
+        /* Add to Cart Hover Bar (Global for all Product Cards) */
         .product-card .product-button-group {
-            display: none !important; /* Hide it everywhere by default */
-        }
-        
-        .popular-category-slider .product-card .product-button-group {
             position: absolute !important;
             bottom: -50px !important; /* Start hidden below the image */
             left: 0 !important;
@@ -161,21 +157,20 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-        .popular-category-slider .product-card .product-thumb:hover .product-button-group {
+        .product-card .product-thumb:hover .product-button-group {
             bottom: 0 !important; /* Slide up on hover */
         }
         
-        /* Hide everything else in the group since wishlist is moved */
-        .popular-category-slider .product-card .product-button-group .wishlist_store,
-        .popular-category-slider .product-card .product-button-group .product_compare {
+        /* Hide all icons inside the hover bar by default */
+        .product-card .product-button-group > a.product-button {
             display: none !important;
         }
         
-        /* Style the remaining button (Add to Cart / Details) */
-        .popular-category-slider .product-card .product-button-group a.product-button {
+        /* Explicitly ONLY show the final action button (Add to Cart / Details fallback) */
+        .product-card .product-button-group > a.product-button.final-action-btn {
+            display: flex !important;
             width: 100% !important;
             height: 45px !important;
-            display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             color: #ffffff !important;
@@ -185,13 +180,14 @@
             background: #8C7558 !important; /* Solid Theme Color */
             transition: background 0.2s ease !important;
             margin: 0 !important;
+            pointer-events: auto !important;
         }
-        .popular-category-slider .product-card .product-button-group a.product-button:hover {
+        .product-card .product-button-group a.product-button:hover {
             background: #735D43 !important; /* Darker solid color on hover */
         }
-        .popular-category-slider .product-card .product-button-group a.product-button i {
-            margin-right: 0 !important; /* Removed margin since there is no text */
-            font-size: 18px !important; /* Slightly larger icon since it's alone */
+        .product-card .product-button-group a.product-button i {
+            margin-right: 8px !important; /* Spacing between icon and text if we add text */
+            font-size: 1.1rem !important;
         }
 
         /* Body */
@@ -1297,8 +1293,8 @@ body_theme4 @endif
     <script>
         $(document).ready(function() {
             $(document).on('click', '.product-card', function(e) {
-                // Ignore clicks on links or buttons inside the card
-                if (!$(e.target).closest('a, button, .product-button-group, .a-t-c-mr, form').length) {
+                // Ignore clicks if they were on links/buttons, OR if the target was detached from DOM (like when Add to Cart spinner is added)
+                if (!$(e.target).closest('a, button, .product-button-group, .a-t-c-mr, form').length && $.contains(document, e.target)) {
                     let link = $(this).find('.product-title a').attr('href');
                     if (link) {
                         window.location.href = link;
