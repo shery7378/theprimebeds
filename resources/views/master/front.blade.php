@@ -62,6 +62,181 @@
     @endif
     <style>
         {{ $setting->custom_css }}
+        /* =============================================
+           SLIDER NAVIGATION ARROWS (HIDDEN)
+           ============================================= */
+        .popular-category-slider .owl-nav,
+        .flash-deal-slider .owl-nav,
+        .bestseller-slider .owl-nav,
+        .newproduct-slider .owl-nav,
+        .toprated-slider .owl-nav,
+        .home-blog-slider .owl-nav {
+            display: none !important;
+        }
+           GLOBAL PRODUCT CARD REDESIGN (BEIGE LUXURY THEME)
+           ============================================= */
+        .product-card {
+            background: #F8F6F0 !important;
+            border: none !important;
+            border-radius: 20px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            transition: transform 0.28s ease, box-shadow 0.28s ease !important;
+            position: relative !important;
+            box-shadow: none !important;
+        }
+        .product-card:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
+            border-color: transparent !important;
+        }
+
+        .product-card .product-thumb {
+            position: relative !important;
+            overflow: hidden !important;
+            background: #EBE5DB !important;
+            aspect-ratio: 4 / 3 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+        .product-card .product-thumb img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+        .product-card:hover .product-thumb img {
+            transform: scale(1.07) !important;
+        }
+
+        /* Badges */
+        .product-card .product-badge {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            left: auto !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            padding: 6px 14px !important;
+            border-radius: 50px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0px !important;
+            color: #8C7558 !important;
+            background: #ffffff !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+            z-index: 3 !important;
+            border: none !important;
+            text-transform: none !important;
+        }
+        .product-card .product-badge.product-badge2 { top: 55px !important; }
+
+        /* Action Buttons (hover overlay) */
+        .product-card .product-button-group {
+            position: absolute !important;
+            top: 15px !important;
+            left: 15px !important;
+            right: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 7px !important;
+            z-index: 4 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateX(-10px) !important;
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease !important;
+            width: auto !important;
+        }
+        .product-card:hover .product-button-group {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateX(0) !important;
+        }
+        .product-card .product-button {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            background: #ffffff !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #332B23 !important;
+            text-decoration: none !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            font-size: 15px !important;
+            margin: 0 !important;
+        }
+        .product-card .product-button:hover {
+            background: #332B23 !important;
+            color: #fff !important;
+            transform: scale(1.08) !important;
+        }
+
+        /* Body */
+        .product-card .product-card-body {
+            padding: 20px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            text-align: left !important;
+            background: #F8F6F0 !important;
+        }
+        
+        .product-card .product-category {
+            display: none !important; /* The image didn't have a category in the new design */
+        }
+        
+        .product-card .product-title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #332B23 !important;
+            line-height: 1.4 !important;
+            margin: 0 0 16px !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            letter-spacing: 0px !important;
+        }
+        .product-card .product-title a {
+            color: inherit !important;
+            text-decoration: none !important;
+            transition: color 0.2s !important;
+        }
+        .product-card .product-title a:hover { color: #8C7558 !important; }
+
+        /* Price Row */
+        .product-card .product-price {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 2px !important;
+            margin-top: auto !important;
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #332B23 !important;
+            line-height: 1.2 !important;
+            margin-bottom: 20px !important;
+        }
+        .product-card .product-price del {
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: #A3917C !important;
+            text-decoration: line-through !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0 !important;
+        }
 
         /* =============================================
            EXPAND CONTAINER ON LARGE SCREENS

@@ -131,13 +131,17 @@ $(function ($) {
     // popular_category_slider
     var $popular_category_slider = $(".popular-category-slider");
     $popular_category_slider.owlCarousel({
-      navText: [],
-      nav: true,
-      dots: false,
-      loop: false,
-      autoplayTimeout: 6000,
-      smartSpeed: 1200,
-      margin: 15,
+    navText: [],
+    nav: true,
+    dots: false,
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    autoplay: true,
+    autoplayHoverPause: true,
+    autoplayTimeout: 3000,
+    smartSpeed: 1200,
+    margin: 15,
       thumbs: false,
       responsive: {
         0: {
@@ -167,7 +171,7 @@ $(function ($) {
       navText: [],
       nav: true,
       dots: false,
-      autoplayTimeout: 6000,
+      autoplayTimeout: 3000,
       smartSpeed: 1200,
       margin: 15,
       thumbs: false,
@@ -199,13 +203,15 @@ $(function ($) {
     // col slider
     var $col_slider = $(".newproduct-slider");
     $col_slider.owlCarousel({
-      navText: [],
-      nav: true,
-      dots: false,
-      loop: false,
-      autoplayTimeout: 6000,
-      smartSpeed: 1200,
-      margin: 15,
+    navText: [],
+    nav: true,
+    dots: false,
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    autoplayTimeout: 3000,
+    smartSpeed: 1200,
+    margin: 15,
       thumbs: false,
       responsive: {
         0: {
@@ -224,7 +230,7 @@ $(function ($) {
       nav: true,
       dots: false,
       loop: true,
-      autoplayTimeout: 6000,
+      autoplayTimeout: 3000,
       smartSpeed: 1200,
       margin: 15,
       thumbs: false,
@@ -241,13 +247,15 @@ $(function ($) {
     // recently-added-slider Area Start
     var $recently_added_slider = $(".recently-added-slider");
     $recently_added_slider.owlCarousel({
-      navText: [],
-      nav: true,
-      dots: false,
-      autoplayTimeout: 6000,
-      smartSpeed: 1200,
-      loop: false,
-      margin: 15,
+    navText: [],
+    nav: true,
+    dots: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1200,
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    margin: 15,
       thumbs: false,
       responsive: {
         0: {
@@ -274,13 +282,15 @@ $(function ($) {
     // newproduct-slider Area Start
     var $newproduct_slider = $(".features-slider");
     $newproduct_slider.owlCarousel({
-      navText: [],
-      nav: true,
-      dots: false,
-      autoplayTimeout: 6000,
-      smartSpeed: 1200,
-      loop: false,
-      margin: 15,
+    navText: [],
+    nav: true,
+    dots: false,
+    autoplayTimeout: 3000,
+    smartSpeed: 1200,
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    margin: 15,
       thumbs: false,
       responsive: {
         0: {
@@ -310,7 +320,7 @@ $(function ($) {
       navText: [],
       nav: true,
       dots: false,
-      autoplayTimeout: 6000,
+      autoplayTimeout: 3000,
       smartSpeed: 1200,
       loop: false,
       thumbs: false,
@@ -343,7 +353,7 @@ $(function ($) {
       navText: [],
       nav: true,
       dots: false,
-      autoplayTimeout: 6000,
+      autoplayTimeout: 3000,
       smartSpeed: 1200,
       loop: true,
       thumbs: false,
@@ -375,7 +385,7 @@ $(function ($) {
     $relatedproductsliderv.owlCarousel({
       nav: false,
       dots: true,
-      autoplayTimeout: 6000,
+      autoplayTimeout: 3000,
       smartSpeed: 1200,
       margin: 15,
       thumbs: false,
