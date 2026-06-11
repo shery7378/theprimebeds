@@ -533,7 +533,7 @@ class FrontendController extends Controller
     public function merchantStore($store_name)
     {
         $merchant = \App\Models\User::where('store_name', $store_name)->where('is_merchant', 1)->firstOrFail();
-        $merchantProducts = $merchant->merchantProducts()->with('item')->where('is_active', true)->paginate(15);
+        $merchantProducts = $merchant->merchantProducts()->with('item')->where('is_active', true)->where('status', 'approved')->paginate(15);
         
         // Store merchant ID in session so cart/checkout knows it's an affiliate sale
         Session::put('merchant_id', $merchant->id);
@@ -550,7 +550,7 @@ class FrontendController extends Controller
             ->whereSlug($slug)
             ->firstOrFail();
 
-        $merchantProduct = $merchant->merchantProducts()->where('item_id', $item->id)->where('is_active', true)->firstOrFail();
+        $merchantProduct = $merchant->merchantProducts()->where('item_id', $item->id)->where('is_active', true)->where('status', 'approved')->firstOrFail();
         
         // Override standard pricing with merchant pricing for display
         $item->discount_price = $merchantProduct->merchant_price;

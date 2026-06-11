@@ -24,7 +24,7 @@
   <!-- Page Content-->
   <div class="container padding-bottom-3x mb-1">
   <div class="row">
-         @include('includes.user_sitebar')
+         @include('includes.merchant_sitebar')
           <div class="col-lg-8">
             <div class="padding-top-2x mt-2 hidden-lg-up"></div>
 
@@ -45,6 +45,7 @@
                                     <th>{{__('Product')}}</th>
                                     <th>{{__('Base Price')}}</th>
                                     <th>{{__('My Selling Price')}}</th>
+                                    <th>{{__('Status')}}</th>
                                     <th>{{__('Store Link')}}</th>
                                     <th>{{__('Actions')}}</th>
                                 </tr>
@@ -68,9 +69,22 @@
                                         </form>
                                     </td>
                                     <td>
+                                        @if($mProduct->status == 'approved')
+                                            <span class="badge badge-success">{{__('Approved')}}</span>
+                                        @elseif($mProduct->status == 'rejected')
+                                            <span class="badge badge-danger">{{__('Rejected')}}</span>
+                                        @else
+                                            <span class="badge badge-warning text-dark">{{__('Pending')}}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($mProduct->status == 'approved')
                                         <a href="{{route('front.merchant.product', ['store_name' => $user->store_name, 'slug' => $mProduct->item->slug])}}" target="_blank" class="btn btn-outline-info btn-sm">
                                             <i class="icon-external-link"></i> {{__('View')}}
                                         </a>
+                                        @else
+                                        <span class="text-muted small">{{__('Not live yet')}}</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <form action="{{route('user.merchant.product.remove', $mProduct->item_id)}}" method="POST">
@@ -82,7 +96,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">{{__('You have no products in your store.')}}</td>
+                                    <td colspan="7" class="text-center">{{__('You have no products in your store.')}}</td>
                                 </tr>
                                 @endforelse
                             </tbody>

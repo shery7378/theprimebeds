@@ -95,10 +95,10 @@ class MerchantController extends Controller
 
         $merchantProduct = MerchantProduct::updateOrCreate(
             ['user_id' => $user->id, 'item_id' => $item->id],
-            ['merchant_price' => $request->merchant_price, 'is_active' => true]
+            ['merchant_price' => $request->merchant_price, 'is_active' => false, 'status' => 'pending']
         );
 
-        return redirect()->back()->with('success', __('Product pricing updated successfully!'));
+        return redirect()->back()->with('success', __('Price proposal submitted! It will go live once approved by the admin.'));
     }
 
     /**

@@ -13,7 +13,8 @@ class MerchantProduct extends Model
         'user_id',
         'item_id',
         'merchant_price',
-        'is_active'
+        'is_active',
+        'status',
     ];
 
     public function user()

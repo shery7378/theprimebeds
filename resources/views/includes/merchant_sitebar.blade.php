@@ -5,27 +5,32 @@
     <aside class="user-info-wrapper">
       <div class="user-info">
         <div class="user-avatar">
-
-          <img id="avater_photo_view" src="{{$user->photo ? url('assets/img/'.$user->photo) : url('assets/img/placeholder.png')}}" alt="User">
+          <img id="avater_photo_view" src="{{$user->photo ? url('assets/img/'.$user->photo) : url('assets/img/placeholder.png')}}" alt="Merchant">
         </div>
-
         <div class="user-data">
-          <h4 class="h5">{{$user->first_name}} {{$user->last_name}}</h4><span>{{__('Joined')}} {{$user->created_at->format('M D Y')}}</span>
+          <h4 class="h5">{{$user->first_name}} {{$user->last_name}}</h4>
+          <span class="badge badge-success">{{__('Merchant')}}</span>
+          @if($user->store_name)
+            <br><small class="text-muted mt-1 d-block">
+                <a href="{{route('front.merchant.store', $user->store_name)}}" target="_blank" class="text-primary">
+                    <i class="icon-external-link"></i> {{$user->store_name}}
+                </a>
+            </small>
+          @endif
         </div>
       </div>
       <nav class="list-group">
-        <a class="list-group-item {{ request()->is('user/dashboard') ? 'active' : '' }}" href="{{route('user.dashboard')}}"><i class="icon-command"></i>{{__('Dashboard')}}</a>
+        <a class="list-group-item {{ request()->is('user/merchant/dashboard') ? 'active' : '' }}" href="{{route('user.merchant.dashboard')}}"><i class="icon-command"></i>{{__('Dashboard')}}</a>
+        <a class="list-group-item {{ request()->is('user/merchant/my-products') ? 'active' : '' }}" href="{{route('user.merchant.my_products')}}"><i class="icon-package"></i>{{__('My Products')}}</a>
+        <a class="list-group-item {{ request()->is('user/merchant/catalog') ? 'active' : '' }}" href="{{route('user.merchant.catalog')}}"><i class="icon-plus-circle"></i>{{__('Browse Catalog')}}</a>
         <a class="list-group-item {{ request()->is('user/profile') ? 'active' : '' }}" href="{{route('user.profile')}}"><i class="icon-user"></i>{{__('Profile')}}</a>
         <a class="list-group-item {{ request()->is('user/ticket') ? 'active' : '' }}" href="{{route('user.ticket')}}"><i class="icon-file-text"></i>{{__('Support Ticket')}}</a>
-        <a class="list-group-item with-badge {{ request()->is('user/orders') ? 'active' : '' }}" href="{{route('user.order.index')}}"><i class="icon-shopping-bag"></i>{{__('Orders')}}<span class="badge badge-default badge-pill">{{$user->orders->count()}}</span></a>
-        <a class="list-group-item {{ request()->is('user/addresses') ? 'active' : '' }}" href="{{route('user.address')}}"><i class="icon-map-pin"></i>{{__('Address')}}</a>
-        <a class="list-group-item  with-badge {{ request()->is('user/wishlists') ? 'active' : '' }}" href="{{route('user.wishlist.index')}}"><i class="icon-heart"></i>{{__('Wishlist')}}<span class="badge badge-default badge-pill">{{$user->wishlists->count()}}</span></a>
-        <a class="list-group-item remove-account with-badge" data-bs-toggle="modal" data-bs-target=".modal" href="javascript:;"><i class="icon-trash"></i>{{__('Delete Account')}}</a>
+        <a class="list-group-item remove-account with-badge" data-bs-toggle="modal" data-bs-target=".modal-merchant" href="javascript:;"><i class="icon-trash"></i>{{__('Delete Account')}}</a>
         <a class="list-group-item with-badge" href="{{route('user.logout')}}"><i class="icon-log-out"></i>{{__('Log out')}}</a>
       </nav>
     </aside>
 
-    <div class="modal" tabindex="-1">
+    <div class="modal modal-merchant" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

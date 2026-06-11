@@ -777,6 +777,14 @@ Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
                 )->name("back.subscribers.mail.submit");
             },
         );
+
+        // -------- MERCHANT MANAGEMENT --------
+        Route::get('/merchant/pending-prices', 'Back\MerchantReviewController@pendingPrices')->name('back.merchant.pending_prices');
+        Route::get('/merchant/approve/{id}', 'Back\MerchantReviewController@approve')->name('back.merchant.approve');
+        Route::get('/merchant/reject/{id}', 'Back\MerchantReviewController@reject')->name('back.merchant.reject');
+        Route::get('/merchant/payouts', 'Back\MerchantReviewController@payouts')->name('back.merchant.payouts');
+        Route::post('/merchant/pay', 'Back\MerchantReviewController@pay')->name('back.merchant.pay');
+        Route::get('/merchant/payout-history/{userId}', 'Back\MerchantReviewController@payoutHistory')->name('back.merchant.payout_history');
     });
 });
 

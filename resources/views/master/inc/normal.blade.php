@@ -140,6 +140,29 @@
     </li>
     @endif
 
+    {{-- MERCHANT MANAGEMENT (always visible to logged-in admins) --}}
+    <li class="nav-item">
+        <a data-toggle="collapse" href="#merchantMgmt">
+            <i class="fas fa-store"></i>
+            <p>{{ __('Merchant Management') }}</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse" id="merchantMgmt">
+            <ul class="nav nav-collapse">
+                <li>
+                    <a class="sub-link" href="{{ route('back.merchant.pending_prices') }}">
+                        <span class="sub-item">{{ __('Pending Prices') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="sub-link" href="{{ route('back.merchant.payouts') }}">
+                        <span class="sub-item">{{ __('Payouts') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
     @if (array_intersect(['Add Ecommerce', 'Update Ecommerce', 'Delete Ecommerce'], $section))
     <li class="nav-item">
         <a data-toggle="collapse" href="#ecommerce">

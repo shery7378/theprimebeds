@@ -24,7 +24,7 @@
   <!-- Page Content-->
   <div class="container padding-bottom-3x mb-1">
   <div class="row">
-         @include('includes.user_sitebar')
+         @include('includes.merchant_sitebar')
           <div class="col-lg-8">
             <div class="padding-top-2x mt-2 hidden-lg-up"></div>
 

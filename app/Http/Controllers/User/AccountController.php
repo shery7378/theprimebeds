@@ -35,15 +35,20 @@ class AccountController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+
+        // Merchants have a separate dashboard
+        if ($user->is_merchant) {
+            return redirect()->route('user.merchant.dashboard');
+        }
+
         return view('user.dashboard.dashboard',[
-            'allorders' => Order::whereUserId(Auth::user()->id)->count(),
-            'pending' => Order::whereUserId(Auth::user()->id)->whereOrderStatus('pending')->count(),
-            'progress' => Order::whereUserId(Auth::user()->id)->whereOrderStatus('In Progress')->count(),
-            'delivered' => Order::whereUserId(Auth::user()->id)->whereOrderStatus('Delivered')->count(),
-            'canceled' => Order::whereUserId(Auth::user()->id)->whereOrderStatus('Canceled')->count()
-
+            'allorders' => Order::whereUserId($user->id)->count(),
+            'pending'   => Order::whereUserId($user->id)->whereOrderStatus('pending')->count(),
+            'progress'  => Order::whereUserId($user->id)->whereOrderStatus('In Progress')->count(),
+            'delivered' => Order::whereUserId($user->id)->whereOrderStatus('Delivered')->count(),
+            'canceled'  => Order::whereUserId($user->id)->whereOrderStatus('Canceled')->count()
         ]);
-
     }
 
 
