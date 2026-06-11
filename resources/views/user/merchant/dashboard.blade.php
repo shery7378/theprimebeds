@@ -221,7 +221,7 @@
 <style>
 /* === HERO BANNER === */
 .merchant-hero-banner {
-    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+    background: linear-gradient(135deg, #0f2540 0%, #1a3a5c 55%, #244e7a 100%);
     border-radius: 20px;
     padding: 28px 28px;
     display: flex;
@@ -230,14 +230,14 @@
     gap: 16px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(99,102,241,.25);
+    box-shadow: 0 8px 32px rgba(15,37,64,.30);
 }
 .merchant-hero-banner::before {
     content: '';
     position: absolute;
     top: -40px; right: -40px;
     width: 200px; height: 200px;
-    background: rgba(255,255,255,.05);
+    background: rgba(201,168,76,.08);
     border-radius: 50%;
 }
 .merchant-hero-banner::after {
@@ -245,7 +245,7 @@
     position: absolute;
     bottom: -60px; right: 80px;
     width: 150px; height: 150px;
-    background: rgba(255,255,255,.04);
+    background: rgba(201,168,76,.05);
     border-radius: 50%;
 }
 .merchant-hero-left {
@@ -266,7 +266,7 @@
     margin: 0 0 4px;
 }
 .merchant-hero-title span {
-    color: #a5b4fc;
+    color: #c9a84c;
 }
 .merchant-hero-sub {
     color: rgba(255,255,255,.7);
@@ -291,9 +291,9 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: rgba(255,255,255,.15);
-    color: #fff;
-    border: 1.5px solid rgba(255,255,255,.25);
+    background: rgba(201,168,76,.20);
+    color: #c9a84c;
+    border: 1.5px solid rgba(201,168,76,.40);
     padding: 9px 18px;
     border-radius: 12px;
     font-size: 0.87rem;
@@ -303,8 +303,8 @@
     transition: all .2s;
 }
 .btn-merchant-add:hover {
-    background: rgba(255,255,255,.25);
-    color: #fff;
+    background: rgba(201,168,76,.35);
+    color: #e8cc82;
     text-decoration: none;
     transform: translateY(-1px);
 }
@@ -328,10 +328,10 @@
     box-shadow: 0 8px 30px rgba(0,0,0,.12);
     text-decoration: none;
 }
-.stat-earnings { border-color: #e0e7ff; }
-.stat-earnings:hover { border-color: #6366f1; }
-.stat-active { border-color: #e0f2fe; }
-.stat-active:hover { border-color: #0ea5e9; }
+.stat-earnings { border-color: #d4e3ef; }
+.stat-earnings:hover { border-color: #1a3a5c; }
+.stat-active { border-color: #d4e8d5; }
+.stat-active:hover { border-color: #16a34a; }
 .stat-pending { border-color: #fef3c7; }
 .stat-pending:hover { border-color: #f59e0b; }
 .stat-rejected { border-color: #fee2e2; }
@@ -343,8 +343,8 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
 }
-.stat-earnings .stat-card-icon { background: #e0e7ff; color: #6366f1; }
-.stat-active .stat-card-icon { background: #e0f2fe; color: #0ea5e9; }
+.stat-earnings .stat-card-icon { background: #e8eef5; color: #1a3a5c; }
+.stat-active .stat-card-icon { background: #dcfce7; color: #16a34a; }
 .stat-pending .stat-card-icon { background: #fef3c7; color: #f59e0b; }
 .stat-rejected .stat-card-icon { background: #fee2e2; color: #ef4444; }
 
@@ -402,10 +402,10 @@
 .merchant-view-all {
     font-size: 0.83rem;
     font-weight: 600;
-    color: #6366f1;
+    color: #1a3a5c;
     text-decoration: none;
 }
-.merchant-view-all:hover { color: #4f46e5; text-decoration: none; }
+.merchant-view-all:hover { color: #0f2540; text-decoration: none; }
 
 .merchant-products-list { padding: 8px 0; }
 .merchant-product-row {
@@ -470,7 +470,7 @@
 .merchant-empty-sub { color: #9ca3af; font-size: 0.87rem; margin-bottom: 18px; }
 .btn-merchant-primary {
     display: inline-block;
-    background: linear-gradient(135deg,#6366f1,#8b5cf6);
+    background: linear-gradient(135deg, #1a3a5c, #244e7a);
     color: #fff;
     padding: 10px 22px;
     border-radius: 12px;

@@ -114,17 +114,39 @@
 
 {{-- ===== MERCHANT SIDEBAR STYLES ===== --}}
 <style>
+/* === PRIME BEDS BRAND VARIABLES === */
+:root {
+    --pb-navy:      #1a3a5c;
+    --pb-navy-dark: #0f2540;
+    --pb-navy-mid:  #244e7a;
+    --pb-gold:      #c9a84c;
+    --pb-gold-light:#e8cc82;
+    --pb-gold-pale: #fdf6e3;
+    --pb-gold-bg:   #f7efd4;
+    --pb-navy-pale: #e8eef5;
+}
+
 /* === PROFILE CARD === */
 .merchant-profile-card {
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(99,102,241,.13);
+    box-shadow: 0 4px 24px rgba(26,58,92,.16);
     background: #fff;
     position: relative;
 }
 .merchant-profile-bg {
     height: 80px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 60%, #a78bfa 100%);
+    background: linear-gradient(135deg, var(--pb-navy-dark) 0%, var(--pb-navy) 55%, var(--pb-navy-mid) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.merchant-profile-bg::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: rgba(201,168,76,.15);
+    border-radius: 50%;
 }
 .merchant-profile-body {
     padding: 0 20px 22px;
@@ -143,7 +165,7 @@
     border-radius: 50%;
     border: 4px solid #fff;
     object-fit: cover;
-    box-shadow: 0 4px 14px rgba(99,102,241,.25);
+    box-shadow: 0 4px 14px rgba(26,58,92,.22);
     display: block;
 }
 .merchant-badge-dot {
@@ -157,19 +179,19 @@
 .merchant-name {
     font-size: 1.05rem;
     font-weight: 700;
-    color: #1e1b4b;
+    color: var(--pb-navy-dark);
     margin-bottom: 4px;
 }
 .merchant-role-tag {
     display: inline-flex;
     align-items: center;
-    background: linear-gradient(135deg,#6366f1,#8b5cf6);
-    color: #fff;
+    background: linear-gradient(135deg, var(--pb-gold), var(--pb-gold-light));
+    color: var(--pb-navy-dark);
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 700;
     padding: 3px 12px;
     border-radius: 20px;
-    letter-spacing: .04em;
+    letter-spacing: .05em;
     text-transform: uppercase;
 }
 .merchant-store-link {
@@ -177,17 +199,17 @@
     align-items: center;
     gap: 5px;
     font-size: 0.82rem;
-    color: #6366f1;
+    color: var(--pb-navy);
     font-weight: 500;
     text-decoration: none;
     padding: 4px 12px;
-    background: #ede9fe;
+    background: var(--pb-navy-pale);
     border-radius: 20px;
     transition: background .2s;
 }
 .merchant-store-link:hover {
-    background: #ddd6fe;
-    color: #4f46e5;
+    background: #c8d8e8;
+    color: var(--pb-navy-dark);
     text-decoration: none;
 }
 
@@ -196,7 +218,7 @@
     background: #fff;
     border-radius: 20px;
     padding: 10px 8px;
-    box-shadow: 0 4px 24px rgba(99,102,241,.10);
+    box-shadow: 0 4px 24px rgba(26,58,92,.10);
 }
 .merchant-nav-item {
     display: flex;
@@ -213,18 +235,19 @@
     cursor: pointer;
 }
 .merchant-nav-item:hover {
-    background: #f5f3ff;
-    color: #6366f1;
+    background: var(--pb-navy-pale);
+    color: var(--pb-navy);
     text-decoration: none;
     transform: translateX(3px);
 }
 .merchant-nav-item.active {
-    background: linear-gradient(135deg,#6366f1,#8b5cf6);
+    background: linear-gradient(135deg, var(--pb-navy-dark), var(--pb-navy));
     color: #fff !important;
-    box-shadow: 0 4px 12px rgba(99,102,241,.30);
+    box-shadow: 0 4px 14px rgba(26,58,92,.30);
 }
 .merchant-nav-item.active .merchant-nav-icon {
-    color: #fff;
+    background: rgba(201,168,76,.25);
+    color: var(--pb-gold-light);
 }
 .merchant-nav-icon {
     width: 36px; height: 36px;
@@ -234,11 +257,9 @@
     flex-shrink: 0;
     transition: all .18s;
 }
-.merchant-nav-item.active .merchant-nav-icon {
-    background: rgba(255,255,255,.2);
-}
 .merchant-nav-item:hover .merchant-nav-icon {
-    background: #ede9fe;
+    background: var(--pb-navy-pale);
+    color: var(--pb-navy);
 }
 .merchant-nav-item.text-danger:hover {
     background: #fef2f2;
