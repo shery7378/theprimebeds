@@ -619,10 +619,13 @@
                                             <div class="product-category"><a
                                                     href="{{ route('front.catalog') . '?category=' . $popular_category_item->category->slug }}">{{ $popular_category_item->category->name }}</a>
                                             </div>
-                                            <h3 class="product-title"><a
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a
                                                     href="{{ route('front.product', $popular_category_item->slug) }}">
                                                     {{ Str::limit($popular_category_item->name, 35) }}
                                                 </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $popular_category_item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                                             {{-- <div class="rating-stars">
                                                 {!! Helper::renderStarRating($popular_category_item->reviews->avg('rating')) !!}
                                             </div> --}}
@@ -738,9 +741,12 @@
                                             <div class="product-category"><a
                                                     href="{{ route('front.catalog') . '?category=' . $recent_item->category->slug }}">{{ $recent_item->category->name }}</a>
                                             </div>
-                                            <h3 class="product-title"><a href="{{ route('front.product', $recent_item->slug) }}">
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a href="{{ route('front.product', $recent_item->slug) }}">
                                                     {{ Str::limit($recent_item->name, 35) }}
                                                 </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $recent_item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                                             <h4 class="product-price">
                                                 @if ($recent_item->previous_price != 0)
                                                     <del>{{ PriceHelper::setPreviousPrice($recent_item->previous_price) }}</del>
@@ -819,9 +825,12 @@
                                                     <div class="product-category"><a
                                                             href="{{ route('front.catalog') . '?category=' . $item->category->slug }}">{{ $item->category->name }}</a>
                                                     </div>
-                                                    <h3 class="product-title"><a href="{{ route('front.product', $item->slug) }}">
+                                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a href="{{ route('front.product', $item->slug) }}">
                                                             {{ Str::limit($item->name, 35) }}
                                                         </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                                                     {{-- <div class="rating-stars">
                                                         {!! Helper::renderStarRating($item->reviews->avg('rating')) !!}
                                                     </div> --}}
@@ -874,10 +883,13 @@
                                             alt="Product">
                                     </a>
                                     <div class="product-card-body">
-                                        <h3 class="product-title"><a
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a
                                                 href="{{ route('front.product', $two_column_category_item->slug) }}">
                                                 {{ Str::limit($two_column_category_item->name, 40) }}
                                             </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $two_column_category_item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                                         <div class="rating-stars">
                                             {!! Helper::renderStarRating($two_column_category_item->reviews->avg('rating'))
                                             !!}
@@ -963,9 +975,12 @@
                                     <div class="product-category"><a
                                             href="{{ route('front.catalog') . '?category=' . $feature_category_item->category->slug }}">{{ $feature_category_item->category->name }}</a>
                                     </div>
-                                    <h3 class="product-title"><a href="{{ route('front.product', $feature_category_item->slug) }}">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a href="{{ route('front.product', $feature_category_item->slug) }}">
                                             {{ Str::limit($feature_category_item->name, 35) }}
                                         </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $feature_category_item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                                     {{-- <div class="rating-stars">
                                         {!! Helper::renderStarRating($feature_category_item->reviews->avg('rating')) !!}
                                     </div> --}}

@@ -18,9 +18,12 @@
                     </div>
                     <div class="product-card-body">
                         <div class="product-category"><a href="{{route('front.catalog').'?category='.$item->category->slug}}">{{$item->category->name}}</a></div>
-                        <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="product-title m-0"><a href="{{route('front.product',$item->slug)}}">
                             {{ Str::limit($item->name, 45) }}
                         </a></h3>
+    <a class="wishlist_store" href="{{ route('user.wishlist.store', $item->id) }}" title="{{ __('Wishlist') }}" style="color: #8C7558; font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
+</div>
                         {{-- <div class="rating-stars">
                         <i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i>
                         </div> --}}

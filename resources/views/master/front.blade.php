@@ -137,28 +137,15 @@
             border: none !important;
             text-transform: none !important;
         }
-        .product-card .product-badge.product-badge2 { top: 55px !important; }
-
-        /* Action Buttons (hover overlay) */
-        .product-card .product-button-group {
-            position: absolute !important;
-            top: 15px !important;
-            left: 15px !important;
-            right: auto !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 7px !important;
-            z-index: 4 !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transform: translateX(-10px) !important;
-            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease !important;
-            width: auto !important;
+        .product-card .product-badge.product-badge2 { 
+            top: 15px !important; 
         }
-        .product-card:hover .product-button-group {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateX(0) !important;
+        .product-card .product-badge.bg-secondary { 
+            top: 55px !important; 
+        }
+
+        .product-card .product-button-group {
+            display: none !important;
         }
         .product-card .product-button {
             width: 40px !important;
@@ -202,7 +189,7 @@
             font-weight: 600 !important;
             color: #332B23 !important;
             line-height: 1.4 !important;
-            margin: 0 0 16px !important;
+            margin: 0 !important;
             display: -webkit-box !important;
             -webkit-line-clamp: 2 !important;
             -webkit-box-orient: vertical !important;
@@ -216,21 +203,37 @@
         }
         .product-card .product-title a:hover { color: #8C7558 !important; }
 
+        /* Title Flex Wrapper */
+        .product-card-body > div:nth-child(2) {
+            margin-bottom: 8px !important;
+            align-items: flex-start !important; /* Align to top instead of center */
+        }
+
+        /* Wishlist Icon in Card Body */
+        .product-card-body .wishlist_store {
+            position: relative !important;
+            top: -4px !important; /* Nudge up slightly from top */
+            right: 6px !important; /* Move left slightly */
+            font-size: 26px !important;
+        }
+
         /* Price Row */
         .product-card .product-price {
             display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 2px !important;
-            margin-top: auto !important;
-            font-size: 20px !important;
-            font-weight: 700 !important;
+            flex-direction: row !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            text-align: right !important;
+            gap: 6px !important;
+            margin-top: 5px !important; /* Removed auto so it sits right under the heart */
+            font-size: 18px !important;
+            font-weight: 600 !important;
             color: #332B23 !important;
             line-height: 1.2 !important;
             margin-bottom: 20px !important;
         }
         .product-card .product-price del {
-            font-size: 13px !important;
+            font-size: 15px !important;
             font-weight: 500 !important;
             color: #A3917C !important;
             text-decoration: line-through !important;
