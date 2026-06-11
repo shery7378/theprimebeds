@@ -18,10 +18,17 @@ class MerchantController extends Controller
     {
         $user = Auth::user();
 
-        $activeProductsCount = $user->is_merchant ? $user->merchantProducts()->where('is_active', true)->count() : 0;
-        $totalEarnings = $user->earnings_balance;
+        $allProducts      = $user->merchantProducts()->with('item')->latest()->get();
+        $activeProductsCount  = $allProducts->where('status', 'approved')->count();
+        $pendingProductsCount = $allProducts->where('status', 'pending')->count();
+        $rejectedProductsCount = $allProducts->where('status', 'rejected')->count();
+        $recentProducts   = $allProducts->take(5);
+        $totalEarnings    = $user->earnings_balance;
 
-        return view('user.merchant.dashboard', compact('activeProductsCount', 'totalEarnings', 'user'));
+        return view('user.merchant.dashboard', compact(
+            'activeProductsCount', 'pendingProductsCount', 'rejectedProductsCount',
+            'recentProducts', 'totalEarnings', 'user'
+        ));
     }
 
     /**
