@@ -178,14 +178,14 @@
     {{-- ==================== NEW TOP BANNER (from new column) ==================== --}}
     @if (isset($top_banner) && $top_banner && isset($top_banner['top_banner_img']))
         <div class="top-banner-section mb-4">
-            <div class="container">
+            <div class="container-fluid p-0">
                 <div id="topBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#topBannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
-                    <div class="carousel-inner rounded" style="overflow: hidden; max-height: 650px;">
+                    <div class="carousel-inner" style="overflow: hidden; max-height: 650px;">
                         <!-- Slide 1 -->
                         <div class="carousel-item active">
                             <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block w-100">
