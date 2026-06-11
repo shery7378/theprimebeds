@@ -177,7 +177,33 @@
 
     {{-- ==================== NEW TOP BANNER (from new column) ==================== --}}
     @if (isset($top_banner) && $top_banner && isset($top_banner['top_banner_img']))
-        <div class="top-banner-section mb-4">
+        <div class="top-banner-section mt-1 mb-4">
+            <style>
+                .top-banner-img {
+                    width: 100%;
+                    height: auto; /* Natural height by default */
+                    object-fit:fill;
+                    object-position: center;
+                    display: block;
+                }
+                /* On large screens, allow the image to show its full natural height up to a max, preventing the top/bottom cropping that looks like it's hiding under the header */
+                @media (min-width: 992px) {
+                    .top-banner-img { 
+                        height: auto !important; 
+                        max-height: 600px; 
+                    }
+                }
+                /* On smaller screens, enforce a minimum fixed height so the banner doesn't become tiny */
+                @media (max-width: 991px) and (min-width: 768px) {
+                    .top-banner-img { height: 350px !important; }
+                }
+                @media (max-width: 767px) {
+                    .top-banner-img { height: 300px !important; }
+                }
+                @media (max-width: 575px) {
+                    .top-banner-img { height: 260px !important; }
+                }
+            </style>
             <div class="container-fluid p-0">
                 <div id="topBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                     <div class="carousel-indicators">
@@ -189,12 +215,12 @@
                         <!-- Slide 1 -->
                         <div class="carousel-item active">
                             <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block w-100">
-                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="d-block w-100" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}" style="height: auto; object-fit: cover;">
+                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="top-banner-img" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}">
                             </a>
                         </div>
                         <!-- Slide 2 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 2" style="height: auto; object-fit: cover;">
+                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="top-banner-img" alt="Luxury Bed 2">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Save Up To 30%</h3>
                                 <p>Enjoy massive discounts on selected items this holiday season.</p>
@@ -202,7 +228,7 @@
                         </div>
                         <!-- Slide 3 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Luxury Bed 3" style="height: auto; object-fit: cover;">
+                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="top-banner-img" alt="Luxury Bed 3">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Elegant Designs</h3>
                                 <p>Transform your bedroom with our modern and classic styles.</p>
@@ -252,19 +278,48 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <!-- Main Slider-->
+                        <style>
+                            .hero-slider-main .item {
+                                position: relative;
+                                width: 100%;
+                                height: auto !important; /* Override fixed heights */
+                                padding: 0 !important;
+                                display: block;
+                            }
+                            .hero-slider-main .item img.slider-bg-img {
+                                width: 100%;
+                                height: auto;
+                                object-fit: contain;
+                                display: block;
+                            }
+                            .hero-slider-main .item .item-inner {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                padding: 5%;
+                                z-index: 2;
+                                pointer-events: none; /* Let clicks pass through to the slider link if needed */
+                            }
+                            .hero-slider-main .item .item-inner * {
+                                pointer-events: auto; /* Re-enable clicks on buttons inside */
+                            }
+                        </style>
                         <div class="hero-slider">
                             <div class="hero-slider-main owl-carousel dots-inside">
                                 @foreach ($sliders as $slider)
-                                    <div class="item
+                                    <a href="{{ $slider->link != '#' ? $slider->link : 'javascript:;' }}" class="item
                                                 @if (DB::table('languages')->where('is_default', 1)->first()->rtl == 1) d-flex justify-content-end @endif
-                                                " style="background: url('{{ url('assets/img/' . $slider->photo) }}') center/cover no-repeat;">
+                                                ">
+                                        <img src="{{ url('assets/img/' . $slider->photo) }}" class="slider-bg-img" alt="Slider Image">
+                                        
+                                        @if($slider->title || $slider->details)
                                         <div class="item-inner">
                                             <div class="from-bottom">
-                                                {{-- @if ($slider->logo)
-                                                <img class="d-inline-block brand-logo"
-                                                    src="{{ url('assets/img/' . $slider->logo) }}" alt="logo">
-                                                @endif --}}
                                                 <div class="title text-body"
                                                     style="color:{{ $slider->text_color ?? (isset($setting->slider_color) ? $setting->slider_color : '#fff') }} !important">
                                                     {{ $slider->title }}</div>
@@ -273,12 +328,13 @@
                                                     {{ $slider->details }}</div>
                                             </div>
                                             @if ($slider->link != '#')
-                                                <a class="btn btn-primary scale-up delay-1" href="{{ $slider->link }}">
+                                                <span class="btn btn-primary scale-up delay-1 mt-3" style="width: max-content;">
                                                     <span>{{ __('Buy Now') }}</span>
-                                                </a>
+                                                </span>
                                             @endif
                                         </div>
-                                    </div>
+                                        @endif
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
