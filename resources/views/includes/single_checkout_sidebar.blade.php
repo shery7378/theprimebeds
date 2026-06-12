@@ -2,7 +2,7 @@
     <div class="padding-top-2x hidden-lg-up"></div>
     <!-- Items in Cart Widget-->
 
-    <section class="card widget widget-featured-posts widget-order-summary p-4">
+    <section class="checkout-premium-card">
         <h3 class="widget-title">{{ __('Order Summary') }}</h3>
         @php
             $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
@@ -61,7 +61,7 @@
     </section>
 
     @if (PriceHelper::CheckDigital() == true)
-    <section class="card widget widget-featured-posts widget-order-summary p-4">
+    <section class="checkout-premium-card">
         <h3 class="widget-title">{{ __('Shipping Options') }}</h3>
         <div class="row">
             <div class="col-sm-12 mb-3">
@@ -70,7 +70,7 @@
                         $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
                     @endphp
 
-                    <select name="shipping_id" class="form-control" id="shipping_id_select" required>
+                    <select name="shipping_id" class="form-control form-control-premium" id="shipping_id_select" required>
                         <option value="" selected disabled>{{ __('Select Shipping Method') }}*</option>
                         @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $shipping)
                             @if ($shipping->id == 1 && isset($free_shipping) && $free_shipping->minimum_price <= $cart_total)
@@ -96,7 +96,7 @@
             <div class="col-sm-12 mb-3">
                 @if (PriceHelper::CheckDigital() == true)
                     @if (DB::table('states')->whereStatus(1)->count() > 0)
-                        <select name="state_id" class="form-control" id="state_id_select" required>
+                        <select name="state_id" class="form-control form-control-premium" id="state_id_select" required>
                             <option value="" selected disabled>{{ __('Select Shipping State') }}*</option>
                             @foreach (DB::table('states')->whereStatus(1)->get() as $state)
                                 <option value="{{ $state->id }}" data-href="{{ route('front.state.setup') }}"
@@ -125,14 +125,14 @@
 
 
     <!-- Order Summary Widget-->
-    <section class="card widget  widget-order-summary p-4 mb-0">
+    <section class="checkout-premium-card mb-0">
         <h3 class="widget-title">{{ __('Pay now') }}</h3>
         <div class="row">
             <div class="col-sm-12">
                 @php
                     $gateways = DB::table('payment_settings')->whereStatus(1)->get();
                 @endphp
-                <select class="form-control payment_gateway" required>
+                <select class="form-control form-control-premium payment_gateway" required>
                     <option value="" selected disabled>{{ __('Select a payment method') }}</option>
                     @foreach ($gateways as $gateway)
                         @if (PriceHelper::CheckDigitalPaymentGateway())
