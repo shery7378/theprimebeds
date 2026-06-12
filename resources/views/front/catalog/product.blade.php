@@ -1488,10 +1488,7 @@
                                     <span class="qty-btn decreaseQty subclick"><i class="fas fa-minus"></i></span>
                                     <input type="text" class="qtyValue cart-amount" value="1">
                                     <span class="qty-btn increaseQty addclick"><i class="fas fa-plus"></i></span>
-                                    <input type="hidden" value="{{ is_numeric($item->stock) ? (int)$item->stock : 9999 }}" id="current_stock">
-                                </div>
-                                <div class="pdp-total-badge">
-                                    {{ __('Total') }}: <span id="computed_total">{{ PriceHelper::grandCurrencyPrice($item) }}</span>
+                                    <input type="hidden" value="{{ (is_numeric($item->stock) && $item->stock > 0) ? (int)$item->stock : 9999 }}" id="current_stock">
                                 </div>
                             </div>
                         </div>
@@ -1521,13 +1518,9 @@
                                 @if ($item->is_stock())
                                     @if(!$hasCustomizers)
                                         <div class="pdp-cta-wrap">
-                                            <button class="pdp-btn pdp-btn-outline" id="add_to_cart">
+                                            <button class="pdp-btn pdp-btn-outline" id="add_to_cart" style="width: 100%;">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 <span>{{ __('Add to Cart') }}</span>
-                                            </button>
-                                            <button class="pdp-btn pdp-btn-primary" id="but_to_cart">
-                                                <i class="fas fa-bolt"></i>
-                                                <span>{{ __('Buy Now') }}</span>
                                             </button>
                                         </div>
                                     @else
