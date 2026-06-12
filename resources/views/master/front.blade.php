@@ -340,11 +340,11 @@
             border: none;
             border-right: 1px solid #e2e6ec;
             background: transparent;
-            padding: 0 18px;
+            padding: 0 18px 0 28px !important; /* Adjusted padding to a middle ground */
             font-size: 13px;
             font-weight: 500;
             color: #3c4858;
-            min-width: 165px; /* More space for categories */
+            min-width: 195px !important;
             cursor: pointer;
             outline: none;
             -webkit-appearance: none;
@@ -352,8 +352,8 @@
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 10px center;
-            padding-right: 26px;
+            background-position: right 14px center;
+            padding-right: 30px;
             height: 100%;
         }
         .topbar-redesigned .topbar-category-select:focus {
