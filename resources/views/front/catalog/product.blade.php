@@ -1322,66 +1322,7 @@
                     </div>
                 </div>
 
-                {{-- 
-                Product Variations Card (customization options)
-                @if (!empty($item->variations['customization_level']) || (!empty($item->variations['custom_text'])))
-                <div class="pdp-variations-card">
-                    <div class="pdp-variations-header">
-                        <div class="icon-wrap"><i class="fas fa-sliders-h"></i></div>
-                        <h5>{{ __('Product Variations & Customisation') }}</h5>
-                    </div>
-                    <div class="pdp-variations-body">
 
-                        @if (!empty($item->variations['customization_level']))
-                            <div class="pdp-custom-level-badge">
-                                <i class="fas fa-star"></i>
-                                {{ ucfirst(str_replace('_', ' ', $item->variations['customization_level'])) }}
-                            </div>
-
-                            @if (in_array($item->variations['customization_level'], ['customizable', 'partial_customizable']))
-                                <h6 style="font-size:14px; font-weight:700; color:var(--text-900); margin-bottom:14px;">
-                                    <i class="fas fa-pencil-alt me-2" style="color:var(--primary);"></i>{{ __('Add Your Customisation Preferences') }}
-                                </h6>
-
-                                <div class="mb-3">
-                                    <label for="preferences" style="font-size:13px; font-weight:600; color:var(--text-700); display:block; margin-bottom:6px;">{{ __('Describe your preferences') }}</label>
-                                    <textarea name="preferences" id="preferences" rows="3"
-                                        class="form-control"
-                                        style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:12px; font-size:14px; resize:none; transition:var(--transition);"
-                                        placeholder="{{ __('Add notes about text placement, design ideas, colours, or layout…') }}">{{ old('preferences') }}</textarea>
-                                </div>
-
-                                @if ($item->variations['customization_level'] !== 'partial_customizable')
-                                    <div class="pdp-upload-zone" onclick="document.getElementById('sample_images').click()">
-                                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                        <div style="font-size:14px; font-weight:600; color:var(--text-700); margin-bottom:4px;">{{ __('Upload Reference Images') }}</div>
-                                        <div style="font-size:12px; color:var(--text-300);">{{ __('JPEG, PNG supported — click or drag & drop') }}</div>
-                                        <input type="file" name="sample_images[]" id="sample_images" class="d-none" multiple>
-                                    </div>
-                                    <div id="preview-area" class="mt-3 d-flex flex-wrap gap-2"></div>
-                                    <div id="shared-progress-wrapper" class="progress mt-2" style="display: none !important;">
-                                        <div id="shared-progress-bar" class="progress-bar" style="width:0%;" role="progressbar">0%</div>
-                                    </div>
-                                    <small class="text-muted d-block mt-2" style="font-size:11px;">{{ __('You can upload multiple images') }}</small>
-                                @endif
-                            @endif
-                        @endif
-
-                        @if (!empty($item->variations['custom_text']))
-                            <div class="d-flex align-items-center" style="background:rgba(0,123,255,.05); border:1px solid rgba(0,123,255,.2); border-radius:var(--radius-sm); padding:12px 14px; font-size:13px; color:var(--text-700); margin-top:14px;">
-                                <span style="display:flex; justify-content:center; align-items:center; width:24px; height:24px; background:#007bff; color:#fff; border-radius:6px; margin-right:12px; flex-shrink:0;">
-                                    <i class="fas fa-info" style="font-size: 12px;"></i>
-                                </span>
-                                <div>
-                                    <strong>{{ __('Important Note:') }}</strong> {{ $item->variations['custom_text'] }}
-                                </div>
-                            </div>
-                        @endif
-
-                    </div>
-                </div>
-                @endif
-                --}}
 
             </div>{{-- /gallery col --}}
 
@@ -1636,7 +1577,7 @@
         {{-- ══════════════════════════════════════════════
              PRODUCT DETAILS TABS
         ══════════════════════════════════════════════ --}}
-        <div class="pdp-details-section" id="pdp-details">
+        <div class="pdp-details-section" id="pdp-details" style="margin-bottom: 40px;">
             <h2 class="pdp-section-heading">
                 <span class="heading-icon"><i class="fas fa-info-circle"></i></span>
                 {{ __('Product Details') }}
@@ -1689,6 +1630,65 @@
                 </div>
             </div>
         </div>
+
+        {{-- Product Variations Card (customization options) --}}
+        @if (!empty($item->variations['customization_level']) || (!empty($item->variations['custom_text'])))
+        <h2 class="pdp-section-heading">
+            <span class="heading-icon"><i class="fas fa-sliders-h"></i></span>
+            {{ __('Product Variations & Customisation') }}
+        </h2>
+        <div class="pdp-variations-card" style="margin-top: 0; margin-bottom: 40px;">
+            <div class="pdp-variations-body">
+
+                @if (!empty($item->variations['customization_level']))
+                    <div class="pdp-custom-level-badge">
+                        <i class="fas fa-star"></i>
+                        {{ ucfirst(str_replace('_', ' ', $item->variations['customization_level'])) }}
+                    </div>
+
+                    @if (in_array($item->variations['customization_level'], ['customizable', 'partial_customizable']))
+                        <h6 style="font-size:14px; font-weight:700; color:var(--text-900); margin-bottom:14px;">
+                            <i class="fas fa-pencil-alt me-2" style="color:var(--primary);"></i>{{ __('Add Your Customisation Preferences') }}
+                        </h6>
+
+                        <div class="mb-3">
+                            <label for="preferences" style="font-size:13px; font-weight:600; color:var(--text-700); display:block; margin-bottom:6px;">{{ __('Describe your preferences') }}</label>
+                            <textarea name="preferences" id="preferences" rows="3"
+                                class="form-control"
+                                style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:12px; font-size:14px; resize:none; transition:var(--transition);"
+                                placeholder="{{ __('Add notes about text placement, design ideas, colours, or layout…') }}">{{ old('preferences') }}</textarea>
+                        </div>
+
+                        @if ($item->variations['customization_level'] !== 'partial_customizable')
+                            <div class="pdp-upload-zone" onclick="document.getElementById('sample_images').click()">
+                                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                <div style="font-size:14px; font-weight:600; color:var(--text-700); margin-bottom:4px;">{{ __('Upload Reference Images') }}</div>
+                                <div style="font-size:12px; color:var(--text-300);">{{ __('JPEG, PNG supported — click or drag & drop') }}</div>
+                                <input type="file" name="sample_images[]" id="sample_images" class="d-none" multiple>
+                            </div>
+                            <div id="preview-area" class="mt-3 d-flex flex-wrap gap-2"></div>
+                            <div id="shared-progress-wrapper" class="progress mt-2" style="display: none !important;">
+                                <div id="shared-progress-bar" class="progress-bar" style="width:0%;" role="progressbar">0%</div>
+                            </div>
+                            <small class="text-muted d-block mt-2" style="font-size:11px;">{{ __('You can upload multiple images') }}</small>
+                        @endif
+                    @endif
+                @endif
+
+                @if (!empty($item->variations['custom_text']))
+                    <div class="d-flex align-items-center" style="background:rgba(0,123,255,.05); border:1px solid rgba(0,123,255,.2); border-radius:var(--radius-sm); padding:12px 14px; font-size:13px; color:var(--text-700); margin-top:14px;">
+                        <span style="display:flex; justify-content:center; align-items:center; width:24px; height:24px; background:#007bff; color:#fff; border-radius:6px; margin-right:12px; flex-shrink:0;">
+                            <i class="fas fa-info" style="font-size: 12px;"></i>
+                        </span>
+                        <div>
+                            <strong>{{ __('Important Note:') }}</strong> {{ $item->variations['custom_text'] }}
+                        </div>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+        @endif
 
         {{-- ══════════════════════════════════════════════
              RELATED PRODUCTS
