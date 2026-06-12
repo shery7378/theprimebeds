@@ -583,29 +583,41 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background-color: var(--brand-bg, #555);
             color: #fff !important;
-            font-size: 15px;
+            font-size: 18px;
             text-decoration: none !important;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+            transition: all 0.3s ease;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .social-icon-branded:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
-            opacity: 0.88;
+            transform: translateY(-5px) scale(1.12);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
             color: #fff !important;
+            text-decoration: none !important;
+        }
+
+        .social-icon-branded:active {
+            transform: translateY(-2px) scale(1.08);
         }
 
         .social-icon-branded svg {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
             display: block;
+        }
+
+        .footer-social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
         }
 
         /* Override old red background on footer social links */
@@ -1140,15 +1152,25 @@ body_theme4 @endif
                                 'pinterest' => '#E60023',
                             ];
 
+                            // Default icon map if custom ones not set
+                            $defaultIcons = [
+                                0 => 'fab fa-facebook-f',
+                                1 => 'fab fa-instagram',
+                                2 => 'fab fa-linkedin-in',
+                                3 => 'fab fa-twitter',
+                                4 => 'fab fa-youtube',
+                                5 => 'fab fa-whatsapp',
+                            ];
+
                             // TikTok SVG — FA 5.8.0 does not ship this icon
                             $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/></svg>';
                         @endphp
 
-                        <div class="footer-social-links d-flex flex-wrap mt-3" style="gap: 10px;">
+                        <div class="footer-social-links d-flex flex-wrap mt-3">
                             @foreach ($links as $link_key => $link)
                                 @if (!empty($link))
                                     @php
-                                        $iconClass    = $icons[$link_key] ?? '';
+                                        $iconClass    = $icons[$link_key] ?? $defaultIcons[$link_key] ?? 'fab fa-link';
                                         $isTikTok     = str_contains(strtolower($iconClass), 'tiktok');
                                         $brandColor   = '#555';
                                         foreach ($socialBrandColors as $platform => $color) {
@@ -1175,6 +1197,28 @@ body_theme4 @endif
                                     </a>
                                 @endif
                             @endforeach
+
+                            {{-- Fallback: Show icons if no social links configured --}}
+                            @if (empty($links))
+                                <a class="social-icon-branded" href="#" title="Facebook" style="--brand-bg: #1877F2;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="Instagram" style="--brand-bg: #E1306C;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="WhatsApp" style="--brand-bg: #25D366;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            @endif
                         </div>
                     </section>
                 </div>
