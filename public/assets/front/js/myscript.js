@@ -1424,3 +1424,14 @@ $(document).ready(function() {
         });
     }
 });
+
+$(document).ready(function() {
+    $(document).on('mouseenter', '.topbar-cart-item', function() {
+        $(this).addClass('active');
+    });
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.topbar-cart-item').length) {
+            $('.topbar-cart-item').removeClass('active');
+        }
+    });
+});
