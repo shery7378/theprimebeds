@@ -1014,18 +1014,47 @@ $(function ($) {
         cartSubmit(item_key, item_id, qty);
         getData();
       } else {
-        // Instantly show loading state so it feels responsive
-        $(".cart_view_header").html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #002e3b;"></i></div>');
+        let isLastItem = $(".decreaseQtycart").length === 1;
+        
+        if (isLastItem) {
+          // Instantly show the empty cart HTML without waiting for the server
+          let emptyCartHtml = `
+            <style>
+                .toolbar-dropdown.cart-dropdown {
+                    width: 380px !important;
+                    min-width: 380px !important;
+                    max-height: none !important;
+                    overflow: hidden !important;
+                    padding: 0 !important;
+                }
+                .toolbar-dropdown.cart-dropdown * {
+                    max-height: none !important;
+                }
+            </style>
+            <div style="text-align: center; width: 100%; overflow: hidden;">
+              <a href="` + mainurl + `/catalog" style="display: block; width: 100%;">
+                  <img src="` + mainurl + `/assets/img/cart.png" alt="Empty Cart" style="width: 100%; display: block;">
+              </a>
+            </div>
+          `;
+          $(".cart_view_header").html(emptyCartHtml);
+          $(".cart_count").text("0");
+        } else {
+          // Show loading state while recalculating totals for remaining items
+          $(".cart_view_header").html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #002e3b;"></i></div>');
+        }
+
         let removeUrl = mainurl + "/cart/destroy/" + item_id;
         $.get(removeUrl, function (response) {
-          $(".cart_view_header").load($("#header_cart_load").attr("data-target"));
-          
-          let newHtml = $(response);
-          let countText = newHtml.find(".cart_count:first").text();
-          if (countText !== "") {
-              $(".cart_count").text(countText);
-          } else {
-              $(".cart_count").text("0");
+          if (!isLastItem) {
+            $(".cart_view_header").load($("#header_cart_load").attr("data-target"));
+            let newHtml = $(response);
+            let countText = newHtml.find(".cart_count:first").text();
+            if (countText !== "") {
+                $(".cart_count").text(countText);
+            } else {
+                $(".cart_count").text("0");
+            }
           }
           
           if ($("#view_cart_load").length > 0) {
