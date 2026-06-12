@@ -1263,7 +1263,17 @@ $(function ($) {
           },
           complete: function () {
             // Restore button text & enable again after AJAX finishes
-            $btn.prop("disabled", false).html(originalHtml);
+            $btn.prop("disabled", false);
+            if (check != 0) {
+                $btn.html("<i class='fas fa-check' style='margin-right: 5px;'></i> Added");
+                $btn.css({"font-size": "12px", "font-weight": "600", "display": "flex", "align-items": "center", "justify-content": "center", "color": "#fff", "text-decoration": "none"});
+                if ($btn[0]) {
+                    $btn[0].style.setProperty("background-color", "#28a745", "important");
+                    $btn[0].style.setProperty("border-color", "#28a745", "important");
+                }
+            } else {
+                $btn.html(originalHtml);
+            }
           },
         });
       }
