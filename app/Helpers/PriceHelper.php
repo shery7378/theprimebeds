@@ -371,7 +371,8 @@ class PriceHelper
 
     public static function GatewayText($keyword)
     {
-        return PaymentSetting::where("unique_keyword", $keyword)->first()->text;
+        $setting = PaymentSetting::where("unique_keyword", $keyword)->first();
+        return $setting ? $setting->text : null;
     }
 
     public static function DiscountPercentage($item)

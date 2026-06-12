@@ -344,10 +344,10 @@
 
      @php
          $paymentData = App\Models\PaymentSetting::where('unique_keyword', 'mercadopago')->first();
-         $paydata = $paymentData->convertJsonData();
+         $paydata = $paymentData ? $paymentData->convertJsonData() : [];
      @endphp
 
-     @if ($paymentData->status == 1)
+     @if ($paymentData && $paymentData->status == 1)
          {{-- MERCADOPAGO --}}
          <div class="modal fade" id="mercadopago" tabindex="-1" aria-hidden="true">
              <form class="interactive-credit-card row" id="mercadopagofrom"
@@ -580,7 +580,7 @@
 
          @php
              $data = App\Models\PaymentSetting::whereUniqueKeyword('paystack')->first();
-             $paydata = $data->convertJsonData();
+             $paydata = $data ? $data->convertJsonData() : [];
              $billing = Session::get('billing_address');
          @endphp
          @section('script')
@@ -596,7 +596,7 @@
                      let email = $('#checkout_email_billing').val();
                      alert(email)
                      var handler = PaystackPop.setup({
-                         key: '{{ $paydata['key'] }}',
+                         key: '{{ $paydata['key'] ?? '' }}',
                          email: email,
                          amount: parseFloat(total).toFixed(2) * 100,
                          currency: '{{ PriceHelper::setCurrencyName() }}',
