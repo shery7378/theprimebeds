@@ -77,7 +77,24 @@
   <div class="w-50 d-block text-end"><a class="btn btn-primary btn-sm  mb-0"
       href="{{route('front.checkout.billing')}}"><span>{{__('Checkout')}}</span></a></div>
   @else
-  {{__('Cart empty')}}
+  <style>
+      .toolbar-dropdown.cart-dropdown {
+          width: 380px !important;
+          min-width: 380px !important;
+          max-height: none !important;
+          overflow: hidden !important;
+          padding: 0 !important;
+          margin-top: 20px !important;
+      }
+      .toolbar-dropdown.cart-dropdown * {
+          max-height: none !important;
+      }
+  </style>
+  <div style="text-align: center; width: 100%; overflow: hidden;">
+    <a href="{{ route('front.catalog') }}" style="display: block; width: 100%;">
+        <img src="{{ asset('assets/img/cart.png') }}" alt="Empty Cart" style="width: 100%; display: block;">
+    </a>
+  </div>
   @endif
   <script>
     function cartQuantity(key, change) {
