@@ -1271,6 +1271,14 @@ $(function ($) {
                     $btn[0].style.setProperty("background-color", "#28a745", "important");
                     $btn[0].style.setProperty("border-color", "#28a745", "important");
                 }
+                setTimeout(function() {
+                    $btn.html(originalHtml);
+                    $btn.css({"font-size": "", "font-weight": "", "display": "", "align-items": "", "justify-content": "", "color": "", "text-decoration": ""});
+                    if ($btn[0]) {
+                        $btn[0].style.removeProperty("background-color");
+                        $btn[0].style.removeProperty("border-color");
+                    }
+                }, 3000);
             } else {
                 $btn.html(originalHtml);
             }
