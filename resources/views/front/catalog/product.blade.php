@@ -369,12 +369,13 @@
        PRICE SECTION
     ============================================================ */
     .pdp-price-section {
-        background: linear-gradient(135deg, rgba(108,92,231,.06) 0%, rgba(162,155,254,.08) 100%);
-        border: 1px solid rgba(108,92,231,.15);
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
         border-radius: var(--radius-md);
         padding: 20px 24px;
         position: relative;
         overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
     }
     .pdp-price-section::after {
         content: '';
@@ -384,7 +385,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(108,92,231,.12) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(42,65,102,.05) 0%, transparent 70%);
         pointer-events: none;
     }
     .pdp-price-section .price-label {
@@ -411,14 +412,15 @@
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        background: var(--danger);
+        background: linear-gradient(135deg, #d63031 0%, #e84393 100%);
         color: #fff;
         font-size: 11px;
         font-weight: 700;
-        padding: 3px 9px;
+        padding: 4px 10px;
         border-radius: var(--radius-pill);
         vertical-align: middle;
         margin-left: 10px;
+        box-shadow: 0 4px 10px rgba(214, 48, 49, 0.25);
     }
     #discount_info {
         display: none;
@@ -453,20 +455,20 @@
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #000000;
+        letter-spacing: 2px;
+        color: #666666;
         margin-bottom: 12px;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
     }
     .pdp-section-label::before {
         content: '';
         display: block;
-        width: 4px;
-        height: 16px;
+        width: 3px;
+        height: 14px;
         border-radius: var(--radius-pill);
-        background: var(--grad-primary);
+        background: #2A4166;
         flex-shrink: 0;
     }
 
@@ -615,14 +617,13 @@
     .pdp-btn:hover::after { background: rgba(255,255,255,.12); }
 
     .pdp-btn-primary {
-        background: #2A4166;
+        background: linear-gradient(135deg, #2A4166 0%, #1f314d 100%);
         color: #fff;
-        box-shadow: 0 6px 20px rgba(42,65,102,.35);
+        box-shadow: 0 6px 20px rgba(42,65,102,.30);
     }
     .pdp-btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(42,65,102,.45);
-        background: #1f314d;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 28px rgba(42,65,102,.45);
         color: #fff;
     }
 
@@ -630,47 +631,60 @@
         background: #fff;
         color: #2A4166;
         border: 2px solid #2A4166;
-        box-shadow: var(--shadow-xs);
+        box-shadow: 0 4px 10px rgba(0,0,0,.03);
     }
     .pdp-btn-outline:hover {
-        background: #2A4166;
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
+        background: #f8faff;
+        color: #1f314d;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 16px rgba(42,65,102,.12);
     }
 
     .pdp-btn-gold {
-        background: #2A4166;
+        background: linear-gradient(135deg, #2A4166 0%, #1f314d 100%);
         color: #fff;
-        box-shadow: 0 6px 20px rgba(42,65,102,.45);
+        box-shadow: 0 6px 20px rgba(42,65,102,.40);
         animation: pdp-pulse-blue 2.2s ease-in-out infinite;
     }
     .pdp-btn-gold:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(42,65,102,.55);
-        background: #1f314d;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 28px rgba(42,65,102,.55);
         color: #fff;
         animation: none;
     }
     @keyframes pdp-pulse-blue {
-        0%,100% { box-shadow: 0 6px 20px rgba(42,65,102,.45); }
-        50%      { box-shadow: 0 6px 28px rgba(42,65,102,.70); }
+        0%,100% { box-shadow: 0 6px 20px rgba(42,65,102,.30); }
+        50%      { box-shadow: 0 6px 28px rgba(42,65,102,.60); }
     }
 
     .pdp-btn-customize {
-        background: #2A4166;
+        background: linear-gradient(135deg, #1f314d 0%, #2A4166 100%);
         color: #fff;
-        box-shadow: 0 8px 24px rgba(42,65,102,.35);
-        font-size: 16px;
-        padding: 16px 28px;
+        border: 1px dashed rgba(255,255,255,0.4);
+        box-shadow: 0 4px 15px rgba(42,65,102,.2);
+        font-size: 15px;
+        font-weight: 700;
+        padding: 14px 28px;
         width: 100%;
         flex: none;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: var(--transition);
+        animation: pdp-offer-glow 3s infinite;
     }
     .pdp-btn-customize:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 32px rgba(42,65,102,.45);
+        transform: translateY(-2px) scale(1.01);
         background: #1f314d;
         color: #fff;
+        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow: 0 8px 25px rgba(208, 166, 75, .3);
+    }
+    @keyframes pdp-offer-glow {
+        0%, 100% { box-shadow: 0 4px 15px rgba(42,65,102,.2); }
+        50% { box-shadow: 0 4px 25px rgba(208, 166, 75, .25); border-color: rgba(208, 166, 75, .6); }
     }
 
     .pdp-btn-disabled {
@@ -779,16 +793,19 @@
     .pdp-trust-badge {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         font-size: 12px;
         font-weight: 600;
         color: var(--text-500);
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: var(--radius-pill);
-        padding: 6px 14px;
+        background: transparent;
+        padding: 6px 10px;
+        transition: var(--transition);
     }
-    .pdp-trust-badge i { color: var(--success); }
+    .pdp-trust-badge:hover {
+        color: var(--text-900);
+        transform: translateY(-1px);
+    }
+    .pdp-trust-badge i { color: #2A4166; font-size: 14px; }
 
     /* ============================================================
        DETAILS TABS SECTION
