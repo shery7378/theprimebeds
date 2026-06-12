@@ -2,1210 +2,1171 @@
 
 @section('styleplugins')
 <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
     :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --primary-color: #667eea;
-        --secondary-color: #764ba2;
-        --success-color: #10b981;
-        --warning-color: #f59e0b;
-        --danger-color: #ef4444;
-        --gray-50: #f9fafb;
-        --gray-100: #f3f4f6;
-        --gray-200: #e5e7eb;
-        --gray-300: #d1d5db;
-        --gray-600: #4b5563;
-        --gray-700: #374151;
-        --gray-900: #111827;
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-        --radius-sm: 6px;
-        --radius-md: 10px;
-        --radius-lg: 16px;
-        --radius-xl: 20px;
+        --primary:        {{ $setting->primary_color ?? '#0F3460' }};
+        --primary-dark:   {{ $setting->primary_color ?? '#0a2342' }};
+        --primary-light:  {{ $setting->primary_color ?? '#1a529c' }};
+        --accent:         #d0a64b;
+        --gold:           #d0a64b;
+        --gold-dark:      #b88a3b;
+        --success:        #00b894;
+        --danger:         #d63031;
+        --info:           #0984e3;
+        --text-900:       #1a1a2e;
+        --text-700:       #2d3436;
+        --text-500:       #636e72;
+        --text-300:       #b2bec3;
+        --bg-page:        #f4f5f9;
+        --bg-card:        #ffffff;
+        --bg-soft:        #f8f8fc;
+        --border:         #e8e8f0;
+        --shadow-xs:      0 1px 3px rgba(15, 52, 96, .08);
+        --shadow-sm:      0 4px 12px rgba(15, 52, 96, .10);
+        --shadow-md:      0 8px 24px rgba(15, 52, 96, .14);
+        --shadow-lg:      0 16px 40px rgba(15, 52, 96, .18);
+        --shadow-xl:      0 24px 60px rgba(15, 52, 96, .22);
+        --radius-sm:      8px;
+        --radius-md:      14px;
+        --radius-lg:      20px;
+        --radius-xl:      28px;
+        --radius-pill:    999px;
+        --grad-primary:   linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        --grad-accent:    linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+        --grad-success:   linear-gradient(135deg, var(--success) 0%, #00cec9 100%);
+        --grad-gold:      linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+        --grad-page:      linear-gradient(160deg, #f4f5f9 0%, #e6eaf0 100%);
+        --transition:     all .3s cubic-bezier(.4,0,.2,1);
+        --font-main:      'Inter', 'Outfit', system-ui, sans-serif;
     }
 
-    /* Modern Breadcrumb */
-    .breadcrumbs {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 16px 0;
-        margin: 0;
-        list-style: none;
+    /* ============================================================
+       GOOGLE FONTS
+    ============================================================ */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+    body { font-family: var(--font-main); }
+
+    /* ============================================================
+       PAGE WRAPPER
+    ============================================================ */
+    .pdp-page-wrapper {
+        background: var(--grad-page);
+        min-height: 100vh;
+        padding-bottom: 80px;
     }
 
-    .breadcrumbs li {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-    }
-
-    .breadcrumbs a {
-        color: var(--gray-600);
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-
-    .breadcrumbs a:hover {
-        color: var(--primary-color);
-    }
-
-    .breadcrumbs .separator::before {
-        content: '›';
-        color: var(--gray-400);
-        margin: 0 4px;
-        font-size: 18px;
-    }
-
-    /* Product Gallery Enhancements */
-    .product-gallery {
+    /* ============================================================
+       BREADCRUMB HERO STRIP
+    ============================================================ */
+    .pdp-hero-strip {
+        background: #2A4166;
+        padding: 18px 0;
         position: relative;
-        background: white;
-        border-radius: var(--radius-lg);
-        padding: 20px;
-        box-shadow: var(--shadow-md);
         overflow: hidden;
     }
-
-    .product-badge {
+    .pdp-hero-strip::before {
+        content: '';
         position: absolute;
-        top: 20px;
-        left: 20px;
-        padding: 8px 16px;
-        border-radius: var(--radius-md);
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        z-index: 5;
-        box-shadow: var(--shadow-md);
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-
-    .ppp-t {
-        top: 60px !important;
-    }
-
-    .customize-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-gradient);
-        color: white;
-        padding: 8px 16px;
-        border-radius: var(--radius-xl);
-        font-size: 13px;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        z-index: 10;
+    .pdp-breadcrumbs {
         display: flex;
         align-items: center;
         gap: 6px;
-        animation: pulse-badge 2s infinite;
-    }
-
-    @keyframes pulse-badge {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-
-    .custom-video-wrapper {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        z-index: 10;
-    }
-
-    .video-button {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: white;
-        box-shadow: var(--shadow-lg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-    .video-button:hover {
-        transform: scale(1.1);
-        box-shadow: var(--shadow-xl);
-    }
-
-    .video-button .play-icon {
-        width: 50px;
-        height: 50px;
-    }
-
-    .video-button:hover .play-icon circle {
-        fill: var(--primary-color);
-    }
-
-    /* Product Details Section */
-    .details-page-top-right-content {
-        background: white;
-        border-radius: var(--radius-lg);
-        padding: 30px;
-        box-shadow: var(--shadow-md);
-    }
-
-    .p-title-main {
-        font-size: 2.5rem !important;
-        font-weight: 800 !important;
-        line-height: 1.2 !important;
-        letter-spacing: -1px !important;
-        color: var(--gray-900) !important;
-        margin-bottom: 20px !important;
-    }
-
-    @media (max-width: 768px) {
-        .p-title-main {
-            font-size: 1.8rem !important;
-        }
-    }
-
-    .price-area {
-        background: var(--gray-50);
-        padding: 20px;
-        border-radius: var(--radius-md);
-        border-left: 4px solid var(--primary-color);
-        margin-bottom: 24px !important;
-    }
-
-    .main-price {
-        font-size: 2.5rem !important;
-        font-weight: 800 !important;
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    /* Attributes Dropdown */
-    .form-group label {
-        font-weight: 600;
-        font-size: 15px;
-        color: var(--gray-700);
-        margin-bottom: 8px;
-        display: block;
-    }
-
-    .attribute_option {
-        width: 100%;
-        padding: 14px 18px;
-        border-radius: var(--radius-md);
-        border: 2px solid var(--gray-200);
-        background: white;
-        font-size: 15px;
-        color: var(--gray-700);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        background-position: right 12px center;
-        background-repeat: no-repeat;
-        background-size: 20px;
-        padding-right: 40px;
-    }
-
-    .attribute_option:hover {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    .attribute_option:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
-    }
-
-    .attribute_option.is-invalid {
-        border-color: var(--danger-color) !important;
-        background-color: #fef2f2;
-    }
-
-    /* Quantity Selector */
-    .qtySelector {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: white;
-        padding: 6px;
-        border-radius: var(--radius-xl);
-        border: 2px solid var(--gray-200);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .qtySelector span {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--gray-100);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        user-select: none;
-    }
-
-    .qtySelector span:hover {
-        background: var(--primary-color);
-        color: white;
-        transform: scale(1.05);
-    }
-
-    .qtyValue {
-        width: 60px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 1.2rem;
-        border: none;
-        background: transparent;
-        outline: none;
-    }
-
-    /* Customize Button */
-    .btn-customize-bed {
-        background: var(--primary-gradient);
-        border: none;
-        color: white;
-        padding: 18px 32px;
-        font-size: 18px;
-        font-weight: 700;
-        border-radius: var(--radius-md);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
-    }
-
-    .btn-customize-bed:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
-        color: white;
-    }
-
-    .btn-customize-bed::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
-        transition: left 0.5s ease;
-    }
-
-    .btn-customize-bed:hover::before {
-        left: 100%;
-    }
-
-    .customize-info {
-        font-size: 13px;
-        color: var(--gray-600);
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    /* Action Buttons */
-    .p-action-button {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .p-action-button .btn {
-        flex: 1;
-        min-width: 160px;
-        padding: 14px 24px;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: var(--radius-md);
-        border-width: 2px;
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .p-action-button .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-    }
-
-    .btn-outline-primary {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
-        background: white;
-    }
-
-    .btn-outline-primary:hover {
-        background: var(--primary-color);
-        color: white;
-    }
-
-    .btn-primary {
-        background: var(--primary-gradient);
-        border: none;
-    }
-
-    /* Discount Button */
-    .btn-warning {
-        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-        border: none;
-        color: var(--gray-900);
-        font-weight: 700;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-    }
-
-    .btn-warning:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
-    }
-
-    @keyframes pulse-branding {
-        0% { transform: scale(1); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
-        50% { transform: scale(1.05); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5); }
-        100% { transform: scale(1); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
-    }
-
-    .pulse-animation {
-        animation: pulse-branding 2s infinite;
-    }
-
-    /* Discount Modal */
-    .modal-content {
-        border-radius: var(--radius-lg);
-        border: none;
-        box-shadow: var(--shadow-xl);
-    }
-
-    .modal-header {
-        background: var(--primary-gradient);
-        color: white;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        padding: 20px 30px;
-        border-bottom: none;
-    }
-
-    .modal-title {
-        font-weight: 700;
-        font-size: 1.5rem;
-    }
-
-    .modal-body {
-        padding: 30px;
-    }
-
-    .discount-card {
-        border: 2px solid var(--gray-200);
-        border-radius: var(--radius-md);
-        padding: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: white;
-        min-width: 140px;
-    }
-
-    .discount-card:hover {
-        background: var(--gray-50);
-        border-color: var(--primary-color);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-    }
-
-    .discount-card.selected {
-        background: #eff6ff;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-    }
-
-    /* Product Variations Card */
-    .card {
-        border-radius: var(--radius-lg);
-        border: none;
-        box-shadow: var(--shadow-md);
-        overflow: hidden;
-    }
-
-    .card-title {
-        font-weight: 700;
-        font-size: 1.25rem;
-        color: var(--gray-900);
-    }
-
-    .badge {
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        font-weight: 600;
-        font-size: 13px;
-    }
-
-    /* Preferences Textarea */
-    #preferences {
-        border: 2px solid var(--gray-200);
-        border-radius: var(--radius-md);
-        padding: 14px;
-        font-size: 15px;
-        transition: all 0.3s ease;
-        resize: none;
-    }
-
-    #preferences:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    @media (max-width: 767px) {
-        #preferences {
-            height: 140px !important;
-        }
-    }
-
-    @media (min-width: 768px) {
-        #preferences {
-            height: 100px !important;
-        }
-    }
-
-    /* File Upload Section */
-    .form-label {
-        font-weight: 600;
-        font-size: 15px;
-        color: var(--gray-700);
-    }
-
-    #sample_images {
-        padding: 12px;
-        border: 2px dashed var(--gray-300);
-        border-radius: var(--radius-md);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: var(--gray-50);
-    }
-
-    #sample_images:hover {
-        border-color: var(--primary-color);
-        background: white;
-    }
-
-    /* Progress Bar */
-    .progress {
-        height: 20px;
-        border-radius: var(--radius-md);
-        background: var(--gray-100);
-        overflow: hidden;
-    }
-
-    /* ===== ENHANCED UI IMPROVEMENTS ===== */
-
-    /* Page Container */
-    .container.padding-bottom-1x {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.02) 0%, rgba(118, 75, 162, 0.02) 100%);
-        padding-top: 50px !important;
-        padding-bottom: 50px !important;
-        border-radius: 0;
-    }
-
-    /* Main Layout Grid */
-    .row > [class*="col-"] {
-        margin-bottom: 0;
-    }
-
-    /* Product Gallery Enhancement */
-    .product-gallery {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        border: 1px solid rgba(102, 126, 234, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    .product-gallery:hover {
-        box-shadow: var(--shadow-lg);
-        border-color: rgba(102, 126, 234, 0.2);
-    }
-
-    .product-thumbnails.insize {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-    }
-
-    .product-thumbnails.insize .item img {
-        transition: transform 0.3s ease;
-    }
-
-    .product-thumbnails.insize .item img:hover {
-        transform: scale(1.05);
-    }
-
-    /* Details Right Content Card */
-    .details-page-top-right-content {
-        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
-        border: 1px solid rgba(102, 126, 234, 0.1);
-        position: sticky;
-        top: 20px;
-    }
-
-    /* Product Title Styling */
-    .p-title-main {
-        position: relative;
-        padding-bottom: 15px;
-    }
-
-    .p-title-main::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 50px;
-        height: 4px;
-        background: var(--primary-gradient);
-        border-radius: 2px;
-    }
-
-    /* Price Area Enhancement */
-    .price-area {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
-        border: 1px solid rgba(102, 126, 234, 0.15);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .price-area::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100px;
-        height: 100px;
-        background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-        border-radius: 50%;
-    }
-
-    .price-area > * {
+        list-style: none;
+        margin: 0;
+        padding: 0;
         position: relative;
         z-index: 1;
     }
+    .pdp-breadcrumbs li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .pdp-breadcrumbs li::after {
+        content: '/';
+        color: rgba(255,255,255,.35);
+        font-size: 12px;
+    }
+    .pdp-breadcrumbs li:last-child::after { display: none; }
+    .pdp-breadcrumbs a {
+        color: rgba(255,255,255,.65);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    .pdp-breadcrumbs a:hover { color: var(--primary-light); }
+    .pdp-breadcrumbs .current { color: #fff; font-weight: 600; }
 
-    /* Quantity Selector Enhancement */
-    .qtySelector {
-        background: linear-gradient(135deg, #ffffff 0%, #f9f9ff 100%);
-        border: 2px solid rgba(102, 126, 234, 0.2);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* ============================================================
+       MAIN GRID
+    ============================================================ */
+    .pdp-main-grid {
+        /* using bootstrap row/cols */
     }
 
-    .qtySelector span {
-        background: var(--gray-100);
-        font-weight: 600;
-        color: var(--gray-700);
+    /* ============================================================
+       GALLERY COLUMN
+    ============================================================ */
+    .pdp-gallery-col {
+        position: sticky;
+        top: 20px;
     }
-
-    /* Attribute Dropdown Enhancement */
-    .form-group {
-        position: relative;
-    }
-
-    .attribute_option {
-        background: white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 12px center / 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Customize Button Enhancement */
-    .btn-customize-bed {
-        position: relative;
+    .pdp-gallery-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
         overflow: hidden;
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+        position: relative;
+        border: 1px solid var(--border);
+    }
+    .pdp-gallery-main {
+        position: relative;
+        background: var(--bg-soft);
+    }
+    .pdp-gallery-main .product-details-slider img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Badges on gallery */
+    .pdp-badge-group {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .pdp-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border-radius: var(--radius-pill);
+        font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        box-shadow: var(--shadow-sm);
+    }
+    .pdp-badge.badge-new    { background: var(--grad-success); color: #fff; }
+    .pdp-badge.badge-hot    { background: var(--grad-gold);    color: #fff; }
+    .pdp-badge.badge-sale   { background: #daa520 !important;       color: #fff; }
+    .pdp-badge.badge-out    { background: #636e72;             color: #fff; }
+    .pdp-badge.badge-top    { background: var(--info);         color: #fff; }
+    .pdp-badge.badge-best   { background: var(--text-700);     color: #fff; }
+    .pdp-badge.badge-custom {
+        background: var(--grad-primary);
+        color: #fff;
+        animation: pdp-pulse-badge 2.5s ease-in-out infinite;
+    }
+    @keyframes pdp-pulse-badge {
+        0%,100% { box-shadow: 0 0 0 0 rgba(108,92,231,.4); }
+        50%      { box-shadow: 0 0 0 8px rgba(108,92,231,0); }
     }
 
-    .btn-customize-bed:active {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
+    /* Video btn top-right */
+    .pdp-video-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.95);
+        box-shadow: var(--shadow-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+    .pdp-video-btn:hover {
+        transform: scale(1.1);
+        background: var(--primary);
+    }
+    .pdp-video-btn:hover svg circle { fill: var(--primary); }
+    .pdp-video-btn:hover svg polygon { fill: #fff; }
+
+    /* Discount ribbon */
+    .pdp-discount-ribbon {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 10;
+        background: var(--danger);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        box-shadow: var(--shadow-sm);
+        animation: pdp-bounce 1.8s ease-in-out infinite;
+    }
+    @keyframes pdp-bounce {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-4px); }
     }
 
-    /* Action Buttons Row */
-    .p-action-button {
+    /* Thumbnails strip */
+    .pdp-thumbs-strip {
+        padding: 14px;
+        background: #fff;
+        border-top: 1px solid var(--border);
+    }
+    .pdp-thumbs-strip .owl-item img {
+        border-radius: var(--radius-sm);
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: var(--transition);
+        aspect-ratio: 1;
+        object-fit: cover;
+    }
+    .pdp-thumbs-strip .owl-item.active img { border-color: var(--primary); }
+    .pdp-thumbs-strip .owl-item img:hover   { border-color: var(--primary-light); }
+
+    /* ============================================================
+       VARIATIONS CARD (below gallery)
+    ============================================================ */
+    .pdp-variations-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
+        margin-top: 20px;
+        overflow: hidden;
+    }
+    .pdp-variations-header {
+        background: linear-gradient(135deg, #f8f8fc 0%, #ede9fe 100%);
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
         gap: 10px;
     }
+    .pdp-variations-header .icon-wrap {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
+        background: var(--grad-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    .pdp-variations-header h5 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-900);
+        margin: 0;
+    }
+    .pdp-variations-body { padding: 20px 24px; }
 
-    .p-action-button .btn {
+    .pdp-custom-level-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        color: #fff;
+        font-size: 13px;
         font-weight: 600;
-        letter-spacing: 0.3px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 16px;
     }
 
-    .p-action-button .btn::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.1);
+    /* File upload zone */
+    .pdp-upload-zone {
+        border: 2px dashed var(--primary-light);
+        border-radius: var(--radius-md);
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(108,92,231,.03) 0%, rgba(162,155,254,.05) 100%);
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    .pdp-upload-zone:hover {
+        border-color: var(--primary);
+        background: linear-gradient(135deg, rgba(108,92,231,.06) 0%, rgba(162,155,254,.08) 100%);
+    }
+    .pdp-upload-zone .upload-icon {
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+        background: var(--grad-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        color: #fff;
+        font-size: 18px;
     }
 
-    .p-action-button .btn:active::after {
-        width: 300px;
-        height: 300px;
-    }
-
-    /* Product Meta Section */
-    .t-c-b-area {
-        background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
-        border: 1px solid var(--gray-200);
+    /* ============================================================
+       INFO COLUMN
+    ============================================================ */
+    .pdp-info-col {}
+    .pdp-info-card {
+        background: var(--bg-card);
         border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+        overflow: hidden;
+    }
+    .pdp-info-body { padding: 32px; }
+
+    /* Product title */
+    .pdp-product-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333333;
+        line-height: 1.2;
+        margin-bottom: 6px;
+        letter-spacing: -.5px;
+    }
+    @media (max-width: 768px) {
+        .pdp-product-title { font-size: 1.5rem; }
     }
 
-    .t-c-b-area > div {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 12px 0;
+    /* Short description */
+    .pdp-short-desc {
+        font-size: 15px;
+        color: #444444;
+        line-height: 1.65;
+        margin-bottom: 0;
     }
-
-    .t-c-b-area > div:last-child {
-        border-bottom: none;
-    }
-
-    .t-c-b-area a {
-        color: var(--primary-color);
-        font-weight: 500;
-        transition: all 0.2s;
+    .pdp-short-desc .read-more-link {
+        color: #333333;
+        font-weight: 600;
         text-decoration: none;
+        transition: var(--transition);
     }
-
-    .t-c-b-area a:hover {
-        color: var(--secondary-color);
+    .pdp-short-desc .read-more-link:hover {
+        color: var(--primary-dark);
         text-decoration: underline;
     }
 
-    /* Tabs Enhancement */
-    .nav-tabs {
-        border-bottom: 2px solid var(--gray-200);
-        gap: 5px;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    /* Section divider */
+    .pdp-section-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 22px 0;
     }
 
-    .nav-tabs .nav-link {
-        color: var(--gray-600);
-        border: none;
-        font-weight: 600;
-        font-size: 15px;
-        padding: 16px 24px;
-        position: relative;
-        transition: all 0.3s ease;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    }
-
-    .nav-tabs .nav-link:hover {
-        color: var(--primary-color);
-        background: var(--gray-50);
-    }
-
-    .nav-tabs .nav-link.active {
-        color: var(--primary-color);
-        background: white;
-        border: none;
-    }
-
-    .nav-tabs .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--primary-gradient);
-        border-radius: 2px 2px 0 0;
-    }
-
-    .tab-content {
-        background: white;
-        padding: 40px;
-        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-        border: 1px solid var(--gray-200);
-        border-top: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Product Variations Card */
-    .card {
-        border: 1px solid rgba(102, 126, 234, 0.1);
-        background: linear-gradient(135deg, #ffffff 0%, #f9f9ff 100%);
-    }
-
-    .card-body {
-        padding: 28px;
-    }
-
-    .card-title {
-        position: relative;
-        padding-bottom: 12px;
-        margin-bottom: 24px;
-    }
-
-    .card-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: var(--primary-gradient);
-        border-radius: 2px;
-    }
-
-    /* Badges Enhancement */
-    .badge {
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        padding: 8px 14px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .badge.bg-info {
-        background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
-    }
-
-    /* Form Controls */
-    .form-control {
-        border: 2px solid var(--gray-200);
-        padding: 12px 16px;
-        font-size: 15px;
+    /* ============================================================
+       PRICE SECTION
+    ============================================================ */
+    .pdp-price-section {
+        background: linear-gradient(135deg, rgba(108,92,231,.06) 0%, rgba(162,155,254,.08) 100%);
+        border: 1px solid rgba(108,92,231,.15);
         border-radius: var(--radius-md);
-        transition: all 0.3s ease;
-        background: white;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        background: white;
-    }
-
-    .form-control::placeholder {
-        color: var(--gray-400);
-    }
-
-    /* Input File Upload */
-    input[type="file"] {
-        cursor: pointer;
-    }
-
-    /* Related Products Section */
-    .relatedproduct-section {
-        background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
-        padding-top: 60px !important;
-        padding-bottom: 60px !important;
-        border-radius: var(--radius-lg);
-    }
-
-    .relatedproduct-section .section-title h2 {
+        padding: 20px 24px;
         position: relative;
-        padding-bottom: 20px;
+        overflow: hidden;
+    }
+    .pdp-price-section::after {
+        content: '';
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(108,92,231,.12) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .pdp-price-section .price-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #444444;
+        margin-bottom: 6px;
+    }
+    .pdp-price-was {
+        font-size: 15px;
+        color: #555555;
+        text-decoration: line-through;
+        margin-right: 12px;
+    }
+    .pdp-price-now {
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #333333;
+        line-height: 1;
+    }
+    .pdp-price-discount-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: var(--radius-pill);
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    #discount_info {
+        display: none;
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--success);
+        background: rgba(0,184,148,.08);
+        border: 1px solid rgba(0,184,148,.2);
+        border-radius: var(--radius-sm);
+        padding: 6px 12px;
     }
 
-    .relatedproduct-section .section-title h2::after {
+    /* Countdown */
+    .pdp-countdown {
+        background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
+        color: #fff;
+        border-radius: var(--radius-md);
+        padding: 14px 20px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+    }
+    .pdp-countdown .countdown { color: var(--gold); font-weight: 700; }
+
+    /* ============================================================
+       ATTRIBUTES SECTION
+    ============================================================ */
+    .pdp-section-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #000000;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .pdp-section-label::before {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 16px;
+        border-radius: var(--radius-pill);
+        background: var(--grad-primary);
+        flex-shrink: 0;
+    }
+
+    .pdp-attr-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+    @media (max-width: 480px) { .pdp-attr-grid { grid-template-columns: 1fr; } }
+
+    .pdp-attr-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-700);
+        margin-bottom: 6px;
+    }
+    .pdp-attr-group .attribute_option {
+        width: 100%;
+        padding: 11px 36px 11px 14px;
+        border: 2px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236c5ce7' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") no-repeat right 10px center / 18px;
+        font-size: 14px;
+        color: var(--text-700);
+        cursor: pointer;
+        appearance: none;
+        transition: var(--transition);
+        font-weight: 500;
+    }
+    .pdp-attr-group .attribute_option:hover,
+    .pdp-attr-group .attribute_option:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(108,92,231,.12);
+        outline: none;
+    }
+    .pdp-attr-group .attribute_option.is-invalid {
+        border-color: var(--danger);
+        background-color: #fff5f5;
+        box-shadow: 0 0 0 3px rgba(214,48,49,.1);
+    }
+    .pdp-attr-group .invalid-msg {
+        display: none;
+        font-size: 12px;
+        color: var(--danger);
+        margin-top: 4px;
+        font-weight: 500;
+    }
+    .pdp-attr-group .attribute_option.is-invalid ~ .invalid-msg { display: block; }
+
+    /* ============================================================
+       QUANTITY + TOTAL
+    ============================================================ */
+    .pdp-qty-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .pdp-qty-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #000000;
+    }
+    .pdp-qty-control {
+        display: inline-flex;
+        align-items: center;
+        background: var(--bg-soft);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-pill);
+        overflow: hidden;
+    }
+    .pdp-qty-control .qty-btn {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 16px;
+        color: #000000;
+        background: transparent;
+        border: none;
+        transition: var(--transition);
+        font-weight: 700;
+        user-select: none;
+    }
+    .pdp-qty-control .qty-btn:hover {
+        background: #000000;
+        color: #fff;
+    }
+    .pdp-qty-control .qtyValue {
+        width: 52px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        border: none;
+        background: transparent;
+        outline: none;
+        color: #000000;
+    }
+    .pdp-total-badge {
+        margin-left: auto;
+        background: var(--bg-soft);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 9px 20px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #000000;
+        white-space: nowrap;
+    }
+    .pdp-total-badge span { color: #000000; }
+
+    /* ============================================================
+       CTA BUTTONS
+    ============================================================ */
+    .pdp-cta-wrap { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .pdp-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 28px;
+        border-radius: var(--radius-md);
+        font-size: 15px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        flex: 1;
+        min-width: 160px;
+        letter-spacing: .2px;
+    }
+    .pdp-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0);
+        transition: background .2s;
+    }
+    .pdp-btn:hover::after { background: rgba(255,255,255,.12); }
+
+    .pdp-btn-primary {
+        background: #2A4166;
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(42,65,102,.35);
+    }
+    .pdp-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(42,65,102,.45);
+        background: #1f314d;
+        color: #fff;
+    }
+
+    .pdp-btn-outline {
+        background: #fff;
+        color: #2A4166;
+        border: 2px solid #2A4166;
+        box-shadow: var(--shadow-xs);
+    }
+    .pdp-btn-outline:hover {
+        background: #2A4166;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .pdp-btn-gold {
+        background: #2A4166;
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(42,65,102,.45);
+        animation: pdp-pulse-blue 2.2s ease-in-out infinite;
+    }
+    .pdp-btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(42,65,102,.55);
+        background: #1f314d;
+        color: #fff;
+        animation: none;
+    }
+    @keyframes pdp-pulse-blue {
+        0%,100% { box-shadow: 0 6px 20px rgba(42,65,102,.45); }
+        50%      { box-shadow: 0 6px 28px rgba(42,65,102,.70); }
+    }
+
+    .pdp-btn-customize {
+        background: #2A4166;
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(42,65,102,.35);
+        font-size: 16px;
+        padding: 16px 28px;
+        width: 100%;
+        flex: none;
+    }
+    .pdp-btn-customize:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(42,65,102,.45);
+        background: #1f314d;
+        color: #fff;
+    }
+
+    .pdp-btn-disabled {
+        background: var(--border);
+        color: var(--text-300);
+        cursor: not-allowed;
+        pointer-events: none;
+        flex: 1;
+        min-width: 160px;
+    }
+
+    .pdp-customize-hint {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-500);
+        margin-top: 8px;
+        padding: 8px 12px;
+        background: rgba(108,92,231,.05);
+        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--primary-light);
+    }
+
+    .pdp-customize-action-hint {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--info);
+        background: rgba(9,132,227,.07);
+        border: 1px solid rgba(9,132,227,.2);
+        border-radius: var(--radius-sm);
+        padding: 10px 14px;
+        width: 100%;
+        font-weight: 500;
+    }
+
+    /* ============================================================
+       META INFO STRIP
+    ============================================================ */
+    .pdp-meta-strip {
+        background: var(--bg-soft);
+        border-top: 1px solid var(--border);
+        padding: 20px 32px;
+    }
+    .pdp-meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 24px;
+    }
+    @media (max-width: 480px) { .pdp-meta-grid { grid-template-columns: 1fr; } }
+    .pdp-meta-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .pdp-meta-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: var(--radius-sm);
+        background: var(--grad-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 11px;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+    .pdp-meta-content { flex: 1; }
+    .pdp-meta-content .meta-label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .8px;
+        color: var(--text-300);
+        display: block;
+        line-height: 1.2;
+    }
+    .pdp-meta-content .meta-val {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-700);
+    }
+    .pdp-meta-content .meta-val a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+    }
+    .pdp-meta-content .meta-val a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+
+    /* Trust badges */
+    .pdp-trust-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+    }
+    .pdp-trust-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-500);
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 6px 14px;
+    }
+    .pdp-trust-badge i { color: var(--success); }
+
+    /* ============================================================
+       DETAILS TABS SECTION
+    ============================================================ */
+    .pdp-details-section { margin-top: 48px; }
+    .pdp-section-heading {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--text-900);
+        position: relative;
+        padding-bottom: 16px;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .pdp-section-heading::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 60px;
+        width: 52px;
         height: 4px;
-        background: var(--primary-gradient);
-        border-radius: 2px;
+        background: var(--grad-primary);
+        border-radius: var(--radius-pill);
+    }
+    .pdp-section-heading .heading-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: var(--radius-md);
+        background: var(--grad-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 16px;
+        flex-shrink: 0;
     }
 
-    .product-card {
-        background: white;
+    /* Tab nav */
+    .pdp-tab-nav {
+        display: flex;
+        gap: 4px;
+        border-bottom: 2px solid var(--border);
+        margin-bottom: 0;
+        list-style: none;
+        padding: 0;
+        overflow-x: auto;
+    }
+    .pdp-tab-nav::-webkit-scrollbar { height: 0; }
+    .pdp-tab-nav li a {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 14px 22px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-500);
+        text-decoration: none;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        border: 2px solid transparent;
+        border-bottom: none;
+        transition: var(--transition);
+        white-space: nowrap;
+        position: relative;
+        top: 2px;
+    }
+    .pdp-tab-nav li a:hover {
+        color: var(--primary);
+        background: rgba(108,92,231,.04);
+    }
+    .pdp-tab-nav li a.active {
+        color: var(--primary);
+        background: var(--bg-card);
+        border-color: var(--border);
+        border-bottom-color: var(--bg-card);
+    }
+
+    .pdp-tab-content {
+        background: var(--bg-card);
+        border: 2px solid var(--border);
+        border-top: none;
+        border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+        padding: 36px;
+        box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 768px) { .pdp-tab-content { padding: 20px; } }
+
+    /* Description content styling */
+    .pdp-tab-content h1,
+    .pdp-tab-content h2,
+    .pdp-tab-content h3 { color: var(--text-900); font-weight: 700; }
+    .pdp-tab-content p { color: var(--text-700); line-height: 1.7; }
+    .pdp-tab-content ul,
+    .pdp-tab-content ol { color: var(--text-700); line-height: 1.7; }
+
+    /* Spec table */
+    .pdp-spec-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+    .pdp-spec-table th {
+        background: linear-gradient(135deg, #f8f8fc 0%, #ede9fe 100%);
+        color: var(--text-900);
+        font-weight: 700;
+        padding: 16px 20px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        border-bottom: 2px solid var(--border);
+    }
+    .pdp-spec-table td {
+        padding: 14px 20px;
+        color: var(--text-700);
+        font-size: 14px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 500;
+    }
+    .pdp-spec-table tbody tr:last-child td { border-bottom: none; }
+    .pdp-spec-table tbody tr:nth-child(even) td { background: rgba(108,92,231,.025); }
+    .pdp-spec-table .spec-key {
+        background: var(--bg-soft);
+        font-weight: 700;
+        color: var(--text-900);
+        width: 32%;
+    }
+    .pdp-spec-table tbody tr:nth-child(even) .spec-key { background: rgba(108,92,231,.05); }
+
+    .pdp-no-spec {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-300);
+    }
+    .pdp-no-spec i { font-size: 40px; display: block; margin-bottom: 10px; }
+
+    /* ============================================================
+       RELATED PRODUCTS
+    ============================================================ */
+    .pdp-related-section { margin-top: 64px; }
+
+    .pdp-product-card {
+        background: var(--bg-card);
         border-radius: var(--radius-lg);
         overflow: hidden;
-        box-shadow: var(--shadow-sm);
-        transition: all 0.3s ease;
-        border: 1px solid var(--gray-100);
+        box-shadow: var(--shadow-xs);
+        border: 1px solid var(--border);
+        transition: var(--transition);
+        position: relative;
     }
-
-    .product-card:hover {
+    .pdp-product-card:hover {
         transform: translateY(-8px);
         box-shadow: var(--shadow-lg);
-        border-color: rgba(102, 126, 234, 0.2);
+        border-color: rgba(108,92,231,.2);
     }
-
-    .product-thumb {
+    .pdp-product-thumb {
+        position: relative;
         overflow: hidden;
-        background: var(--gray-50);
+        background: var(--bg-soft);
         aspect-ratio: 1;
     }
-
-    .product-thumb img {
+    .pdp-product-thumb img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.4s ease;
+        transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .pdp-product-card:hover .pdp-product-thumb img { transform: scale(1.1); }
+
+    .pdp-product-badge-wrap {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 5;
     }
 
-    .product-card:hover .product-thumb img {
-        transform: scale(1.1);
-    }
-
-    .product-card-body {
-        padding: 20px;
-    }
-
-    .product-category {
-        font-size: 12px;
-        color: var(--primary-color);
-        font-weight: 600;
+    .pdp-product-body { padding: 18px 20px; }
+    .pdp-product-cat {
+        font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
+        letter-spacing: .6px;
+        color: var(--primary);
+        margin-bottom: 6px;
     }
-
-    .product-title {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--gray-900);
-        margin-bottom: 12px;
-        min-height: 35px;
-    }
-
-    .product-title a {
+    .pdp-product-cat a {
         color: inherit;
         text-decoration: none;
-        transition: color 0.2s;
+        transition: var(--transition);
     }
-
-    .product-title a:hover {
-        color: var(--primary-color);
-    }
-
-    .product-price {
-        font-size: 16px;
-        color: var(--gray-900);
-        font-weight: 700;
-        margin-bottom: 0;
-    }
-
-    .product-price del {
-        color: var(--gray-400);
-        font-weight: 400;
+    .pdp-product-cat a:hover { color: var(--primary-dark); }
+    .pdp-product-name {
         font-size: 14px;
+        font-weight: 700;
+        color: var(--text-900);
+        margin-bottom: 10px;
+        line-height: 1.4;
+        min-height: 38px;
+    }
+    .pdp-product-name a {
+        color: inherit;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    .pdp-product-name a:hover { color: var(--primary); }
+    .pdp-product-price {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--primary);
+    }
+    .pdp-product-price del {
+        color: var(--text-300);
+        font-weight: 400;
+        font-size: 12px;
+        margin-right: 5px;
     }
 
-    /* Modal Enhancement */
-    .modal-dialog {
+    /* ============================================================
+       DISCOUNT MODAL
+    ============================================================ */
+    .pdp-modal .modal-content {
+        border: none;
         border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
     }
-
-    .modal-content {
-        border: 1px solid rgba(102, 126, 234, 0.1);
-    }
-
-    .modal-header {
+    .pdp-modal .modal-header {
+        background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
+        color: #fff;
+        padding: 28px 30px;
         border-bottom: none;
-        padding: 30px;
+    }
+    .pdp-modal .modal-title {
+        font-size: 1.4rem;
+        font-weight: 800;
+    }
+    .pdp-modal .btn-close-white { filter: invert(1); }
+    .pdp-modal .modal-body { padding: 28px 30px; }
+    .pdp-modal .modal-footer {
+        background: var(--bg-soft);
+        border-top: 1px solid var(--border);
+        padding: 18px 30px;
+        gap: 10px;
     }
 
-    .modal-body {
-        padding: 30px;
-    }
-
-    .offer-card {
+    .pdp-offer-card {
         cursor: pointer;
         outline: none;
         border: none;
+        background: none;
+        padding: 0;
         display: inline-flex;
         flex-direction: column;
         user-select: none;
         -webkit-user-select: none;
     }
-
-    .offer-card input:checked + .discount-card {
-        background: #eff6ff;
-        border-color: var(--primary-color);
-        transform: scale(1.02);
-    }
-
-    /* Alert Styling */
-    .alert {
+    .pdp-discount-tile {
+        border: 2px solid var(--border);
         border-radius: var(--radius-md);
+        padding: 20px 16px;
+        text-align: center;
+        background: var(--bg-card);
+        min-width: 130px;
+        transition: var(--transition);
+    }
+    .pdp-discount-tile:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-3px);
+    }
+    .pdp-offer-card input:checked + .pdp-discount-tile {
+        border-color: var(--primary);
+        background: rgba(108,92,231,.06);
+        box-shadow: 0 0 0 3px rgba(108,92,231,.15);
+        transform: scale(1.03);
+    }
+    .pdp-discount-tile .tile-qty {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-700);
+        margin-bottom: 4px;
+    }
+    .pdp-discount-tile .tile-save {
+        font-size: 11px;
+        color: var(--text-300);
+        margin-bottom: 6px;
+    }
+    .pdp-discount-tile .tile-pct {
+        font-size: 2rem;
+        font-weight: 900;
+        background: var(--grad-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+    }
+
+    /* ============================================================
+       REVIEW MODAL
+    ============================================================ */
+    .pdp-review-modal .modal-content {
         border: none;
-        font-weight: 500;
-    }
-
-    .alert-info {
-        background: rgba(6, 182, 212, 0.1);
-        color: #0891b2;
-    }
-
-    /* Discount Discount Text */
-    .ppp-t {
-        animation: bounceAlert 1s infinite;
-    }
-
-    @keyframes bounceAlert {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-    }
-
-    /* Smooth Transitions */
-    * {
-        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-
-    button, a, input, select, textarea {
-        transition: all 0.3s ease;
-    }
-
-    /* Responsive Improvements */
-    @media (max-width: 768px) {
-        .details-page-top-right-content {
-            position: static;
-        }
-
-        .tab-content {
-            padding: 20px;
-        }
-
-        .p-title-main {
-            font-size: 1.8rem !important;
-        }
-
-        .nav-tabs .nav-link {
-            padding: 12px 16px;
-            font-size: 13px;
-        }
-
-        .card-body {
-            padding: 16px;
-        }
-
-        .product-card-body {
-            padding: 15px;
-        }
-
-        .relatedproduct-section {
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .p-action-button {
-            flex-direction: column;
-        }
-
-        .p-action-button .btn {
-            width: 100%;
-        }
-
-        .q-select {
-            width: 100%;
-        }
-
-        .nav-tabs {
-            gap: 0;
-        }
-
-        .nav-tabs .nav-link {
-            padding: 12px;
-            font-size: 12px;
-        }
-    }
-
-    .progress-bar {
-        background: var(--primary-gradient);
-        font-weight: 600;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: width 0.3s ease;
-    }
-
-    /* Tabs */
-    .nav-tabs {
-        border-bottom: 2px solid var(--gray-200);
-        gap: 8px;
-    }
-
-    .nav-tabs .nav-link {
-        border: none;
-        border-bottom: 3px solid transparent;
-        color: var(--gray-600);
-        font-weight: 600;
-        padding: 12px 24px;
-        transition: all 0.3s ease;
-        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    }
-
-    .nav-tabs .nav-link:hover {
-        color: var(--primary-color);
-        background: var(--gray-50);
-    }
-
-    .nav-tabs .nav-link.active {
-        color: var(--primary-color);
-        border-bottom-color: var(--primary-color);
-        background: white;
-    }
-
-    .tab-content {
-        padding: 30px;
-        border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
-        box-shadow: var(--shadow-md);
-    }
-
-    /* Category Links */
-    .t-c-b-area a {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.2s;
-    }
-
-    .t-c-b-area a:hover {
-        color: var(--secondary-color);
-        text-decoration: underline;
-    }
-
-    /* Related Products */
-    .product-card {
-        background: white;
         border-radius: var(--radius-lg);
         overflow: hidden;
-        box-shadow: var(--shadow-md);
-        transition: all 0.3s ease;
-    }
-
-    .product-card:hover {
-        transform: translateY(-8px);
         box-shadow: var(--shadow-xl);
     }
-
-    .product-thumb {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 1;
+    .pdp-review-modal .modal-header {
+        background: var(--grad-primary);
+        color: #fff;
+        border-bottom: none;
+        padding: 24px 28px;
     }
+    .pdp-review-modal .modal-title { font-weight: 700; font-size: 1.3rem; }
 
-    .product-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
+    /* ============================================================
+       PROGRESS BAR
+    ============================================================ */
+    .progress { height: 8px; border-radius: var(--radius-pill); background: var(--border); overflow: hidden; }
+    .progress-bar { background: var(--grad-primary); border-radius: var(--radius-pill); transition: width .3s ease; }
 
-    .product-card:hover .product-thumb img {
-        transform: scale(1.1);
-    }
-
-    .product-card-body {
-        padding: 20px;
-    }
-
-    .product-title a {
-        color: var(--gray-900);
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.2s;
-    }
-
-    .product-title a:hover {
-        color: var(--primary-color);
-    }
-
-    .product-price {
-        font-weight: 700;
-        font-size: 1.25rem;
-        color: var(--primary-color);
-        margin-top: 10px;
-    }
-
-    .product-price del {
-        color: var(--gray-400);
-        font-size: 0.9rem;
-        margin-right: 8px;
-    }
-
-    /* Alert */
-    .alert-info {
-        background: #dbeafe;
-        border: 2px solid #3b82f6;
-        color: #1e40af;
-        border-radius: var(--radius-md);
-        padding: 14px 18px;
-        font-size: 14px;
-    }
-
-    /* Responsive */
+    /* ============================================================
+       RESPONSIVE TWEAKS
+    ============================================================ */
     @media (max-width: 768px) {
-        .details-page-top-right-content {
-            padding: 20px;
-        }
-
-        .p-action-button .btn {
-            min-width: 100%;
-        }
-
-        .qtySelector {
-            width: 100%;
-            justify-content: space-between;
-        }
+        .pdp-info-body { padding: 20px; }
+        .pdp-meta-strip { padding: 16px 20px; }
+        .pdp-section-heading { font-size: 1.3rem; }
+        .pdp-price-now { font-size: 1.9rem; }
+        .pdp-gallery-col { position: static; }
+        .pdp-cta-wrap { flex-direction: column; }
+        .pdp-btn { min-width: 100%; flex: none; }
+        .pdp-btn-customize { flex: none; }
+        .pdp-trust-row { gap: 7px; }
+    }
+    @media (max-width: 480px) {
+        .pdp-qty-row { flex-direction: column; align-items: flex-start; }
+        .pdp-total-badge { margin-left: 0; width: 100%; text-align: center; }
     }
 
-    /* Loading Animation */
-    @keyframes shimmer {
-        0% { background-position: -1000px 0; }
-        100% { background-position: 1000px 0; }
-    }
-
-    /* Section Title */
-    .section-title h2 {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--gray-900);
-        margin-bottom: 24px;
-        position: relative;
-        padding-bottom: 12px;
-    }
-
-    .section-title h2::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 60px;
-        height: 4px;
-        background: var(--primary-gradient);
-        border-radius: 2px;
-    }
-
-    /* Comparison Table */
-    .comparison-table {
-        overflow-x: auto;
-    }
-
-    .comparison-table table {
-        border-radius: var(--radius-md);
-        overflow: hidden;
-    }
-
-    .comparison-table th {
-        background: var(--gray-100);
+    /* ============================================================
+       MISC UTILITIES
+    ============================================================ */
+    .pdp-mt-6  { margin-top: 24px; }
+    .pdp-tag {
+        display: inline-block;
+        background: rgba(108,92,231,.1);
+        color: var(--primary);
+        font-size: 11px;
         font-weight: 600;
-        color: var(--gray-900);
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
+        margin: 2px;
+        text-decoration: none;
+        transition: var(--transition);
     }
-
-    .comparison-table td {
-        color: var(--gray-700);
+    .pdp-tag:hover {
+        background: var(--primary);
+        color: #fff;
     }
+    .pdp-sku-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 4px 12px;
+        font-size: 12px;
+        color: var(--text-500);
+        font-weight: 600;
+    }
+    .pdp-sku-pill span { color: var(--text-700); }
 </style>
 @endsection
 
@@ -1217,837 +1178,888 @@
     <meta name="tile" content="{{ $item->title }}">
     <meta name="keywords" content="{{ $item->meta_keywords }}">
     <meta name="description" content="{{ $item->meta_description }}">
-
     <meta name="twitter:title" content="{{ $item->title }}">
     <meta name="twitter:image" content="{{ url('assets/img/' . $item->photo) }}">
     <meta name="twitter:description" content="{{ $item->meta_description }}">
-
     <meta name="og:title" content="{{ $item->title }}">
     <meta name="og:image" content="{{ url('assets/img/' . $item->photo) }}">
     <meta name="og:description" content="{{ $item->meta_description }}">
 @endsection
 
 @section('content')
-    <script>
-        window.bundleDiscount = @json($item->bundle_discount);
-    </script>
-    <div class="page-title" style="background: var(--gray-50); padding: 20px 0;">
+<script>
+    window.bundleDiscount = @json($item->bundle_discount);
+</script>
+
+<div class="pdp-page-wrapper">
+
+    {{-- ── BREADCRUMB HERO STRIP ── --}}
+    <div class="pdp-hero-strip">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="breadcrumbs">
-                        <li><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-                        <li class="separator"></li>
-                        <li><a href="{{ route('front.catalog') }}">{{ __('Shop') }}</a></li>
-                        <li class="separator"></li>
-                        <li style="color: var(--gray-900); font-weight: 600;">{{ $item->name }}</li>
-                    </ul>
-                </div>
-            </div>
+            <ul class="pdp-breadcrumbs">
+                <li><a href="{{ route('front.index') }}"><i class="fas fa-home me-1"></i>{{ __('Home') }}</a></li>
+                <li><a href="{{ route('front.catalog') }}">{{ __('Shop') }}</a></li>
+                <li><span class="current">{{ Str::limit($item->name, 50) }}</span></li>
+            </ul>
         </div>
     </div>
 
-    <!-- Page Content-->
-    <div class="container padding-bottom-1x mb-1" style="padding-top: 40px;">
-        <!-- Breadcrumbs -->
-        <div style="margin-bottom: 30px;">
-            <ol class="breadcrumbs">
-                <li><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-                <li class="separator"></li>
-                <li><a href="{{ route('front.catalog') }}">{{ __('Products') }}</a></li>
-                <li class="separator"></li>
-                <li style="color: var(--gray-700); font-weight: 600;">{{ $item->name }}</li>
-            </ol>
-        </div>
+    <div class="container" style="padding-top: 10px; padding-bottom: 10px;">
 
-        <div class="row">
-            <!-- Product Gallery-->
-            <div class="col-xxl-5 col-lg-6 col-md-6 mb-4">
-                <div class="product-gallery">
-                    @if ($item->video)
-                        <div class="custom-video-wrapper">
-                            <div class="video-button">
-                                <a href="{{ $item->video }}" title="Watch video" data-type="video">
-                                    <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-                                        viewBox="0 0 24 24" fill="none">
-                                        <circle cx="12" cy="12" r="12" fill="#fff" />
-                                        <polygon points="10,8 16,12 10,16" fill="#667eea" />
-                                    </svg>
-                                </a>
-                            </div>
+        {{-- ══════════════════════════════════════════════
+             MAIN GRID: GALLERY ← → INFO
+        ══════════════════════════════════════════════ --}}
+        <div class="row mt-4 pdp-main-grid">
+
+            {{-- ─────────── GALLERY COLUMN ─────────── --}}
+            <div class="col-lg-6 pdp-gallery-col">
+
+                {{-- Main Gallery Card --}}
+                <div class="pdp-gallery-card">
+                    <div class="pdp-gallery-main">
+
+                        {{-- Top-Left Badge Group --}}
+                        <div class="pdp-badge-group">
+                            @if ($item->is_stock())
+                                @php $typeClass = match($item->is_type) {
+                                    'feature'    => 'badge-hot',
+                                    'new'        => 'badge-new',
+                                    'top'        => 'badge-top',
+                                    'best'       => 'badge-best',
+                                    'flash_deal' => 'badge-new',
+                                    default      => '',
+                                }; @endphp
+                                @if ($item->is_type !== 'undefine' && $typeClass)
+                                    <span class="pdp-badge {{ $typeClass }}">
+                                        @if ($item->is_type === 'flash_deal') <i class="fas fa-bolt"></i> @endif
+                                        {{ ucfirst(str_replace('_', ' ', $item->is_type)) }}
+                                    </span>
+                                @endif
+                            @else
+                                <span class="pdp-badge badge-out"><i class="fas fa-times-circle"></i>{{ __('Out of Stock') }}</span>
+                            @endif
+
+                            @if ($item->previous_price && $item->previous_price != 0)
+                                <span class="pdp-badge badge-sale" style="backgournd-color:#daa520 !important">
+                                    <i class="fas fa-tag"></i>-{{ PriceHelper::DiscountPercentage($item) }}
+                                </span>
+                            @endif
+
+                            @php $hasCustomizers = method_exists($item, 'hasBedCustomizers') && $item->hasBedCustomizers(); @endphp
+                            @if ($hasCustomizers)
+                                <span class="pdp-badge badge-custom"><i class="fas fa-magic"></i>{{ __('Customizable') }}</span>
+                            @endif
                         </div>
-                    @endif
 
-                    {{-- Customizable Badge --}}
-                    @php
-                        $hasCustomizers = method_exists($item, 'hasBedCustomizers') && $item->hasBedCustomizers();
-                    @endphp
-                    @if($hasCustomizers)
-                    <div class="customize-badge">
-                        <i class="fas fa-cog"></i>
-                        <span>{{ __('Customizable') }}</span>
-                    </div>
-                    @endif
+                        {{-- Video Button --}}
+                        @if ($item->video)
+                            <a href="{{ $item->video }}" class="pdp-video-btn" title="Watch video" data-type="video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="12" fill="#f0eeff"/>
+                                    <polygon points="10,8 17,12 10,16" fill="#6c5ce7"/>
+                                </svg>
+                            </a>
+                        @endif
 
-                    @if ($item->is_stock())
-                        <span class="product-badge @if ($item->is_type == 'feature') bg-warning
-                            @elseif($item->is_type == 'new') bg-success
-                            @elseif($item->is_type == 'top') bg-info
-                            @elseif($item->is_type == 'best') bg-dark
-                            @elseif($item->is_type == 'flash_deal') bg-success @endif">
-                            {{ __($item->is_type != 'undefine' ? ucfirst(str_replace('_', ' ', $item->is_type)) : '') }}
-                        </span>
-                    @else
-                        <span class="product-badge bg-secondary border-default text-body">{{ __('out of stock') }}</span>
-                    @endif
-
-                    @if ($item->previous_price && $item->previous_price != 0)
-                        <div class="product-badge bg-danger ppp-t" style="background: var(--danger-color) !important;">
-                            -{{ PriceHelper::DiscountPercentage($item) }}
-                        </div>
-                    @endif
-
-                    @php $imageIndex = 0; @endphp
-                    <div class="product-thumbnails insize">
-                        <div class="product-details-slider owl-carousel" id="product-gallery">
-                            <div class="item">
-                                <img src="{{ url('assets/img/' . $item->photo) }}" alt="zoom" data-index="{{ $imageIndex++ }}" style="border-radius: var(--radius-md);" />
-                            </div>
-                            @foreach ($galleries as $key => $gallery)
+                        {{-- Gallery Slider --}}
+                        @php $imageIndex = 0; @endphp
+                        <div class="product-thumbnails insize">
+                            <div class="product-details-slider owl-carousel" id="product-gallery">
                                 <div class="item">
-                                    <img src="{{ url('assets/img/' . $gallery->photo) }}" alt="zoom" data-index="{{ $imageIndex++ }}" style="border-radius: var(--radius-md);" />
+                                    <img src="{{ url('assets/img/' . $item->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
                                 </div>
-                            @endforeach
-                            {{-- Add attribute option images --}}
-                            @foreach (($attributes ?? collect()) as $attribute)
-                                @foreach (($attribute->options ?? collect()) as $option)
-                                    @php
-                                        $images = json_decode($option->variation_images, true) ?? [];
-                                    @endphp
-                                    @foreach (($images ?? []) as $img)
-                                        @if (!empty($img))
-                                            <div class="item">
-                                                <img src="{{ url('assets/img/' . $img) }}" alt="zoom"
-                                                    data-option-id="{{ $option->id }}"
-                                                    data-attribute-id="{{ $attribute->id }}"
-                                                    data-index="{{ $imageIndex++ }}" style="border-radius: var(--radius-md);" />
-                                            </div>
-                                        @endif
+                                @foreach ($galleries as $gallery)
+                                    <div class="item">
+                                        <img src="{{ url('assets/img/' . $gallery->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
+                                    </div>
+                                @endforeach
+                                @foreach (($attributes ?? collect()) as $attribute)
+                                    @foreach (($attribute->options ?? collect()) as $option)
+                                        @php $images = json_decode($option->variation_images, true) ?? []; @endphp
+                                        @foreach (($images ?? []) as $img)
+                                            @if (!empty($img))
+                                                <div class="item">
+                                                    <img src="{{ url('assets/img/' . $img) }}" alt="zoom"
+                                                        data-option-id="{{ $option->id }}"
+                                                        data-attribute-id="{{ $attribute->id }}"
+                                                        data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 @endforeach
-                            @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Thumbnail Strip --}}
+                    <div class="pdp-thumbs-strip">
+                        <div class="product-thumbnails">
+                            <div class="owl-carousel product-thumbnails-slider">
+                                <div class="item"><img src="{{ url('assets/img/' . $item->photo) }}" alt="thumb" /></div>
+                                @foreach ($galleries as $gallery)
+                                    <div class="item"><img src="{{ url('assets/img/' . $gallery->photo) }}" alt="thumb" /></div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Product Variations --}}
-                <div class="card my-4">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Product Variations</h5>
+                {{-- 
+                Product Variations Card (customization options)
+                @if (!empty($item->variations['customization_level']) || (!empty($item->variations['custom_text'])))
+                <div class="pdp-variations-card">
+                    <div class="pdp-variations-header">
+                        <div class="icon-wrap"><i class="fas fa-sliders-h"></i></div>
+                        <h5>{{ __('Product Variations & Customisation') }}</h5>
+                    </div>
+                    <div class="pdp-variations-body">
 
                         @if (!empty($item->variations['customization_level']))
-                            <div class="mb-4">
-                                <strong>Customisation Level:</strong>
-                                <span class="badge bg-info text-dark ms-2">
-                                    {{ ucfirst(str_replace('_', ' ', $item->variations['customization_level'])) }}
-                                </span>
+                            <div class="pdp-custom-level-badge">
+                                <i class="fas fa-star"></i>
+                                {{ ucfirst(str_replace('_', ' ', $item->variations['customization_level'])) }}
                             </div>
 
                             @if (in_array($item->variations['customization_level'], ['customizable', 'partial_customizable']))
-                                <h6 class="mb-3 fw-semibold">Add Customisation Preferences</h6>
+                                <h6 style="font-size:14px; font-weight:700; color:var(--text-900); margin-bottom:14px;">
+                                    <i class="fas fa-pencil-alt me-2" style="color:var(--primary);"></i>{{ __('Add Your Customisation Preferences') }}
+                                </h6>
 
-                                <div class="form-group mb-3">
-                                    <label for="preferences">Describe your preferences</label>
-                                    <textarea name="preferences" id="preferences" rows="4" class="form-control" placeholder="Add notes about text placement, design ideas, or layout...">{{ old('preferences') }}</textarea>
+                                <div class="mb-3">
+                                    <label for="preferences" style="font-size:13px; font-weight:600; color:var(--text-700); display:block; margin-bottom:6px;">{{ __('Describe your preferences') }}</label>
+                                    <textarea name="preferences" id="preferences" rows="3"
+                                        class="form-control"
+                                        style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:12px; font-size:14px; resize:none; transition:var(--transition);"
+                                        placeholder="{{ __('Add notes about text placement, design ideas, colours, or layout…') }}">{{ old('preferences') }}</textarea>
                                 </div>
 
                                 @if ($item->variations['customization_level'] !== 'partial_customizable')
-                                    <div class="card p-3 mb-3" style="background: var(--gray-50);">
-                                        <div class="form-group">
-                                            <label for="sample_images" class="form-label fw-semibold mb-2">
-                                                Upload Reference or Sample Images
-                                            </label>
-                                            <input type="file" name="sample_images[]" id="sample_images" class="w-100" multiple>
-                                            <div id="preview-area" class="mt-3"></div>
-                                            <div id="shared-progress-wrapper" class="progress mt-3" style="display: none;">
-                                                <div id="shared-progress-bar" class="progress-bar" style="width: 0%;" role="progressbar">0%</div>
-                                            </div>
-                                            <small class="text-muted d-block mt-2">
-                                                You can upload multiple images (JPEG, PNG, etc.)
-                                            </small>
-                                        </div>
+                                    <div class="pdp-upload-zone" onclick="document.getElementById('sample_images').click()">
+                                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                        <div style="font-size:14px; font-weight:600; color:var(--text-700); margin-bottom:4px;">{{ __('Upload Reference Images') }}</div>
+                                        <div style="font-size:12px; color:var(--text-300);">{{ __('JPEG, PNG supported — click or drag & drop') }}</div>
+                                        <input type="file" name="sample_images[]" id="sample_images" class="d-none" multiple>
                                     </div>
+                                    <div id="preview-area" class="mt-3 d-flex flex-wrap gap-2"></div>
+                                    <div id="shared-progress-wrapper" class="progress mt-2" style="display: none !important;">
+                                        <div id="shared-progress-bar" class="progress-bar" style="width:0%;" role="progressbar">0%</div>
+                                    </div>
+                                    <small class="text-muted d-block mt-2" style="font-size:11px;">{{ __('You can upload multiple images') }}</small>
                                 @endif
                             @endif
                         @endif
 
                         @if (!empty($item->variations['custom_text']))
-                            <div class="mb-1">
-                                <strong>Important Note:</strong>
-                                <span class="ms-2 text-muted">{{ $item->variations['custom_text'] }}</span>
+                            <div class="d-flex align-items-center" style="background:rgba(0,123,255,.05); border:1px solid rgba(0,123,255,.2); border-radius:var(--radius-sm); padding:12px 14px; font-size:13px; color:var(--text-700); margin-top:14px;">
+                                <span style="display:flex; justify-content:center; align-items:center; width:24px; height:24px; background:#007bff; color:#fff; border-radius:6px; margin-right:12px; flex-shrink:0;">
+                                    <i class="fas fa-info" style="font-size: 12px;"></i>
+                                </span>
+                                <div>
+                                    <strong>{{ __('Important Note:') }}</strong> {{ $item->variations['custom_text'] }}
+                                </div>
                             </div>
                         @endif
+
                     </div>
                 </div>
-            </div>
+                @endif
+                --}}
 
-            <!-- Product Info-->
-            <div class="col-xxl-7 col-lg-6 col-md-6">
-                <div class="details-page-top-right-content">
-                    <input type="hidden" id="item_id" value="{{ $item->id }}">
-                    <input type="hidden" id="demo_price" value="{{ PriceHelper::setConvertPrice($item->discount_price) }}">
-                    <input type="hidden" value="{{ PriceHelper::setCurrencySign() }}" id="set_currency">
-                    <input type="hidden" value="{{ PriceHelper::setCurrencyValue() }}" id="set_currency_val">
-                    <input type="hidden" value="{{ $setting->currency_direction }}" id="currency_direction">
+            </div>{{-- /gallery col --}}
 
-                    <h1 class="p-title-main">{{ $item->name }}</h1>
+            {{-- ─────────── INFO COLUMN ─────────── --}}
+            <div class="col-lg-6 pdp-info-col">
+                <div class="pdp-info-card">
 
-                    @if ($item->is_type == 'flash_deal')
-                        @if (date('d-m-y') != \Carbon\Carbon::parse($item->date)->format('d-m-y'))
-                            <div class="countdown countdown-alt mb-4" data-date-time="{{ $item->date }}" style="background: var(--gray-50); padding: 15px; border-radius: var(--radius-md);"></div>
-                        @endif
-                    @endif
+                    {{-- Hidden inputs --}}
+                    <input type="hidden" id="item_id"          value="{{ $item->id }}">
+                    <input type="hidden" id="demo_price"       value="{{ PriceHelper::setConvertPrice($item->discount_price) }}">
+                    <input type="hidden" id="set_currency"     value="{{ PriceHelper::setCurrencySign() }}">
+                    <input type="hidden" id="set_currency_val" value="{{ PriceHelper::setCurrencyValue() }}">
+                    <input type="hidden" id="currency_direction" value="{{ $setting->currency_direction }}">
 
-                    <div class="price-area">
-                        @if ($item->previous_price != 0)
-                            <small class="d-inline-block text-muted me-3" style="font-size: 1.2rem; text-decoration: line-through;">
-                                <del>{{ PriceHelper::setPreviousPrice($item->previous_price) }}</del>
-                            </small>
-                        @endif
-                        <span id="main_price" class="main-price" data-price="{{ PriceHelper::grandCurrencyPrice($item) }}">
-                            {{ PriceHelper::grandCurrencyPrice($item) }}
-                        </span>
-                        <div id="discount_info" class="text-success mt-2" style="display:none; font-size:0.9rem;"></div>
-                    </div>
+                    <div class="pdp-info-body">
 
-                    <p class="text-muted mb-4" style="font-size: 16px; line-height: 1.6;">
-                        {{ $item->sort_details }}
-                        <a href="#details" class="scroll-to" style="color: var(--primary-color); font-weight: 600;">{{ __('Read more') }}</a>
-                    </p>
+                        {{-- ① PRODUCT TITLE ──────────────────── --}}
+                        <h1 class="pdp-product-title">{{ $item->name }}</h1>
 
-                    {{-- Attributes --}}
-                    <div class="row margin-top-1x mb-4">
-                        @foreach (($attributes ?? collect()) as $attribute)
-                            @if (($attribute->options ?? collect())->count() != 0)
-                                <div class="col-sm-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="{{ $attribute->name }}">{{ $attribute->name }}</label>
-                                        <select class="form-control attribute_option" id="{{ $attribute->name }}">
-                                            <option value="">Select {{ $attribute->name }}</option>
-                                            @foreach (($attribute->options ?? collect())->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE) as $option)
-                                                @php
-                                                    $stockRaw = $option->stock ?? '';
-                                                    $isNumericZero = is_numeric($stockRaw) && (int) $stockRaw === 0;
-                                                    $isOut = $isNumericZero || trim((string) $stockRaw) === '0';
-                                                    $images = json_decode($option->variation_images, true) ?: [];
-                                                @endphp
-                                                <option value="{{ $option->name }}"
-                                                    data-type="{{ $attribute->id }}"
-                                                    data-href="{{ $option->id }}"
-                                                    data-images='@json($images)'
-                                                    data-target="{{ PriceHelper::setConvertPrice($option->price) }}"
-                                                    @if ($isOut) disabled style="color:#b00020;font-weight:600;background:#ffe5e5;" @endif>
-                                                    {{ $option->name }} @if ($isOut) — Out of stock @endif
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                        {{-- Flash Deal Countdown --}}
+                        @if ($item->is_type == 'flash_deal')
+                            @if (date('d-m-y') != \Carbon\Carbon::parse($item->date)->format('d-m-y'))
+                                <div class="pdp-countdown">
+                                    <i class="fas fa-fire" style="color:var(--gold);"></i>
+                                    <span>{{ __('Flash Deal ends in') }}:</span>
+                                    <div class="countdown" data-date-time="{{ $item->date }}"></div>
                                 </div>
                             @endif
-                        @endforeach
-                    </div>
-
-                    {{-- Quantity & Actions --}}
-                    <div class="row align-items-end pb-4">
-                        <div class="col-sm-12">
-                            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
-                                <div class="qtySelector product-quantity">
-                                    <span class="decreaseQty subclick"><i class="fas fa-minus"></i></span>
-                                    <input type="text" class="qtyValue cart-amount" value="1">
-                                    <span class="increaseQty addclick"><i class="fas fa-plus"></i></span>
-                                    <input type="hidden" value="{{ is_numeric($item->stock) ? (int)$item->stock : 9999 }}" id="current_stock">
-                                </div>
-
-                                <div id="total_container" class="w-100 mb-3 text-end">
-                                    <button id="total_price_btn" class="btn btn-outline-secondary">
-                                        {{ __('Total:') }} <span id="computed_total">{{ PriceHelper::grandCurrencyPrice($item) }}</span>
-                                    </button>
-                                </div>
-
-                                {{-- Customize Button if product has customizers --}}
-                                @if($hasCustomizers)
-                                <div class="w-100">
-                                    <a href="{{ route('front.bed.customize', $item->slug) }}" class="btn btn-customize-bed w-100">
-                                        <i class="fas fa-cog me-2"></i>
-                                        <span>{{ __('Customize This Bed') }}</span>
-                                    </a>
-                                    <small class="customize-info">
-                                        <i class="fas fa-info-circle me-1"></i>
-                                        {{ __('Customize size, fabric, headboard, mattress and more') }}
-                                    </small>
-                                </div>
-                                @endif
-
-                                <div class="p-action-button w-100">
-                                    @if ($item->item_type != 'affiliate')
-                                        @if ($item->is_stock())
-                                            @if(!$hasCustomizers)
-                                                <button class="btn btn-outline-primary" id="add_to_cart">
-                                                    <i class="icon-bag me-2"></i><span>{{ __('Add to Cart') }}</span>
-                                                </button>
-                                                <button class="btn btn-primary" id="but_to_cart">
-                                                    <i class="icon-bag me-2"></i><span>{{ __('Buy Now') }}</span>
-                                                </button>
-                                            @else
-                                                <div class="alert alert-info w-100 mb-0">
-                                                    <i class="fas fa-arrow-up me-2"></i>{{ __('Click "Customize This Bed" above to select your options and add to cart') }}
-                                                </div>
-                                            @endif
-                                        @else
-                                            <button class="btn btn-secondary disabled">
-                                                <i class="icon-bag me-2"></i><span>{{ __('Out of stock') }}</span>
-                                            </button>
-                                        @endif
-                                    @else
-                                        <a href="{{ $item->affiliate_link }}" target="_blank" class="btn btn-primary">
-                                            <i class="icon-bag me-2"></i>{{ __('Buy Now') }}
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-
-                            {{-- Discount Offer --}}
-                            <div class="p-action-discount mt-3">
-                                @if (isset($item->bundle_discount) && !empty($item->bundle_discount))
-                                    @php
-                                        $discountItems  = $item->bundle_discount['discount_items']     ?? [];
-                                        $discountPrices = $item->bundle_discount['discountItems_price'] ?? [];
-                                    @endphp
-
-                                    @if(count($discountItems) > 0)
-                                        <button class="btn btn-warning w-100 pulse-animation" id="avail_discount" data-bs-toggle="modal" data-bs-target="#discountModal">
-                                            <i class="fas fa-gift me-2"></i>
-                                            <span>{{ __('First Time Offer') }}</span>
-                                        </button>
-
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Product Meta --}}
-                    <div class="t-c-b-area" style="background: var(--gray-50); padding: 20px; border-radius: var(--radius-md); margin-top: 20px;">
-                        @if ($item->brand_id)
-                            <div class="mb-2">
-                                <span class="text-medium fw-semibold">{{ __('Brand') }}:</span>
-                                <a href="{{ route('front.catalog') . '?brand=' . $item->brand->slug }}">{{ $item->brand->name }}</a>
-                            </div>
                         @endif
 
-                        <div class="mb-2">
-                            <span class="text-medium fw-semibold">{{ __('Categories') }}:</span>
-                            <a href="{{ route('front.catalog') . '?category=' . $item->category->slug }}">{{ $item->category->name }}</a>
-                            @if ($item->subcategory->name) / @endif
-                            <a href="{{ route('front.catalog') . '?subcategory=' . $item->subcategory->slug }}">{{ $item->subcategory->name }}</a>
-                            @if ($item->childcategory->name) / @endif
-                            <a href="{{ route('front.catalog') . '?childcategory=' . $item->childcategory->slug }}">{{ $item->childcategory->name }}</a>
+                        {{-- Short Description --}}
+                        @if($item->sort_details)
+                        <p class="pdp-short-desc">
+                            {{ $item->sort_details }}
+                            <a href="#pdp-details" class="scroll-to read-more-link">{{ __('Read more →') }}</a>
+                        </p>
+                        @endif
+
+                        <div class="pdp-section-divider"></div>
+
+                        {{-- ② PRICE SECTION ───────────────────── --}}
+                        <div class="pdp-price-section">
+                            <div class="price-label"><i class="fas fa-tag me-1"></i>{{ __('Price') }}</div>
+                            <div class="d-flex align-items-baseline flex-wrap gap-1" style="margin-bottom:4px;">
+                                @if ($item->previous_price != 0)
+                                    <span class="pdp-price-was">{{ PriceHelper::setPreviousPrice($item->previous_price) }}</span>
+                                @endif
+                                <span id="main_price" class="pdp-price-now" data-price="{{ PriceHelper::grandCurrencyPrice($item) }}">
+                                    {{ PriceHelper::grandCurrencyPrice($item) }}
+                                </span>
+                                @if ($item->previous_price && $item->previous_price != 0)
+                                    <span class="product-badge bg-info" style="position:static; display:inline-block; margin-left:10px; color:#fff;">
+                                        -{{ PriceHelper::DiscountPercentage($item) }}
+                                    </span>
+                                @endif
+                            </div>
+                            <div id="discount_info"></div>
                         </div>
 
-                        <div class="mb-2">
-                            <span class="text-medium fw-semibold">{{ __('Tags') }}:</span>
-                            @if ($item->tags)
-                                @foreach (explode(',', $item->tags) as $tag)
-                                    @if ($loop->last)
-                                        <a href="{{ route('front.catalog') . '?tag=' . $tag }}">{{ $tag }}</a>
-                                    @else
-                                        <a href="{{ route('front.catalog') . '?tag=' . $tag }}">{{ $tag }}</a>,
+                        <div class="pdp-section-divider"></div>
+
+                        {{-- ③ ATTRIBUTES ───────────────────────── --}}
+                        @if(($attributes ?? collect())->filter(fn($a) => ($a->options ?? collect())->count() > 0)->count() > 0)
+                        <div>
+                            <div class="pdp-section-label"><i class="fas fa-layer-group"></i>{{ __('Select Options') }}</div>
+                            <div class="pdp-attr-grid">
+                                @foreach (($attributes ?? collect()) as $attribute)
+                                    @if (($attribute->options ?? collect())->count() != 0)
+                                        <div class="pdp-attr-group">
+                                            <label for="attr-{{ $attribute->id }}">{{ $attribute->name }}</label>
+                                            <select class="attribute_option" id="attr-{{ $attribute->id }}">
+                                                <option value="">{{ __('Select') }} {{ $attribute->name }}</option>
+                                                @foreach (($attribute->options ?? collect())->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE) as $option)
+                                                    @php
+                                                        $stockRaw = $option->stock ?? '';
+                                                        $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
+                                                        $images   = json_decode($option->variation_images, true) ?: [];
+                                                    @endphp
+                                                    <option value="{{ $option->name }}"
+                                                        data-type="{{ $attribute->id }}"
+                                                        data-href="{{ $option->id }}"
+                                                        data-images='@json($images)'
+                                                        data-target="{{ PriceHelper::setConvertPrice($option->price) }}"
+                                                        @if ($isOut) disabled style="color:#d63031;font-weight:600;background:#fff0f0;" @endif>
+                                                        {{ $option->name }} @if ($isOut) — {{ __('Out of stock') }} @endif
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <span class="invalid-msg"><i class="fas fa-exclamation-circle me-1"></i>{{ __('Please select') }} {{ $attribute->name }}</span>
+                                        </div>
                                     @endif
                                 @endforeach
+                            </div>
+                        </div>
+                        <div class="pdp-section-divider"></div>
+                        @endif
+
+                        {{-- ④ QUANTITY ──────────────────────────── --}}
+                        <div>
+                            <div class="pdp-section-label"><i class="fas fa-sort-amount-up"></i>{{ __('Quantity') }}</div>
+                            <div class="pdp-qty-row">
+                                <span class="pdp-qty-label">{{ __('Qty') }}:</span>
+                                <div class="pdp-qty-control product-quantity">
+                                    <span class="qty-btn decreaseQty subclick"><i class="fas fa-minus"></i></span>
+                                    <input type="text" class="qtyValue cart-amount" value="1">
+                                    <span class="qty-btn increaseQty addclick"><i class="fas fa-plus"></i></span>
+                                    <input type="hidden" value="{{ is_numeric($item->stock) ? (int)$item->stock : 9999 }}" id="current_stock">
+                                </div>
+                                <div class="pdp-total-badge">
+                                    {{ __('Total') }}: <span id="computed_total">{{ PriceHelper::grandCurrencyPrice($item) }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdp-section-divider"></div>
+
+                        {{-- ⑤ CTA BUTTONS ──────────────────────── --}}
+                        <div>
+                            <div class="pdp-section-label"><i class="fas fa-shopping-bag"></i>{{ __('Add to Your Order') }}</div>
+
+                            {{-- Customize CTA (if customizable) --}}
+                            @if($hasCustomizers)
+                            <div style="margin-bottom:12px;">
+                                <a href="{{ route('front.bed.customize', $item->slug) }}" class="pdp-btn pdp-btn-customize">
+                                    <i class="fas fa-magic"></i>
+                                    <span>{{ __('Customize This Bed') }}</span>
+                                </a>
+                                <div class="pdp-customize-hint">
+                                    <i class="fas fa-info-circle" style="color:var(--primary);"></i>
+                                    {{ __('Customize size, fabric, headboard, mattress and more') }}
+                                </div>
+                            </div>
+                            @endif
+
+                            {{-- Add to Cart / Buy Now --}}
+                            @if ($item->item_type != 'affiliate')
+                                @if ($item->is_stock())
+                                    @if(!$hasCustomizers)
+                                        <div class="pdp-cta-wrap">
+                                            <button class="pdp-btn pdp-btn-outline" id="add_to_cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                <span>{{ __('Add to Cart') }}</span>
+                                            </button>
+                                            <button class="pdp-btn pdp-btn-primary" id="but_to_cart">
+                                                <i class="fas fa-bolt"></i>
+                                                <span>{{ __('Buy Now') }}</span>
+                                            </button>
+                                        </div>
+                                    @else
+                                        <div class="pdp-customize-action-hint">
+                                            <i class="fas fa-arrow-up"></i>
+                                            {{ __('Click "Customize This Bed" above to select your options and add to cart') }}
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="pdp-cta-wrap">
+                                        <button class="pdp-btn pdp-btn-disabled" disabled>
+                                            <i class="fas fa-ban"></i>
+                                            <span>{{ __('Out of Stock') }}</span>
+                                        </button>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="pdp-cta-wrap">
+                                    <a href="{{ $item->affiliate_link }}" target="_blank" class="pdp-btn pdp-btn-primary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>{{ __('Buy Now') }}</span>
+                                    </a>
+                                </div>
+                            @endif
+
+                            {{-- Bundle Discount Offer --}}
+                            @if (isset($item->bundle_discount) && !empty($item->bundle_discount))
+                                @php $discountItems = $item->bundle_discount['discount_items'] ?? []; @endphp
+                                @if(count($discountItems) > 0)
+                                    <div style="margin-top:12px;">
+                                        <button class="pdp-btn pdp-btn-gold w-100" id="avail_discount"
+                                            data-bs-toggle="modal" data-bs-target="#discountModal">
+                                            <i class="fas fa-gift"></i>
+                                            <span>{{ __('🎁 First Time Offer — Tap to Unlock') }}</span>
+                                        </button>
+                                    </div>
+                                @endif
                             @endif
                         </div>
 
-                        @if ($item->item_type == 'normal')
-                            <div>
-                                <span class="text-medium fw-semibold">{{ __('SKU') }}:</span> #{{ $item->sku }}
-                            </div>
-                        @endif
-                    </div>
+                    </div>{{-- /pdp-info-body --}}
 
-
-                </div>
-            </div>
-
-            {{-- Description & Specifications --}}
-            <div class="padding-top-3x mb-3 w-100" id="details" style="margin-top: 60px;">
-                <div class="col-lg-12">
-                    <div style="margin-bottom: 30px;">
-                        <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--gray-900); position: relative; padding-bottom: 20px;">
-                            {{ __('Product Details') }}
-                            <span style="position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background: var(--primary-gradient); border-radius: 2px;"></span>
-                        </h3>
-                    </div>
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">
-                                {{ __('Descriptions') }}
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="specification-tab" data-bs-toggle="tab" data-bs-target="#specification" type="button" role="tab">
-                                {{ __('Specifications') }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="description" role="tabpanel">
-                            {!! $item->details !!}
-                        </div>
-                        <div class="tab-pane fade" id="specification" role="tabpanel">
-                            <div class="comparison-table">
-                                <table class="table table-bordered" style="margin-bottom: 0;">
-                                    <tbody>
-                                        <tr style="background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%); font-weight: 700;">
-                                            <th class="text-uppercase" style="font-weight: 700; padding: 16px; color: var(--gray-900);">{{ __('Specifications') }}</th>
-                                            <td style="padding: 16px;"><span class="text-medium" style="font-weight: 600;">{{ __('Descriptions') }}</span></td>
-                                        </tr>
-                                        @if ($sec_name)
-                                            @foreach (array_combine($sec_name, $sec_details) as $sname => $sdetail)
-                                                <tr style="border-bottom: 1px solid var(--gray-200);">
-                                                    <th style="background: var(--gray-50); font-weight: 600; padding: 14px; color: var(--gray-900); width: 30%;">{{ $sname }}</th>
-                                                    <td style="padding: 14px; color: var(--gray-700);">{{ $sdetail }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            <tr class="text-center">
-                                                <td colspan="2">{{ __('No Specifications') }}</td>
-                                            </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Related Products --}}
-    @if (count($related_items) > 0)
-        <div class="relatedproduct-section container padding-bottom-3x mb-1" style="padding-top: 60px;">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title" style="margin-bottom: 40px;">
-                        <h2 class="h3" style="font-size: 1.8rem; font-weight: 700; color: var(--gray-900); position: relative; padding-bottom: 20px;">
-                            {{ __('You May Also Like') }}
-                            <span style="position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background: var(--primary-gradient); border-radius: 2px;"></span>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="relatedproductslider owl-carousel">
-                        @foreach ($related_items as $related)
-                            <div class="slider-item">
-                                <div class="product-card">
-                                    @if ($related->is_stock())
-                                        @if ($related->is_type != 'new')
-                                            <div class="product-badge @if ($related->is_type == 'feature') bg-warning
-                                                @elseif($related->is_type == 'top') bg-info
-                                                @elseif($related->is_type == 'best') bg-dark
-                                                @elseif($related->is_type == 'flash_deal') bg-success @endif">
-                                                {{ $related->is_type != 'undefine' ? ucfirst(str_replace('_', ' ', $related->is_type)) : '' }}
-                                            </div>
-                                        @endif
-                                    @else
-                                        <div class="product-badge bg-secondary">{{ __('out of stock') }}</div>
-                                    @endif
-
-                                    @php $relDiscPct = PriceHelper::DiscountPercentage($related); @endphp
-                                    @if($relDiscPct)
-                                        <div class="product-badge product-badge2 bg-danger" style="top: 60px; background: var(--danger-color) !important;">
-                                            -{{ $relDiscPct }}
+                    {{-- ⑥ META STRIP ─────────────────────────── --}}
+                    <div class="pdp-meta-strip">
+                        <div class="pdp-meta-grid">
+                            @if ($item->brand_id)
+                                <div class="pdp-meta-item">
+                                    <div class="pdp-meta-icon"><i class="fas fa-copyright"></i></div>
+                                    <div class="pdp-meta-content">
+                                        <span class="meta-label">{{ __('Brand') }}</span>
+                                        <div class="meta-val">
+                                            <a href="{{ route('front.catalog') . '?brand=' . $item->brand->slug }}">{{ $item->brand->name }}</a>
                                         </div>
-                                    @endif
-
-                                    <div class="product-thumb">
-                                        <img class="lazy" data-src="{{ url('assets/img/' . $related->thumbnail) }}" alt="Product">
                                     </div>
+                                </div>
+                            @endif
 
-                                    <div class="product-card-body">
-                                        <div class="product-category">
-                                            <a href="{{ route('front.catalog') . '?category=' . $related->category->slug }}">{{ $related->category->name }}</a>
-                                        </div>
-                                        <h3 class="product-title">
-                                            <a href="{{ route('front.product', $related->slug) }}">{{ Str::limit($related->name, 35) }}</a>
-                                        </h3>
-                                        <h4 class="product-price">
-                                            @if ($related->previous_price != 0)
-                                                <del>{{ PriceHelper::setPreviousPrice($related->previous_price) }}</del>
-                                            @endif
-                                            {{ PriceHelper::grandCurrencyPrice($related) }}
-                                        </h4>
+                            <div class="pdp-meta-item">
+                                <div class="pdp-meta-icon"><i class="fas fa-th-large"></i></div>
+                                <div class="pdp-meta-content">
+                                    <span class="meta-label">{{ __('Category') }}</span>
+                                    <div class="meta-val">
+                                        <a href="{{ route('front.catalog') . '?category=' . $item->category->slug }}">{{ $item->category->name }}</a>
+                                        @if ($item->subcategory->name) /
+                                            <a href="{{ route('front.catalog') . '?subcategory=' . $item->subcategory->slug }}">{{ $item->subcategory->name }}</a>
+                                        @endif
+                                        @if ($item->childcategory->name) /
+                                            <a href="{{ route('front.catalog') . '?childcategory=' . $item->childcategory->slug }}">{{ $item->childcategory->name }}</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+
+                            @if ($item->tags)
+                                <div class="pdp-meta-item" style="grid-column:1/-1;">
+                                    <div class="pdp-meta-icon"><i class="fas fa-tags"></i></div>
+                                    <div class="pdp-meta-content">
+                                        <span class="meta-label">{{ __('Tags') }}</span>
+                                        <div class="meta-val" style="margin-top:4px;">
+                                            @foreach (explode(',', $item->tags) as $tag)
+                                                <a href="{{ route('front.catalog') . '?tag=' . trim($tag) }}" class="pdp-tag">{{ trim($tag) }}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if ($item->item_type == 'normal')
+                                <div class="pdp-meta-item">
+                                    <div class="pdp-meta-icon"><i class="fas fa-barcode"></i></div>
+                                    <div class="pdp-meta-content">
+                                        <span class="meta-label">{{ __('SKU') }}</span>
+                                        <div class="meta-val"><span class="pdp-sku-pill"><span>#{{ $item->sku }}</span></span></div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                        {{-- Trust Badges --}}
+                        <div class="pdp-trust-row">
+                            <div class="pdp-trust-badge"><i class="fas fa-shield-alt"></i>{{ __('Secure Checkout') }}</div>
+                            <div class="pdp-trust-badge"><i class="fas fa-truck"></i>{{ __('Fast Delivery') }}</div>
+                            <div class="pdp-trust-badge"><i class="fas fa-undo-alt"></i>{{ __('Easy Returns') }}</div>
+                            <div class="pdp-trust-badge"><i class="fas fa-headset"></i>{{ __('24/7 Support') }}</div>
+                        </div>
                     </div>
+
+                </div>{{-- /pdp-info-card --}}
+            </div>{{-- /info col --}}
+
+        </div>{{-- /row pdp-main-grid --}}
+
+        {{-- ══════════════════════════════════════════════
+             PRODUCT DETAILS TABS
+        ══════════════════════════════════════════════ --}}
+        <div class="pdp-details-section" id="pdp-details">
+            <h2 class="pdp-section-heading">
+                <span class="heading-icon"><i class="fas fa-info-circle"></i></span>
+                {{ __('Product Details') }}
+            </h2>
+
+            <ul class="pdp-tab-nav nav" id="pdpTabNav" role="tablist">
+                <li role="presentation">
+                    <a class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">
+                        <i class="fas fa-align-left"></i>{{ __('Description') }}
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a class="nav-link" id="specification-tab" data-bs-toggle="tab" data-bs-target="#specification" type="button" role="tab">
+                        <i class="fas fa-list-ul"></i>{{ __('Specifications') }}
+                    </a>
+                </li>
+            </ul>
+
+            <div class="pdp-tab-content tab-content">
+                {{-- Description --}}
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    {!! $item->details !!}
+                </div>
+
+                {{-- Specifications --}}
+                <div class="tab-pane fade" id="specification" role="tabpanel">
+                    @if ($sec_name)
+                        <table class="pdp-spec-table">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('Specification') }}</th>
+                                    <th>{{ __('Details') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (array_combine($sec_name, $sec_details) as $sname => $sdetail)
+                                    <tr>
+                                        <td class="spec-key">{{ $sname }}</td>
+                                        <td>{{ $sdetail }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="pdp-no-spec">
+                            <i class="fas fa-clipboard-list"></i>
+                            {{ __('No specifications available for this product.') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-    @endif
 
-    {{-- Discount Modal Setup --}}
-    @if (isset($item->bundle_discount) && !empty($item->bundle_discount))
-        @php
-            $discountItems  = $item->bundle_discount['discount_items']     ?? [];
-            $discountPrices = $item->bundle_discount['discountItems_price'] ?? [];
-        @endphp
-        @if(count($discountItems) > 0)
-            <div class="modal fade" id="discountModal" tabindex="-1" role="dialog" aria-labelledby="discountModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="discountModalLabel">🎁 {{ __('First Time Offer') }}</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-muted mb-3">
-                                <small>{{ __('Hurry! Avail discount — limited time offer') }}</small>
-                            </p>
-                            <div class="d-flex flex-wrap gap-3" id="discount-options">
-                                @for ($i = 0; $i < count($discountItems); $i++)
-                                    <label class="offer-card">
-                                        <input type="radio" name="discount_selected"
-                                               value="{{ $i }}"
-                                               data-pct="{{ $discountPrices[$i] ?? 0 }}"
-                                               data-label="{{ $discountItems[$i] }}"
-                                               class="d-none" />
-                                        <div class="discount-card text-center">
-                                            <div class="fw-semibold mb-2">{{ __('Buy') }} {{ $discountItems[$i] }}</div>
-                                            <small class="text-muted d-block mb-1">{{ __('Save') }}</small>
-                                            <div class="fw-bold text-primary" style="font-size: 1.5rem;">{{ number_format($discountPrices[$i] ?? 0) }}%</div>
-                                        </div>
-                                    </label>
-                                @endfor
+        {{-- ══════════════════════════════════════════════
+             RELATED PRODUCTS
+        ══════════════════════════════════════════════ --}}
+        @if (count($related_items) > 0)
+        <div class="pdp-related-section">
+            <div class="section-title">
+                <h2 class="h3">{{ __('You May Also Like') }}</h2>
+            </div>
+
+            <div class="relatedproductslider owl-carousel">
+                @foreach ($related_items as $related)
+                    <div class="slider-item">
+                        <div class="product-card">
+                            <div class="product-thumb">
+                                @if (!$related->is_stock())
+                                    <div class="product-badge bg-secondary border-default text-body">
+                                        {{ __('out of stock') }}
+                                    </div>
+                                @endif
+
+                                @php $discPct = PriceHelper::DiscountPercentage($related); @endphp
+                                @if($discPct)
+                                    <div class="product-badge bg-warning" style="background-color:#daa520 !important;">-{{ $discPct }}</div>
+                                @endif
+                                <img class="lazy" data-src="{{ url('assets/img/' . $related->thumbnail) }}" alt="{{ $related->name }}">
+                                <div class="product-button-group">
+                                    <a class="product-button wishlist_store"
+                                        href="{{ route('user.wishlist.store', $related->id) }}"
+                                        title="{{ __('Wishlist') }}"><i class="icon-heart"></i></a>
+                                    <a class="product-button"
+                                        href="{{ route('front.product', $related->slug) }}"
+                                        title="{{ __('Details') }}"><i class="icon-search"></i></a>
+                                    @include('includes.item_footer', ['sitem' => $related])
+                                </div>
                             </div>
-                            <div id="discount-no-selection-alert" class="alert alert-warning mt-3 d-none py-2">
-                                <i class="fas fa-exclamation-triangle me-1"></i>
-                                {{ __('Please select a discount tier first.') }}
+                            <div class="product-card-body">
+                                <div class="product-category"><a
+                                        href="{{ route('front.catalog') . '?category=' . $related->category->slug }}">{{ $related->category->name }}</a>
+                                </div>
+                                <h3 class="product-title"><a
+                                        href="{{ route('front.product', $related->slug) }}">
+                                        {{ Str::limit($related->name, 35) }}
+                                    </a></h3>
+                                <h4 class="product-price">
+                                    @if ($related->previous_price != 0)
+                                        <del>{{ PriceHelper::setPreviousPrice($related->previous_price) }}</del>
+                                    @endif
+                                    {{ PriceHelper::grandCurrencyPrice($related) }}
+                                </h4>
                             </div>
-                        </div>
-                        <div class="modal-footer border-0 pt-0 gap-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                            <button type="button" class="btn btn-warning" id="applyDiscountBtn">
-                                <i class="fas fa-check me-1"></i>{{ __('Apply Offer') }}
-                            </button>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
+        </div>
         @endif
-    @endif
 
-    {{-- Review Modal --}}
-    @auth
-        <form class="modal fade ratingForm" action="{{ route('front.review.submit') }}" method="post" id="leaveReview" tabindex="-1">
-            @csrf
-            <div class="modal-dialog modal-lg">
+    </div>{{-- /container --}}
+</div>{{-- /pdp-page-wrapper --}}
+
+{{-- ══════════════════════════════════════════════
+     DISCOUNT MODAL
+══════════════════════════════════════════════ --}}
+@if (isset($item->bundle_discount) && !empty($item->bundle_discount))
+    @php
+        $discountItems  = $item->bundle_discount['discount_items']     ?? [];
+        $discountPrices = $item->bundle_discount['discountItems_price'] ?? [];
+    @endphp
+    @if(count($discountItems) > 0)
+        <div class="modal fade pdp-modal" id="discountModal" tabindex="-1" aria-labelledby="discountModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">{{ __('Leave a Review') }}</h4>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="discountModalLabel">
+                            🎁 {{ __('First Time Offer') }}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @php $user = Auth::user(); @endphp
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="review-name">{{ __('Your Name') }}</label>
-                                    <input class="form-control" type="text" id="review-name" value="{{ $user->first_name }}" required>
-                                </div>
-                            </div>
-                            <input type="hidden" name="item_id" value="{{ $item->id }}">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="review-email">{{ __('Your Email') }}</label>
-                                    <input class="form-control" type="email" id="review-email" value="{{ $user->email }}" required>
-                                </div>
-                            </div>
+                        <p style="font-size:14px; color:var(--text-500); margin-bottom:20px;">
+                            <i class="fas fa-clock me-2" style="color:var(--gold-dark);"></i>
+                            {{ __('Hurry! Limited time bundle discount — pick a tier below') }}
+                        </p>
+                        <div class="d-flex flex-wrap gap-3" id="discount-options">
+                            @for ($i = 0; $i < count($discountItems); $i++)
+                                <label class="pdp-offer-card">
+                                    <input type="radio" name="discount_selected"
+                                        value="{{ $i }}"
+                                        data-pct="{{ $discountPrices[$i] ?? 0 }}"
+                                        data-label="{{ $discountItems[$i] }}"
+                                        class="d-none" />
+                                    <div class="pdp-discount-tile">
+                                        <div class="tile-qty">{{ __('Buy') }} {{ $discountItems[$i] }}</div>
+                                        <div class="tile-save">{{ __('Save') }}</div>
+                                        <div class="tile-pct">{{ number_format($discountPrices[$i] ?? 0) }}%</div>
+                                    </div>
+                                </label>
+                            @endfor
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="review-subject">{{ __('Subject') }}</label>
-                                    <input class="form-control" type="text" name="subject" id="review-subject" required>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="review-rating">{{ __('Rating') }}</label>
-                                    <select name="rating" class="form-control" id="review-rating">
-                                        <option value="5">5 {{ __('Stars') }}</option>
-                                        <option value="4">4 {{ __('Stars') }}</option>
-                                        <option value="3">3 {{ __('Stars') }}</option>
-                                        <option value="2">2 {{ __('Stars') }}</option>
-                                        <option value="1">1 {{ __('Star') }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="review-message">{{ __('Review') }}</label>
-                            <textarea class="form-control" name="review" id="review-message" rows="8" required></textarea>
+                        <div id="discount-no-selection-alert" class="mt-3 d-none"
+                            style="background:rgba(214,48,49,.08); border:1px solid rgba(214,48,49,.2); border-radius:var(--radius-sm); padding:10px 14px; font-size:13px; color:var(--danger); font-weight:600;">
+                            <i class="fas fa-exclamation-triangle me-2"></i>{{ __('Please select a discount tier first.') }}
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">{{ __('Submit Review') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="button" class="pdp-btn pdp-btn-primary" id="applyDiscountBtn" style="flex:none; min-width:auto; padding:12px 24px;">
+                            <i class="fas fa-check me-1"></i>{{ __('Apply Offer') }}
+                        </button>
                     </div>
                 </div>
             </div>
-        </form>
-    @endauth
+        </div>
+    @endif
+@endif
 
-    {{-- JavaScript --}}
-    <script>
-        // File Upload Preview
-        const dt = new DataTransfer();
+{{-- ══════════════════════════════════════════════
+     REVIEW MODAL
+══════════════════════════════════════════════ --}}
+@auth
+    <form class="modal fade pdp-review-modal ratingForm" action="{{ route('front.review.submit') }}" method="post" id="leaveReview" tabindex="-1">
+        @csrf
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ __('Leave a Review') }}</h4>
+                    <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding:28px;">
+                    @php $user = Auth::user(); @endphp
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-3">
+                                <label for="review-name" style="font-size:13px; font-weight:600; color:var(--text-700); margin-bottom:6px; display:block;">{{ __('Your Name') }}</label>
+                                <input class="form-control" type="text" id="review-name" value="{{ $user->first_name }}" required style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px;">
+                            </div>
+                        </div>
+                        <input type="hidden" name="item_id" value="{{ $item->id }}">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-3">
+                                <label for="review-email" style="font-size:13px; font-weight:600; color:var(--text-700); margin-bottom:6px; display:block;">{{ __('Your Email') }}</label>
+                                <input class="form-control" type="email" id="review-email" value="{{ $user->email }}" required style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-3">
+                                <label for="review-subject" style="font-size:13px; font-weight:600; color:var(--text-700); margin-bottom:6px; display:block;">{{ __('Subject') }}</label>
+                                <input class="form-control" type="text" name="subject" id="review-subject" required style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px;">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group mb-3">
+                                <label for="review-rating" style="font-size:13px; font-weight:600; color:var(--text-700); margin-bottom:6px; display:block;">{{ __('Rating') }}</label>
+                                <select name="rating" class="form-control" id="review-rating" style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px;">
+                                    <option value="5">5 {{ __('Stars') }} ⭐⭐⭐⭐⭐</option>
+                                    <option value="4">4 {{ __('Stars') }} ⭐⭐⭐⭐</option>
+                                    <option value="3">3 {{ __('Stars') }} ⭐⭐⭐</option>
+                                    <option value="2">2 {{ __('Stars') }} ⭐⭐</option>
+                                    <option value="1">1 {{ __('Star') }}  ⭐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-message" style="font-size:13px; font-weight:600; color:var(--text-700); margin-bottom:6px; display:block;">{{ __('Your Review') }}</label>
+                        <textarea class="form-control" name="review" id="review-message" rows="5" required
+                            style="border:2px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; resize:none;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background:var(--bg-soft); border-top:1px solid var(--border); padding:18px 28px;">
+                    <button class="pdp-btn pdp-btn-primary" type="submit" style="flex:none; min-width:auto; padding:12px 28px;">
+                        <i class="fas fa-paper-plane me-2"></i>{{ __('Submit Review') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+@endauth
 
-        document.getElementById('sample_images')?.addEventListener('change', function(e) {
-            const input = e.target;
-            const previewArea = document.getElementById('preview-area');
-            const progressWrapper = document.getElementById('shared-progress-wrapper');
-            const progressBar = document.getElementById('shared-progress-bar');
+{{-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ --}}
+<script>
+// ── File Upload Preview ──────────────────────────────────────────
+const dt = new DataTransfer();
 
-            progressBar.style.width = '0%';
-            progressBar.innerText = '0%';
-            progressBar.classList.remove('bg-success');
-            progressWrapper.style.display = 'block';
+document.getElementById('sample_images')?.addEventListener('change', function(e) {
+    const input       = e.target;
+    const previewArea = document.getElementById('preview-area');
+    const progressWrap = document.getElementById('shared-progress-wrapper');
+    const progressBar  = document.getElementById('shared-progress-bar');
 
-            Array.from(input.files).forEach((file) => {
-                if ([...dt.files].some(f => f.name === file.name && f.size === file.size)) return;
-                dt.items.add(file);
+    if (progressBar) { progressBar.style.width = '0%'; progressBar.innerText = '0%'; progressBar.classList.remove('bg-success'); }
+    if (progressWrap) progressWrap.style.display = 'block';
 
-                const container = document.createElement('div');
-                container.className = 'd-inline-block text-center position-relative';
-                container.style.cssText = 'width:120px;height:120px;margin:5px;border:2px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden;padding:5px;';
+    Array.from(input.files).forEach((file) => {
+        if ([...dt.files].some(f => f.name === file.name && f.size === file.size)) return;
+        dt.items.add(file);
 
-                const removeBtn = document.createElement('button');
-                removeBtn.innerHTML = '&times;';
-                removeBtn.style.cssText = 'position:absolute;top:5px;right:5px;border:none;background:var(--danger-color);color:#fff;cursor:pointer;width:24px;height:24px;border-radius:50%;font-size:16px;line-height:20px;z-index:10;';
-                removeBtn.title = 'Remove';
+        const container = document.createElement('div');
+        container.className = 'd-inline-block text-center position-relative';
+        container.style.cssText = 'width:100px;height:100px;margin:4px;border:2px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;padding:4px;background:#fff;';
 
-                removeBtn.addEventListener('click', function() {
-                    const newDt = new DataTransfer();
-                    [...dt.files].forEach(f => {
-                        if (!(f.name === file.name && f.size === file.size)) {
-                            newDt.items.add(f);
-                        }
-                    });
-                    dt.items.clear();
-                    [...newDt.files].forEach(f => dt.items.add(f));
-                    input.files = dt.files;
-                    container.remove();
-                });
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = '&times;';
+        removeBtn.style.cssText = 'position:absolute;top:4px;right:4px;border:none;background:var(--danger);color:#fff;cursor:pointer;width:22px;height:22px;border-radius:50%;font-size:14px;line-height:18px;z-index:10;padding:0;';
+        removeBtn.title = 'Remove';
 
-                container.appendChild(removeBtn);
-
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    const img = document.createElement('img');
-                    img.style.cssText = 'max-width:100%;max-height:100%;border-radius:var(--radius-sm);';
-                    reader.onload = (e) => img.src = e.target.result;
-                    reader.readAsDataURL(file);
-                    container.appendChild(img);
-                } else {
-                    const icon = document.createElement('i');
-                    const ext = file.name.split('.').pop().toLowerCase();
-                    icon.className = ext === 'pdf' ? 'fas fa-file-pdf fa-3x text-danger' :
-                                    ['doc','docx'].includes(ext) ? 'fas fa-file-word fa-3x text-primary' :
-                                    'fas fa-file-alt fa-3x text-secondary';
-                    container.appendChild(icon);
-                    const label = document.createElement('small');
-                    label.innerText = file.name;
-                    label.style.cssText = 'font-size:10px;word-break:break-word;display:block;margin-top:5px;';
-                    container.appendChild(label);
-                }
-
-                previewArea.appendChild(container);
-            });
-
+        removeBtn.addEventListener('click', function() {
+            const newDt = new DataTransfer();
+            [...dt.files].forEach(f => { if (!(f.name === file.name && f.size === file.size)) newDt.items.add(f); });
+            dt.items.clear();
+            [...newDt.files].forEach(f => dt.items.add(f));
             input.files = dt.files;
-
-            let percent = 0;
-            const interval = setInterval(() => {
-                percent += 5;
-                progressBar.style.width = percent + '%';
-                progressBar.innerText = percent + '%';
-                if (percent >= 100) {
-                    clearInterval(interval);
-                    progressBar.classList.add('bg-success');
-                    progressBar.innerText = 'Done';
-                    setTimeout(() => progressWrapper.style.display = 'none', 500);
-                }
-            }, 30);
+            container.remove();
         });
 
-        // Gallery navigation
-        const assetBaseUrl = "{{ url('assets/img') }}";
-        document.addEventListener('DOMContentLoaded', function() {
-            const gallery = $('#product-gallery');
-            document.querySelectorAll('.attribute_option').forEach(select => {
-                select.addEventListener('change', function() {
-                    const selected = this.options[this.selectedIndex];
-                    const optionId = selected.getAttribute('data-href');
-                    const selectedAttrId = selected.getAttribute('data-type');
-                    if (!optionId || !selectedAttrId) return;
+        container.appendChild(removeBtn);
 
-                    const items = $('#product-gallery .item img');
-                    let foundIndex = -1;
-                    items.each(function() {
-                        if (this.getAttribute('data-option-id') === optionId &&
-                            this.getAttribute('data-attribute-id') === selectedAttrId) {
-                            foundIndex = parseInt(this.getAttribute('data-index'));
-                            return false;
-                        }
-                    });
-                    if (foundIndex !== -1) {
-                        gallery.trigger('to.owl.carousel', [foundIndex, 300, true]);
-                    }
-                });
-            });
-        });
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            const img = document.createElement('img');
+            img.style.cssText = 'max-width:100%;max-height:100%;border-radius:4px;';
+            reader.onload = (e) => img.src = e.target.result;
+            reader.readAsDataURL(file);
+            container.appendChild(img);
+        } else {
+            const icon = document.createElement('i');
+            const ext  = file.name.split('.').pop().toLowerCase();
+            icon.className = ext === 'pdf' ? 'fas fa-file-pdf fa-2x text-danger' :
+                             ['doc','docx'].includes(ext) ? 'fas fa-file-word fa-2x text-primary' :
+                             'fas fa-file-alt fa-2x text-secondary';
+            icon.style.cssText = 'display:block;margin:20px auto 6px;';
+            const label = document.createElement('small');
+            label.innerText = file.name;
+            label.style.cssText = 'font-size:9px;word-break:break-word;display:block;';
+            container.appendChild(icon);
+            container.appendChild(label);
+        }
 
-        // Discount card selection
-        document.addEventListener('DOMContentLoaded', function() {
-            const offerCards        = document.querySelectorAll('.offer-card');
-            const noSelectionAlert  = document.getElementById('discount-no-selection-alert');
-            const availBtn          = document.getElementById('avail_discount');
+        previewArea.appendChild(container);
+    });
 
-            // Highlight the card whose radio is checked
-            offerCards.forEach(label => {
-                const radio = label.querySelector('input[type="radio"]');
-                const card  = label.querySelector('.discount-card');
-                if (!radio || !card) return;
+    input.files = dt.files;
 
-                radio.addEventListener('change', () => {
-                    offerCards.forEach(l => {
-                        const c = l.querySelector('.discount-card');
-                        if (c) c.classList.remove('selected');
-                    });
-                    card.classList.add('selected');
-                    // Hide the no-selection warning once a tier is chosen
-                    if (noSelectionAlert) noSelectionAlert.classList.add('d-none');
-                });
-
-                if (radio.checked) card.classList.add('selected');
-            });
-
-            // Apply Offer button
-            const applyBtn = document.getElementById('applyDiscountBtn');
-            if (applyBtn) {
-                applyBtn.addEventListener('click', function() {
-                    const selectedRadio = document.querySelector('input[name="discount_selected"]:checked');
-
-                    if (!selectedRadio) {
-                        // Show inline warning — keep modal open
-                        if (noSelectionAlert) noSelectionAlert.classList.remove('d-none');
-                        return;
-                    }
-
-                    const discountPct   = parseFloat(selectedRadio.getAttribute('data-pct') || '0');
-                    const discountLabel = selectedRadio.getAttribute('data-label') || '';
-
-                    // If the label is a numeric quantity threshold, update the qty input
-                    const qtyInput     = document.querySelector('.qtyValue.cart-amount');
-                    const qtyThreshold = parseInt(discountLabel, 10);
-                    if (!isNaN(qtyThreshold) && qtyThreshold >= 1 && qtyInput) {
-                        qtyInput.value = qtyThreshold;
-                    }
-
-                    // Persist the applied discount percentage so:
-                    //  a) getData() uses it when qty/options change, and
-                    //  b) the cart-add AJAX request sends it to the server
-                    window._activeDiscountPct = discountPct;
-
-                    // Delegate the price re-render to getData() so formatting is
-                    // identical to what happens on qty / option changes
-                    if (typeof window.getData === 'function') {
-                        window.getData(0);
-                    }
-
-                    // Visual feedback: change the trigger button to show "Applied"
-                    if (availBtn) {
-                        availBtn.innerHTML = '<i class="fas fa-check-circle me-2"></i><span>{{ __("Offer Applied ✓") }}</span>';
-                        availBtn.classList.remove('btn-warning', 'pulse-animation');
-                        availBtn.classList.add('btn-success');
-                    }
-
-                    // Blur the currently focused element before hiding so Bootstrap's
-                    // aria-hidden transition does not trap focus inside the modal,
-                    // which would trigger the "Blocked aria-hidden on an element
-                    // because its descendant retained focus" browser warning.
-                    if (document.activeElement && document.activeElement !== document.body) {
-                        document.activeElement.blur();
-                    }
-
-                    // Close the modal
-                    const modalEl = document.getElementById('discountModal');
-                    if (modalEl && typeof bootstrap !== 'undefined') {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-                });
+    if (progressBar) {
+        let percent = 0;
+        const interval = setInterval(() => {
+            percent += 5;
+            progressBar.style.width = percent + '%';
+            progressBar.innerText   = percent + '%';
+            if (percent >= 100) {
+                clearInterval(interval);
+                progressBar.classList.add('bg-success');
+                progressBar.innerText = 'Done ✓';
+                setTimeout(() => { if (progressWrap) progressWrap.style.display = 'none'; }, 600);
             }
+        }, 25);
+    }
+});
 
-            // When the modal is reopened, clear the "no selection" warning and
-            // reset any previously highlighted card so the user can re-pick
-            const discountModalEl = document.getElementById('discountModal');
-            if (discountModalEl) {
-                discountModalEl.addEventListener('show.bs.modal', function() {
-                    if (noSelectionAlert) noSelectionAlert.classList.add('d-none');
-                });
-            }
-        });
+// ── Gallery Navigation on Attribute Change ──────────────────────
+const assetBaseUrl = "{{ url('assets/img') }}";
+document.addEventListener('DOMContentLoaded', function() {
+    const gallery = $('#product-gallery');
+    document.querySelectorAll('.attribute_option').forEach(select => {
+        select.addEventListener('change', function() {
+            const selected      = this.options[this.selectedIndex];
+            const optionId      = selected.getAttribute('data-href');
+            const selectedAttrId = selected.getAttribute('data-type');
+            if (!optionId || !selectedAttrId) return;
 
-        // Attribute validation
-        document.addEventListener('DOMContentLoaded', function() {
-            function validateAttributeOptions() {
-                let valid = true;
-                let firstInvalid = null;
-                document.querySelectorAll('.attribute_option').forEach(function(select) {
-                    if (select.options.length > 1 && !select.value) {
-                        valid = false;
-                        if (!firstInvalid) firstInvalid = select;
-                        select.classList.add('is-invalid');
-                    } else {
-                        select.classList.remove('is-invalid');
-                    }
-                });
-                if (!valid && firstInvalid) firstInvalid.focus();
-                return valid;
-            }
-
-            document.getElementById('add_to_cart')?.addEventListener('click', function(e) {
-                if (!validateAttributeOptions()) {
-                    e.preventDefault();
-                    e.stopPropagation();
+            const items = $('#product-gallery .item img');
+            let foundIndex = -1;
+            items.each(function() {
+                if (this.getAttribute('data-option-id') === optionId &&
+                    this.getAttribute('data-attribute-id') === selectedAttrId) {
+                    foundIndex = parseInt(this.getAttribute('data-index'));
+                    return false;
                 }
             });
-
-            document.getElementById('but_to_cart')?.addEventListener('click', function(e) {
-                if (!validateAttributeOptions()) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            });
-
-            document.querySelectorAll('.attribute_option').forEach(function(select) {
-                select.addEventListener('change', function() {
-                    if (select.value) select.classList.remove('is-invalid');
-                });
-            });
+            if (foundIndex !== -1) gallery.trigger('to.owl.carousel', [foundIndex, 300, true]);
         });
-    </script>
+    });
+});
+
+// ── Discount Card Logic ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    const offerCards       = document.querySelectorAll('.pdp-offer-card');
+    const noSelectionAlert = document.getElementById('discount-no-selection-alert');
+    const availBtn         = document.getElementById('avail_discount');
+
+    offerCards.forEach(label => {
+        const radio = label.querySelector('input[type="radio"]');
+        const tile  = label.querySelector('.pdp-discount-tile');
+        if (!radio || !tile) return;
+
+        radio.addEventListener('change', () => {
+            offerCards.forEach(l => { const t = l.querySelector('.pdp-discount-tile'); if (t) t.style.cssText = ''; });
+            if (noSelectionAlert) noSelectionAlert.classList.add('d-none');
+        });
+
+        if (radio.checked) tile.style.borderColor = 'var(--primary)';
+    });
+
+    const applyBtn = document.getElementById('applyDiscountBtn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function() {
+            const selectedRadio = document.querySelector('input[name="discount_selected"]:checked');
+
+            if (!selectedRadio) {
+                if (noSelectionAlert) noSelectionAlert.classList.remove('d-none');
+                return;
+            }
+
+            const discountPct   = parseFloat(selectedRadio.getAttribute('data-pct') || '0');
+            const discountLabel = selectedRadio.getAttribute('data-label') || '';
+
+            const qtyInput     = document.querySelector('.qtyValue.cart-amount');
+            const qtyThreshold = parseInt(discountLabel, 10);
+            if (!isNaN(qtyThreshold) && qtyThreshold >= 1 && qtyInput) qtyInput.value = qtyThreshold;
+
+            window._activeDiscountPct = discountPct;
+            if (typeof window.getData === 'function') window.getData(0);
+
+            if (availBtn) {
+                availBtn.innerHTML = '<i class="fas fa-check-circle me-2"></i><span>{{ __("Offer Applied ✓") }}</span>';
+                availBtn.classList.remove('pdp-btn-gold', 'w-100');
+                availBtn.classList.add('pdp-btn-primary');
+                availBtn.style.animation = 'none';
+            }
+
+            if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur();
+
+            const modalEl = document.getElementById('discountModal');
+            if (modalEl && typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+        });
+    }
+
+    const discountModalEl = document.getElementById('discountModal');
+    if (discountModalEl) {
+        discountModalEl.addEventListener('show.bs.modal', function() {
+            if (noSelectionAlert) noSelectionAlert.classList.add('d-none');
+        });
+    }
+});
+
+// ── Attribute Validation ─────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    function validateAttributeOptions() {
+        let valid = true;
+        let firstInvalid = null;
+        document.querySelectorAll('.attribute_option').forEach(function(select) {
+            if (select.options.length > 1 && !select.value) {
+                valid = false;
+                if (!firstInvalid) firstInvalid = select;
+                select.classList.add('is-invalid');
+            } else {
+                select.classList.remove('is-invalid');
+            }
+        });
+        if (!valid && firstInvalid) firstInvalid.focus();
+        return valid;
+    }
+
+    document.getElementById('add_to_cart')?.addEventListener('click', function(e) {
+        if (!validateAttributeOptions()) { e.preventDefault(); e.stopPropagation(); }
+    });
+
+    document.getElementById('but_to_cart')?.addEventListener('click', function(e) {
+        if (!validateAttributeOptions()) { e.preventDefault(); e.stopPropagation(); }
+    });
+
+    document.querySelectorAll('.attribute_option').forEach(function(select) {
+        select.addEventListener('change', function() {
+            if (select.value) select.classList.remove('is-invalid');
+        });
+    });
+});
+</script>
 @endsection
