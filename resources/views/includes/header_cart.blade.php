@@ -108,8 +108,21 @@
 </div>
 
 @else
-  <div class="text-center py-5">
-      <i class="icon-shopping-cart" style="font-size: 40px; color: #ddd; margin-bottom: 15px;"></i>
-      <h6 class="mb-0">{{__('Your Cart is empty.')}}</h6>
+  <style>
+      .toolbar-dropdown.cart-dropdown {
+          width: 380px !important;
+          min-width: 380px !important;
+          max-height: none !important;
+          overflow: hidden !important;
+          padding: 0 !important;
+      }
+      .toolbar-dropdown.cart-dropdown * {
+          max-height: none !important;
+      }
+  </style>
+  <div style="text-align: center; width: 100%; overflow: hidden;">
+    <a href="{{ route('front.catalog') }}" style="display: block; width: 100%;">
+        <img src="{{ asset('assets/img/cart.png') }}" alt="Empty Cart" style="width: 100%; display: block;">
+    </a>
   </div>
 @endif

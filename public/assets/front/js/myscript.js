@@ -1013,6 +1013,25 @@ $(function ($) {
       if (qty > 0) {
         cartSubmit(item_key, item_id, qty);
         getData();
+      } else {
+        // Instantly show loading state so it feels responsive
+        $(".cart_view_header").html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #002e3b;"></i></div>');
+        let removeUrl = mainurl + "/cart/destroy/" + item_id;
+        $.get(removeUrl, function (response) {
+          $(".cart_view_header").load($("#header_cart_load").attr("data-target"));
+          
+          let newHtml = $(response);
+          let countText = newHtml.find(".cart_count:first").text();
+          if (countText !== "") {
+              $(".cart_count").text(countText);
+          } else {
+              $(".cart_count").text("0");
+          }
+          
+          if ($("#view_cart_load").length > 0) {
+              $("#view_cart_load").load($("#cart_view_load").attr("data-target"));
+          }
+        });
       }
     });
 
