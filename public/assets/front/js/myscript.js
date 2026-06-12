@@ -1164,8 +1164,7 @@ $(function ($) {
           decimal_separator,
           thousand_separator,
         );
-        let saveAmount =
-          originalMain - parseFloat(mainPrice.replace(/[^0-9\.]/g, ""));
+        let saveAmount = originalMain * (applicableDiscount / 100);
         saveAmount = number_format(
           saveAmount,
           2,
@@ -1301,7 +1300,10 @@ $(function ($) {
     }
 
     function getQuantity() {
-      let quantity = $(".qtyValue").val();
+      let quantity = $(".cart-amount").val();
+      if (typeof quantity === 'undefined') {
+        quantity = $(".qtyValue").val();
+      }
       return parseInt(quantity);
     }
 
