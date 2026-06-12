@@ -308,12 +308,13 @@
         }
 
         /* --- Search Box Wrapper --- */
+        /* --- Search Box Wrapper --- */
         .topbar-redesigned .topbar-search-wrap {
             flex: 1 1 auto;
-            max-width: 420px;
+            max-width: 440px;
             min-width: 250px;
             padding: 0;
-            margin: 0 15px;
+            margin: -3px 15px 0 35px; /* Moved up and right */
         }
         .topbar-redesigned .topbar-search-wrap .search-box-inner {
             width: 100%;
@@ -324,6 +325,9 @@
             overflow: hidden;
             background: #f8f9fb;
             transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex;
+            align-items: center;
+            height: 44px;
         }
         .topbar-redesigned .topbar-search-box:focus-within {
             border-color: #377dff;
@@ -336,11 +340,11 @@
             border: none;
             border-right: 1px solid #e2e6ec;
             background: transparent;
-            padding: 11px 18px;
+            padding: 0 18px;
             font-size: 13px;
             font-weight: 500;
             color: #3c4858;
-            min-width: 140px;
+            min-width: 165px; /* More space for categories */
             cursor: pointer;
             outline: none;
             -webkit-appearance: none;
@@ -350,6 +354,7 @@
             background-repeat: no-repeat;
             background-position: right 10px center;
             padding-right: 26px;
+            height: 100%;
         }
         .topbar-redesigned .topbar-category-select:focus {
             outline: none;
@@ -359,11 +364,12 @@
         .topbar-redesigned .topbar-search-input {
             border: none !important;
             background: transparent !important;
-            padding: 11px 18px !important;
+            padding: 0 18px !important;
             font-size: 14px !important;
             color: #3c4858 !important;
             box-shadow: none !important;
-            height: auto !important;
+            height: 100% !important;
+            flex: 1;
         }
         
         /* Reduce Footer Padding */
@@ -377,23 +383,27 @@
 
         /* Search Button */
         .topbar-redesigned .topbar-search-btn {
-            background: linear-gradient(135deg, #377dff, #2c5cc5);
+            background: transparent;
             border: none;
-            color: #fff;
-            padding: 0 20px;
+            color: #377dff; /* Blue icon to match theme */
+            padding: 0 18px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.15s ease;
+            transition: transform 0.15s ease, color 0.2s ease;
             display: flex;
             align-items: center;
+            height: 100%;
         }
         .topbar-redesigned .topbar-search-btn:hover {
-            background: linear-gradient(135deg, #2c5cc5, #1e4ba8);
+            color: #1e4ba8;
         }
         .topbar-redesigned .topbar-search-btn:active {
-            transform: scale(0.96);
+            transform: scale(0.92);
         }
         .topbar-redesigned .topbar-search-btn i {
-            font-size: 16px;
+            font-size: 18px;
+            position: relative;
+            top: -5px; /* Moved further up */
+            left: 5px; /* Moved right slightly */
         }
 
         /* --- Catalog Button --- */
