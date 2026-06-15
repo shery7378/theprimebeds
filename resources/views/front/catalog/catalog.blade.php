@@ -243,6 +243,74 @@
         .pc__price-current { font-size: 18px; }
         .pc__cta { padding: 12px; font-size: 14px; }
     }
+
+    /* ── Catalog Empty State Redesign ── */
+    .catalog-empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 40px;
+        background: #ffffff;
+        border: 1px solid #e2dcd0;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(44, 41, 36, 0.02);
+        max-width: 600px;
+        margin: 40px auto;
+    }
+    .catalog-empty-state__icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(181, 148, 105, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b59469;
+        font-size: 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 12px rgba(181, 148, 105, 0.05);
+    }
+    .catalog-empty-state h4 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #2c2924;
+        margin-bottom: 12px;
+        letter-spacing: -0.2px;
+    }
+    .catalog-empty-state p {
+        font-size: 15px;
+        color: #718096;
+        max-width: 440px;
+        line-height: 1.6;
+        margin-bottom: 28px;
+    }
+    .btn-browse {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #31251A;
+        color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        padding: 12px 28px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 12px rgba(49, 37, 26, 0.15);
+    }
+    .btn-browse:hover {
+        background: #1F1710;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(49, 37, 26, 0.25);
+    }
+    .btn-browse:active {
+        transform: translateY(0);
+    }
 </style>
 
 {{-- ===================================================

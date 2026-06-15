@@ -158,6 +158,7 @@
             border-radius: 8px;
             padding: 12px 16px;
             transition: all 0.3s ease;
+            height: auto !important; /* Fix vertical clipping */
         }
         .form-control-premium:focus {
             background-color: #fff;
@@ -169,6 +170,62 @@
             color: #374151;
             font-size: 0.9rem;
             margin-bottom: 6px;
+        }
+        
+        /* Order Summary Table Styles */
+        .checkout-premium-card .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .checkout-premium-card .table th,
+        .checkout-premium-card .table td {
+            padding: 12px 8px;
+            vertical-align: middle;
+            border-top: 1px solid #f3f4f6;
+            border-bottom: none;
+            font-size: 0.95rem;
+        }
+        .checkout-premium-card .table tr:first-child td {
+            border-top: none;
+        }
+        .text-gray-dark {
+            color: #1f2937 !important;
+            font-weight: 600;
+        }
+        .grand_total_set {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+        .text-primary {
+            color: {{ $setting->primary_color }} !important;
+        }
+        
+        /* Fix for Select2 and standard select boxes */
+        select.form-control-premium {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+        
+        /* Checkbox styling */
+        .custom-control-label {
+            font-size: 0.95rem;
+            color: #4b5563;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: {{ $setting->primary_color }};
+            border-color: {{ $setting->primary_color }};
+        }
+        .btn-primary:hover {
+            background-color: #222;
+            border-color: #222;
         }
     </style>
     <div class="container padding-bottom-3x mb-1 checkut-page mt-4">

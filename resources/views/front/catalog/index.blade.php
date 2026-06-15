@@ -100,144 +100,152 @@
     /* =============================================
        FILTER TOOLBAR
     ============================================= */
+    /* =============================================
+       FILTER TOOLBAR REDESIGN
+    ============================================= */
     .catalog-toolbar {
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 20px rgba(0,0,0,0.07);
-        padding: 16px 20px;
-        margin-bottom: 28px;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 14px;
-        border: 1px solid #edf0f5;
+        background: #ffffff !important;
+        border-radius: 20px !important;
+        border: 1px solid #ebdcd0 !important;
+        box-shadow: 0 8px 24px rgba(44, 41, 36, 0.02) !important;
+        padding: 14px 24px !important;
+        margin-bottom: 28px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        gap: 16px !important;
     }
     .catalog-toolbar__filters {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-        flex: 1 1 auto;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+        flex: 1 1 auto !important;
     }
     .catalog-toolbar__label {
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: #a0aec0;
-        margin-right: 4px;
-        white-space: nowrap;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.8px !important;
+        text-transform: uppercase !important;
+        color: #2c2924 !important;
+        margin-right: 8px !important;
+        white-space: nowrap !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
     }
-    #quick_filter {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
+    #catalog_quick_filter_list {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
-    #quick_filter li a {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 7px 16px;
-        border-radius: 50px;
-        font-size: 13px;
-        font-weight: 500;
-        color: #4a5568;
-        background: #f4f6f9;
-        border: 1.5px solid transparent;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.22s ease;
-        white-space: nowrap;
+    #catalog_quick_filter_list li a {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 8px 16px !important;
+        border-radius: 50px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #5a5045 !important;
+        background: #ffffff !important;
+        border: 1.5px solid #ebdcd0 !important;
+        cursor: pointer !important;
+        text-decoration: none !important;
+        transition: all 0.22s ease !important;
+        white-space: nowrap !important;
     }
-    #quick_filter li a i {
-        font-size: 10px;
-        opacity: 0.5;
+    #catalog_quick_filter_list li a:hover {
+        color: #b59469 !important;
+        background: rgba(181, 148, 105, 0.08) !important;
+        border-color: #b59469 !important;
     }
-    #quick_filter li a:hover,
-    #quick_filter li.active a {
-        color: #fff;
-        background: linear-gradient(135deg, #1a2332, #2d4270);
-        border-color: transparent;
-        box-shadow: 0 4px 12px rgba(26,35,50,0.22);
+    #catalog_quick_filter_list li.active a {
+        color: #ffffff !important;
+        background: #b59469 !important;
+        border-color: #b59469 !important;
+        box-shadow: 0 4px 10px rgba(181, 148, 105, 0.15) !important;
     }
     .catalog-toolbar__right {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-shrink: 0;
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+        flex-shrink: 0 !important;
     }
     .catalog-sort-wrap {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
     }
     .catalog-sort-wrap label {
-        font-size: 13px;
-        font-weight: 600;
-        color: #718096;
-        white-space: nowrap;
-        margin: 0;
+        font-size: 13px !important;
+        color: #718096 !important;
+        margin: 0 !important;
+        display: none !important;
     }
     .catalog-sort-select {
-        border: 1.5px solid #e2e8f0;
-        border-radius: 50px;
-        padding: 7px 32px 7px 14px;
-        font-size: 13px;
-        font-weight: 500;
-        color: #2d3748;
-        background: #f8fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
-        -webkit-appearance: none;
-        appearance: none;
-        cursor: pointer;
-        outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        border: 1.5px solid #ebdcd0 !important;
+        border-radius: 50px !important;
+        padding: 8px 32px 8px 16px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #2c2924 !important;
+        background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b59469' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        cursor: pointer !important;
+        outline: none !important;
+        transition: all 0.2s !important;
     }
     .catalog-sort-select:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102,126,234,0.12);
+        border-color: #b59469 !important;
+        box-shadow: 0 0 0 3px rgba(181,148,105,0.1) !important;
     }
     .catalog-count-badge {
-        font-size: 12.5px;
-        color: #718096;
-        background: #f4f6f9;
-        border-radius: 50px;
-        padding: 6px 14px;
-        font-weight: 500;
-        white-space: nowrap;
+        font-size: 13px !important;
+        color: #5a5045 !important;
+        background: #faf8f5 !important;
+        border: 1.5px solid #ebdcd0 !important;
+        border-radius: 50px !important;
+        padding: 8px 16px !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
     }
     .catalog-view-toggle {
-        display: flex;
-        gap: 4px;
-        background: #f4f6f9;
-        border-radius: 10px;
-        padding: 4px;
+        display: flex !important;
+        gap: 6px !important;
+        background: #faf8f5 !important;
+        border: 1.5px solid #ebdcd0 !important;
+        border-radius: 50px !important;
+        padding: 4px !important;
     }
     .catalog-view-toggle .list-view {
-        width: 34px;
-        height: 34px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        color: #a0aec0;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        font-size: 14px;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        color: #a0aec0 !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+        font-size: 13px !important;
     }
     .catalog-view-toggle .list-view:hover,
     .catalog-view-toggle .list-view.active {
-        background: #fff;
-        color: #2d3748;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background: #ffffff !important;
+        color: #b59469 !important;
+        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.15) !important;
     }
 
     @media (max-width: 768px) {
-        .catalog-toolbar { padding: 12px 14px; }
-        .catalog-toolbar__right { width: 100%; justify-content: space-between; }
-        .catalog-count-badge { display: none; }
+        .catalog-toolbar { padding: 12px 14px !important; }
+        .catalog-toolbar__right { width: 100% !important; justify-content: space-between !important; }
+        .catalog-count-badge { display: none !important; }
     }
 
     /* =============================================
@@ -246,221 +254,382 @@
     .catalog-sidebar {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
     }
     .sidebar-card {
-        background: #fff;
-        border-radius: 16px;
-        border: 1px solid #edf0f5;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        background: #ffffff;
+        border-radius: 20px;
+        border: 1px solid #e2dcd0;
+        box-shadow: 0 10px 30px rgba(44, 41, 36, 0.03);
         overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar-card:hover {
+        box-shadow: 0 16px 40px rgba(44, 41, 36, 0.06);
+        border-color: #b59469;
     }
     .sidebar-card__header {
-        padding: 16px 20px;
+        padding: 22px 24px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        border-bottom: 1px solid #f1f4f8;
-        background: #fafbfd;
+        gap: 14px;
+        border-bottom: 1px solid rgba(226, 220, 208, 0.5);
+        background: #faf9f6;
     }
     .sidebar-card__icon {
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
         border-radius: 10px;
-        background: linear-gradient(135deg, #eef3ff, #dde6fa);
+        background: rgba(181, 148, 105, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #4f71d9;
+        color: #b59469;
         font-size: 14px;
         flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.05);
     }
     .sidebar-card__title {
         font-size: 14px;
-        font-weight: 700;
-        color: #1a202c;
+        font-weight: 800;
+        color: #2c2924;
         margin: 0;
-        letter-spacing: 0.1px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     .sidebar-card__body {
-        padding: 16px 20px;
+        padding: 24px;
     }
 
-    /* Category List */
+    /* Category List Redesign (Clean Inset Accordion) */
     #category_list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+    #category_list > li {
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(226, 220, 208, 0.5) !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+        transition: all 0.25s ease !important;
+    }
+    #category_list > li:last-child {
+        border-bottom: none !important;
     }
     #category_list > li > a.category_search {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        color: #2d3748;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        background: transparent;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 14px 4px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #2c2924 !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
     }
-    #category_list > li > a.category_search::after {
-        content: '\f105';
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        font-size: 12px;
-        color: #a0aec0;
-        transition: transform 0.2s ease;
-    }
-    #category_list > li.expanded > a.category_search::after,
-    #category_list > li.active > a.category_search::after {
-        transform: rotate(90deg);
-        color: #4f71d9;
-    }
-    #category_list > li > a.category_search:hover,
+    #category_list > li.expanded > a.category_search,
     #category_list > li.active > a.category_search {
-        background: #eef3ff;
-        color: #2c4ecb;
+        color: #b59469 !important;
     }
-    #subcategory_list {
-        list-style: none;
-        padding: 4px 0 4px 14px;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
+    .category-chevron {
+        transition: transform 0.3s ease, color 0.3s ease !important;
+        font-size: 11px !important;
+        color: #718096 !important;
     }
-    #subcategory_list li a.subcategory {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 12px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 500;
-        color: #4a5568;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.2s ease;
+    #category_list > li.expanded > a.category_search .category-chevron {
+        transform: rotate(180deg) !important;
+        color: #b59469 !important;
     }
-    #subcategory_list li a.subcategory::before {
-        content: '';
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #cbd5e0;
-        flex-shrink: 0;
-        transition: background 0.2s;
+    
+    /* Subcategory List (Beige Inset Panel) */
+    .subcategory-list-container {
+        display: none !important;
+        list-style: none !important;
+        padding: 16px !important;
+        margin: 0 0 16px 0 !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        background: #faf8f5 !important;
+        border: 1px solid rgba(226, 220, 208, 0.5) !important;
+        border-radius: 12px !important;
     }
-    #subcategory_list li a.subcategory:hover::before,
-    #subcategory_list li.active a.subcategory::before {
-        background: #4f71d9;
+    #category_list > li.expanded > .subcategory-list-container {
+        display: flex !important;
     }
-    #subcategory_list li a.subcategory:hover,
-    #subcategory_list li.active a.subcategory {
-        background: #f0f4ff;
-        color: #2c4ecb;
+    
+    /* Search box inside expanded category */
+    .subcategory-search-box {
+        position: relative !important;
+        width: 100% !important;
+        margin-bottom: 10px !important;
+        border: 1px solid #ebdcd0 !important;
+        border-radius: 8px !important;
+        background: #ffffff !important;
+        box-sizing: border-box !important;
     }
+    .subcategory-search-box .search-icon {
+        position: absolute !important;
+        left: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        font-size: 12px !important;
+        color: #a0aec0 !important;
+        pointer-events: none !important;
+    }
+    .subcategory-search-input {
+        width: 100% !important;
+        border: none !important;
+        outline: none !important;
+        padding: 8px 12px 8px 30px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+        color: #2c2924 !important;
+        box-sizing: border-box !important;
+    }
+    .subcategory-search-input::placeholder {
+        color: #a0aec0 !important;
+    }
+    
+    .subcategory-list-scroll {
+        max-height: 200px !important;
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: #a0aec0 #f1f2f6 !important;
+    }
+    
+    /* Custom scrollbar matching the screenshot (thick grey thumb) */
+    .subcategory-list-scroll::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    .subcategory-list-scroll::-webkit-scrollbar-track {
+        background: #f1f2f6 !important;
+        border-radius: 10px !important;
+    }
+    .subcategory-list-scroll::-webkit-scrollbar-thumb {
+        background: #a0aec0 !important;
+        border-radius: 10px !important;
+    }
+    .subcategory-list-scroll::-webkit-scrollbar-thumb:hover {
+        background: #718096 !important;
+    }
+    
+    #category_list li a.subcategory {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 8px 14px !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        color: #5a5045 !important;
+        border-radius: 8px !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        transition: all 0.2s !important;
+        background: transparent !important;
+    }
+    #category_list li a.subcategory:hover {
+        background: rgba(181, 148, 105, 0.08) !important;
+        color: #b59469 !important;
+    }
+    #category_list li.active > a.subcategory {
+        background: #b59469 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+    
     #childcategory_list {
-        list-style: none;
-        padding: 2px 0 2px 18px;
-        margin: 0;
+        list-style: none !important;
+        padding: 4px 0 4px 18px !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
     }
     #childcategory_list li a.childcategory {
-        display: block;
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-size: 12px;
-        color: #718096;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.2s;
+        display: block !important;
+        padding: 6px 12px !important;
+        border-radius: 6px !important;
+        font-size: 12.5px !important;
+        font-weight: 500 !important;
+        color: #6a5f51 !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        transition: all 0.2s !important;
+        background: transparent !important;
     }
-    #childcategory_list li a.childcategory:hover,
-    #childcategory_list li.active a.childcategory {
-        background: #f0f4ff;
-        color: #2c4ecb;
+    #childcategory_list li a.childcategory:hover {
+        background: rgba(181, 148, 105, 0.08) !important;
+        color: #b59469 !important;
     }
-    .category-scroll {
-        max-height: 340px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #e2e8f0 transparent;
+    #childcategory_list li.active > a.childcategory {
+        background: #b59469 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
     }
-    .category-scroll::-webkit-scrollbar { width: 4px; }
-    .category-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
 
-    /* Price Filter */
+    /* Price Filter Redesign */
+    .price-filter-card {
+        border: 1px solid #e2dcd0 !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 30px rgba(44, 41, 36, 0.03) !important;
+        overflow: hidden !important;
+    }
+    .price-filter-card:hover {
+        box-shadow: 0 16px 40px rgba(44, 41, 36, 0.06) !important;
+        border-color: #b59469 !important;
+    }
+    .price-filter-header {
+        padding: 22px 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        border-bottom: 1px solid rgba(226, 220, 208, 0.5) !important;
+        background: #faf9f6 !important;
+    }
+    .price-filter-header.second-header {
+        border-top: 1px solid rgba(226, 220, 208, 0.5) !important;
+    }
+    .price-filter-icon-box {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 10px !important;
+        background: rgba(181, 148, 105, 0.1) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #b59469 !important;
+        font-size: 14px !important;
+        flex-shrink: 0 !important;
+        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.05) !important;
+    }
+    .price-filter-title {
+        font-size: 14px !important;
+        font-weight: 800 !important;
+        color: #2c2924 !important;
+        margin: 0 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+    .price-filter-body {
+        padding: 24px !important;
+    }
     .price-range-slider {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 22px;
+    }
+    
+    /* noUiSlider & jQuery UI Slider Track override */
+    .price-range-slider .noUi-target,
+    .price-range-slider .ui-slider {
+        height: 2px !important;
+        border-radius: 0px !important;
+        background: #ebdcd0 !important;
+        border: none !important;
+        margin: 15px 10px !important;
+        position: relative !important;
+        box-shadow: none !important;
+    }
+    .price-range-slider .noUi-base {
+        background: #ebdcd0 !important;
+    }
+    .price-range-slider .noUi-connect,
+    .price-range-slider .ui-slider-range {
+        background: #333333 !important;
+        border-radius: 0px !important;
+        position: absolute !important;
+        height: 100% !important;
+        top: 0 !important;
+        box-shadow: none !important;
+    }
+    .price-range-slider .noUi-handle,
+    .price-range-slider .ui-slider-handle {
+        width: 6px !important;
+        height: 16px !important;
+        border-radius: 2px !important;
+        background: #333333 !important;
+        border: none !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
+        top: -7px !important;
+        margin-left: -3px !important;
+        outline: none !important;
+        position: absolute !important;
+        z-index: 2 !important;
+        transition: none !important;
+    }
+    .price-range-slider .noUi-horizontal .noUi-handle {
+        right: -3px !important;
+        top: -7px !important;
+    }
+    .price-range-slider .noUi-handle::before,
+    .price-range-slider .noUi-handle::after {
+        display: none !important;
+    }
+    .price-range-slider .noUi-handle:hover,
+    .price-range-slider .noUi-handle:focus,
+    .price-range-slider .ui-slider-handle:hover,
+    .price-range-slider .ui-slider-handle:focus {
+        transform: none !important;
     }
     .ui-range-slider-footer {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 16px;
-        flex-wrap: wrap;
+        display: block !important;
+        width: 100% !important;
+        margin-top: 10px !important;
     }
-    #price_filter {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        min-height: 38px;
-        background: linear-gradient(135deg, #1a2332, #2d4270);
-        border: none;
-        color: #fff;
-        padding: 8px 18px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 1;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 12px rgba(26,35,80,0.18);
+    
+    /* Pill shaped wrapper for the min/max input boxes */
+    .price-inputs-pill-wrapper {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1.5px solid #ebdcd0 !important;
+        border-radius: 50px !important;
+        padding: 0 16px !important;
+        background: #ffffff !important;
+        width: 100% !important;
+        height: 44px !important;
+        box-sizing: border-box !important;
     }
-    #price_filter i {
-        font-size: 12px;
-        line-height: 1;
-        margin-right: 0 !important;
+    .price-inputs-pill-wrapper .ui-range-value-min,
+    .price-inputs-pill-wrapper .ui-range-value-max {
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
     }
-    #price_filter:hover {
-        opacity: 0.94;
-        transform: translateY(-1px);
+    .price-range-input {
+        width: 100% !important;
+        background: transparent !important;
+        border: none !important;
+        text-align: center !important;
+        color: #2c2924 !important;
+        font-weight: 700 !important;
+        font-size: 14.5px !important;
+        outline: none !important;
+        height: 40px !important;
+        box-sizing: border-box !important;
     }
-    #price_filter:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(79,113,217,0.2), 0 4px 12px rgba(26,35,80,0.18);
-    }
-    .ui-range-values {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 38px;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 1;
-        color: #2d3748;
-        background: #f4f6f9;
-        border: 1px solid #e7ecf3;
-        padding: 6px 14px;
-        border-radius: 999px;
-        white-space: nowrap;
-    }
-    .ui-range-value-min,
-    .ui-range-value-max {
-        display: inline-flex;
-        align-items: center;
-        gap: 2px;
-        line-height: 1;
+    .price-inputs-divider {
+        color: #b59469 !important;
+        font-weight: 700 !important;
+        font-size: 14.5px !important;
+        padding: 0 10px !important;
+        user-select: none !important;
     }
 
     /* Sidebar Toggle (Mobile) */
@@ -580,55 +749,66 @@
 
                 <aside class="catalog-sidebar" id="catalogSidebar">
 
-                    {{-- Categories Widget --}}
-                    <div class="sidebar-card">
-                        <div class="sidebar-card__header">
-                            <div class="sidebar-card__icon">
+                    {{-- Unified Filter Widget --}}
+                    <div class="sidebar-card price-filter-card">
+                        <div class="sidebar-card__header price-filter-header">
+                            <div class="sidebar-card__icon price-filter-icon-box">
                                 <i class="fas fa-th-list"></i>
                             </div>
-                            <h3 class="sidebar-card__title">{{ __('Shop Categories') }}</h3>
+                            <h3 class="sidebar-card__title price-filter-title">{{ __('Shop Categories') }}</h3>
                         </div>
-                        <div class="sidebar-card__body" style="padding: 12px 14px;">
-                            <ul id="category_list" class="category-scroll">
+                        <div class="sidebar-card__body category-widget-body" style="padding: 8px 24px 16px;">
+                            <ul id="category_list">
                                 @foreach ($categories as $getcategory)
                                 <li class="has-children {{ isset($category) && $category->id == $getcategory->id ? 'expanded active' : '' }}">
                                     <a class="category_search" href="javascript:;" data-href="{{ $getcategory->slug }}">
                                         {{ $getcategory->name }}
+                                        @if($getcategory->subcategory->count() > 0)
+                                        <i class="fas fa-chevron-down category-chevron"></i>
+                                        @endif
                                     </a>
-                                    <ul id="subcategory_list">
-                                        @foreach ($getcategory->subcategory as $getsubcategory)
-                                        <li class="{{ isset($subcategory) && $subcategory->id == $getsubcategory->id ? 'active' : '' }}">
-                                            <a class="subcategory" href="javascript:;" data-href="{{ $getsubcategory->slug }}">
-                                                {{ $getsubcategory->name }}
-                                            </a>
-                                            <ul id="childcategory_list">
-                                                @foreach ($getsubcategory->childcategory as $getchildcategory)
-                                                <li class="{{ isset($childcategory) && $getchildcategory->id == $getchildcategory->id ? 'active' : '' }}">
-                                                    <a class="childcategory" href="javascript:;" data-href="{{ $getchildcategory->slug }}">
-                                                        {{ $getchildcategory->name }}
-                                                    </a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                        @endforeach
+                                    @if($getcategory->subcategory->count() > 0)
+                                    <ul id="subcategory_list" class="subcategory-list-container">
+                                        <div class="subcategory-search-box">
+                                            <i class="fas fa-search search-icon"></i>
+                                            <input type="text" class="subcategory-search-input" placeholder="{{ __('Search...') }}">
+                                        </div>
+                                        <div class="subcategory-list-scroll">
+                                            @foreach ($getcategory->subcategory as $getsubcategory)
+                                            <li class="{{ isset($subcategory) && $subcategory->id == $getsubcategory->id ? 'active' : '' }}">
+                                                <a class="subcategory" href="javascript:;" data-href="{{ $getsubcategory->slug }}">
+                                                    {{ $getsubcategory->name }}
+                                                </a>
+                                                @if($getsubcategory->childcategory->count() > 0)
+                                                <ul id="childcategory_list">
+                                                    @foreach ($getsubcategory->childcategory as $getchildcategory)
+                                                    <li class="{{ isset($childcategory) && $getchildcategory->id == $getchildcategory->id ? 'active' : '' }}">
+                                                        <a class="childcategory" href="javascript:;" data-href="{{ $getchildcategory->slug }}">
+                                                            {{ $getchildcategory->name }}
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </li>
+                                            @endforeach
+                                        </div>
                                     </ul>
+                                    @endif
                                 </li>
                                 @endforeach
                             </ul>
                         </div>
-                    </div>
 
-                    {{-- Price Filter Widget --}}
-                    @if ($setting->is_range_search == 1)
-                    <div class="sidebar-card">
-                        <div class="sidebar-card__header">
-                            <div class="sidebar-card__icon">
+                        {{-- Price Filter Widget --}}
+                        @if ($setting->is_range_search == 1)
+                        <div class="sidebar-card__header price-filter-header second-header">
+                            <div class="sidebar-card__icon price-filter-icon-box">
                                 <i class="fas fa-tag"></i>
                             </div>
-                            <h3 class="sidebar-card__title">{{ __('Filter by Price') }}</h3>
+                            <h3 class="sidebar-card__title price-filter-title">{{ __('Filter by Price') }}</h3>
                         </div>
-                        <div class="sidebar-card__body">
+                        <div class="sidebar-card__body price-filter-body">
                             <form class="price-range-slider" method="post"
                                 data-start-min="{{ request()->input('minPrice') ? request()->input('minPrice') : '0' }}"
                                 data-start-max="{{ request()->input('maxPrice') ? request()->input('maxPrice') : $setting->max_price }}"
@@ -637,27 +817,95 @@
                                 data-step="5">
                                 <div class="ui-range-slider"></div>
                                 <footer class="ui-range-slider-footer">
-                                    <div style="margin-right: 0;">
-                                        <button class="btn" id="price_filter" type="button">
-                                            <i class="fas fa-check me-1"></i>{{ __('Apply') }}
-                                        </button>
+                                    <div style="display:none;">
+                                        <button class="btn" id="price_filter" type="button">{{ __('Apply') }}</button>
                                     </div>
-                                    <div class="ui-range-values" style="margin-top: 6px;">
+                                    <div class="price-inputs-pill-wrapper">
                                         <div class="ui-range-value-min">
-                                            {{ PriceHelper::setCurrencySign() }}<span class="min_price"></span>
-                                            <input type="hidden">
+                                            <span class="min_price" style="display:none;"></span>
+                                            <input type="text" class="price-range-input" id="min_price_input" readonly>
                                         </div>
-                                        <span style="color:#a0aec0; line-height:1;">–</span>
+                                        <div class="price-inputs-divider">–</div>
                                         <div class="ui-range-value-max">
-                                            {{ PriceHelper::setCurrencySign() }}<span class="max_price"></span>
-                                            <input type="hidden">
+                                            <span class="max_price" style="display:none;"></span>
+                                            <input type="text" class="price-range-input" id="max_price_input" readonly>
                                         </div>
                                     </div>
                                 </footer>
                             </form>
                         </div>
+                        @endif
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                function formatNumber(num) {
+                                    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                                }
+                                
+                                setTimeout(function() {
+                                    var slider = document.querySelector(".ui-range-slider");
+                                    if (slider && slider.noUiSlider) {
+                                        slider.noUiSlider.on("update", function(values, handle) {
+                                            var val = Math.round(values[handle]);
+                                            if (handle === 0) {
+                                                document.getElementById("min_price_input").value = formatNumber(val);
+                                                document.querySelector(".min_price").textContent = val;
+                                            } else {
+                                                document.getElementById("max_price_input").value = formatNumber(val);
+                                                document.querySelector(".max_price").textContent = val;
+                                            }
+                                        });
+                                        slider.noUiSlider.on("change", function(values, handle) {
+                                            document.getElementById("price_filter").click();
+                                        });
+                                    }
+                                }, 500);
+
+                                // Accordion toggle logic for Categories
+                                $(document).on("click", "#category_list > li.has-children > a.category_search", function(e) {
+                                    var $li = $(this).parent();
+                                    var isExpanded = $li.hasClass("expanded");
+                                    
+                                    if (isExpanded) {
+                                        $li.removeClass("expanded");
+                                    } else {
+                                        $("#category_list > li.has-children").removeClass("expanded");
+                                        $li.addClass("expanded");
+                                    }
+                                });
+
+                                // Prevent search container click from closing accordion
+                                $(document).on("click", ".subcategory-list-container", function(e) {
+                                    e.stopPropagation();
+                                });
+
+                                // Dynamic Subcategory Search filtering
+                                $(document).on("input", ".subcategory-search-input", function() {
+                                    var query = $(this).val().toLowerCase();
+                                    var $container = $(this).closest(".subcategory-list-container");
+                                    $container.find(".subcategory-list-scroll > li").each(function() {
+                                        var text = $(this).find("a.subcategory").text().toLowerCase();
+                                        if (text.indexOf(query) > -1) {
+                                            $(this).show();
+                                        } else {
+                                            $(this).hide();
+                                        }
+                                    });
+                                });
+
+                                // Quick filter click logic to avoid duplicate ID issues
+                                $(document).on("click", "#catalog_quick_filter_list li a", function (e) {
+                                    e.preventDefault();
+                                    $("#catalog_quick_filter_list li").removeClass("active");
+                                    $(this).parent().addClass("active");
+                                    var filter = $(this).attr("data-href") || "";
+                                    $("#search_form #quick_filter").val(filter);
+                                    $("#search_form #page").val("");
+                                    $("#search_button").click();
+                                });
+                            });
+                        </script>
                     </div>
-                    @endif
 
                     {{-- Need Help Card --}}
                     <div class="sidebar-card" style="background: linear-gradient(135deg, #1a2332, #2d4270); border: none;">
@@ -687,12 +935,15 @@
                         <span class="catalog-toolbar__label">
                             <i class="fas fa-bolt me-1" style="color:#f6ad55;"></i>{{ __('Filter') }}
                         </span>
-                        <ul id="quick_filter">
-                            <li class="active"><a datahref="">{{ __('All') }}</a></li>
-                            <li><a href="javascript:;" data-href="feature">⭐ {{ __('Featured') }}</a></li>
-                            <li><a href="javascript:;" data-href="best">🏆 {{ __('Best Sellers') }}</a></li>
-                            <li><a href="javascript:;" data-href="top">👍 {{ __('Top Rated') }}</a></li>
-                            <li><a href="javascript:;" data-href="new">🆕 {{ __('New Arrival') }}</a></li>
+                        @php
+                            $qf = request()->input('quick_filter');
+                        @endphp
+                        <ul id="catalog_quick_filter_list">
+                            <li class="{{ !$qf ? 'active' : '' }}"><a href="javascript:;" data-href="">{{ __('All') }}</a></li>
+                            <li class="{{ $qf == 'feature' ? 'active' : '' }}"><a href="javascript:;" data-href="feature">⭐ {{ __('Featured') }}</a></li>
+                            <li class="{{ $qf == 'best' ? 'active' : '' }}"><a href="javascript:;" data-href="best">🏆 {{ __('Best Sellers') }}</a></li>
+                            <li class="{{ $qf == 'top' ? 'active' : '' }}"><a href="javascript:;" data-href="top">👍 {{ __('Top Rated') }}</a></li>
+                            <li class="{{ $qf == 'new' ? 'active' : '' }}"><a href="javascript:;" data-href="new">🆕 {{ __('New Arrival') }}</a></li>
                         </ul>
                     </div>
 
@@ -701,8 +952,8 @@
                             <label for="sorting"><i class="fas fa-sort-amount-down"></i></label>
                             <select class="catalog-sort-select" id="sorting">
                                 <option value="">{{ __('Default') }}</option>
-                                <option value="low_to_high" {{ request()->input('low_to_high') ? 'selected' : '' }}>{{ __('Price: Low → High') }}</option>
-                                <option value="high_to_low" {{ request()->input('high_to_low') ? 'selected' : '' }}>{{ __('Price: High → Low') }}</option>
+                                <option value="low_to_high" {{ request()->input('sorting') == 'low_to_high' ? 'selected' : '' }}>{{ __('Price: Low → High') }}</option>
+                                <option value="high_to_low" {{ request()->input('sorting') == 'high_to_low' ? 'selected' : '' }}>{{ __('Price: High → Low') }}</option>
                             </select>
                         </div>
                         <span class="catalog-count-badge">
@@ -743,7 +994,7 @@
     <input type="text" name="minPrice"      id="minPrice"      value="{{ request()->input('minPrice') ? request()->input('minPrice') : '' }}">
     <input type="text" name="brand"         id="brand"         value="{{ isset($brand) ? $brand->slug : '' }}">
     <input type="text" name="category"      id="category"      value="{{ isset($category) ? $category->slug : '' }}">
-    <input type="text" name="quick_filter"  id="quick_filter"  value="">
+    <input type="text" name="quick_filter"  id="quick_filter"  value="{{ request()->input('quick_filter') ? request()->input('quick_filter') : '' }}">
     <input type="text" name="childcategory" id="childcategory" value="{{ isset($childcategory) ? $childcategory->slug : '' }}">
     <input type="text" name="page"          id="page"          value="{{ isset($page) ? $page : '' }}">
     <input type="text" name="attribute"     id="attribute"     value="{{ isset($attribute) ? $attribute : '' }}">
