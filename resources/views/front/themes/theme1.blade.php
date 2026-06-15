@@ -296,7 +296,7 @@
     {{-- ==================== END NEW TOP BANNER ==================== --}}
 
     @if ($setting->is_slider == 1)
-        <div class="slider-area-wrapper">
+        <div class="slider-area-wrapper d-none" style="display: none !important;">
             <div class="container-fluid p-0">
                 <div class="row m-0">
                     <div class="col-lg-12 p-0">
