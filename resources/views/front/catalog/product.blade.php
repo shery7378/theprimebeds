@@ -1488,7 +1488,7 @@
                             @endif
 
                             {{-- Bundle Discount Offer --}}
-                            @if (isset($item->bundle_discount) && !empty($item->bundle_discount))
+                            <!-- @if (isset($item->bundle_discount) && !empty($item->bundle_discount))
                                 @php $discountItems = $item->bundle_discount['discount_items'] ?? []; @endphp
                                 @if(count($discountItems) > 0)
                                     <div style="margin-top:12px;">
@@ -1498,7 +1498,7 @@
                                             <span>{{ __('🎁 First Time Offer — Tap to Unlock') }}</span>
                                         </button>
                                     </div>
-                                @endif
+                                @endif -->
                             @endif
                         </div>
 
