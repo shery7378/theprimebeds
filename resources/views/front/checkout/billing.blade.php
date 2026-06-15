@@ -143,9 +143,9 @@
                             @endif
 
                             <div class="d-flex justify-content-between paddin-top-1x mt-4">
-                                <a class="btn btn-primary btn-sm" href="{{ route('front.cart') }}"><span
+                                <a class="btn btn-primary btn-sm" href="{{ route('front.catalog') }}"><span
                                         class="hidden-xs-down"><i
-                                            class="icon-arrow-left"></i>{{ __('Back To Cart') }}</span></a>
+                                            class="icon-arrow-left"></i>{{ __('Back To Shop') }}</span></a>
                                 @if ($setting->is_privacy_trams == 1)
                                     <button disabled id="continue__button" class="btn btn-primary  btn-sm"
                                         type="button"><span class="hidden-xs-down">{{ __('Continue') }}</span><i

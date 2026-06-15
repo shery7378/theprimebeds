@@ -28,14 +28,10 @@ class CartController extends Controller
 
     public function index()
     {
-        if (Session::has('cart')) {
-            $cart = Session::get('cart');
-        } else {
-            $cart = [];
+        if (Session::has('cart') && count(Session::get('cart')) > 0) {
+            return redirect()->route('front.checkout');
         }
-        return view('front.catalog.cart', [
-            'cart' => $cart
-        ]);
+        return redirect()->route('front.index');
     }
 
 
@@ -47,7 +43,7 @@ class CartController extends Controller
 
         if ($request->ajax()) {
             if (!empty($msg['buystatus']) && $msg['buystatus'] === "true") {
-                $msg['redirect'] = route('front.cart');
+                $msg['redirect'] = route('front.checkout');
             }
 
             return $msg;

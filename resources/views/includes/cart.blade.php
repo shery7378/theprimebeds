@@ -483,14 +483,19 @@ html.dark-mode .shopping-cart-footer {
 <div class="card border-0 shadow-sm rounded-lg mt-4">
     <div class="card-body p-4">
         <div class="shopping-cart-footer d-flex flex-wrap justify-content-between align-items-center mb-3">
-            <div class="column mb-3 mb-md-0">
-                <form class="coupon-form" method="post" id="coupon_form"
-                    action="{{ route('front.promo.submit') }}">
+            <div class="column mb-3 mb-md-0 w-100 p-4 rounded-lg shadow-sm" style="background: #f8f9fc; border: 2px dashed #d1d5db; max-width: 500px; position: relative;">
+                <h5 class="mb-3 font-weight-bold text-dark" style="font-size: 1.1rem;">
+                    <i class="fas fa-ticket-alt text-primary mr-2"></i>{{ __('Have a Coupon or Promo Code?') }}
+                </h5>
+                <form class="coupon-form" method="post" id="coupon_form" action="{{ route('front.promo.submit') }}">
                     @csrf
-                    <div class="d-flex align-items-stretch" style="max-width: 400px; width: 100%;">
-                        <input class="form-control" name="code" type="text"
-                            placeholder="{{ __('Coupon code') }}" required style="border-radius: 30px 0 0 30px; padding-left:20px; border-right: 0; min-height: 44px; margin-bottom: 0;">
-                        <button class="btn btn-primary m-0 px-4" type="submit" style="border-radius: 0 30px 30px 0; white-space: nowrap; min-height: 44px; display: flex; align-items: center; justify-content: center;"><span>{{ __('Apply Coupon') }}</span></button>
+                    <div class="d-flex align-items-stretch w-100">
+                        <input class="form-control shadow-sm" name="code" type="text" placeholder="{{ __('Enter code here...') }}" required 
+                            style="border-radius: 8px 0 0 8px; padding-left:20px; border: 1px solid #ced4da; border-right: 0; min-height: 48px; margin-bottom: 0; font-size: 15px;">
+                        <button class="btn btn-primary m-0 px-4 shadow-sm" type="submit" 
+                            style="border-radius: 0 8px 8px 0; white-space: nowrap; min-height: 48px; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: all 0.3s ease;">
+                            <span>{{ __('Apply') }}</span>
+                        </button>
                     </div>
                 </form>
             </div>

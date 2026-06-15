@@ -114,9 +114,9 @@
 
 
                             <div class="d-flex justify-content-between paddin-top-1x mt-4">
-                                <a class="btn btn-primary btn-sm" href="{{ route('front.cart') }}"><span
+                                <a class="btn btn-primary btn-sm" href="{{ route('front.checkout.billing') }}"><span
                                         class="hidden-xs-down"><i class="icon-arrow-left"></i>
-                                        {{ __('Back To Cart') }}</span>
+                                        {{ __('Back To Billing Address') }}</span>
                                 </a><button class="btn btn-primary  btn-sm" type="submit"><span
                                         class="hidden-xs-down">{{ __('Continue') }}</span><i
                                         class="icon-arrow-right"></i></button>

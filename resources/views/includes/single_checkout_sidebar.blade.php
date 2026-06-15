@@ -58,6 +58,38 @@
                 </td>
             </tr>
         </table>
+        
+        {{-- Coupon / Promo Code Section --}}
+        <div class="promo-section-checkout mt-4 mb-2 p-3 rounded shadow-sm" style="background-color: #f8f9fa; border: 2px dashed #cbd5e1;">
+            @if ($discount)
+                <div class="d-flex align-items-center justify-content-between p-3 rounded" style="background: #e6f4ea; border: 1px solid #34a853; gap: 8px;">
+                    <div>
+                        <span class="d-block text-success font-weight-bold" style="font-size: 14px;">
+                            <i class="fas fa-check-circle me-1"></i>{{ __('Coupon Active') }}
+                        </span>
+                        <small class="text-dark font-weight-bold" style="font-size: 13px;">{{ $discount['code']['title'] ?? '' }}</small>
+                    </div>
+                    <a href="{{ route('front.promo.destroy') }}" class="btn btn-sm btn-danger shadow-sm" style="border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600;">
+                        <i class="fas fa-times mr-1"></i>{{ __('Remove') }}
+                    </a>
+                </div>
+            @else
+                <h6 class="mb-3 font-weight-bold text-dark" style="font-size: 15px;">
+                    <i class="fas fa-ticket-alt text-primary mr-2"></i>{{ __('Have a Promo Code?') }}
+                </h6>
+                <form method="post" id="checkout_coupon_form_single" action="{{ route('front.promo.submit') }}">
+                    @csrf
+                    <div class="d-flex align-items-stretch shadow-sm rounded" style="gap: 0;">
+                        <input class="form-control" name="code" type="text" placeholder="{{ __('Enter code...') }}" required 
+                            style="border-radius: 8px 0 0 8px; border: 1px solid #ced4da; border-right: none; padding: 10px 15px; font-size: 14px; min-height: 45px; margin-bottom: 0; box-shadow: none;">
+                        <button class="btn btn-primary m-0 px-4" type="submit" 
+                            style="border-radius: 0 8px 8px 0; font-size: 14px; font-weight: bold; min-height: 45px; display: inline-flex; align-items: center; justify-content: center; text-transform: none; letter-spacing: 0; transition: all 0.3s ease;">
+                            {{ __('Apply') }}
+                        </button>
+                    </div>
+                </form>
+            @endif
+        </div>
     </section>
 
     @if (PriceHelper::CheckDigital() == true)

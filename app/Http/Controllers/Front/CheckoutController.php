@@ -62,7 +62,7 @@ class CheckoutController extends Controller
     {
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
         $data['user'] = Auth::user() ? Auth::user() : null;
         $cart = Session::get('cart');
@@ -122,7 +122,7 @@ class CheckoutController extends Controller
 
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
         $data['user'] = Auth::user();
         $cart = Session::get('cart');
@@ -225,7 +225,7 @@ class CheckoutController extends Controller
         }
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
         $data['user'] = Auth::user();
         $cart = Session::get('cart');
@@ -299,7 +299,7 @@ class CheckoutController extends Controller
 
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
         $data['user'] = Auth::user();
         $cart = Session::get('cart');
@@ -571,7 +571,7 @@ class CheckoutController extends Controller
 
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
 
         $cart = Session::get('cart');
@@ -634,7 +634,7 @@ class CheckoutController extends Controller
 
 
         if (!Session::has('cart')) {
-            return redirect(route('front.cart'));
+            return redirect(route('front.index'));
         }
 
         $cart = Session::get('cart');
