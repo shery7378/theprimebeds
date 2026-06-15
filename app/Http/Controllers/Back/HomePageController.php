@@ -43,24 +43,37 @@ class HomePageController extends Controller
     public function top_banner_update(Request $request)
     {
         $request->validate([
-            'top_banner_img' => 'image',
-            'top_banner_url' => 'required|max:500',
+            'img1' => 'image',
+            'img2' => 'image',
+            'img3' => 'image',
+            'url1' => 'required|max:500',
+            'url2' => 'nullable|max:500',
+            'url3' => 'nullable|max:500',
         ]);
 
+        $all_images_names = ['img1','img2','img3'];
         $input = $request->all();
         $data = HomeCutomize::first();
+        $check = json_decode($data->top_banner,true) ?: [];
 
-        if($request->hasFile('top_banner_img')){
-            $existing = json_decode($data->top_banner,true);
-            $input['top_banner_img'] = ImageHelper::handleUploadedImage($request->top_banner_img,'',isset($existing['top_banner_img']) ? $existing['top_banner_img'] : null);
-        } else {
-            $existing = json_decode($data->top_banner,true);
-            if(isset($existing['top_banner_img'])){
-                $input['top_banner_img'] = $existing['top_banner_img'];
+        foreach($all_images_names as $single_image){
+            if($request->hasFile($single_image)){
+                $input[$single_image] = ImageHelper::handleUploadedImage($request->$single_image,'',isset($check[$single_image]) ? $check[$single_image] : null);
+            }else{
+                if(isset($check[$single_image])){
+                    $input[$single_image] = $check[$single_image];
+                }
             }
         }
 
         unset($input['_token']);
+
+        // Preserve any old fields like top_banner_img just in case
+        foreach($check as $key => $value){
+            if(!isset($input[$key]) && !in_array($key, $all_images_names)){
+                $input[$key] = $value;
+            }
+        }
 
         $data->top_banner = json_encode($input,true);
         $data->update();

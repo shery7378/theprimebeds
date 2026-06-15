@@ -60,43 +60,124 @@
                                     enctype="multipart/form-data">
                                     @include('alerts.alerts')
                                     @csrf
+                                    <h5 class="mb-2"><b>{{ __('Banner 1') }}</b></h5>
                                     <div class="form-group">
-                                        <label for="top_banner_img">{{ __('Banner Image') }} *</label>
+                                        <label for="img1">{{ __('Banner Image 1') }} *</label>
                                         <br>
                                         <img class="admin-img" style="max-width: 100%; max-height: 200px;"
-                                            src="{{isset($top_banner['top_banner_img']) ? url('assets/img/' . $top_banner['top_banner_img']) : url('assets/img/placeholder.png') }}"
+                                            src="{{ isset($top_banner['img1']) ? url('assets/img/' . $top_banner['img1']) : (isset($top_banner['top_banner_img']) ? url('assets/img/' . $top_banner['top_banner_img']) : url('assets/img/placeholder.png')) }}"
                                             alt="No Image Found">
                                         <br>
                                         <span class="mt-1">{{ __('Recommended: Full width banner image (1920 x 400 or similar).') }}</span>
                                     </div>
                                     <div class="form-group position-relative">
                                         <label class="file">
-                                            <input type="file" accept="image/*" class="upload-photo" name="top_banner_img" id="top_banner_file"
+                                            <input type="file" accept="image/*" class="upload-photo" name="img1" id="top_banner_file1"
                                                 aria-label="File browser example">
                                             <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
                                         </label>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="top_banner_title">{{ __('Banner Title') }}</label>
-                                        <input type="text" name="top_banner_title" class="form-control" id="top_banner_title"
+                                        <label for="title1">{{ __('Banner Title 1') }}</label>
+                                        <input type="text" name="title1" class="form-control" id="title1"
                                             placeholder="{{ __('Enter Banner Title (optional)') }}"
-                                            value="{{isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : ''}}">
+                                            value="{{ isset($top_banner['title1']) ? $top_banner['title1'] : (isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : '') }}">
                                     </div>
                                     @include('back.components.color_picker', [
-                                        'label'   => __('Title Color'),
-                                        'name'    => 'top_banner_title_color',
-                                        'id'      => 'top_banner_title_color',
-                                        'forName' => 'top_banner_title',
-                                        'value'   => $top_banner['top_banner_title_color'] ?? '#ffffff',
-                                        'preview' => $top_banner['top_banner_title'] ?? 'Banner Title',
+                                        'label'   => __('Title Color 1'),
+                                        'name'    => 'title_color1',
+                                        'id'      => 'title_color1',
+                                        'forName' => 'title1',
+                                        'value'   => $top_banner['title_color1'] ?? ($top_banner['top_banner_title_color'] ?? '#ffffff'),
+                                        'preview' => $top_banner['title1'] ?? 'Banner Title 1',
                                     ])
 
                                     <div class="form-group">
-                                        <label for="top_banner_url">{{ __('Banner URL') }} *</label>
-                                        <input type="text" name="top_banner_url" class="form-control" id="top_banner_url"
+                                        <label for="url1">{{ __('Banner URL 1') }} *</label>
+                                        <input type="text" name="url1" class="form-control" id="url1"
                                             placeholder="{{ __('Enter Banner Link URL') }}"
-                                            value="{{isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#'}}">
+                                            value="{{ isset($top_banner['url1']) ? $top_banner['url1'] : (isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#') }}">
+                                    </div>
+
+                                    <hr>
+
+                                    <h5 class="mb-2"><b>{{ __('Banner 2') }}</b></h5>
+                                    <div class="form-group">
+                                        <label for="img2">{{ __('Banner Image 2') }}</label>
+                                        <br>
+                                        <img class="admin-img" style="max-width: 100%; max-height: 200px;"
+                                            src="{{ isset($top_banner['img2']) ? url('assets/img/' . $top_banner['img2']) : url('assets/img/placeholder.png') }}"
+                                            alt="No Image Found">
+                                    </div>
+                                    <div class="form-group position-relative">
+                                        <label class="file">
+                                            <input type="file" accept="image/*" class="upload-photo" name="img2" id="top_banner_file2"
+                                                aria-label="File browser example">
+                                            <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title2">{{ __('Banner Title 2') }}</label>
+                                        <input type="text" name="title2" class="form-control" id="title2"
+                                            placeholder="{{ __('Enter Banner Title (optional)') }}"
+                                            value="{{ isset($top_banner['title2']) ? $top_banner['title2'] : '' }}">
+                                    </div>
+                                    @include('back.components.color_picker', [
+                                        'label'   => __('Title Color 2'),
+                                        'name'    => 'title_color2',
+                                        'id'      => 'title_color2',
+                                        'forName' => 'title2',
+                                        'value'   => $top_banner['title_color2'] ?? '#ffffff',
+                                        'preview' => $top_banner['title2'] ?? 'Banner Title 2',
+                                    ])
+
+                                    <div class="form-group">
+                                        <label for="url2">{{ __('Banner URL 2') }}</label>
+                                        <input type="text" name="url2" class="form-control" id="url2"
+                                            placeholder="{{ __('Enter Banner Link URL') }}"
+                                            value="{{ isset($top_banner['url2']) ? $top_banner['url2'] : '' }}">
+                                    </div>
+
+                                    <hr>
+
+                                    <h5 class="mb-2"><b>{{ __('Banner 3') }}</b></h5>
+                                    <div class="form-group">
+                                        <label for="img3">{{ __('Banner Image 3') }}</label>
+                                        <br>
+                                        <img class="admin-img" style="max-width: 100%; max-height: 200px;"
+                                            src="{{ isset($top_banner['img3']) ? url('assets/img/' . $top_banner['img3']) : url('assets/img/placeholder.png') }}"
+                                            alt="No Image Found">
+                                    </div>
+                                    <div class="form-group position-relative">
+                                        <label class="file">
+                                            <input type="file" accept="image/*" class="upload-photo" name="img3" id="top_banner_file3"
+                                                aria-label="File browser example">
+                                            <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title3">{{ __('Banner Title 3') }}</label>
+                                        <input type="text" name="title3" class="form-control" id="title3"
+                                            placeholder="{{ __('Enter Banner Title (optional)') }}"
+                                            value="{{ isset($top_banner['title3']) ? $top_banner['title3'] : '' }}">
+                                    </div>
+                                    @include('back.components.color_picker', [
+                                        'label'   => __('Title Color 3'),
+                                        'name'    => 'title_color3',
+                                        'id'      => 'title_color3',
+                                        'forName' => 'title3',
+                                        'value'   => $top_banner['title_color3'] ?? '#ffffff',
+                                        'preview' => $top_banner['title3'] ?? 'Banner Title 3',
+                                    ])
+
+                                    <div class="form-group">
+                                        <label for="url3">{{ __('Banner URL 3') }}</label>
+                                        <input type="text" name="url3" class="form-control" id="url3"
+                                            placeholder="{{ __('Enter Banner Link URL') }}"
+                                            value="{{ isset($top_banner['url3']) ? $top_banner['url3'] : '' }}">
                                     </div>
 
                                     <div class="form-group">

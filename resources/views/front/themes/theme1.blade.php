@@ -226,29 +226,37 @@
             <div class="container-fluid p-0">
                 <div id="topBannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
                     <div class="carousel-inner" style="overflow: hidden;">
-                        <!-- Slide 1 -->
-                        <div class="carousel-item active">
-                            <a href="{{ isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#' }}" class="d-block w-100">
-                                <img src="{{ url('assets/img/' . $top_banner['top_banner_img']) }}" class="top-banner-img" alt="{{ isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : 'Banner' }}">
-                            </a>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/seed/theme1_2/1200/600" class="top-banner-img" alt="Luxury Bed 2">
-                            <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
-                                <h3 class="text-white">Save Up To 30%</h3>
-                                <p>Enjoy massive discounts on selected items this holiday season.</p>
-                            </div>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/seed/theme1_3/1200/600" class="top-banner-img" alt="Luxury Bed 3">
-                            <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
-                                <h3 class="text-white">Elegant Designs</h3>
-                                <p>Transform your bedroom with our modern and classic styles.</p>
-                            </div>
-                        </div>
-                    </div>
+                        @php $first = true; @endphp
+                        @for($i = 1; $i <= 3; $i++)
+                            @php
+                                $img_key = 'img' . $i;
+                                $url_key = 'url' . $i;
+                                $title_key = 'title' . $i;
+                                $color_key = 'title_color' . $i;
+                                
+                                // Fallback for old single image setup
+                                if ($i == 1 && !isset($top_banner[$img_key]) && isset($top_banner['top_banner_img'])) {
+                                    $top_banner[$img_key] = $top_banner['top_banner_img'];
+                                    $top_banner[$url_key] = isset($top_banner['top_banner_url']) ? $top_banner['top_banner_url'] : '#';
+                                    $top_banner[$title_key] = isset($top_banner['top_banner_title']) ? $top_banner['top_banner_title'] : '';
+                                    $top_banner[$color_key] = isset($top_banner['top_banner_title_color']) ? $top_banner['top_banner_title_color'] : '#ffffff';
+                                }
+                            @endphp
+                            
+                            @if(isset($top_banner[$img_key]))
+                                <div class="carousel-item {{ $first ? 'active' : '' }}">
+                                    <a href="{{ isset($top_banner[$url_key]) && $top_banner[$url_key] ? $top_banner[$url_key] : '#' }}" class="d-block w-100 position-relative">
+                                        <img src="{{ url('assets/img/' . $top_banner[$img_key]) }}" class="top-banner-img w-100" alt="{{ isset($top_banner[$title_key]) ? $top_banner[$title_key] : 'Banner' }}">
+                                        @if(isset($top_banner[$title_key]) && $top_banner[$title_key])
+                                            <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: auto;">
+                                                <h3 style="color: {{ isset($top_banner[$color_key]) ? $top_banner[$color_key] : '#ffffff' }} !important; margin: 0;">{{ $top_banner[$title_key] }}</h3>
+                                            </div>
+                                        @endif
+                                    </a>
+                                </div>
+                                @php $first = false; @endphp
+                            @endif
+                        @endfor
                 </div>
             </div>
         </div>
