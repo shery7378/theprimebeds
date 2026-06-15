@@ -342,27 +342,44 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-.social-btn svg {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.3s ease;
+.social-btn i {
+    font-size: 20px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    line-height: 1;
 }
 
-.social-btn.facebook-btn svg {
-    fill: #1877F2;
+.social-btn.facebook-btn i {
+    color: #1877F2;
 }
 
-.social-btn.google-btn svg {
-    fill: #EA4335;
+.social-btn.google-btn i {
+    color: #EA4335;
 }
 
 .social-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(140, 117, 88, 0.15);
-    border-color: #8C7558;
 }
 
-.social-btn:hover svg {
+.social-btn:hover.facebook-btn {
+    background: #1877F2 !important;
+    border-color: #1877F2 !important;
+}
+
+.social-btn:hover.facebook-btn i {
+    color: #ffffff !important;
+}
+
+.social-btn:hover.google-btn {
+    background: #EA4335 !important;
+    border-color: #EA4335 !important;
+}
+
+.social-btn:hover.google-btn i {
+    color: #ffffff !important;
+}
+
+.social-btn:hover i {
     transform: scale(1.1);
 }
 
@@ -519,16 +536,12 @@
                 <div class="social-login-buttons d-flex justify-content-center">
                   @if($setting->facebook_check == 1)
                     <a class="social-btn facebook-btn" href="{{route('social.provider','facebook')}}" aria-label="{{ __('Login with Facebook') }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                      </svg>
+                      <i class="fab fa-facebook-f"></i>
                     </a>
                   @endif
                   @if($setting->google_check == 1)
                     <a class="social-btn google-btn" href="{{route('social.provider','google')}}" aria-label="{{ __('Login with Google') }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.43 0-6.216-2.787-6.216-6.215 0-3.429 2.786-6.216 6.216-6.216 1.572 0 2.997.585 4.093 1.547l3.197-3.197C19.167 1.83 15.938 1 12.24 1 5.972 1 12.24 12.24s4.972 11.24 11.24 11.24c6.51 0 11.24-4.577 11.24-11.24 0-.766-.078-1.503-.217-2.203H12.24z"/>
-                      </svg>
+                      <i class="fab fa-google"></i>
                     </a>
                   @endif
                 </div>
