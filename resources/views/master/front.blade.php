@@ -4,30 +4,30 @@
 <head>
     <meta charset="UTF-8">
     @if (url()->current() == route('front.index'))
-    <title>@yield('hometitle')</title>
+        <title>@yield('hometitle')</title>
     @else
-    <title>{{ $setting->title }} -@yield('title')</title>
+        <title>{{ $setting->title }} -@yield('title')</title>
     @endif
 
     <!-- SEO Meta Tags-->
     @if (url()->current() == route('front.index'))
-    <meta name="author" content="GeniusDevs">
-    <meta name="distribution" content="web">
-    <meta name="description" content="{{ $setting->meta_description }}">
-    <meta name="keywords" content="{{ $setting->meta_keywords }}">
-    <meta name="image" content="{{ url('assets/img/' . $setting->meta_image) }}">
-    <meta property="og:title" content="{{ $setting->title}}">
-    <meta property="og:description" content="{{ $setting->meta_description }}">
-    <meta property="og:image" content="{{ url('assets/img/' . $setting->meta_image) }}">
-    <meta property="og:image:secure_url" content="{{ url('assets/img/' . $setting->meta_image) }}" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="627" />
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:site_name" content="{{ $setting->title }}">
-    <meta property="og:type" content="website">
+        <meta name="author" content="GeniusDevs">
+        <meta name="distribution" content="web">
+        <meta name="description" content="{{ $setting->meta_description }}">
+        <meta name="keywords" content="{{ $setting->meta_keywords }}">
+        <meta name="image" content="{{ url('assets/img/' . $setting->meta_image) }}">
+        <meta property="og:title" content="{{ $setting->title}}">
+        <meta property="og:description" content="{{ $setting->meta_description }}">
+        <meta property="og:image" content="{{ url('assets/img/' . $setting->meta_image) }}">
+        <meta property="og:image:secure_url" content="{{ url('assets/img/' . $setting->meta_image) }}" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="627" />
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:site_name" content="{{ $setting->title }}">
+        <meta property="og:type" content="website">
     @else
-    @yield('meta')
+        @yield('meta')
     @endif
 
     <!-- Mobile Specific Meta Tag-->
@@ -58,640 +58,950 @@
     <script src="{{ asset('assets/front/js/modernizr.min.js') }}"></script>
 
     @if (DB::table('languages')->where('is_default', 1)->first()->rtl == 1)
-    <link rel="stylesheet" href="{{ asset('assets/front/css/rtl.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/front/css/rtl.css') }}">
     @endif
     <style>
-    {{ $setting->custom_css }}
-    /* =============================================
+        {{ $setting->custom_css }}
+        /* =============================================
     SLIDER NAVIGATION ARROWS (HIDDEN)
     ============================================= */
-    .popular-category-slider .owl-nav,
-    .flash-deal-slider .owl-nav,
-    .bestseller-slider .owl-nav,
-    .newproduct-slider .owl-nav,
-    .toprated-slider .owl-nav,
-    .home-blog-slider .owl-nav {
-    display: none !important;
-    }
-    GLOBAL PRODUCT CARD REDESIGN (BEIGE LUXURY THEME)
-    ============================================= */
-    .product-card {
-    background: #F8F6F0 !important;
-    border: none !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    transition: transform 0.28s ease, box-shadow 0.28s ease !important;
-    position: relative !important;
-    box-shadow: none !important;
-    }
-    .product-card:hover {
-    transform: translateY(-6px) !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
-    border-color: transparent !important;
-    }
-
-    .product-card .product-thumb {
-    position: relative !important;
-    overflow: hidden !important;
-    background: #EBE5DB !important;
-    aspect-ratio: 4 / 3 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    padding: 0 !important;
-    }
-    .product-card .product-thumb img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    }
-    .product-card:hover .product-thumb img {
-    transform: scale(1.07) !important;
-    }
-
-    /* Badges */
-    .product-card .product-badge {
-    position: absolute !important;
-    top: 15px !important;
-    right: 15px !important;
-    left: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    padding: 6px 14px !important;
-    border-radius: 50px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0px !important;
-    color: #8C7558 !important;
-    background: #ffffff !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
-    z-index: 3 !important;
-    border: none !important;
-    text-transform: none !important;
-    }
-    .product-card .product-badge.product-badge2 {
-    top: 15px !important;
-    }
-    .product-card .product-badge.bg-secondary {
-    top: 55px !important;
-    }
-
-    /* Add to Cart Hover Bar (Global for all Product Cards) */
-    .product-card .product-button-group {
-    position: absolute !important;
-    bottom: -50px !important; /* Start hidden below the image */
-    left: 0 !important;
-    width: 100% !important;
-    display: flex !important;
-    transition: bottom 0.3s ease !important;
-    z-index: 10 !important;
-    background: transparent !important; /* Move color to button */
-    padding: 0 !important;
-    margin: 0 !important;
-    }
-    .product-card .product-thumb:hover .product-button-group {
-    bottom: 0 !important; /* Slide up on hover */
-    }
-
-    /* Hide all icons inside the hover bar by default */
-    .product-card .product-button-group > a.product-button {
-    display: none !important;
-    }
-
-    /* Explicitly ONLY show the final action button (Add to Cart / Details fallback) */
-    .product-card .product-button-group > a.product-button.final-action-btn {
-    display: flex !important;
-    width: 100% !important;
-    height: 45px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    background: #8C7558 !important; /* Solid Theme Color */
-    transition: background 0.2s ease !important;
-    margin: 0 !important;
-    pointer-events: auto !important;
-    }
-    .product-card .product-button-group a.product-button:hover {
-    background: #735D43 !important; /* Darker solid color on hover */
-    }
-    .product-card .product-button-group a.product-button i {
-    margin-right: 8px !important; /* Spacing between icon and text if we add text */
-    font-size: 1.1rem !important;
-    }
-
-    /* Body */
-    .product-card .product-card-body {
-    padding: 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 !important;
-    text-align: left !important;
-    background: #F8F6F0 !important;
-    }
-
-    .product-card .product-category {
-    display: none !important; /* The image didn't have a category in the new design */
-    }
-
-    .product-card .product-title {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    color: #332B23 !important;
-    line-height: 1.4 !important;
-    margin: 0 !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    letter-spacing: 0px !important;
-    }
-    .product-card .product-title a {
-    color: inherit !important;
-    text-decoration: none !important;
-    transition: color 0.2s !important;
-    }
-    .product-card .product-title a:hover { color: #8C7558 !important; }
-
-    /* Title Flex Wrapper */
-    .product-card-body > div:nth-child(2) {
-    margin-bottom: 8px !important;
-    align-items: flex-start !important; /* Align to top instead of center */
-    }
-
-    /* Wishlist Icon in Card Body */
-    .product-card-body .wishlist_store {
-    position: relative !important;
-    top: -4px !important; /* Nudge up slightly from top */
-    right: 6px !important; /* Move left slightly */
-    font-size: 26px !important;
-    transition: color 0.3s ease !important;
-    }
-    .product-card-body .wishlist_store.added {
-    color: #E33535 !important; /* Red color when added */
-    }
-
-    /* Price Row */
-    .product-card .product-price {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    text-align: right !important;
-    gap: 6px !important;
-    margin-top: 5px !important; /* Removed auto so it sits right under the heart */
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #332B23 !important;
-    line-height: 1.2 !important;
-    margin-bottom: 20px !important;
-    }
-    .product-card .product-price del {
-    font-size: 15px !important;
-    font-weight: 500 !important;
-    color: #A3917C !important;
-    text-decoration: line-through !important;
-    line-height: 1.2 !important;
-    margin-bottom: 0 !important;
-    }
-
-    /* =============================================
-    EXPAND CONTAINER ON LARGE SCREENS
-    ============================================= */
-    @media (min-width: 1400px) {
-    .container { max-width: 1320px; }
-    }
-    @media (min-width: 1600px) {
-    .container { max-width: 1500px; }
-    }
-    @media (min-width: 1900px) {
-    .container { max-width: 1700px; }
-    }
-
-    /* =============================================
-    TOPBAR REDESIGN — Premium Header Styles
-    ============================================= */
-
-    .topbar-redesigned {
-    padding: 0;
-    background: #ffffff;
-    border-bottom: 1px solid #e8ecf1;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    }
-
-    .topbar-redesigned .topbar-inner {
-    gap: 20px;
-    }
-
-    /* --- Logo --- */
-    .topbar-redesigned .topbar-logo {
-    flex-shrink: 0;
-    padding: 0;
-    }
-    .topbar-redesigned .topbar-logo .site-logo {
-    display: block;
-    width: 140px;
-    transition: opacity 0.25s ease;
-    }
-    .topbar-redesigned .topbar-logo .site-logo:hover {
-    opacity: 0.85;
-    }
-
-    /* --- Search Box Wrapper --- */
-    /* --- Search Box Wrapper --- */
-    .topbar-redesigned .topbar-search-wrap {
-    flex: 1 1 auto;
-    max-width: 440px;
-    min-width: 250px;
-    padding: 0;
-    margin: -3px 15px 0 35px; /* Moved up and right */
-    }
-    .topbar-redesigned .topbar-search-wrap .search-box-inner {
-    width: 100%;
-    }
-    .topbar-redesigned .topbar-search-box {
-    border: 2px solid #e2e6ec;
-    border-radius: 50px;
-    overflow: hidden;
-    background: #f8f9fb;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    display: flex;
-    align-items: center;
-    height: 44px;
-    }
-    .topbar-redesigned .topbar-search-box:focus-within {
-    border-color: #377dff;
-    box-shadow: 0 0 0 4px rgba(55, 125, 255, 0.1);
-    background: #fff;
-    }
-
-    /* Category Select */
-    .topbar-redesigned .topbar-category-select {
-    border: none;
-    border-right: 1px solid #e2e6ec;
-    background: transparent;
-    padding: 0 18px 0 28px !important; /* Adjusted padding to a middle ground */
-    font-size: 13px;
-    font-weight: 500;
-    color: #3c4858;
-    min-width: 195px !important;
-    cursor: pointer;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 30px;
-    height: 100%;
-    }
-    .topbar-redesigned .topbar-category-select:focus {
-    outline: none;
-    }
-
-    /* Search Input */
-    .topbar-redesigned .topbar-search-input {
-    border: none !important;
-    background: transparent !important;
-    padding: 0 18px !important;
-    font-size: 14px !important;
-    color: #3c4858 !important;
-    box-shadow: none !important;
-    height: 100% !important;
-    flex: 1;
-    }
-
-    /* Reduce Footer Padding */
-    .site-footer {
-    padding-top: 10px !important;
-    }
-    .topbar-redesigned .topbar-search-input::placeholder {
-    color: #a0aec0;
-    font-weight: 400;
-    }
-
-    /* Search Button */
-    .topbar-redesigned .topbar-search-btn {
-    background: transparent;
-    border: none;
-    color: #377dff; /* Blue icon to match theme */
-    padding: 0 18px;
-    cursor: pointer;
-    transition: transform 0.15s ease, color 0.2s ease;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    }
-    .topbar-redesigned .topbar-search-btn:hover {
-    color: #1e4ba8;
-    }
-    .topbar-redesigned .topbar-search-btn:active {
-    transform: scale(0.92);
-    }
-    .topbar-redesigned .topbar-search-btn i {
-    font-size: 18px;
-    position: relative;
-    top: -5px; /* Moved further up */
-    left: 5px; /* Moved right slightly */
-    }
-
-    /* --- Catalog Button --- */
-    .topbar-catalog-wrap {
-    margin-right: 0;
-    }
-    .topbar-catalog-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 22px;
-    background: linear-gradient(135deg, #1a2332, #2c3e56);
-    color: #fff !important;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none !important;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
-    white-space: nowrap;
-    }
-    .topbar-catalog-btn:hover {
-    background: linear-gradient(135deg, #2c3e56, #3d5577);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(26, 35, 50, 0.3);
-    color: #fff !important;
-    }
-    .topbar-catalog-btn:active {
-    transform: translateY(0);
-    }
-    .topbar-catalog-btn svg {
-    flex-shrink: 0;
-    }
-
-    /* --- Divider --- */
-    .topbar-divider {
-    width: 1px;
-    height: 36px;
-    background: linear-gradient(to bottom, transparent, #d0d6e0, transparent);
-    margin: 0 8px;
-    flex-shrink: 0;
-    }
-
-    /* --- Contact Info --- */
-    .topbar-contact-wrap {
-    gap: 12px;
-    }
-    .topbar-contact-icon {
-    width: 42px;
-    height: 42px;
-    background: linear-gradient(135deg, #eef3ff, #dde6fa);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #377dff;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-    }
-    .topbar-contact-icon:hover {
-    transform: scale(1.08);
-    }
-    .topbar-contact-info {
-    display: flex;
-    flex-direction: column;
-    }
-    .topbar-phone {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #2d3748 !important;
-    text-decoration: none !important;
-    line-height: 1.3;
-    transition: color 0.25s ease;
-    }
-    .topbar-phone:hover {
-    color: #377dff !important;
-    }
-    .topbar-email {
-    font-size: 12px;
-    color: #718096 !important;
-    text-decoration: none !important;
-    line-height: 1.3;
-    transition: color 0.25s ease;
-    }
-    .topbar-email:hover {
-    color: #377dff !important;
-    }
-
-    /* --- Cart Item --- */
-    .topbar-cart-item {
-    position: relative;
-    width: auto !important;
-    margin-left: 0 !important;
-    }
-    .topbar-cart-item > a {
-    display: flex !important;
-    align-items: center;
-    position: relative !important;
-    width: auto !important;
-    height: auto !important;
-    padding: 8px 12px !important;
-    border-radius: 12px;
-    color: #3c4858 !important;
-    text-decoration: none;
-    transition: background 0.25s ease;
-    }
-    .topbar-cart-item > a:hover {
-    background: #f0f4ff;
-    }
-    .topbar-cart-item > a > div {
-    position: static !important;
-    transform: none !important;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    }
-    .topbar-cart-item .cart-icon {
-    position: relative;
-    }
-    .topbar-cart-item .cart-icon i {
-    font-size: 22px !important;
-    margin-bottom: 0 !important;
-    }
-    .topbar-cart-item .cart-icon .count-label {
-    top: -8px !important;
-    right: -10px !important;
-    background: linear-gradient(135deg, #377dff, #2c5cc5) !important;
-    font-size: 10px !important;
-    width: 18px !important;
-    height: 18px !important;
-    line-height: 18px !important;
-    }
-    .topbar-cart-item .text-label {
-    display: inline-block !important;
-    font-size: 13px !important;
-    font-weight: 600;
-    color: #3c4858;
-    }
-
-    /* --- Topbar Right Toolbar --- */
-    .topbar-right-toolbar {
-    gap: 4px;
-    flex-shrink: 0;
-    }
-
-    /* --- Responsive: Medium screens --- */
-    @media (max-width: 1200px) {
-    .topbar-redesigned .topbar-search-wrap {
-    max-width: 400px;
-    }
-    .topbar-contact-info {
-    display: none;
-    }
-    .topbar-contact-icon {
-    width: 38px;
-    height: 38px;
-    }
-    .topbar-divider {
-    margin: 0 8px;
-    }
-    .topbar-catalog-btn {
-    padding: 9px 16px;
-    font-size: 12px;
-    }
-    }
-
-    @media (max-width: 991px) {
-    .topbar-redesigned {
-    padding: 8px 0;
-    }
-    }
-
-    /* ===== Branded Social Icons ===== */
-    .social-icon-branded {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: var(--brand-bg, #555);
-    color: #fff !important;
-    font-size: 18px;
-    text-decoration: none !important;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-<<<<<<< Updated upstream
-        .footer-social-links a::before {
+        .popular-category-slider .owl-nav,
+        .flash-deal-slider .owl-nav,
+        .bestseller-slider .owl-nav,
+        .newproduct-slider .owl-nav,
+        .toprated-slider .owl-nav,
+        .home-blog-slider .owl-nav {
             display: none !important;
         }
 
-        /* Social Icon Branded */
-        .social-icon-branded {
+        GLOBAL PRODUCT CARD REDESIGN (BEIGE LUXURY THEME)=============================================*/ .product-card {
+            background: #F8F6F0 !important;
+            border: none !important;
+            border-radius: 20px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            transition: transform 0.28s ease, box-shadow 0.28s ease !important;
+            position: relative !important;
+            box-shadow: none !important;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
+            border-color: transparent !important;
+        }
+
+        .product-card .product-thumb {
+            position: relative !important;
+            overflow: hidden !important;
+            background: #EBE5DB !important;
+            aspect-ratio: 4 / 3 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+
+        .product-card .product-thumb img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        .product-card:hover .product-thumb img {
+            transform: scale(1.07) !important;
+        }
+
+        /* Badges */
+        .product-card .product-badge {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            left: auto !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            padding: 6px 14px !important;
+            border-radius: 50px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0px !important;
+            color: #8C7558 !important;
+            background: #ffffff !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+            z-index: 3 !important;
+            border: none !important;
+            text-transform: none !important;
+        }
+
+        .product-card .product-badge.product-badge2 {
+            top: 15px !important;
+        }
+
+        .product-card .product-badge.bg-secondary {
+            top: 55px !important;
+        }
+
+        /* Add to Cart Hover Bar (Global for all Product Cards) */
+        .product-card .product-button-group {
+            position: absolute !important;
+            bottom: -50px !important;
+            /* Start hidden below the image */
+            left: 0 !important;
+            width: 100% !important;
+            display: flex !important;
+            transition: bottom 0.3s ease !important;
+            z-index: 10 !important;
+            background: transparent !important;
+            /* Move color to button */
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .product-card .product-thumb:hover .product-button-group {
+            bottom: 0 !important;
+            /* Slide up on hover */
+        }
+
+        /* Hide all icons inside the hover bar by default */
+        .product-card .product-button-group>a.product-button {
+            display: none !important;
+        }
+
+        /* Explicitly ONLY show the final action button (Add to Cart / Details fallback) */
+        .product-card .product-button-group>a.product-button.final-action-btn {
+            display: flex !important;
+            width: 100% !important;
+            height: 45px !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: #8C7558 !important;
+            /* Solid Theme Color */
+            transition: background 0.2s ease !important;
+            margin: 0 !important;
+            pointer-events: auto !important;
+        }
+
+        .product-card .product-button-group a.product-button:hover {
+            background: #735D43 !important;
+            /* Darker solid color on hover */
+        }
+
+        .product-card .product-button-group a.product-button i {
+            margin-right: 8px !important;
+            /* Spacing between icon and text if we add text */
+            font-size: 1.1rem !important;
+        }
+
+        /* Body */
+        .product-card .product-card-body {
+            padding: 20px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            text-align: left !important;
+            background: #F8F6F0 !important;
+        }
+
+        .product-card .product-category {
+            display: none !important;
+            /* The image didn't have a category in the new design */
+        }
+
+        .product-card .product-title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #332B23 !important;
+            line-height: 1.4 !important;
+            margin: 0 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            letter-spacing: 0px !important;
+        }
+
+        .product-card .product-title a {
+            color: inherit !important;
+            text-decoration: none !important;
+            transition: color 0.2s !important;
+        }
+
+        .product-card .product-title a:hover {
+            color: #8C7558 !important;
+        }
+
+        /* Title Flex Wrapper */
+        .product-card-body>div:nth-child(2) {
+            margin-bottom: 8px !important;
+            align-items: flex-start !important;
+            /* Align to top instead of center */
+        }
+
+        /* Wishlist Icon in Card Body */
+        .product-card-body .wishlist_store {
+            position: relative !important;
+            top: -4px !important;
+            /* Nudge up slightly from top */
+            right: 6px !important;
+            /* Move left slightly */
+            font-size: 26px !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .product-card-body .wishlist_store.added {
+            color: #E33535 !important;
+            /* Red color when added */
+        }
+
+        /* Price Row */
+        .product-card .product-price {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            text-align: right !important;
+            gap: 6px !important;
+            margin-top: 5px !important;
+            /* Removed auto so it sits right under the heart */
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: #332B23 !important;
+            line-height: 1.2 !important;
+            margin-bottom: 20px !important;
+        }
+
+        .product-card .product-price del {
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            color: #A3917C !important;
+            text-decoration: line-through !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* =============================================
+    EXPAND CONTAINER ON LARGE SCREENS
+    ============================================= */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1500px;
+            }
+        }
+
+        @media (min-width: 1900px) {
+            .container {
+                max-width: 1700px;
+            }
+        }
+
+        /* =============================================
+    TOPBAR REDESIGN — Premium Header Styles
+    ============================================= */
+
+        .topbar-redesigned {
+            padding: 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e8ecf1;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .topbar-redesigned .topbar-inner {
+            gap: 20px;
+        }
+
+        /* --- Logo --- */
+        .topbar-redesigned .topbar-logo {
+            flex-shrink: 0;
+            padding: 0;
+        }
+
+        .topbar-redesigned .topbar-logo .site-logo {
+            display: block;
+            width: 140px;
+            transition: opacity 0.25s ease;
+        }
+
+        .topbar-redesigned .topbar-logo .site-logo:hover {
+            opacity: 0.85;
+        }
+
+        /* --- Search Box Wrapper --- */
+        /* --- Search Box Wrapper --- */
+        .topbar-redesigned .topbar-search-wrap {
+            flex: 1 1 auto;
+            max-width: 440px;
+            min-width: 250px;
+            padding: 0;
+            margin: -3px 15px 0 35px;
+            /* Moved up and right */
+        }
+
+        .topbar-redesigned .topbar-search-wrap .search-box-inner {
+            width: 100%;
+        }
+
+        .topbar-redesigned .topbar-search-box {
+            border: 2px solid #e2e6ec;
+            border-radius: 50px;
+            overflow: hidden;
+            background: #f8f9fb;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex;
+            align-items: center;
+            height: 44px;
+        }
+
+        .topbar-redesigned .topbar-search-box:focus-within {
+            border-color: #377dff;
+            box-shadow: 0 0 0 4px rgba(55, 125, 255, 0.1);
+            background: #fff;
+        }
+
+        /* Category Select */
+        .topbar-redesigned .topbar-category-select {
+            border: none;
+            border-right: 1px solid #e2e6ec;
+            background: transparent;
+            padding: 0 18px 0 28px !important;
+            /* Adjusted padding to a middle ground */
+            font-size: 13px;
+            font-weight: 500;
+            color: #3c4858;
+            min-width: 195px !important;
+            cursor: pointer;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 30px;
+            height: 100%;
+        }
+
+        .topbar-redesigned .topbar-category-select:focus {
+            outline: none;
+        }
+
+        /* Search Input */
+        .topbar-redesigned .topbar-search-input {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 18px !important;
+            font-size: 14px !important;
+            color: #3c4858 !important;
+            box-shadow: none !important;
+            height: 100% !important;
+            flex: 1;
+        }
+
+        /* Reduce Footer Padding */
+        .site-footer {
+            padding-top: 10px !important;
+        }
+
+        .topbar-redesigned .topbar-search-input::placeholder {
+            color: #a0aec0;
+            font-weight: 400;
+        }
+
+        /* Search Button */
+        .topbar-redesigned .topbar-search-btn {
+            background: transparent;
+            border: none;
+            color: #377dff;
+            /* Blue icon to match theme */
+            padding: 0 18px;
+            cursor: pointer;
+            transition: transform 0.15s ease, color 0.2s ease;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .topbar-redesigned .topbar-search-btn:hover {
+            color: #1e4ba8;
+        }
+
+        .topbar-redesigned .topbar-search-btn:active {
+            transform: scale(0.92);
+        }
+
+        .topbar-redesigned .topbar-search-btn i {
+            font-size: 18px;
+            position: relative;
+            top: -5px;
+            /* Moved further up */
+            left: 5px;
+            /* Moved right slightly */
+        }
+
+        /* --- Catalog Button --- */
+        .topbar-catalog-wrap {
+            margin-right: 0;
+        }
+
+        .topbar-catalog-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #1a2332, #2c3e56);
+            color: #fff !important;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none !important;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
+            white-space: nowrap;
+        }
+
+        .topbar-catalog-btn:hover {
+            background: linear-gradient(135deg, #2c3e56, #3d5577);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26, 35, 50, 0.3);
+            color: #fff !important;
+        }
+
+        .topbar-catalog-btn:active {
+            transform: translateY(0);
+        }
+
+        .topbar-catalog-btn svg {
+            flex-shrink: 0;
+        }
+
+        /* --- Divider --- */
+        .topbar-divider {
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, transparent, #d0d6e0, transparent);
+            margin: 0 8px;
+            flex-shrink: 0;
+        }
+
+        /* --- Contact Info --- */
+        .topbar-contact-wrap {
+            gap: 12px;
+        }
+
+        .topbar-contact-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #eef3ff, #dde6fa);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #377dff;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .topbar-contact-icon:hover {
+            transform: scale(1.08);
+        }
+
+        .topbar-contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar-phone {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #2d3748 !important;
+            text-decoration: none !important;
+            line-height: 1.3;
+            transition: color 0.25s ease;
+        }
+
+        .topbar-phone:hover {
+            color: #377dff !important;
+        }
+
+        .topbar-email {
+            font-size: 12px;
+            color: #718096 !important;
+            text-decoration: none !important;
+            line-height: 1.3;
+            transition: color 0.25s ease;
+        }
+
+        .topbar-email:hover {
+            color: #377dff !important;
+        }
+
+        /* --- Cart Item --- */
+        .topbar-cart-item {
+            position: relative;
+            width: auto !important;
+            margin-left: 0 !important;
+        }
+
+        .topbar-cart-item>a {
+            display: flex !important;
+            align-items: center;
+            position: relative !important;
+            width: auto !important;
+            height: auto !important;
+            padding: 8px 12px !important;
+            border-radius: 12px;
+            color: #3c4858 !important;
+            text-decoration: none;
+            transition: background 0.25s ease;
+        }
+
+        .topbar-cart-item>a:hover {
+            background: #f0f4ff;
+        }
+
+        .topbar-cart-item>a>div {
+            position: static !important;
+            transform: none !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topbar-cart-item .cart-icon {
+            position: relative;
+        }
+
+        .topbar-cart-item .cart-icon i {
+            font-size: 22px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .topbar-cart-item .cart-icon .count-label {
+            top: -8px !important;
+            right: -10px !important;
+            background: linear-gradient(135deg, #377dff, #2c5cc5) !important;
+            font-size: 10px !important;
+            width: 18px !important;
+            height: 18px !important;
+            line-height: 18px !important;
+        }
+
+        .topbar-cart-item .text-label {
+            display: inline-block !important;
+            font-size: 13px !important;
+            font-weight: 600;
+            color: #3c4858;
+        }
+
+        /* --- Topbar Right Toolbar --- */
+        .topbar-right-toolbar {
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        /* --- Responsive: Medium screens --- */
+        @media (max-width: 1200px) {
+            .topbar-redesigned .topbar-search-wrap {
+                max-width: 400px;
+            }
+
+            .topbar-contact-info {
+                display: none;
+            }
+
+            .topbar-contact-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .topbar-divider {
+                margin: 0 8px;
+            }
+
+            .topbar-catalog-btn {
+                padding: 9px 16px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .topbar-redesigned {
+                padding: 8px 0;
+            }
+        }
+
+        /* ===== Branded Social Icons & Redesigned Site Footer ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        .site-footer {
+            background: #ffffff !important;
+            /* Pristine luxury white background */
+            color: #3F3A36 !important;
+            /* Soft dark charcoal text */
+            padding: 90px 0 0 !important;
+            font-family: 'Outfit', sans-serif !important;
+            border-top: 1px solid #EBE5DB !important;
+            /* Elegant warm off-white border */
+            position: relative !important;
+        }
+
+        .site-footer .widget {
+            margin-bottom: 40px !important;
+        }
+
+        .site-footer .widget-title {
+            color: #8C7558 !important;
+            /* Gold title */
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-size: 19px !important;
+            font-weight: 600 !important;
+            text-transform: capitalize !important;
+            letter-spacing: 0.5px !important;
+            margin-bottom: 28px !important;
+            position: relative !important;
+            padding-bottom: 0 !important;
+            border-bottom: none !important;
+        }
+
+        .site-footer .widget-title::after {
+            content: none !important;
+            display: none !important;
+        }
+
+        .site-footer p {
+            color: #4E453E !important;
+            /* Warm dark brown-gray */
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            margin-bottom: 12px !important;
+        }
+
+        .site-footer .brand-description {
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            color: #4E453E !important;
+            /* Muted dark brown-gray matched with main footer text color */
+            margin-bottom: 28px !important;
+        }
+
+        .site-footer p strong {
+            color: #8C7558 !important;
+            /* Bronze label */
+            font-weight: 600 !important;
+        }
+
+        .site-footer ul {
+            padding-left: 0 !important;
+            list-style: none !important;
+        }
+
+        .site-footer ul li {
+            margin-bottom: 14px !important;
+            font-size: 14px !important;
+            color: #4E453E !important;
+            display: flex !important;
+            align-items: flex-start !important;
+            line-height: 1.6 !important;
+        }
+
+        /* Contact Info Styling */
+        .site-footer .contact-icon {
+            color: #8C7558 !important;
+            margin-right: 12px !important;
+            font-size: 16px !important;
+            width: 20px !important;
+            display: inline-block !important;
+            flex-shrink: 0 !important;
+            text-align: center !important;
+            margin-top: 3px !important;
+        }
+
+        /* Footer Logo */
+        .site-footer .footer-logo {
+            max-width: 383px !important;
+            opacity: 0.95 !important;
+            transition: opacity 0.3s ease !important;
+        }
+
+        .site-footer .footer-logo:hover {
+            opacity: 1 !important;
+        }
+
+        /* Redesigned Footer Links with sliding line indicator */
+        .site-footer .widget-links ul>li {
+            display: block !important;
+            padding-left: 0 !important;
+            position: relative !important;
+        }
+
+        /* Hide the default feather icon chevron */
+        .site-footer .widget-links ul>li::before {
+            display: none !important;
+            content: none !important;
+        }
+
+        .site-footer .widget-links ul li a {
+            color: #4E453E !important;
+            text-decoration: none !important;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 4px 0 !important;
+        }
+
+        /* Animated horizontal gold line indicator on hover */
+        .site-footer .widget-links ul li a::before {
+            content: '' !important;
+            display: inline-block !important;
+            width: 0 !important;
+            height: 1px !important;
+            background-color: #8C7558 !important;
+            margin-right: 0 !important;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+            opacity: 0 !important;
+        }
+
+        .site-footer .widget-links ul li a:hover {
+            color: #8C7558 !important;
+            transform: translateX(6px) !important;
+            /* Elegant shift to the right */
+        }
+
+        .site-footer .widget-links ul li a:hover::before {
+            width: 12px !important;
+            margin-right: 8px !important;
+            opacity: 1 !important;
+        }
+
+        /* Branded Social Links with overrides to prevent theme pollution */
+        .footer-social-links {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 12px !important;
+            margin-top: 24px !important;
+        }
+
+        .site-footer .footer-social-links a.social-icon-branded {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            width: 36px !important;
-            height: 36px !important;
-            border-radius: 6px !important;
-            background: #fff !important;
-            color: #333 !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
-            margin: 0 10px 10px 0 !important;
-            padding: 0 !important;
-            transition: all 0.3s ease;
-            border: 1px solid #eee !important;
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            color: #4E453E !important;
+            border: 1px solid #D9D2C9 !important;
+            font-size: 15px !important;
             text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: none !important;
             box-sizing: border-box !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            flex-shrink: 0 !important;
+            position: relative !important;
         }
-        .social-icon-branded:hover {
-            background: var(--brand-bg) !important;
-            color: #fff !important;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-            border-color: var(--brand-bg) !important;
+
+        /* Completely disable the standard background slide effect from theme stylesheet */
+        .site-footer .footer-social-links a.social-icon-branded::before {
+            display: none !important;
+            content: none !important;
         }
-        .social-icon-branded svg,
-        .social-icon-branded i {
-            width: 16px !important;
-            height: 16px !important;
-            fill: #333 !important;
-            color: #333 !important;
-            transition: all 0.3s ease;
+
+        .site-footer .footer-social-links a.social-icon-branded svg,
+        .site-footer .footer-social-links a.social-icon-branded i {
+            width: 15px !important;
+            height: 15px !important;
+            fill: currentColor !important;
+            color: currentColor !important;
+            transition: all 0.3s ease !important;
             margin: 0 !important;
             padding: 0 !important;
             display: block !important;
+            z-index: 2 !important;
         }
-        .social-icon-branded:hover svg,
-        .social-icon-branded:hover i {
-            fill: #fff !important;
-            color: #fff !important;
+
+        .site-footer .footer-social-links a.social-icon-branded:hover {
+            background: var(--brand-bg, #8C7558) !important;
+            background-color: var(--brand-bg, #8C7558) !important;
+            border-color: var(--brand-bg, #8C7558) !important;
+            color: #ffffff !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 6px 15px rgba(140, 117, 88, 0.25) !important;
         }
-=======
-    .social-icon-branded:hover {
-    transform: translateY(-5px) scale(1.12);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-    color: #fff !important;
-    text-decoration: none !important;
-    }
 
-    .social-icon-branded:active {
-    transform: translateY(-2px) scale(1.08);
-    }
+        .site-footer .footer-social-links a.social-icon-branded:hover svg,
+        .site-footer .footer-social-links a.social-icon-branded:hover i {
+            fill: #ffffff !important;
+            color: #ffffff !important;
+        }
 
-    .social-icon-branded svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    display: block;
-    }
+        /* Newsletter Form Redesign */
+        .subscriber-form {
+            margin-top: 20px !important;
+        }
 
-    .footer-social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 16px;
-    }
+        .subscriber-form .input-group {
+            position: relative !important;
+            display: flex !important;
+            width: 100% !important;
+        }
 
-    /* Override old red background on footer social links */
-    .footer-social-links a {
-    background: transparent !important;
-    }
+        .subscriber-form .form-control {
+            background-color: transparent !important;
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 1px solid #D9D2C9 !important;
+            border-radius: 0 !important;
+            padding: 12px 12px 12px 30px !important;
+            color: #1E1B18 !important;
+            font-size: 14px !important;
+            height: auto !important;
+            transition: border-color 0.3s ease !important;
+            width: 100% !important;
+            box-shadow: none !important;
+        }
 
-    .footer-social-links a::before {
-    display: none !important;
-    }
->>>>>>> Stashed changes
+        .subscriber-form .form-control::placeholder {
+            color: #9C9083 !important;
+        }
+
+        .subscriber-form .form-control:focus {
+            border-bottom-color: #8C7558 !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        .subscriber-form .input-group-addon {
+            position: absolute !important;
+            left: 0 !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: #8C7558 !important;
+            z-index: 10 !important;
+            pointer-events: none !important;
+            font-size: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .subscriber-form .btn-primary {
+            background: linear-gradient(135deg, #8C7558 0%, #6E5B45 100%) !important;
+            border: none !important;
+            border-radius: 30px !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            padding: 14px 28px !important;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+            box-shadow: 0 4px 15px rgba(140, 117, 88, 0.15) !important;
+            font-size: 12px !important;
+            cursor: pointer !important;
+            width: 100% !important;
+            display: block !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase !important;
+        }
+
+        .subscriber-form .btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 24px rgba(140, 117, 88, 0.3) !important;
+        }
+
+        .subscriber-form .btn-primary:active {
+            transform: translateY(0) !important;
+        }
+
+        .gateway_image {
+            opacity: 0.8 !important;
+            transition: opacity 0.3s ease !important;
+            filter: grayscale(100%) contrast(120%) !important;
+        }
+
+        .gateway_image:hover {
+            opacity: 1 !important;
+            filter: none !important;
+        }
+
+        /* Copyright Bottom Bar */
+        .footer-copyright {
+            margin: 60px 0 0 !important;
+            padding: 30px 0 !important;
+            border-top: 1px solid #EBE5DB !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            flex-wrap: wrap !important;
+            font-size: 13px !important;
+            color: #7E7468 !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .footer-copyright a {
+            color: #7E7468 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .footer-copyright a:hover {
+            color: #8C7558 !important;
+        }
+
+        .footer-copyright-links {
+            display: flex !important;
+            gap: 20px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .footer-copyright {
+                flex-direction: column !important;
+                justify-content: center !important;
+                text-align: center !important;
+                gap: 15px !important;
+                padding: 24px 0 !important;
+            }
+
+            .footer-copyright-links {
+                justify-content: center !important;
+            }
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')
-    {!! $setting->google_adsense !!}
+        {!! $setting->google_adsense !!}
     @endif
     {{-- Google AdSense End --}}
 
     {{-- Google AnalyTics Start --}}
     @if ($setting->is_google_analytics == '1')
-    {!! $setting->google_analytics !!}
+        {!! $setting->google_analytics !!}
     @endif
     {{-- Google AnalyTics End --}}
 
     {{-- Facebook pixel Start --}}
     @if ($setting->is_facebook_pixel == '1')
-    {!! $setting->facebook_pixel !!}
+        {!! $setting->facebook_pixel !!}
     @endif
     {{-- Facebook pixel End --}}
     <style>
@@ -733,14 +1043,14 @@
 body_theme4 @endif
 ">
     @if ($setting->is_loader == 1)
-    <!-- Preloader Start -->
-    @if ($setting->is_loader == 1)
-    <div id="preloader">
-        <img src="{{ url('assets/img/' . $setting->loader) }}" alt="{{ __('Loading...') }}">
-    </div>
-    @endif
+        <!-- Preloader Start -->
+        @if ($setting->is_loader == 1)
+            <div id="preloader">
+                <img src="{{ url('assets/img/' . $setting->loader) }}" alt="{{ __('Loading...') }}">
+            </div>
+        @endif
 
-    <!-- Preloader endif -->
+        <!-- Preloader endif -->
     @endif
 
     <!-- Header-->
@@ -766,51 +1076,51 @@ body_theme4 @endif
 
                             {{-- <div class="t-h-dropdown ">
                                 <a class="main-link" href="#">{{ __('Language') }}<i class="icon-chevron-down"></i></a>
-                            <div class="t-h-dropdown-menu">
-                                @foreach (DB::table('languages')->whereType('Website')->get() as $language)
-                                <a class="{{ Session::get('language') == $language->id ? 'active' : ($language->is_default == 1 && !Session::has('language') ? 'active' : '') }}"
-                                    href="{{ route('front.language.setup', $language->id) }}"><i
-                                        class="icon-chevron-right pr-2"></i>{{ $language->language }}</a>
-                                @endforeach
-                            </div>
-                        </div> --}}
+                                <div class="t-h-dropdown-menu">
+                                    @foreach (DB::table('languages')->whereType('Website')->get() as $language)
+                                    <a class="{{ Session::get('language') == $language->id ? 'active' : ($language->is_default == 1 && !Session::has('language') ? 'active' : '') }}"
+                                        href="{{ route('front.language.setup', $language->id) }}"><i
+                                            class="icon-chevron-right pr-2"></i>{{ $language->language }}</a>
+                                    @endforeach
+                                </div>
+                            </div> --}}
 
 
-                        {{-- <div class="t-h-dropdown ">
+                            {{-- <div class="t-h-dropdown ">
                                 <a class="main-link" href="#">{{ __('Currency') }}<i class="icon-chevron-down"></i></a>
-                        <div class="t-h-dropdown-menu">
-                            @foreach (DB::table('currencies')->get() as $currency)
-                            <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
-                                href="{{ route('front.currency.setup', $currency->id) }}"><i
-                                    class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
-                            @endforeach
-                        </div>
-                    </div> --}}
+                                <div class="t-h-dropdown-menu">
+                                    @foreach (DB::table('currencies')->get() as $currency)
+                                    <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
+                                        href="{{ route('front.currency.setup', $currency->id) }}"><i
+                                            class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
+                                    @endforeach
+                                </div>
+                            </div> --}}
 
-                    {{-- <div class="login-register ">
+                            {{-- <div class="login-register ">
                                 @if (!Auth::user())
                                 <a class="track-order-link mr-0" href="{{ route('user.login') }}">
-                    {{ __('Login') }}
-                    </a>
-                    @else
-                    <div class="t-h-dropdown">
-                        <div class="main-link">
-                            <i class="icon-user pr-2"></i> <span class="text-label">{{
+                                    {{ __('Login') }}
+                                </a>
+                                @else
+                                <div class="t-h-dropdown">
+                                    <div class="main-link">
+                                        <i class="icon-user pr-2"></i> <span class="text-label">{{
                                             Auth::user()->first_name }}</span>
-                        </div>
-                        <div class="t-h-dropdown-menu">
-                            <a href="{{ route('user.dashboard') }}"><i
-                                    class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
-                            <a href="{{ route('user.logout') }}"><i class="icon-chevron-right pr-2"></i>{{
+                                    </div>
+                                    <div class="t-h-dropdown-menu">
+                                        <a href="{{ route('user.dashboard') }}"><i
+                                                class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
+                                        <a href="{{ route('user.logout') }}"><i class="icon-chevron-right pr-2"></i>{{
                                             __('Logout') }}</a>
+                                    </div>
+                                </div>
+                                @endif
+                            </div> --}}
                         </div>
                     </div>
-                    @endif
-                </div> --}}
+                </div>
             </div>
-        </div>
-        </div>
-        </div>
         </div>
         <!-- Topbar-->
         <div class="topbar topbar-redesigned">
@@ -821,7 +1131,8 @@ body_theme4 @endif
                             <!-- Logo-->
                             <div class="site-branding topbar-logo" style="margin-right: auto;">
                                 <a class="site-logo align-self-center" href="{{ route('front.index') }}">
-                                    <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}" alt="{{ $setting->title }}">
+                                    <img src="{{ url('assets/img/prime_beds_logo3_transparent.png') }}"
+                                        alt="{{ $setting->title }}">
                                 </a>
                             </div>
 
@@ -829,10 +1140,11 @@ body_theme4 @endif
                             <div class="search-box-wrap d-none d-lg-flex align-items-center topbar-search-wrap">
                                 <div class="search-box-inner align-self-center">
                                     <div class="search-box d-flex topbar-search-box">
-                                        <select name="category" id="category_select" class="categoris topbar-category-select">
+                                        <select name="category" id="category_select"
+                                            class="categoris topbar-category-select">
                                             <option value="">{{ __('All Categories') }}</option>
                                             @foreach (DB::table('categories')->whereStatus(1)->get() as $category)
-                                            <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->slug }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         <form class="input-group topbar-search-form" id="header_search_form"
@@ -842,7 +1154,8 @@ body_theme4 @endif
                                                 data-target="{{ route('front.search.suggest') }}" id="__product__search"
                                                 name="search" placeholder="{{ __('Search...') }}">
                                             <span class="input-group-btn">
-                                                <button type="submit" class="topbar-search-btn"><i class="icon-search"></i></button>
+                                                <button type="submit" class="topbar-search-btn"><i
+                                                        class="icon-search"></i></button>
                                             </span>
                                             <div class="serch-result d-none">
                                                 {{-- search result --}}
@@ -862,22 +1175,26 @@ body_theme4 @endif
                                     </a>
                                 </div>
                                 <div class="toolbar-item visible-on-mobile mobile-menu-toggle"><a href="#">
-                                        <div><i class="icon-menu"></i><span class="text-label">{{ __('Menu') }}</span></div>
+                                        <div><i class="icon-menu"></i><span class="text-label">{{ __('Menu') }}</span>
+                                        </div>
                                     </a>
                                 </div>
 
                                 {{-- Catalog Download Button --}}
                                 @if(isset($setting->catalog_file))
-                                <div class="d-none d-md-flex align-items-center topbar-catalog-wrap">
-                                    <a href="{{ asset('assets/files/' . $setting->catalog_file) }}" class="topbar-catalog-btn" download>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                            <polyline points="7 10 12 15 17 10" />
-                                            <line x1="12" y1="15" x2="12" y2="3" />
-                                        </svg>
-                                        <span>{{ __('Catalog') }}</span>
-                                    </a>
-                                </div>
+                                    <div class="d-none d-md-flex align-items-center topbar-catalog-wrap">
+                                        <a href="{{ asset('assets/files/' . $setting->catalog_file) }}"
+                                            class="topbar-catalog-btn" download>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="7 10 12 15 17 10" />
+                                                <line x1="12" y1="15" x2="12" y2="3" />
+                                            </svg>
+                                            <span>{{ __('Catalog') }}</span>
+                                        </a>
+                                    </div>
                                 @endif
 
                                 {{-- Divider --}}
@@ -888,199 +1205,218 @@ body_theme4 @endif
                                 @if (isset($setting->contact_number))
                                 <div class="d-none d-md-flex align-items-center topbar-contact-wrap">
                                     <div class="topbar-contact-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                                         </svg>
                                     </div>
                                     <div class="topbar-contact-info">
                                         <a href="tel:{{ $setting->contact_number }}" class="topbar-phone">
-                                {{ $setting->contact_number }}
-                                </a>
-                                <a href="mailto:{{ $setting->contact_mail }}" class="topbar-email">
-                                    {{ $setting->contact_mail }}
-                                </a>
-                            </div>
-                        </div>
-                        @endif
-
-                        --}}
-                        {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
-
-                        {{-- User Login / Profile --}}
-                        <div class="d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px; margin-right: 20px; position: relative; left: 10px;">
-                            @if (!Auth::user())
-                            <a href="{{ route('user.login') }}"
-                                style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
-                                onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
-                                onmouseout="this.style.color='inherit'">
-                                <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                         width:32px;height:32px;border-radius:50%;
-                                                         border:2px solid currentColor;">
-                                    <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
-                                </span>
-                                <span class="d-none d-lg-inline">{{ __('Login') }}</span>
-                            </a>
-                            @else
-                            <div class="t-h-dropdown">
-                                <div class="main-link" style="display:inline-flex;align-items:center;cursor:pointer;">
-                                    <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                             width:32px;height:32px;border-radius:50%;
-                                                             background:{{ $setting->primary_color ?? '#4e73df' }};
-                                                             color:#fff;flex-shrink:0;">
-                                        <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
-                                    </span>
+                                            {{ $setting->contact_number }}
+                                        </a>
+                                        <a href="mailto:{{ $setting->contact_mail }}" class="topbar-email">
+                                            {{ $setting->contact_mail }}
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="t-h-dropdown-menu" style="min-width:160px;">
-                                    <a href="{{ route('user.dashboard') }}">
-                                        <i class="icon-grid pr-2"></i>{{ __('Dashboard') }}
-                                    </a>
-                                    <a href="{{ route('user.logout') }}">
-                                        <i class="icon-log-out pr-2"></i>{{ __('Logout') }}
-                                    </a>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
+                                @endif
 
-                        {{-- Divider --}}
-                        <div class="topbar-divider d-none d-md-block"></div>
+                                --}}
+                                {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
 
-                        {{-- Cart --}}
-                        <div class="toolbar-item topbar-cart-item">
-                            <a href="{{ route('front.cart') }}">
-                                <div>
-                                    <span class="cart-icon"><i class="icon-shopping-cart"></i>
-                                        <span class="count-label cart_count">{{ Session::has('cart') ? count(Session::get('cart')) : '0' }}</span>
-                                    </span>
-                                    <span class="text-label">{{ __('Cart') }}</span>
-                                </div>
-                            </a>
-                            <div class="toolbar-dropdown cart-dropdown widget-cart cart_view_header"
-                                id="header_cart_load" data-target="{{ route('front.header.cart') }}">
-                                @include('includes.header_cart')
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Menu-->
-                    <div class="mobile-menu">
-                        <!-- Slideable (Mobile) Menu-->
-                        <div class="mm-heading-area">
-                            <h4>{{ __('Navigation') }}</h4>
-                            <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
-                                <a href="#">
-                                    <div> <i class="icon-x"></i></div>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item" role="presentation99">
-                                <span class="active" id="mmenu-tab" data-bs-toggle="tab" data-bs-target="#mmenu"
-                                    role="tab" aria-controls="mmenu"
-                                    aria-selected="true">{{ __('Menu') }}</span>
-                            </li>
-                            <li class="nav-item" role="presentation99">
-                                <span class="" id="mcat-tab" data-bs-toggle="tab" data-bs-target="#mcat"
-                                    role="tab" aria-controls="mcat"
-                                    aria-selected="false">{{ __('Category') }}</span>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content p-0">
-                            <div class="tab-pane fade show active" id="mmenu" role="tabpanel"
-                                aria-labelledby="mmenu-tab">
-                                <nav class="slideable-menu">
-                                    <ul>
-                                        <li class="{{ request()->routeIs('front.index') ? 'active' : '' }}"><a
-                                                href="{{ route('front.index') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Home') }}</a>
-                                        </li>
-                                        @if ($setting->is_shop == 1)
-                                        <li class="{{ request()->routeIs('front.catalog*') ? 'active' : '' }}">
-                                            <a href="{{ route('front.catalog') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Shop') }}</a>
-                                        </li>
-                                        @endif
-                                        @if ($setting->is_campaign == 1)
-                                        <li class="{{ request()->routeIs('front.campaign') ? 'active' : '' }}">
-                                            <a href="{{ route('front.campaign') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Campaign') }}</a>
-                                        </li>
-                                        @endif
-                                        @if ($setting->is_brands == 1)
-                                        <li class="{{ request()->routeIs('front.brand') ? 'active' : '' }}">
-                                            <a href="{{ route('front.brand') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Brand') }}</a>
-                                        </li>
-                                        @endif
-
-                                        @if ($setting->is_blog == 1)
-                                        <li class="{{ request()->routeIs('front.blog*') ? 'active' : '' }}">
-                                            <a href="{{ route('front.blog') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Blog') }}</a>
-                                        </li>
-                                        @endif
-                                        <li class="t-h-dropdown">
-                                            <a class="" href="#"><i
-                                                    class="icon-chevron-right"></i>{{ __('Pages') }} <i
-                                                    class="icon-chevron-down"></i></a>
-                                            <div class="t-h-dropdown-menu">
-                                                @if ($setting->is_faq == 1)
-                                                <a class="{{ request()->routeIs('front.faq*') ? 'active' : '' }}"
-                                                    href="{{ route('front.faq') }}"><i
-                                                        class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
-                                                @endif
-                                                @foreach (DB::table('pages')->wherePos(0)->orwhere('pos', 2)->get() as $page)
-                                                <a class="{{ request()->url() == route('front.page', $page->slug) ? 'active' : '' }} "
-                                                    href="{{ route('front.page', $page->slug) }}"><i
-                                                        class="icon-chevron-right pr-2"></i>{{ $page->title }}</a>
-                                                @endforeach
+                                {{-- User Login / Profile --}}
+                                <div class="d-none d-md-flex align-items-center"
+                                    style="width: auto; justify-content: center; padding: 0; margin-left: 20px; margin-right: 20px; position: relative; left: 10px;">
+                                    @if (!Auth::user())
+                                        <a href="{{ route('user.login') }}"
+                                            style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
+                                            onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
+                                            onmouseout="this.style.color='inherit'">
+                                            <span style="display:inline-flex;align-items:center;justify-content:center;
+                                                                     width:32px;height:32px;border-radius:50%;
+                                                                     border:2px solid currentColor;">
+                                                <i class="icon-user"
+                                                    style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
+                                            </span>
+                                            <span class="d-none d-lg-inline">{{ __('Login') }}</span>
+                                        </a>
+                                    @else
+                                        <div class="t-h-dropdown">
+                                            <div class="main-link"
+                                                style="display:inline-flex;align-items:center;cursor:pointer;">
+                                                <span style="display:inline-flex;align-items:center;justify-content:center;
+                                                                         width:32px;height:32px;border-radius:50%;
+                                                                         background:{{ $setting->primary_color ?? '#4e73df' }};
+                                                                         color:#fff;flex-shrink:0;">
+                                                    <i class="icon-user"
+                                                        style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
+                                                </span>
                                             </div>
-                                        </li>
+                                            <div class="t-h-dropdown-menu" style="min-width:160px;">
+                                                <a href="{{ route('user.dashboard') }}">
+                                                    <i class="icon-grid pr-2"></i>{{ __('Dashboard') }}
+                                                </a>
+                                                <a href="{{ route('user.logout') }}">
+                                                    <i class="icon-log-out pr-2"></i>{{ __('Logout') }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
 
-                                        @if ($setting->is_contact == 1)
-                                        <li class="{{ request()->routeIs('front.contact') ? 'active' : '' }}">
-                                            <a href="{{ route('front.contact') }}"><i
-                                                    class="icon-chevron-right"></i>{{ __('Contact') }}</a>
-                                        </li>
-                                        @endif
-                                    </ul>
-                                </nav>
+                                {{-- Divider --}}
+                                <div class="topbar-divider d-none d-md-block"></div>
+
+                                {{-- Cart --}}
+                                <div class="toolbar-item topbar-cart-item">
+                                    <a href="{{ route('front.cart') }}">
+                                        <div>
+                                            <span class="cart-icon"><i class="icon-shopping-cart"></i>
+                                                <span
+                                                    class="count-label cart_count">{{ Session::has('cart') ? count(Session::get('cart')) : '0' }}</span>
+                                            </span>
+                                            <span class="text-label">{{ __('Cart') }}</span>
+                                        </div>
+                                    </a>
+                                    <div class="toolbar-dropdown cart-dropdown widget-cart cart_view_header"
+                                        id="header_cart_load" data-target="{{ route('front.header.cart') }}">
+                                        @include('includes.header_cart')
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tab-pane fade" id="mcat" role="tabpanel" aria-labelledby="mcat-tab">
-                                <nav class="slideable-menu">
-                                    @include('includes.mobile-category')
 
-                                </nav>
+                            <!-- Mobile Menu-->
+                            <div class="mobile-menu">
+                                <!-- Slideable (Mobile) Menu-->
+                                <div class="mm-heading-area">
+                                    <h4>{{ __('Navigation') }}</h4>
+                                    <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
+                                        <a href="#">
+                                            <div> <i class="icon-x"></i></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item" role="presentation99">
+                                        <span class="active" id="mmenu-tab" data-bs-toggle="tab" data-bs-target="#mmenu"
+                                            role="tab" aria-controls="mmenu"
+                                            aria-selected="true">{{ __('Menu') }}</span>
+                                    </li>
+                                    <li class="nav-item" role="presentation99">
+                                        <span class="" id="mcat-tab" data-bs-toggle="tab" data-bs-target="#mcat"
+                                            role="tab" aria-controls="mcat"
+                                            aria-selected="false">{{ __('Category') }}</span>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content p-0">
+                                    <div class="tab-pane fade show active" id="mmenu" role="tabpanel"
+                                        aria-labelledby="mmenu-tab">
+                                        <nav class="slideable-menu">
+                                            <ul>
+                                                <li class="{{ request()->routeIs('front.index') ? 'active' : '' }}"><a
+                                                        href="{{ route('front.index') }}"><i
+                                                            class="icon-chevron-right"></i>{{ __('Home') }}</a>
+                                                </li>
+                                                @if ($setting->is_shop == 1)
+                                                    <li class="{{ request()->routeIs('front.catalog*') ? 'active' : '' }}">
+                                                        <a href="{{ route('front.catalog') }}"><i
+                                                                class="icon-chevron-right"></i>{{ __('Shop') }}</a>
+                                                    </li>
+                                                @endif
+                                                @if ($setting->is_campaign == 1)
+                                                    <li class="{{ request()->routeIs('front.campaign') ? 'active' : '' }}">
+                                                        <a href="{{ route('front.campaign') }}"><i
+                                                                class="icon-chevron-right"></i>{{ __('Campaign') }}</a>
+                                                    </li>
+                                                @endif
+                                                @if ($setting->is_brands == 1)
+                                                    <li class="{{ request()->routeIs('front.brand') ? 'active' : '' }}">
+                                                        <a href="{{ route('front.brand') }}"><i
+                                                                class="icon-chevron-right"></i>{{ __('Brand') }}</a>
+                                                    </li>
+                                                @endif
+
+                                                @if ($setting->is_blog == 1)
+                                                    <li class="{{ request()->routeIs('front.blog*') ? 'active' : '' }}">
+                                                        <a href="{{ route('front.blog') }}"><i
+                                                                class="icon-chevron-right"></i>{{ __('Blog') }}</a>
+                                                    </li>
+                                                @endif
+                                                <li class="t-h-dropdown">
+                                                    <a class="" href="#"><i
+                                                            class="icon-chevron-right"></i>{{ __('Pages') }} <i
+                                                            class="icon-chevron-down"></i></a>
+                                                    <div class="t-h-dropdown-menu">
+                                                        @if ($setting->is_faq == 1)
+                                                            <a class="{{ request()->routeIs('front.faq*') ? 'active' : '' }}"
+                                                                href="{{ route('front.faq') }}"><i
+                                                                    class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
+                                                        @endif
+                                                        @foreach (DB::table('pages')->wherePos(0)->orwhere('pos', 2)->get() as $page)
+                                                            <a class="{{ request()->url() == route('front.page', $page->slug) ? 'active' : '' }} "
+                                                                href="{{ route('front.page', $page->slug) }}"><i
+                                                                    class="icon-chevron-right pr-2"></i>{{ $page->title }}</a>
+                                                        @endforeach
+                                                    </div>
+                                                </li>
+
+                                                @if ($setting->is_contact == 1)
+                                                    <li class="{{ request()->routeIs('front.contact') ? 'active' : '' }}">
+                                                        <a href="{{ route('front.contact') }}"><i
+                                                                class="icon-chevron-right"></i>{{ __('Contact') }}</a>
+                                                    </li>
+                                                @endif
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="tab-pane fade" id="mcat" role="tabpanel" aria-labelledby="mcat-tab">
+                                        <nav class="slideable-menu">
+                                            @include('includes.mobile-category')
+
+                                        </nav>
+                                    </div>
+                                </div>
+                                {{-- ===== Mobile Social Icons ===== --}}
+                                @if($socials->isNotEmpty())
+                                    <div class="d-flex flex-wrap px-3 pb-3"
+                                        style="gap:10px;border-top:1px solid rgba(255,255,255,.12);margin-top:6px;">
+                                        @foreach($socials as $social)
+                                            @if(!empty($social->link))
+                                                @php
+                                                    $smColors = ["facebook" => "#1877F2", "instagram" => "#E1306C", "linkedin" => "#0A66C2", "tiktok" => "#010101", "twitter" => "#1DA1F2", "youtube" => "#FF0000", "whatsapp" => "#25D366", "pinterest" => "#E60023", "snapchat" => "#FFFC00", "telegram" => "#26A5E4"];
+                                                    $ic = $social->icon ?? "";
+                                                    $isTT = str_contains(strtolower($ic), "tiktok");
+                                                    $bc = "#888";
+                                                    foreach ($smColors as $p => $cv) {
+                                                        if (str_contains(strtolower($ic), $p)) {
+                                                            $bc = $cv;
+                                                            break;
+                                                        }
+                                                    }
+                                                @endphp
+                                                <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
+                                                    style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:14px;text-decoration:none;">
+                                                    @php $isImgM = preg_match("/^https?:\/\//i", $ic); @endphp@if($isImgM)<img
+                                                        src="{{ $ic }}" alt=""
+                                                    style="width:14px;height:14px;object-fit:contain;display:block;">@elseif($isTT)<svg
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"
+                                                            style="width:14px;height:14px;display:block;">
+                                                            <path
+                                                                d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                                        </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        {{-- ===== Mobile Social Icons ===== --}}
-                        @if($socials->isNotEmpty())
-                        <div class="d-flex flex-wrap px-3 pb-3" style="gap:10px;border-top:1px solid rgba(255,255,255,.12);margin-top:6px;">
-                            @foreach($socials as $social)
-                            @if(!empty($social->link))
-                            @php
-                            $smColors=["facebook"=>"#1877F2","instagram"=>"#E1306C","linkedin"=>"#0A66C2","tiktok"=>"#010101","twitter"=>"#1DA1F2","youtube"=>"#FF0000","whatsapp"=>"#25D366","pinterest"=>"#E60023","snapchat"=>"#FFFC00","telegram"=>"#26A5E4"];
-                            $ic=$social->icon??"";
-                            $isTT=str_contains(strtolower($ic),"tiktok");
-                            $bc="#888";
-                            foreach($smColors as $p=>$cv){if(str_contains(strtolower($ic),$p)){$bc=$cv;break;}}
-                            @endphp
-                            <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
-                                style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:14px;text-decoration:none;">
-                                @php $isImgM=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImgM)<img src="{{ $ic }}" alt="" style="width:14px;height:14px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:14px;height:14px;display:block;">
-                                    <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
-                                </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
-                            </a>
-                            @endif
-                            @endforeach
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
         <!-- Navbar-->
         <div class="navbar">
@@ -1092,43 +1428,49 @@ body_theme4 @endif
                         </div>
                         {{-- ===== Navbar Social Icons =====
                         @if($socials->isNotEmpty())
-                        <div class="d-none d-lg-flex align-items-center" style="gap:8px;margin-left:auto;padding-left:20px;">
+                        <div class="d-none d-lg-flex align-items-center"
+                            style="gap:8px;margin-left:auto;padding-left:20px;">
                             @php
-                                $nbColors=["facebook"=>"#1877F2","instagram"=>"#E1306C","linkedin"=>"#0A66C2","tiktok"=>"#010101","twitter"=>"#1DA1F2","youtube"=>"#FF0000","whatsapp"=>"#25D366","pinterest"=>"#E60023","snapchat"=>"#FFFC00","telegram"=>"#26A5E4"];
+                            $nbColors=["facebook"=>"#1877F2","instagram"=>"#E1306C","linkedin"=>"#0A66C2","tiktok"=>"#010101","twitter"=>"#1DA1F2","youtube"=>"#FF0000","whatsapp"=>"#25D366","pinterest"=>"#E60023","snapchat"=>"#FFFC00","telegram"=>"#26A5E4"];
                             @endphp
                             @foreach($socials as $social)
-                                @if(!empty($social->link))
-                                    @php
-                                        $ic  = $social->icon ?? "";
-                                        $isTT = str_contains(strtolower($ic), "tiktok");
-                                        $bc  = "#888";
-                                        foreach ($nbColors as $p => $cv) { if (str_contains(strtolower($ic), $p)) { $bc = $cv; break; } }
-                                        preg_match('/fa-([a-z0-9\-]+)$/i', $ic, $nm);
-                                        $pnm = ucfirst(str_replace(['-f','-in','-square','-'], ['','','',' '], $nm[1] ?? 'social'));
-                                    @endphp
-                                    <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
-                        title="{{ $pnm }}"
-                        style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:12px;text-decoration:none;flex-shrink:0;transition:opacity .2s,transform .2s;"
-                        onmouseover="this.style.opacity='.75';this.style.transform='translateY(-2px)'"
-                        onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-                        @php $isImg=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImg)<img src="{{ $ic }}" alt="" style="width:12px;height:12px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:12px;height:12px;display:block;">
-                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
-                        </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
-                        </a>
-                        @endif
-                        @endforeach
-                    </div>
-                    @endif --}}
-                    @php
-                    $free_shipping = DB::table('shipping_services')
-                    ->whereStatus(1)
-                    ->whereIsCondition(1)
-                    ->first();
-                    @endphp
+                            @if(!empty($social->link))
+                            @php
+                            $ic = $social->icon ?? "";
+                            $isTT = str_contains(strtolower($ic), "tiktok");
+                            $bc = "#888";
+                            foreach ($nbColors as $p => $cv) { if (str_contains(strtolower($ic), $p)) { $bc = $cv;
+                            break; } }
+                            preg_match('/fa-([a-z0-9\-]+)$/i', $ic, $nm);
+                            $pnm = ucfirst(str_replace(['-f','-in','-square','-'], ['','','',' '], $nm[1] ?? 'social'));
+                            @endphp
+                            <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer" title="{{ $pnm }}"
+                                style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:12px;text-decoration:none;flex-shrink:0;transition:opacity .2s,transform .2s;"
+                                onmouseover="this.style.opacity='.75';this.style.transform='translateY(-2px)'"
+                                onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+                                @php $isImg=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImg)<img src="{{ $ic }}"
+                                    alt=""
+                                    style="width:12px;height:12px;object-fit:contain;display:block;">@elseif($isTT)<svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"
+                                    style="width:12px;height:12px;display:block;">
+                                    <path
+                                        d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
+                            </a>
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif --}}
+                        @php
+                            $free_shipping = DB::table('shipping_services')
+                                ->whereStatus(1)
+                                ->whereIsCondition(1)
+                                ->first();
+                        @endphp
 
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </header>
@@ -1142,31 +1484,31 @@ body_theme4 @endif
         <div class="announcement-with-content">
             <div class="left-area">
                 <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
-    </div>
-    <div class="right-area">
-        <h3 class="">{{ $setting->announcement_title }}</h3>
-        <p>{{ $setting->announcement_details }}</p>
-        <form class="subscriber-form" action="{{ route('front.subscriber.submit') }}" method="post">
-            @csrf
-            <div class="input-group">
-                <input class="form-control" type="email" name="email" placeholder="{{ __('Your e-mail') }}">
-                <span class="input-group-addon"><i class="icon-mail"></i></span>
             </div>
-            <div aria-hidden="true">
-                <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
-            </div>
+            <div class="right-area">
+                <h3 class="">{{ $setting->announcement_title }}</h3>
+                <p>{{ $setting->announcement_details }}</p>
+                <form class="subscriber-form" action="{{ route('front.subscriber.submit') }}" method="post">
+                    @csrf
+                    <div class="input-group">
+                        <input class="form-control" type="email" name="email" placeholder="{{ __('Your e-mail') }}">
+                        <span class="input-group-addon"><i class="icon-mail"></i></span>
+                    </div>
+                    <div aria-hidden="true">
+                        <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
+                    </div>
 
-            <button class="btn btn-primary btn-block mt-2" type="submit">
-                <span>{{ __('Subscribe') }}</span>
-            </button>
-        </form>
-    </div>
-    </div>
-    @else
-    <a href="{{ $setting->announcement_link }}">
-        <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
-    </a>
-    @endif
+                    <button class="btn btn-primary btn-block mt-2" type="submit">
+                        <span>{{ __('Subscribe') }}</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        @else
+        <a href="{{ $setting->announcement_link }}">
+            <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
+        </a>
+        @endif
 
 
     </div> --}}
@@ -1176,75 +1518,67 @@ body_theme4 @endif
     <footer class="site-footer">
         <div class="container">
             <div class="row">
+                <!-- Column 1: Brand Info & Socials -->
                 <div class="col-lg-4 col-md-6">
-                    <!-- Contact Info-->
                     <section class="widget widget-light-skin">
                         <div class="mb-4">
-                            <img src="{{ url('assets/img/prime_beds_logo_transparent.png') }}" alt="{{ $setting->title }}" style="max-width: 180px;">
+                            <img class="footer-logo" src="{{ url('assets/img/footer_logo_monochrome.png') }}"
+                                alt="{{ $setting->title }}">
                         </div>
-                        <h3 class="widget-title">{{ __('Get In Touch') }}</h3>
-                        <p class="mb-1"><strong>{{ __('Address') }}: </strong> {{ $setting->footer_address }}</p>
-                        <p class="mb-1"><strong>{{ __('Phone') }}: </strong> {{ $setting->footer_phone }}</p>
-                        <p class="mb-1"><strong>{{ __('Email') }}: </strong> {{ $setting->footer_email }}</p>
-                        <ul class="list-unstyled text-sm">
-                            <li><span class=""><strong>{{ $setting->working_days_from_to }}:
-                                    </strong></span>{{ $setting->friday_start }} - {{ $setting->friday_end }}</li>
-                        </ul>
+                        <p class="brand-description">
+                            {{ __('Crafting the ultimate sleep sanctuaries. The Prime Beds combines premium materials with master craftsmanship for nights of pure luxury and tranquility.') }}
+                        </p>
                         @php
-                        $socialData = json_decode($setting->social_link, true) ?? [];
-                        $links = $socialData['links'] ?? [];
-                        $icons = $socialData['icons'] ?? [];
-                        $socialBrandColors = [
-                            'facebook'  => '#1877F2',
-                            'instagram' => '#E1306C',
-                            'linkedin'  => '#0A66C2',
-                            'tiktok'    => '#010101',
-                            'twitter'   => '#1DA1F2',
-                            'youtube'   => '#FF0000',
-                            'whatsapp'  => '#25D366',
-                            'snapchat'  => '#FFFC00',
-                            'pinterest' => '#E60023',
-                        ];
+                            $socialData = json_decode($setting->social_link, true) ?? [];
+                            $links = $socialData['links'] ?? [];
+                            $icons = $socialData['icons'] ?? [];
+                            $socialBrandColors = [
+                                'facebook' => '#1877F2',
+                                'instagram' => '#E1306C',
+                                'linkedin' => '#0A66C2',
+                                'tiktok' => '#010101',
+                                'twitter' => '#1DA1F2',
+                                'youtube' => '#FF0000',
+                                'whatsapp' => '#25D366',
+                                'snapchat' => '#FFFC00',
+                                'pinterest' => '#E60023',
+                            ];
 
-                        $defaultIcons = [
-                            0 => 'fab fa-facebook-f',
-                            1 => 'fab fa-instagram',
-                            2 => 'fab fa-linkedin-in',
-                            3 => 'fab fa-twitter',
-                            4 => 'fab fa-youtube',
-                            5 => 'fab fa-whatsapp',
-                        ];
+                            $defaultIcons = [
+                                0 => 'fab fa-facebook-f',
+                                1 => 'fab fa-instagram',
+                                2 => 'fab fa-linkedin-in',
+                                3 => 'fab fa-twitter',
+                                4 => 'fab fa-youtube',
+                                5 => 'fab fa-whatsapp',
+                            ];
 
-                        $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
-                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
-                        </svg>';
+                            $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                                                                                                                <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                                                                                            </svg>';
                         @endphp
 
-                        <div class="footer-social-links d-flex flex-wrap mt-3">
+                        <div class="footer-social-links d-flex flex-wrap">
                             @foreach ($links as $link_key => $link)
                                 @if (!empty($link))
                                     @php
                                         $iconClass = $icons[$link_key] ?? $defaultIcons[$link_key] ?? 'fab fa-link';
                                         $isTikTok = str_contains(strtolower($iconClass), 'tiktok');
-                                        $brandColor = '#555';
-                                        
+                                        $brandColor = '#8C7558';
+
                                         foreach ($socialBrandColors as $platform => $color) {
                                             if (str_contains(strtolower($iconClass), $platform) || str_contains(strtolower($link), $platform)) {
                                                 $brandColor = $color;
                                                 break;
                                             }
                                         }
-                                        
+
                                         preg_match('/fa-([a-z0-9\-]+)$/i', $iconClass, $m);
                                         $platformName = ucfirst(str_replace(['-f', '-in', '-square', '-'], ['', '', '', ' '], $m[1] ?? 'social'));
                                     @endphp
-                                    <a class="social-icon-branded"
-                                       href="{{ $link }}"
-                                       target="_blank"
-                                       rel="noopener noreferrer"
-                                       aria-label="{{ $platformName }}"
-                                       title="{{ $platformName }}"
-                                       style="--brand-bg: {{ $brandColor }};">
+                                    <a class="social-icon-branded" href="{{ $link }}" target="_blank" rel="noopener noreferrer"
+                                        aria-label="{{ $platformName }}" title="{{ $platformName }}"
+                                        style="--brand-bg: {{ $brandColor }};">
                                         @if ($isTikTok)
                                             {!! $tiktokSvg !!}
                                         @else
@@ -1254,49 +1588,85 @@ body_theme4 @endif
                                 @endif
                             @endforeach
 
-                            {{-- Fallback: Show icons if no social links configured --}}
                             @if (empty($links))
-                            <a class="social-icon-branded" href="#" title="Facebook" style="--brand-bg: #1877F2;">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="social-icon-branded" href="#" title="Instagram" style="--brand-bg: #E1306C;">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a class="social-icon-branded" href="#" title="WhatsApp" style="--brand-bg: #25D366;">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
+                                <a class="social-icon-branded" href="#" title="Facebook" style="--brand-bg: #1877F2;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="Instagram" style="--brand-bg: #E1306C;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a class="social-icon-branded" href="#" title="WhatsApp" style="--brand-bg: #25D366;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
                             @endif
                         </div>
                     </section>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <!-- Customer Info-->
+
+                <!-- Column 2: Useful Links -->
+                <div class="col-lg-2 col-sm-6">
                     <div class="widget widget-links widget-light-skin">
-                        <h3 class="widget-title">{{ __('Usefull Links') }}</h3>
+                        <h3 class="widget-title">{{ __('Useful Links') }}</h3>
                         <ul>
                             @if ($setting->is_faq == 1)
-                            <li>
-                                <a class="" href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
-                            </li>
+                                <li>
+                                    <a href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
+                                </li>
                             @endif
                             @foreach (DB::table('pages')->wherePos(2)->orwhere('pos', 1)->get() as $page)
-                            <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
+                                <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
                             @endforeach
-
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <!-- Subscription-->
+
+                <!-- Column 3: Contact Info -->
+                <div class="col-lg-3 col-sm-6">
+                    <section class="widget widget-light-skin">
+                        <h3 class="widget-title">{{ __('Get In Touch') }}</h3>
+                        <ul class="list-unstyled text-sm contact-list">
+                            @if(!empty($setting->footer_address))
+                                <li>
+                                    <i class="icon-map-pin contact-icon"></i>
+                                    <span>{{ $setting->footer_address }}</span>
+                                </li>
+                            @endif
+                            @if(!empty($setting->footer_phone))
+                                <li>
+                                    <i class="icon-phone contact-icon"></i>
+                                    <span>{{ $setting->footer_phone }}</span>
+                                </li>
+                            @endif
+                            @if(!empty($setting->footer_email))
+                                <li>
+                                    <i class="icon-mail contact-icon"></i>
+                                    <span>{{ $setting->footer_email }}</span>
+                                </li>
+                            @endif
+                            @if(!empty($setting->working_days_from_to))
+                                <li>
+                                    <i class="icon-clock contact-icon"></i>
+                                    <span>
+                                        <strong>{{ $setting->working_days_from_to }}:</strong><br>
+                                        {{ $setting->friday_start }} - {{ $setting->friday_end }}
+                                    </span>
+                                </li>
+                            @endif
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="col-lg-3 col-md-6">
                     <section class="widget">
                         <h3 class="widget-title">{{ __('Newsletter') }}</h3>
                         <form class="row subscriber-form" action="{{ route('front.subscriber.submit') }}" method="post">
@@ -1304,42 +1674,57 @@ body_theme4 @endif
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input class="form-control" type="email" name="email"
-                                        placeholder="{{ __('Your e-mail') }}">
+                                        placeholder="{{ __('Your e-mail') }}" required>
                                     <span class="input-group-addon"><i class="icon-mail"></i></span>
                                 </div>
                                 <div aria-hidden="true">
                                     <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
                                 </div>
-
                             </div>
                             <div class="col-sm-12">
-                                <button class="btn btn-primary btn-block mt-2" type="submit">
+                                <button class="btn btn-primary btn-block mt-3" type="submit">
                                     <span>{{ __('Subscribe') }}</span>
                                 </button>
                             </div>
                             <div class="col-lg-12">
-                                <p class="text-sm opacity-80 pt-2">
+                                <p class="text-sm opacity-80 pt-3"
+                                    style="line-height: 1.5; font-size: 13px !important; color: #8A7F73 !important;">
                                     {{ __('Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.') }}
                                 </p>
                             </div>
                         </form>
-                        <div class="pt-3"><img class="d-block gateway_image"
-                                src="{{ $setting->footer_gateway_img ? url('assets/img/' . $setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}">
+                        <div class="pt-3">
+                            <img class="d-block gateway_image"
+                                src="{{ $setting->footer_gateway_img ? url('assets/img/' . $setting->footer_gateway_img) : asset('system/resources/assets/images/placeholder.png') }}"
+                                alt="Payment Gateways" style="max-height: 35px; object-fit: contain;">
                         </div>
                     </section>
                 </div>
             </div>
-            <!-- Copyright-->
-            <p class="footer-copyright">powered by Quadtrum</p>
+
+            <!-- Copyright Footer Bottom -->
+            <div class="footer-copyright">
+                <div>
+                    &copy; {{ date('Y') }} <a href="{{ route('front.index') }}">{{ $setting->title }}</a>. All rights
+                    reserved.
+                </div>
+                <div>
+                    <ul class="footer-copyright-links">
+                        <li><a href="{{ route('front.faq') }}">{{ __('FAQ') }}</a></li>
+                        <li>powered by Quadtrum</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
 
     {{-- add whatsapp icon --}}
 
     @if (isset($setting->whatsapp))
-    <a href="https://wa.me/{{$setting->whatsapp}}" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/whatsapp.svg" alt="WhatsApp" />
-    </a>
+        <a href="https://wa.me/{{$setting->whatsapp}}" class="whatsapp-float" target="_blank"
+            title="Chat with us on WhatsApp">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/whatsapp.svg" alt="WhatsApp" />
+        </a>
     @endif
 
 
@@ -1352,17 +1737,17 @@ body_theme4 @endif
 
     <!-- Cookie alert dialog  -->
     @if ($setting->is_cookie == 1)
-    @include('cookie-consent::index')
+        @include('cookie-consent::index')
     @endif
     <!-- Cookie alert dialog  -->
 
 
     @php
-    $mainbs = [];
-    $mainbs['is_announcement'] = $setting->is_announcement;
-    $mainbs['announcement_delay'] = $setting->announcement_delay;
-    $mainbs['overlay'] = $setting->overlay;
-    $mainbs = json_encode($mainbs);
+        $mainbs = [];
+        $mainbs['is_announcement'] = $setting->is_announcement;
+        $mainbs['announcement_delay'] = $setting->announcement_delay;
+        $mainbs['overlay'] = $setting->overlay;
+        $mainbs = json_encode($mainbs);
     @endphp
 
     <script>
@@ -1398,17 +1783,17 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=4') }}"></script>
 
     @if(Auth::check())
-    @php
-    $wishlist_item_ids = \App\Models\Wishlist::where('user_id', Auth::user()->id)->pluck('item_id')->toArray();
-    @endphp
-    <script>
-        window.user_wishlist_items = @json($wishlist_item_ids);
-    </script>
+        @php
+            $wishlist_item_ids = \App\Models\Wishlist::where('user_id', Auth::user()->id)->pluck('item_id')->toArray();
+        @endphp
+        <script>
+            window.user_wishlist_items = @json($wishlist_item_ids);
+        </script>
     @endif
 
     <script>
-        $(document).ready(function() {
-            $(document).on('click', '.product-card', function(e) {
+        $(document).ready(function () {
+            $(document).on('click', '.product-card', function (e) {
                 // Ignore clicks if they were on links/buttons, OR if the target was detached from DOM (like when Add to Cart spinner is added)
                 if (!$(e.target).closest('a, button, .product-button-group, .a-t-c-mr, form').length && $.contains(document, e.target)) {
                     let link = $(this).find('.product-title a').attr('href');
@@ -1418,7 +1803,7 @@ body_theme4 @endif
                 }
             });
             // Update cursor via JS so we don't mess with CSS where it was undone before
-            $(document).on('mouseenter', '.product-card', function() {
+            $(document).on('mouseenter', '.product-card', function () {
                 $(this).css('cursor', 'pointer');
             });
         });
@@ -1426,33 +1811,33 @@ body_theme4 @endif
     @yield('script')
 
     @if ($setting->is_facebook_messenger == '1')
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
+        <!-- Messenger Chat Plugin Code -->
+        <div id="fb-root"></div>
 
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+        <!-- Your Chat Plugin code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
 
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "{{ $setting->facebook_messenger }}");
-        chatbox.setAttribute("attribution", "biz_inbox");
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v11.0'
-            });
-        };
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "{{ $setting->facebook_messenger }}");
+            chatbox.setAttribute("attribution", "biz_inbox");
+            window.fbAsyncInit = function () {
+                FB.init({
+                    xfbml: true,
+                    version: 'v11.0'
+                });
+            };
 
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
     @endif
 
 
@@ -1537,20 +1922,20 @@ body_theme4 @endif
     </script>
 
     @if (Session::has('error'))
-    <script>
-        $(document).ready(function() {
-            DangerNotification('{{ Session::get('
-                error ') }}')
-        })
-    </script>
+        <script>
+            $(document).ready(function () {
+                DangerNotification('{{ Session::get('
+                            error ') }}')
+            })
+        </script>
     @endif
     @if (Session::has('success'))
-    <script>
-        $(document).ready(function() {
-            SuccessNotification('{{ Session::get('
-                success ') }}');
-        })
-    </script>
+        <script>
+            $(document).ready(function () {
+                SuccessNotification('{{ Session::get('
+                            success ') }}');
+            })
+        </script>
     @endif
 
 </body>
