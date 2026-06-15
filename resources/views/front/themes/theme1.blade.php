@@ -234,7 +234,7 @@
                         </div>
                         <!-- Slide 2 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80" class="top-banner-img" alt="Luxury Bed 2">
+                            <img src="https://picsum.photos/seed/theme1_2/1200/600" class="top-banner-img" alt="Luxury Bed 2">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Save Up To 30%</h3>
                                 <p>Enjoy massive discounts on selected items this holiday season.</p>
@@ -242,7 +242,7 @@
                         </div>
                         <!-- Slide 3 -->
                         <div class="carousel-item">
-                            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1200&q=80" class="top-banner-img" alt="Luxury Bed 3">
+                            <img src="https://picsum.photos/seed/theme1_3/1200/600" class="top-banner-img" alt="Luxury Bed 3">
                             <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 15px;">
                                 <h3 class="text-white">Elegant Designs</h3>
                                 <p>Transform your bedroom with our modern and classic styles.</p>
@@ -464,7 +464,7 @@
                                             @if($discPct)
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct }}</div>
                                             @endif
-                                            <img class="lazy" data-src="{{ url('assets/img/' . $compaign_item->item->thumbnail) }}"
+                                            <img class="lazy" src="{{ url('assets/img/' . $compaign_item->item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group">
                                                 <a class="product-button wishlist_store"
@@ -601,7 +601,7 @@
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct2 }}</div>
                                             @endif
                                             <img class="lazy"
-                                                data-src="{{ url('assets/img/' . $popular_category_item->thumbnail) }}"
+                                                src="{{ url('assets/img/' . $popular_category_item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group">
 
@@ -648,7 +648,7 @@
                 <div class="row gx-3">
                     <div class="col-md-4">
                         <a href="{{ $banner_secend['url1'] }}" class="genius-banner">
-                            <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img1']) }}" alt="">
+                            <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img1']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle1']))
                                     <p style="color:{{ isset($banner_secend['subtitle_color1']) && $banner_secend['subtitle_color1'] ? $banner_secend['subtitle_color1'] : '#fff' }} !important">{{ $banner_secend['subtitle1'] }}</p>
@@ -662,7 +662,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{ $banner_secend['url2'] }}" class="genius-banner">
-                            <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img2']) }}" alt="">
+                            <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img2']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle2']))
                                     <p style="color:{{ isset($banner_secend['subtitle_color2']) && $banner_secend['subtitle_color2'] ? $banner_secend['subtitle_color2'] : '#fff' }} !important">{{ $banner_secend['subtitle2'] }}</p>
@@ -676,7 +676,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{ $banner_secend['url3'] }}" class="genius-banner">
-                            <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img3']) }}" alt="">
+                            <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img3']) }}" alt="">
                             <div class="inner-content">
                                 @if (isset($banner_secend['subtitle3']))
                                     <p style="color:{{ isset($banner_secend['subtitle_color3']) && $banner_secend['subtitle_color3'] ? $banner_secend['subtitle_color3'] : '#fff' }} !important">{{ $banner_secend['subtitle3'] }} </p>
@@ -721,7 +721,7 @@
                                             @if($discPct3)
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct3 }}</div>
                                             @endif
-                                            <img class="lazy" data-src="{{ url('assets/img/' . $recent_item->thumbnail) }}" alt="Product">
+                                            <img class="lazy" src="{{ url('assets/img/' . $recent_item->thumbnail) }}" alt="Product">
                                             <div class="product-button-group">
                                                 <a class="product-button wishlist_store"
                                                     href="{{ route('user.wishlist.store', $recent_item->id) }}"
@@ -804,7 +804,7 @@
                                                 @if($discPct4)
                                                     <div class="product-badge product-badge2 bg-info">-{{ $discPct4 }}</div>
                                                 @endif
-                                                <img class="lazy" data-src="{{ url('assets/img/' . $item->thumbnail) }}" alt="Product">
+                                                <img class="lazy" src="{{ url('assets/img/' . $item->thumbnail) }}" alt="Product">
                                                 <div class="product-button-group">
                                                     <a class="product-button wishlist_store"
                                                         href="{{ route('user.wishlist.store', $item->id) }}"
@@ -874,7 +874,7 @@
                                         @endif
 
                                         <img class="lazy"
-                                            data-src="{{ url('assets/img/' . $two_column_category_item->thumbnail) }}"
+                                            src="{{ url('assets/img/' . $two_column_category_item->thumbnail) }}"
                                             alt="Product">
                                     </a>
                                     <div class="product-card-body">
@@ -952,7 +952,7 @@
                                     @if($discPct5)
                                         <div class="product-badge product-badge2 bg-info">-{{ $discPct5 }}</div>
                                     @endif
-                                    <img class="lazy" data-src="{{ url('assets/img/' . $feature_category_item->thumbnail) }}"
+                                    <img class="lazy" src="{{ url('assets/img/' . $feature_category_item->thumbnail) }}"
                                         alt="Product">
                                     <div class="product-button-group">
                                         <a class="product-button wishlist_store"
@@ -1447,7 +1447,7 @@
                         @foreach ($brands as $brand)
                         <div class="slider-item">
                             <a class="text-center" href="{{ route('front.catalog') . '?brand=' . $brand->slug }}">
-                                <img class="d-block hi-50 lazy" data-src="{{ url('assets/img/' . $brand->photo) }}"
+                                <img class="d-block hi-50 lazy" src="{{ url('assets/img/' . $brand->photo) }}"
                                     alt="{{ $brand->name }}" title="{{ $brand->name }}">
                             </a>
                         </div>

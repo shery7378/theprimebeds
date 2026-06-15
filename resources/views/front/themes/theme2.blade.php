@@ -192,7 +192,7 @@
                                                     <div class="product-badge product-badge2 bg-info">-{{ $discPct }}</div>
                                                 @endif
                                                 <img class="lazy"
-                                                    data-src="{{ url('assets/img/' . $item->thumbnail) }}"
+                                                    src="{{ url('assets/img/' . $item->thumbnail) }}"
                                                     alt="Product">
                                                 <div class="product-button-group"><a class="product-button wishlist_store"
                                                         href="{{ route('user.wishlist.store', $item->id) }}"
@@ -243,7 +243,7 @@
             <div class="row gx-3">
                 <div class="col-md-4">
                     <a href="{{ $banner_secend['url1'] }}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img1']) }}"
+                        <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img1']) }}"
                             alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle1']))
@@ -258,7 +258,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{ $banner_secend['url2'] }}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img2']) }}"
+                        <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img2']) }}"
                             alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle2']))
@@ -273,7 +273,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{ $banner_secend['url3'] }}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/' . $banner_secend['img3']) }}"
+                        <img class="lazy" src="{{ url('assets/img/' . $banner_secend['img3']) }}"
                             alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle3']))
@@ -322,7 +322,7 @@
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct2 }}</div>
                                             @endif
                                             <img class="lazy"
-                                                data-src="{{ url('assets/img/' . $item->thumbnail) }}"
+                                                src="{{ url('assets/img/' . $item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group"><a class="product-button wishlist_store"
                                                     href="{{ route('user.wishlist.store', $item->id) }}"
@@ -395,7 +395,7 @@
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct3 }}</div>
                                             @endif
                                             <img class="lazy"
-                                                data-src="{{ url('assets/img/' . $item->thumbnail) }}"
+                                                src="{{ url('assets/img/' . $item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group"><a class="product-button wishlist_store"
                                                     href="{{ route('user.wishlist.store', $item->id) }}"
@@ -469,7 +469,7 @@
                                                 <div class="product-badge product-badge2 bg-info">-{{ $discPct4 }}</div>
                                             @endif
                                             <img class="lazy"
-                                                data-src="{{ url('assets/img/' . $item->thumbnail) }}"
+                                                src="{{ url('assets/img/' . $item->thumbnail) }}"
                                                 alt="Product">
                                             <div class="product-button-group"><a class="product-button wishlist_store"
                                                     href="{{ route('user.wishlist.store', $item->id) }}"
@@ -518,7 +518,7 @@
             <div class="row gx-3">
                 <div class="col-md-6">
                     <a href="{{ $banner_third['url1'] }}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/' . $banner_third['img1']) }}"
+                        <img class="lazy" src="{{ url('assets/img/' . $banner_third['img1']) }}"
                             alt="">
                         <div class="inner-content">
                             @if (isset($banner_third['subtitle1']))
@@ -532,7 +532,7 @@
                 </div>
                 <div class="col-md-6">
                     <a href="{{ $banner_third['url2'] }}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/' . $banner_third['img2']) }}"
+                        <img class="lazy" src="{{ url('assets/img/' . $banner_third['img2']) }}"
                             alt="">
                         <div class="inner-content">
                             @if (isset($banner_third['subtitle2']))
@@ -574,7 +574,7 @@
                                                     @endif
 
                                                     <img class="lazy"
-                                                        data-src="{{ url('assets/img/' . $two_column_category_item->thumbnail) }}"
+                                                        src="{{ url('assets/img/' . $two_column_category_item->thumbnail) }}"
                                                         alt="Product">
                                                 </a>
                                                 <div class="product-card-body">
@@ -626,7 +626,7 @@
                                 <a href="{{ route('front.blog.details', $post->slug) }}" class="blog-post">
                                     <div class="post-thumb">
                                         <img class="lazy"
-                                            data-src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                            src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
                                             alt="Blog Post">
                                     </div>
                                     <div class="post-body">
@@ -671,7 +671,7 @@
                                 <a class="text-center"
                                     href="{{ route('front.catalog') . '?brand=' . $brand->slug }}">
                                     <img class="d-block hi-50 lazy"
-                                        data-src="{{ url('assets/img/' . $brand->photo) }}"
+                                        src="{{ url('assets/img/' . $brand->photo) }}"
                                         alt="{{ $brand->name }}" title="{{ $brand->name }}">
                                 </a>
                             </div>

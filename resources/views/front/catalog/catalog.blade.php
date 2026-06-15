@@ -261,7 +261,7 @@
                     {{-- Thumbnail --}}
                     <a class="pc__thumb-link" href="{{ route('front.product', $item->slug) }}">
                         <div class="pc__thumb">
-                            <img class="lazy" data-src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
+                            <img class="lazy" src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
 
                             {{-- Left Action Buttons --}}
                             <div class="pc__actions">
@@ -354,7 +354,7 @@
                     {{-- Thumbnail --}}
                     <a class="pc__thumb-link" href="{{ route('front.product', $item->slug) }}">
                         <div class="pc-list__thumb">
-                            <img class="lazy" data-src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
+                            <img class="lazy" src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
 
                             {{-- Left Action Buttons --}}
                             <div class="pc__actions">

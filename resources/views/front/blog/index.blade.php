@@ -30,7 +30,7 @@
                             <a href="{{ route('front.blog.details', $post->slug) }}" class="blog-post">
                                 <div class="post-thumb">
                                     <img class="lazy"
-                                        data-src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                        src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
                                         alt="Blog Post">
                                 </div>
                                 <div class="post-body">

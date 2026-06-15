@@ -1714,7 +1714,7 @@
                                 @if($discPct)
                                     <div class="product-badge bg-warning" style="background-color:#daa520 !important;">-{{ $discPct }}</div>
                                 @endif
-                                <img class="lazy" data-src="{{ url('assets/img/' . $related->thumbnail) }}" alt="{{ $related->name }}">
+                                <img class="lazy" src="{{ url('assets/img/' . $related->thumbnail) }}" alt="{{ $related->name }}">
                                 <div class="product-button-group">
                                     <a class="product-button wishlist_store"
                                         href="{{ route('user.wishlist.store', $related->id) }}"

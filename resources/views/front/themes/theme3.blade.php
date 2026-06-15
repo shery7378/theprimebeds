@@ -165,7 +165,7 @@
                                                 @if($item->previous_price && $item->previous_price !=0)
                                                 <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($item)}}</div>
                                                 @endif
-                                                <img class="lazy" data-src="{{url('assets/img/'.$item->thumbnail)}}" alt="Product">
+                                                <img class="lazy" src="{{url('assets/img/'.$item->thumbnail)}}" alt="Product">
                                                 <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                                     <a class="product-button" href="{{route('front.product',$item->slug)}}" title="{{__('Details')}}"><i class="icon-search"></i></a>
                                                     @include('includes.item_footer',['sitem' => $item])
@@ -242,7 +242,7 @@
             <div class="row gx-3">
                 <div class="col-md-4">
                     <a href="{{$banner_secend['url1']}}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/'.$banner_secend['img1']) }}" alt="">
+                        <img class="lazy" src="{{ url('assets/img/'.$banner_secend['img1']) }}" alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle1']))
                                 <p style="color:{{ isset($banner_secend['subtitle_color1']) && $banner_secend['subtitle_color1'] ? $banner_secend['subtitle_color1'] : '#fff' }} !important">{{$banner_secend['subtitle1']}}</p>
@@ -256,7 +256,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{$banner_secend['url2']}}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/'.$banner_secend['img2']) }}" alt="">
+                        <img class="lazy" src="{{ url('assets/img/'.$banner_secend['img2']) }}" alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle2']))
                                 <p style="color:{{ isset($banner_secend['subtitle_color2']) && $banner_secend['subtitle_color2'] ? $banner_secend['subtitle_color2'] : '#fff' }} !important">{{$banner_secend['subtitle2']}}</p>
@@ -270,7 +270,7 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{$banner_secend['url3']}}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/'.$banner_secend['img3']) }}" alt="">
+                        <img class="lazy" src="{{ url('assets/img/'.$banner_secend['img3']) }}" alt="">
                         <div class="inner-content">
                             @if (isset($banner_secend['subtitle3']))
                                 <p style="color:{{ isset($banner_secend['subtitle_color3']) && $banner_secend['subtitle_color3'] ? $banner_secend['subtitle_color3'] : '#fff' }} !important">{{$banner_secend['subtitle3']}} </p>
@@ -323,7 +323,7 @@
                                         @if($popular_category_item->previous_price && $popular_category_item->previous_price !=0)
                                         <div class="product-badge product-badge2 bg-info"> -{{PriceHelper::DiscountPercentage($popular_category_item)}}</div>
                                         @endif
-                                            <img class="lazy" data-src="{{url('assets/img/'.$popular_category_item->thumbnail)}}" alt="Product">
+                                            <img class="lazy" src="{{url('assets/img/'.$popular_category_item->thumbnail)}}" alt="Product">
                                         <div class="product-button-group"><a class="product-button wishlist_store" href="{{route('user.wishlist.store',$popular_category_item->id)}}" title="{{__('Wishlist')}}"><i class="icon-heart"></i></a>
                                             <a class="product-button" href="{{route('front.product',$popular_category_item->slug)}}" title="{{__('Details')}}"><i class="icon-search"></i></a>
 
@@ -379,7 +379,7 @@
                                                 ">{{__('out of stock')}}</div>
                                                 @endif
 
-                                            <img class="lazy" data-src="{{url('assets/img/'.$two_column_category_item->thumbnail)}}" alt="Product"></a>
+                                            <img class="lazy" src="{{url('assets/img/'.$two_column_category_item->thumbnail)}}" alt="Product"></a>
                                         <div class="product-card-body">
                                             <h3 class="product-title"><a href="{{route('front.product',$two_column_category_item->slug)}}">
                                                 {{ Str::limit($two_column_category_item->name,40) }}
@@ -416,7 +416,7 @@
             <div class="row gx-3">
                 <div class="col-md-6">
                     <a href="{{$banner_third['url1']}}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/'.$banner_third['img1']) }}" alt="">
+                        <img class="lazy" src="{{ url('assets/img/'.$banner_third['img1']) }}" alt="">
                         <div class="inner-content">
                             @if (isset($banner_third['subtitle1']))
                                 <p style="color:{{ isset($banner_third['subtitle_color1']) && $banner_third['subtitle_color1'] ? $banner_third['subtitle_color1'] : '#fff' }} !important">{{$banner_third['subtitle1']}}</p>
@@ -429,7 +429,7 @@
                 </div>
                 <div class="col-md-6">
                     <a href="{{$banner_third['url2']}}" class="genius-banner">
-                        <img class="lazy" data-src="{{ url('assets/img/'.$banner_third['img2']) }}" alt="">
+                        <img class="lazy" src="{{ url('assets/img/'.$banner_third['img2']) }}" alt="">
                         <div class="inner-content">
                             @if (isset($banner_third['subtitle2']))
                                 <p style="color:{{ isset($banner_third['subtitle_color2']) && $banner_third['subtitle_color2'] ? $banner_third['subtitle_color2'] : '#fff' }} !important">{{$banner_third['subtitle2']}} </p>
@@ -462,7 +462,7 @@
                                 <div class="slider-item">
                                     <a href="{{route('front.blog.details',$post->slug)}}" class="blog-post">
                                         <div class="post-thumb">
-                                            <img class="lazy" data-src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                            <img class="lazy" src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
                                                 alt="Blog Post">
                                             </div>
                                         <div class="post-body">
@@ -504,7 +504,7 @@
                             <div class="slider-item">
                                 <a class="text-center" href="{{ route('front.catalog') . '?brand=' . $brand->slug }}">
                                     <img class="d-block hi-50 lazy"
-                                    data-src="{{ url('assets/img/' . $brand->photo) }}"
+                                    src="{{ url('assets/img/' . $brand->photo) }}"
                                         alt="{{ $brand->name }}" title="{{ $brand->name }}">
                                 </a>
                             </div>

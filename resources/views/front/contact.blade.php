@@ -12,7 +12,7 @@
 <style>
     /* Hero Section */
     .contact-hero {
-        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset("assets/img/contact us.png") }}') center/cover no-repeat;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset("assets/img/contact%20us.png") }}') center/cover no-repeat;
         min-height: 380px;
         display: flex;
         align-items: center;
@@ -306,49 +306,91 @@
 
     /* Features Section */
     .features-section {
-        padding: 80px 0;
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-        border-top: 1px solid #e5e5e5;
+        padding: 90px 0;
+        background: linear-gradient(135deg, #fdfbf7 0%, #ffffff 100%);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
     }
-    .feature-box {
+    .feature-card {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 16px;
+        padding: 40px 24px 35px;
         text-align: center;
-        padding: 30px 20px;
-        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    .feature-box:hover {
-        transform: translateY(-5px);
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 100%
+        );
+        transform: skewX(-25deg);
+        transition: 0.75s;
+        pointer-events: none;
+        z-index: 1;
     }
-    .feature-icon {
-        width: 70px;
-        height: 70px;
-        margin: 0 auto 20px;
+    .feature-card:hover::before {
+        left: 125%;
+    }
+    .feature-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(197, 160, 89, 0.35);
+        box-shadow: 0 20px 40px -15px rgba(197, 160, 89, 0.18);
+    }
+    .feature-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        color: #1a1a1a;
-        font-size: 28px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #fbf8f2 0%, #f4eae0 100%);
+        border: 1px solid rgba(197, 160, 89, 0.12);
+        color: #c5a059;
+        font-size: 30px;
+        box-shadow: 0 8px 20px rgba(197, 160, 89, 0.05);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .feature-box:hover .feature-icon {
-        transform: scale(1.1);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
-        color: #fff;
+    .feature-card:hover .feature-icon-wrapper {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+        color: #f4eae0;
+        border-color: #1a1a1a;
+        transform: scale(1.08) rotate(5deg);
+        box-shadow: 0 12px 24px rgba(26, 26, 26, 0.15);
     }
-    .feature-box h5 {
-        font-size: 0.8rem;
-        font-weight: 800;
+    .feature-card-title {
+        font-size: 0.88rem;
+        font-weight: 700;
+        margin-top: 24px;
         margin-bottom: 8px;
         color: #1a1a1a;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
+        transition: color 0.3s ease;
     }
-    .feature-box p {
+    .feature-card:hover .feature-card-title {
+        color: #c5a059;
+    }
+    .feature-card-desc {
         font-size: 0.85rem;
-        color: #888;
+        color: #777;
         margin: 0;
         line-height: 1.5;
     }
@@ -624,42 +666,42 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                <div class="feature-box">
-                    <div class="feature-icon">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
                         <i class="icon-truck"></i>
                     </div>
-                    <h5>{{ __('FAST SHIPPING') }}</h5>
-                    <p>{{ __('Return of Choice') }}</p>
+                    <h5 class="feature-card-title">{{ __('FAST SHIPPING') }}</h5>
+                    <p class="feature-card-desc">{{ __('Return of Choice') }}</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                <div class="feature-box">
-                    <div class="feature-icon">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
                         <i class="icon-credit-card"></i>
                     </div>
-                    <h5>{{ __('ONLINE PAYMENT') }}</h5>
-                    <p>{{ __('Safe & Secure') }}</p>
+                    <h5 class="feature-card-title">{{ __('ONLINE PAYMENT') }}</h5>
+                    <p class="feature-card-desc">{{ __('Safe & Secure') }}</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                <div class="feature-box">
-                    <div class="feature-icon">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
                         <i class="icon-headphones"></i>
                     </div>
-                    <h5>{{ __('DEDICATED CUSTOMER CARE') }}</h5>
-                    <p>{{ __('Friendly Helpdesk') }}</p>
+                    <h5 class="feature-card-title">{{ __('DEDICATED CUSTOMER CARE') }}</h5>
+                    <p class="feature-card-desc">{{ __('Friendly Helpdesk') }}</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <div class="feature-box">
-                    <div class="feature-icon">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
                         <i class="icon-shield"></i>
                     </div>
-                    <h5>{{ __('100% SAFE') }}</h5>
-                    <p>{{ __('SSL Certified') }}</p>
+                    <h5 class="feature-card-title">{{ __('100% SAFE') }}</h5>
+                    <p class="feature-card-desc">{{ __('SSL Certified') }}</p>
                 </div>
             </div>
         </div>
