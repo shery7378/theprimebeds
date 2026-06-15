@@ -311,9 +311,96 @@
             }
         }
 
+        /* ============================================================
+           GLOBAL BREADCRUMB HERO STRIP REDESIGN (MATCHING PRODUCT PAGE)
+           ============================================================ */
+        .page-title {
+            background: #2A4166 !important;
+            padding: 18px 0 !important;
+            position: relative !important;
+            overflow: hidden !important;
+            border: none !important;
+            margin-bottom: 40px !important;
+            border-top: none !important;
+            height: auto !important;
+        }
+
+        .page-title::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+            z-index: 1 !important;
+            opacity: 1 !important;
+        }
+
+        .page-title>.container {
+            display: block !important;
+            position: relative !important;
+            z-index: 2 !important;
+        }
+
+        .breadcrumbs {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+        }
+
+        .breadcrumbs>li {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: rgba(255, 255, 255, 0.65) !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Hide the legacy separator li elements */
+        .breadcrumbs>li.separator {
+            display: none !important;
+        }
+
+        /* Re-use CSS / slash separator */
+        .breadcrumbs>li:not(:last-child)::after {
+            content: '/' !important;
+            color: rgba(255, 255, 255, 0.35) !important;
+            font-size: 12px !important;
+        }
+
+        .breadcrumbs>li>a {
+            color: rgba(255, 255, 255, 0.65) !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+
+        .breadcrumbs>li>a:hover {
+            color: #ffffff !important;
+        }
+
+        /* Active current item */
+        .breadcrumbs>li:last-child {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+
+        /* Ensure font awesome icon or home icon displays correctly in white */
+        .breadcrumbs>li:first-child>a::before {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-size: 13px !important;
+            margin-right: 6px !important;
+        }
+
         /* =============================================
-    TOPBAR REDESIGN — Premium Header Styles
-    ============================================= */
+        TOPBAR REDESIGN — Premium Header Styles
+        ============================================= */
 
         .topbar-redesigned {
             padding: 0;
@@ -990,18 +1077,23 @@
         /* ===== Attractive & Premium Feature Cards Redesign ===== */
         .service-section {
             padding: 50px 0 20px !important;
-            background-color: #faf8f5 !important; /* Extremely soft warm luxury backdrop */
+            background-color: #faf8f5 !important;
+            /* Extremely soft warm luxury backdrop */
         }
 
         .single-service.single-service2 {
             background: #ffffff !important;
-            border: 1px solid #ebe5db !important; /* Elegant warm off-white border */
-            border-radius: 16px !important; /* Smooth premium rounded corners */
-            padding: 20px 20px 20px 96px !important; /* Fixed padding leaving room on the left */
+            border: 1px solid #ebe5db !important;
+            /* Elegant warm off-white border */
+            border-radius: 16px !important;
+            /* Smooth premium rounded corners */
+            padding: 20px 20px 20px 96px !important;
+            /* Fixed padding leaving room on the left */
             display: flex !important;
             align-items: center !important;
             height: 100% !important;
-            box-shadow: 0 4px 20px rgba(140, 117, 88, 0.04) !important; /* Subtle warm golden shadow */
+            box-shadow: 0 4px 20px rgba(140, 117, 88, 0.04) !important;
+            /* Subtle warm golden shadow */
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
             position: relative !important;
             overflow: hidden !important;
@@ -1017,7 +1109,8 @@
             transform: translateY(-50%) !important;
             width: 56px !important;
             height: 56px !important;
-            background: #fcfaf6 !important; /* Inner card background for icon contrast */
+            background: #fcfaf6 !important;
+            /* Inner card background for icon contrast */
             border-radius: 14px !important;
             border: 1px solid #f2ede4 !important;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -1025,7 +1118,8 @@
         }
 
         .single-service.single-service2:hover::before {
-            background: #8C7558 !important; /* Fills squircle with gold on card hover */
+            background: #8C7558 !important;
+            /* Fills squircle with gold on card hover */
             border-color: #8C7558 !important;
             transform: translateY(-50%) scale(1.1) rotate(5deg) !important;
         }
@@ -1063,8 +1157,10 @@
             width: 56px !important;
             height: 56px !important;
             object-fit: contain !important;
-            padding: 14px !important; /* Keeps drawing sized correctly */
-            background: transparent !important; /* Keep background transparent to see ::before backdrop */
+            padding: 14px !important;
+            /* Keeps drawing sized correctly */
+            background: transparent !important;
+            /* Keep background transparent to see ::before backdrop */
             border: none !important;
             margin-bottom: 0 !important;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -1075,7 +1171,8 @@
 
         /* Icon transform on hover */
         .single-service.single-service2:hover img {
-            filter: brightness(0) invert(1) !important; /* Flips dark drawing color to white */
+            filter: brightness(0) invert(1) !important;
+            /* Flips dark drawing color to white */
             transform: translateY(-50%) scale(1.1) rotate(5deg) !important;
         }
 
@@ -1103,7 +1200,8 @@
 
         .single-service.single-service2:hover .content h6,
         .single-service.single-service2:hover .content .contactLink {
-            color: #8C7558 !important; /* Accent color on card hover */
+            color: #8C7558 !important;
+            /* Accent color on card hover */
         }
 
         /* Description text */
@@ -1363,8 +1461,8 @@ body_theme4 @endif
                                             onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
                                             onmouseout="this.style.color='inherit'">
                                             <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                                         width:32px;height:32px;border-radius:50%;
-                                                                         border:2px solid currentColor;">
+                                                                             width:32px;height:32px;border-radius:50%;
+                                                                             border:2px solid currentColor;">
                                                 <i class="icon-user"
                                                     style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
                                             </span>
@@ -1375,9 +1473,9 @@ body_theme4 @endif
                                             <div class="main-link"
                                                 style="display:inline-flex;align-items:center;cursor:pointer;">
                                                 <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                                             width:32px;height:32px;border-radius:50%;
-                                                                             background:{{ $setting->primary_color ?? '#4e73df' }};
-                                                                             color:#fff;flex-shrink:0;">
+                                                                                 width:32px;height:32px;border-radius:50%;
+                                                                                 background:{{ $setting->primary_color ?? '#4e73df' }};
+                                                                                 color:#fff;flex-shrink:0;">
                                                     <i class="icon-user"
                                                         style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
                                                 </span>
@@ -1682,8 +1780,8 @@ body_theme4 @endif
                             ];
 
                             $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
-                                                                                                                                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
-                                                                                                                                        </svg>';
+                                                                                                                                                                        <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                                                                                                                                                    </svg>';
                         @endphp
 
                         <div class="footer-social-links d-flex flex-wrap">
@@ -2051,7 +2149,7 @@ body_theme4 @endif
         <script>
             $(document).ready(function () {
                 DangerNotification('{{ Session::get('
-                                error ') }}')
+                                    error ') }}')
             })
         </script>
     @endif
@@ -2059,7 +2157,7 @@ body_theme4 @endif
         <script>
             $(document).ready(function () {
                 SuccessNotification('{{ Session::get('
-                                success ') }}');
+                                    success ') }}');
             })
         </script>
     @endif
