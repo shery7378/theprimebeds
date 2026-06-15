@@ -1763,7 +1763,7 @@ body_theme4 @endif
                                 'instagram' => '#E1306C',
                                 'linkedin' => '#0A66C2',
                                 'tiktok' => '#010101',
-                                'twitter' => '#1DA1F2',
+                                'twitter' => '#000000',
                                 'youtube' => '#FF0000',
                                 'whatsapp' => '#25D366',
                                 'snapchat' => '#FFFC00',
@@ -1782,6 +1782,9 @@ body_theme4 @endif
                             $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
                                                                                                                                                                                                     <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
                                                                                                                                                                                                 </svg>';
+                            $xSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                                        <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+                                     </svg>';
                         @endphp
 
                         <div class="footer-social-links d-flex flex-wrap">
@@ -1807,6 +1810,8 @@ body_theme4 @endif
                                         style="--brand-bg: {{ $brandColor }};">
                                         @if ($isTikTok)
                                             {!! $tiktokSvg !!}
+                                        @elseif(str_contains(strtolower($iconClass), 'twitter') || str_contains(strtolower($link), 'twitter') || str_contains(strtolower($link), 'x.com'))
+                                            {!! $xSvg !!}
                                         @else
                                             <i class="{{ $iconClass }}"></i>
                                         @endif
@@ -1824,8 +1829,8 @@ body_theme4 @endif
                                 <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
-                                    <i class="fab fa-twitter"></i>
+                                <a class="social-icon-branded" href="#" title="X (Twitter)" style="--brand-bg: #000000;">
+                                    {!! $xSvg !!}
                                 </a>
                                 <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
                                     <i class="fab fa-youtube"></i>
