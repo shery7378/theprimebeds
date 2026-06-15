@@ -1048,68 +1048,74 @@
 
             @if($testimonials->count() > 0)
             <div class="row">
-                <div class="col-lg-10 mx-auto">
+                <div class="col-lg-12 mx-auto">
                     <!-- Hidden Progress Bar (required by JS controller) -->
                     <div id="carousel-progress" style="display: none; width: 0%;"></div>
 
                     <!-- Main Carousel -->
-                    <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000" style="max-width: 800px; margin: 0 auto; position: relative;">
+                    <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000" style="max-width: 1200px; margin: 0 auto; position: relative;">
 
                         <!-- Carousel Items -->
                         <div class="carousel-inner">
-                            @foreach ($testimonials as $key => $testimonial)
-                            <div class="carousel-item @if($key == 0) active @endif" data-bs-interval="6000">
-                                <div style="padding: 20px 20px 40px;">
-                                    <div style="background: #ffffff; padding: 50px 45px; border-radius: 24px; border: 1px solid #ebe5db; box-shadow: 0 10px 40px rgba(140, 117, 88, 0.04); text-align: center; position: relative; overflow: hidden;">
-                                        <!-- Centered Quote Icon -->
-                                        <div style="font-size: 32px; color: #8C7558; opacity: 0.8; margin-bottom: 15px; display: inline-block;">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-
-                                        <!-- Stars -->
-                                        <div style="margin-bottom: 20px; position: relative; z-index: 2;">
-                                            @for ($i = 0; $i < $testimonial->rating; $i++)
-                                                <i class="fas fa-star" style="color: #e5a93b; margin: 0 4px; font-size: 16px;"></i>
-                                            @endfor
-                                        </div>
-
-                                        <!-- Testimonial Text -->
-                                        <p style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 500; font-size: 21px; line-height: 1.8; color: #3f3a36; margin-bottom: 30px; position: relative; z-index: 2;">"{{ $testimonial->testimonial_text }}"</p>
-
-                                        <!-- Client Info -->
-                                        <div style="border-top: 1px solid #ebe5db; padding-top: 25px; position: relative; z-index: 2;">
-                                            <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
-                                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #FAF7F2 0%, #EADDCF 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8C7558; border: 1px solid #EBE5DB; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif;">
-                                                    {{ substr($testimonial->client_name, 0, 1) }}
+                            @foreach ($testimonials->chunk(3) as $chunkIndex => $chunk)
+                            <div class="carousel-item @if($chunkIndex == 0) active @endif" data-bs-interval="6000">
+                                <div class="row px-4">
+                                    @foreach($chunk as $testimonial)
+                                    <div class="col-md-4 mb-4">
+                                        <div style="padding: 10px; height: 100%;">
+                                            <div style="background: #ffffff; padding: 40px 30px; border-radius: 24px; border: 1px solid #ebe5db; box-shadow: 0 10px 40px rgba(140, 117, 88, 0.04); text-align: center; position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
+                                                <!-- Centered Quote Icon -->
+                                                <div style="font-size: 32px; color: #8C7558; opacity: 0.8; margin-bottom: 15px; display: inline-block;">
+                                                    <i class="fas fa-quote-left"></i>
                                                 </div>
-                                                <div style="text-align: left;">
-                                                    <h5 style="margin: 0 0 3px 0; color: #2c2724; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.3px;">{{ $testimonial->client_name }}</h5>
-                                                    <p style="margin: 0; color: #8C7558; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">{{ $testimonial->client_title }}</p>
+
+                                                <!-- Stars -->
+                                                <div style="margin-bottom: 20px; position: relative; z-index: 2;">
+                                                    @for ($i = 0; $i < $testimonial->rating; $i++)
+                                                        <i class="fas fa-star" style="color: #e5a93b; margin: 0 4px; font-size: 16px;"></i>
+                                                    @endfor
+                                                </div>
+
+                                                <!-- Testimonial Text -->
+                                                <p style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 500; font-size: 18px; line-height: 1.6; color: #3f3a36; margin-bottom: 30px; position: relative; z-index: 2; flex-grow: 1;">"{{ \Illuminate\Support\Str::limit($testimonial->testimonial_text, 150) }}"</p>
+
+                                                <!-- Client Info -->
+                                                <div style="border-top: 1px solid #ebe5db; padding-top: 25px; position: relative; z-index: 2; margin-top: auto;">
+                                                    <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                                                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #FAF7F2 0%, #EADDCF 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8C7558; border: 1px solid #EBE5DB; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif; flex-shrink: 0;">
+                                                            {{ substr($testimonial->client_name, 0, 1) }}
+                                                        </div>
+                                                        <div style="text-align: left;">
+                                                            <h5 style="margin: 0 0 3px 0; color: #2c2724; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.3px;">{{ $testimonial->client_name }}</h5>
+                                                            <p style="margin: 0; color: #8C7558; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">{{ $testimonial->client_title }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                             @endforeach
                         </div>
 
                         <!-- Pagination Indicators (Dots) -->
-                        @if($testimonials->count() > 1)
-                        <div class="carousel-indicators-custom" style="display: flex; justify-content: center; gap: 8px; margin-top: 10px; margin-bottom: 10px;">
-                            @foreach ($testimonials as $key => $testimonial)
-                            <button class="carousel-indicator-btn @if($key == 0) active @endif" data-bs-slide-to="{{ $key }}" aria-label="Slide {{ $key + 1 }}"></button>
+                        @if($testimonials->count() > 3)
+                        <div class="carousel-indicators-custom" style="display: flex; justify-content: center; gap: 8px; margin-top: 20px; margin-bottom: 10px;">
+                            @foreach ($testimonials->chunk(3) as $chunkIndex => $chunk)
+                            <button class="carousel-indicator-btn @if($chunkIndex == 0) active @endif" data-bs-slide-to="{{ $chunkIndex }}" aria-label="Slide {{ $chunkIndex + 1 }}"></button>
                             @endforeach
                         </div>
                         @endif
 
                         <!-- Navigation Buttons -->
-                        @if($testimonials->count() > 1)
-                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev" title="Previous">
-                            <i class="fas fa-chevron-left"></i>
+                        @if($testimonials->count() > 3)
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev" title="Previous" style="left: -40px; width: 40px; height: 40px; margin-top: auto; margin-bottom: auto;">
+                            <i class="fas fa-chevron-left" style="font-size: 20px;"></i>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next" title="Next">
-                            <i class="fas fa-chevron-right"></i>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next" title="Next" style="right: -40px; width: 40px; height: 40px; margin-top: auto; margin-bottom: auto;">
+                            <i class="fas fa-chevron-right" style="font-size: 20px;"></i>
                         </button>
                         @endif
                     </div>
