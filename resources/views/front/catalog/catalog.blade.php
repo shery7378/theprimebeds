@@ -366,7 +366,7 @@
 
                                 @if($item->previous_price && $item->previous_price != 0 && $item->previous_price > $item->discount_price)
                                 <span class="pc__badge">
-                                    -{{ PriceHelper::DiscountPercentage($item) }}% off
+                                    -{{ PriceHelper::DiscountPercentage($item) }} off
                                 </span>
                                 @endif
                             </div>
@@ -459,7 +459,7 @@
 
                                 @if($item->previous_price && $item->previous_price != 0 && $item->previous_price > $item->discount_price)
                                 <span class="pc__badge">
-                                    -{{ PriceHelper::DiscountPercentage($item) }}% off
+                                    -{{ PriceHelper::DiscountPercentage($item) }} off
                                 </span>
                                 @endif
                             </div>
