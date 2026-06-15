@@ -4,30 +4,30 @@
 <head>
     <meta charset="UTF-8">
     @if (url()->current() == route('front.index'))
-        <title>@yield('hometitle')</title>
+    <title>@yield('hometitle')</title>
     @else
-        <title>{{ $setting->title }} -@yield('title')</title>
+    <title>{{ $setting->title }} -@yield('title')</title>
     @endif
 
     <!-- SEO Meta Tags-->
     @if (url()->current() == route('front.index'))
-        <meta name="author" content="GeniusDevs">
-        <meta name="distribution" content="web">
-        <meta name="description" content="{{ $setting->meta_description }}">
-        <meta name="keywords" content="{{ $setting->meta_keywords }}">
-        <meta name="image" content="{{ url('assets/img/' . $setting->meta_image) }}">
-        <meta property="og:title" content="{{ $setting->title}}">
-        <meta property="og:description" content="{{ $setting->meta_description }}">
-        <meta property="og:image" content="{{ url('assets/img/' . $setting->meta_image) }}">
-        <meta property="og:image:secure_url" content="{{ url('assets/img/' . $setting->meta_image) }}" />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="627" />
-        <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:site_name" content="{{ $setting->title }}">
-        <meta property="og:type" content="website">
+    <meta name="author" content="GeniusDevs">
+    <meta name="distribution" content="web">
+    <meta name="description" content="{{ $setting->meta_description }}">
+    <meta name="keywords" content="{{ $setting->meta_keywords }}">
+    <meta name="image" content="{{ url('assets/img/' . $setting->meta_image) }}">
+    <meta property="og:title" content="{{ $setting->title}}">
+    <meta property="og:description" content="{{ $setting->meta_description }}">
+    <meta property="og:image" content="{{ url('assets/img/' . $setting->meta_image) }}">
+    <meta property="og:image:secure_url" content="{{ url('assets/img/' . $setting->meta_image) }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="{{ $setting->title }}">
+    <meta property="og:type" content="website">
     @else
-        @yield('meta')
+    @yield('meta')
     @endif
 
     <!-- Mobile Specific Meta Tag-->
@@ -58,573 +58,544 @@
     <script src="{{ asset('assets/front/js/modernizr.min.js') }}"></script>
 
     @if (DB::table('languages')->where('is_default', 1)->first()->rtl == 1)
-        <link rel="stylesheet" href="{{ asset('assets/front/css/rtl.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front/css/rtl.css') }}">
     @endif
     <style>
-        {{ $setting->custom_css }}
-        /* =============================================
-           SLIDER NAVIGATION ARROWS (HIDDEN)
-           ============================================= */
-        .popular-category-slider .owl-nav,
-        .flash-deal-slider .owl-nav,
-        .bestseller-slider .owl-nav,
-        .newproduct-slider .owl-nav,
-        .toprated-slider .owl-nav,
-        .home-blog-slider .owl-nav {
-            display: none !important;
-        }
-           GLOBAL PRODUCT CARD REDESIGN (BEIGE LUXURY THEME)
-           ============================================= */
-        .product-card {
-            background: #F8F6F0 !important;
-            border: none !important;
-            border-radius: 20px !important;
-            overflow: hidden !important;
-            display: flex !important;
-            flex-direction: column !important;
-            transition: transform 0.28s ease, box-shadow 0.28s ease !important;
-            position: relative !important;
-            box-shadow: none !important;
-        }
-        .product-card:hover {
-            transform: translateY(-6px) !important;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
-            border-color: transparent !important;
-        }
+    {{ $setting->custom_css }}
+    /* =============================================
+    SLIDER NAVIGATION ARROWS (HIDDEN)
+    ============================================= */
+    .popular-category-slider .owl-nav,
+    .flash-deal-slider .owl-nav,
+    .bestseller-slider .owl-nav,
+    .newproduct-slider .owl-nav,
+    .toprated-slider .owl-nav,
+    .home-blog-slider .owl-nav {
+    display: none !important;
+    }
+    GLOBAL PRODUCT CARD REDESIGN (BEIGE LUXURY THEME)
+    ============================================= */
+    .product-card {
+    background: #F8F6F0 !important;
+    border: none !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.28s ease, box-shadow 0.28s ease !important;
+    position: relative !important;
+    box-shadow: none !important;
+    }
+    .product-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08) !important;
+    border-color: transparent !important;
+    }
 
-        .product-card .product-thumb {
-            position: relative !important;
-            overflow: hidden !important;
-            background: #EBE5DB !important;
-            aspect-ratio: 4 / 3 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 100% !important;
-            padding: 0 !important;
-        }
-        .product-card .product-thumb img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            display: block !important;
-            transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-        }
-        .product-card:hover .product-thumb img {
-            transform: scale(1.07) !important;
-        }
+    .product-card .product-thumb {
+    position: relative !important;
+    overflow: hidden !important;
+    background: #EBE5DB !important;
+    aspect-ratio: 4 / 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+    }
+    .product-card .product-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    }
+    .product-card:hover .product-thumb img {
+    transform: scale(1.07) !important;
+    }
 
-        /* Badges */
-        .product-card .product-badge {
-            position: absolute !important;
-            top: 15px !important;
-            right: 15px !important;
-            left: auto !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 4px !important;
-            padding: 6px 14px !important;
-            border-radius: 50px !important;
-            font-size: 13px !important;
-            font-weight: 600 !important;
-            letter-spacing: 0px !important;
-            color: #8C7558 !important;
-            background: #ffffff !important;
-            line-height: 1 !important;
-            white-space: nowrap !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
-            z-index: 3 !important;
-            border: none !important;
-            text-transform: none !important;
-        }
-        .product-card .product-badge.product-badge2 { 
-            top: 15px !important; 
-        }
-        .product-card .product-badge.bg-secondary { 
-            top: 55px !important; 
-        }
+    /* Badges */
+    .product-card .product-badge {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 6px 14px !important;
+    border-radius: 50px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0px !important;
+    color: #8C7558 !important;
+    background: #ffffff !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+    z-index: 3 !important;
+    border: none !important;
+    text-transform: none !important;
+    }
+    .product-card .product-badge.product-badge2 {
+    top: 15px !important;
+    }
+    .product-card .product-badge.bg-secondary {
+    top: 55px !important;
+    }
 
-        /* Add to Cart Hover Bar (Global for all Product Cards) */
-        .product-card .product-button-group {
-            position: absolute !important;
-            bottom: -50px !important; /* Start hidden below the image */
-            left: 0 !important;
-            width: 100% !important;
-            display: flex !important;
-            transition: bottom 0.3s ease !important;
-            z-index: 10 !important;
-            background: transparent !important; /* Move color to button */
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        .product-card .product-thumb:hover .product-button-group {
-            bottom: 0 !important; /* Slide up on hover */
-        }
-        
-        /* Hide all icons inside the hover bar by default */
-        .product-card .product-button-group > a.product-button {
-            display: none !important;
-        }
-        
-        /* Explicitly ONLY show the final action button (Add to Cart / Details fallback) */
-        .product-card .product-button-group > a.product-button.final-action-btn {
-            display: flex !important;
-            width: 100% !important;
-            height: 45px !important;
-            align-items: center !important;
-            justify-content: center !important;
-            color: #ffffff !important;
-            text-decoration: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            background: #8C7558 !important; /* Solid Theme Color */
-            transition: background 0.2s ease !important;
-            margin: 0 !important;
-            pointer-events: auto !important;
-        }
-        .product-card .product-button-group a.product-button:hover {
-            background: #735D43 !important; /* Darker solid color on hover */
-        }
-        .product-card .product-button-group a.product-button i {
-            margin-right: 8px !important; /* Spacing between icon and text if we add text */
-            font-size: 1.1rem !important;
-        }
+    /* Add to Cart Hover Bar (Global for all Product Cards) */
+    .product-card .product-button-group {
+    position: absolute !important;
+    bottom: -50px !important; /* Start hidden below the image */
+    left: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    transition: bottom 0.3s ease !important;
+    z-index: 10 !important;
+    background: transparent !important; /* Move color to button */
+    padding: 0 !important;
+    margin: 0 !important;
+    }
+    .product-card .product-thumb:hover .product-button-group {
+    bottom: 0 !important; /* Slide up on hover */
+    }
 
-        /* Body */
-        .product-card .product-card-body {
-            padding: 20px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            flex: 1 !important;
-            text-align: left !important;
-            background: #F8F6F0 !important;
-        }
-        
-        .product-card .product-category {
-            display: none !important; /* The image didn't have a category in the new design */
-        }
-        
-        .product-card .product-title {
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            color: #332B23 !important;
-            line-height: 1.4 !important;
-            margin: 0 !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important;
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-            letter-spacing: 0px !important;
-        }
-        .product-card .product-title a {
-            color: inherit !important;
-            text-decoration: none !important;
-            transition: color 0.2s !important;
-        }
-        .product-card .product-title a:hover { color: #8C7558 !important; }
+    /* Hide all icons inside the hover bar by default */
+    .product-card .product-button-group > a.product-button {
+    display: none !important;
+    }
 
-        /* Title Flex Wrapper */
-        .product-card-body > div:nth-child(2) {
-            margin-bottom: 8px !important;
-            align-items: flex-start !important; /* Align to top instead of center */
-        }
+    /* Explicitly ONLY show the final action button (Add to Cart / Details fallback) */
+    .product-card .product-button-group > a.product-button.final-action-btn {
+    display: flex !important;
+    width: 100% !important;
+    height: 45px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #8C7558 !important; /* Solid Theme Color */
+    transition: background 0.2s ease !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+    }
+    .product-card .product-button-group a.product-button:hover {
+    background: #735D43 !important; /* Darker solid color on hover */
+    }
+    .product-card .product-button-group a.product-button i {
+    margin-right: 8px !important; /* Spacing between icon and text if we add text */
+    font-size: 1.1rem !important;
+    }
 
-        /* Wishlist Icon in Card Body */
-        .product-card-body .wishlist_store {
-            position: relative !important;
-            top: -4px !important; /* Nudge up slightly from top */
-            right: 6px !important; /* Move left slightly */
-            font-size: 26px !important;
-            transition: color 0.3s ease !important;
-        }
-        .product-card-body .wishlist_store.added {
-            color: #E33535 !important; /* Red color when added */
-        }
+    /* Body */
+    .product-card .product-card-body {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    text-align: left !important;
+    background: #F8F6F0 !important;
+    }
 
-        /* Price Row */
-        .product-card .product-price {
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: flex-end !important;
-            align-items: center !important;
-            text-align: right !important;
-            gap: 6px !important;
-            margin-top: 5px !important; /* Removed auto so it sits right under the heart */
-            font-size: 18px !important;
-            font-weight: 600 !important;
-            color: #332B23 !important;
-            line-height: 1.2 !important;
-            margin-bottom: 20px !important;
-        }
-        .product-card .product-price del {
-            font-size: 15px !important;
-            font-weight: 500 !important;
-            color: #A3917C !important;
-            text-decoration: line-through !important;
-            line-height: 1.2 !important;
-            margin-bottom: 0 !important;
-        }
+    .product-card .product-category {
+    display: none !important; /* The image didn't have a category in the new design */
+    }
 
-        /* =============================================
-           EXPAND CONTAINER ON LARGE SCREENS
-           ============================================= */
-        @media (min-width: 1400px) {
-            .container { max-width: 1320px; }
-        }
-        @media (min-width: 1600px) {
-            .container { max-width: 1500px; }
-        }
-        @media (min-width: 1900px) {
-            .container { max-width: 1700px; }
-        }
+    .product-card .product-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #332B23 !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    letter-spacing: 0px !important;
+    }
+    .product-card .product-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+    }
+    .product-card .product-title a:hover { color: #8C7558 !important; }
 
-        /* =============================================
-           TOPBAR REDESIGN — Premium Header Styles
-           ============================================= */
+    /* Title Flex Wrapper */
+    .product-card-body > div:nth-child(2) {
+    margin-bottom: 8px !important;
+    align-items: flex-start !important; /* Align to top instead of center */
+    }
 
-        .topbar-redesigned {
-            padding: 0;
-            background: #ffffff;
-            border-bottom: 1px solid #e8ecf1;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-        }
+    /* Wishlist Icon in Card Body */
+    .product-card-body .wishlist_store {
+    position: relative !important;
+    top: -4px !important; /* Nudge up slightly from top */
+    right: 6px !important; /* Move left slightly */
+    font-size: 26px !important;
+    transition: color 0.3s ease !important;
+    }
+    .product-card-body .wishlist_store.added {
+    color: #E33535 !important; /* Red color when added */
+    }
 
-        .topbar-redesigned .topbar-inner {
-            gap: 20px;
-        }
+    /* Price Row */
+    .product-card .product-price {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    text-align: right !important;
+    gap: 6px !important;
+    margin-top: 5px !important; /* Removed auto so it sits right under the heart */
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #332B23 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 20px !important;
+    }
+    .product-card .product-price del {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #A3917C !important;
+    text-decoration: line-through !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0 !important;
+    }
 
-        /* --- Logo --- */
-        .topbar-redesigned .topbar-logo {
-            flex-shrink: 0;
-            padding: 0;
-        }
-        .topbar-redesigned .topbar-logo .site-logo {
-            display: block;
-            width: 140px;
-            transition: opacity 0.25s ease;
-        }
-        .topbar-redesigned .topbar-logo .site-logo:hover {
-            opacity: 0.85;   
-        }
+    /* =============================================
+    EXPAND CONTAINER ON LARGE SCREENS
+    ============================================= */
+    @media (min-width: 1400px) {
+    .container { max-width: 1320px; }
+    }
+    @media (min-width: 1600px) {
+    .container { max-width: 1500px; }
+    }
+    @media (min-width: 1900px) {
+    .container { max-width: 1700px; }
+    }
 
-        /* --- Search Box Wrapper --- */
-        /* --- Search Box Wrapper --- */
-        .topbar-redesigned .topbar-search-wrap {
-            flex: 1 1 auto;
-            max-width: 440px;
-            min-width: 250px;
-            padding: 0;
-            margin: -3px 15px 0 35px; /* Moved up and right */
-        }
-        .topbar-redesigned .topbar-search-wrap .search-box-inner {
-            width: 100%;
-        }
-        .topbar-redesigned .topbar-search-box {
-            border: 2px solid #e2e6ec;
-            border-radius: 50px;
-            overflow: hidden;
-            background: #f8f9fb;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            display: flex;
-            align-items: center;
-            height: 44px;
-        }
-        .topbar-redesigned .topbar-search-box:focus-within {
-            border-color: #377dff;
-            box-shadow: 0 0 0 4px rgba(55, 125, 255, 0.1);
-            background: #fff;
-        }
+    /* =============================================
+    TOPBAR REDESIGN — Premium Header Styles
+    ============================================= */
 
-        /* Category Select */
-        .topbar-redesigned .topbar-category-select {
-            border: none;
-            border-right: 1px solid #e2e6ec;
-            background: transparent;
-            padding: 0 18px 0 28px !important; /* Adjusted padding to a middle ground */
-            font-size: 13px;
-            font-weight: 500;
-            color: #3c4858;
-            min-width: 195px !important;
-            cursor: pointer;
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            padding-right: 30px;
-            height: 100%;
-        }
-        .topbar-redesigned .topbar-category-select:focus {
-            outline: none;
-        }
+    .topbar-redesigned {
+    padding: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e8ecf1;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
 
-        /* Search Input */
-        .topbar-redesigned .topbar-search-input {
-            border: none !important;
-            background: transparent !important;
-            padding: 0 18px !important;
-            font-size: 14px !important;
-            color: #3c4858 !important;
-            box-shadow: none !important;
-            height: 100% !important;
-            flex: 1;
-        }
-        
-        /* Reduce Footer Padding */
-        .site-footer {
-            padding-top: 10px !important;
-        }
-        .topbar-redesigned .topbar-search-input::placeholder {
-            color: #a0aec0;
-            font-weight: 400;
-        }
+    .topbar-redesigned .topbar-inner {
+    gap: 20px;
+    }
 
-        /* Search Button */
-        .topbar-redesigned .topbar-search-btn {
-            background: transparent;
-            border: none;
-            color: #377dff; /* Blue icon to match theme */
-            padding: 0 18px;
-            cursor: pointer;
-            transition: transform 0.15s ease, color 0.2s ease;
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        .topbar-redesigned .topbar-search-btn:hover {
-            color: #1e4ba8;
-        }
-        .topbar-redesigned .topbar-search-btn:active {
-            transform: scale(0.92);
-        }
-        .topbar-redesigned .topbar-search-btn i {
-            font-size: 18px;
-            position: relative;
-            top: -5px; /* Moved further up */
-            left: 5px; /* Moved right slightly */
-        }
+    /* --- Logo --- */
+    .topbar-redesigned .topbar-logo {
+    flex-shrink: 0;
+    padding: 0;
+    }
+    .topbar-redesigned .topbar-logo .site-logo {
+    display: block;
+    width: 140px;
+    transition: opacity 0.25s ease;
+    }
+    .topbar-redesigned .topbar-logo .site-logo:hover {
+    opacity: 0.85;
+    }
 
-        /* --- Catalog Button --- */
-        .topbar-catalog-wrap {
-            margin-right: 0;
-        }
-        .topbar-catalog-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 22px;
-            background: linear-gradient(135deg, #1a2332, #2c3e56);
-            color: #fff !important;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none !important;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
-            white-space: nowrap;
-        }
-        .topbar-catalog-btn:hover {
-            background: linear-gradient(135deg, #2c3e56, #3d5577);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(26, 35, 50, 0.3);
-            color: #fff !important;
-        }
-        .topbar-catalog-btn:active {
-            transform: translateY(0);
-        }
-        .topbar-catalog-btn svg {
-            flex-shrink: 0;
-        }
+    /* --- Search Box Wrapper --- */
+    /* --- Search Box Wrapper --- */
+    .topbar-redesigned .topbar-search-wrap {
+    flex: 1 1 auto;
+    max-width: 440px;
+    min-width: 250px;
+    padding: 0;
+    margin: -3px 15px 0 35px; /* Moved up and right */
+    }
+    .topbar-redesigned .topbar-search-wrap .search-box-inner {
+    width: 100%;
+    }
+    .topbar-redesigned .topbar-search-box {
+    border: 2px solid #e2e6ec;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #f8f9fb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    }
+    .topbar-redesigned .topbar-search-box:focus-within {
+    border-color: #377dff;
+    box-shadow: 0 0 0 4px rgba(55, 125, 255, 0.1);
+    background: #fff;
+    }
 
-        /* --- Divider --- */
-        .topbar-divider {
-            width: 1px;
-            height: 36px;
-            background: linear-gradient(to bottom, transparent, #d0d6e0, transparent);
-            margin: 0 8px;
-            flex-shrink: 0;
-        }
+    /* Category Select */
+    .topbar-redesigned .topbar-category-select {
+    border: none;
+    border-right: 1px solid #e2e6ec;
+    background: transparent;
+    padding: 0 18px 0 28px !important; /* Adjusted padding to a middle ground */
+    font-size: 13px;
+    font-weight: 500;
+    color: #3c4858;
+    min-width: 195px !important;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 30px;
+    height: 100%;
+    }
+    .topbar-redesigned .topbar-category-select:focus {
+    outline: none;
+    }
 
-        /* --- Contact Info --- */
-        .topbar-contact-wrap {
-            gap: 12px;
-        }
-        .topbar-contact-icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #eef3ff, #dde6fa);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #377dff;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-        .topbar-contact-icon:hover {
-            transform: scale(1.08);
-        }
-        .topbar-contact-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .topbar-phone {
-            font-size: 13.5px;
-            font-weight: 600;
-            color: #2d3748 !important;
-            text-decoration: none !important;
-            line-height: 1.3;
-            transition: color 0.25s ease;
-        }
-        .topbar-phone:hover {
-            color: #377dff !important;
-        }
-        .topbar-email {
-            font-size: 12px;
-            color: #718096 !important;
-            text-decoration: none !important;
-            line-height: 1.3;
-            transition: color 0.25s ease;
-        }
-        .topbar-email:hover {
-            color: #377dff !important;
-        }
+    /* Search Input */
+    .topbar-redesigned .topbar-search-input {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 18px !important;
+    font-size: 14px !important;
+    color: #3c4858 !important;
+    box-shadow: none !important;
+    height: 100% !important;
+    flex: 1;
+    }
 
-        /* --- Cart Item --- */
-        .topbar-cart-item {
-            position: relative;
-            width: auto !important;
-            margin-left: 0 !important;
-        }
-        .topbar-cart-item > a {
-            display: flex !important;
-            align-items: center;
-            position: relative !important;
-            width: auto !important;
-            height: auto !important;
-            padding: 8px 12px !important;
-            border-radius: 12px;
-            color: #3c4858 !important;
-            text-decoration: none;
-            transition: background 0.25s ease;
-        }
-        .topbar-cart-item > a:hover {
-            background: #f0f4ff;
-        }
-        .topbar-cart-item > a > div {
-            position: static !important;
-            transform: none !important;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .topbar-cart-item .cart-icon {
-            position: relative;
-        }
-        .topbar-cart-item .cart-icon i {
-            font-size: 22px !important;
-            margin-bottom: 0 !important;
-        }
-        .topbar-cart-item .cart-icon .count-label {
-            top: -8px !important;
-            right: -10px !important;
-            background: linear-gradient(135deg, #377dff, #2c5cc5) !important;
-            font-size: 10px !important;
-            width: 18px !important;
-            height: 18px !important;
-            line-height: 18px !important;
-        }
-        .topbar-cart-item .text-label {
-            display: inline-block !important;
-            font-size: 13px !important;
-            font-weight: 600;
-            color: #3c4858;
-        }
+    /* Reduce Footer Padding */
+    .site-footer {
+    padding-top: 10px !important;
+    }
+    .topbar-redesigned .topbar-search-input::placeholder {
+    color: #a0aec0;
+    font-weight: 400;
+    }
 
-        /* --- Topbar Right Toolbar --- */
-        .topbar-right-toolbar {
-            gap: 4px;
-            flex-shrink: 0;
-        }
+    /* Search Button */
+    .topbar-redesigned .topbar-search-btn {
+    background: transparent;
+    border: none;
+    color: #377dff; /* Blue icon to match theme */
+    padding: 0 18px;
+    cursor: pointer;
+    transition: transform 0.15s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    }
+    .topbar-redesigned .topbar-search-btn:hover {
+    color: #1e4ba8;
+    }
+    .topbar-redesigned .topbar-search-btn:active {
+    transform: scale(0.92);
+    }
+    .topbar-redesigned .topbar-search-btn i {
+    font-size: 18px;
+    position: relative;
+    top: -5px; /* Moved further up */
+    left: 5px; /* Moved right slightly */
+    }
 
-        /* --- Responsive: Medium screens --- */
-        @media (max-width: 1200px) {
-            .topbar-redesigned .topbar-search-wrap {
-                max-width: 400px;
-            }
-            .topbar-contact-info {
-                display: none;
-            }
-            .topbar-contact-icon {
-                width: 38px;
-                height: 38px;
-            }
-            .topbar-divider {
-                margin: 0 8px;
-            }
-            .topbar-catalog-btn {
-                padding: 9px 16px;
-                font-size: 12px;
-            }
-        }
+    /* --- Catalog Button --- */
+    .topbar-catalog-wrap {
+    margin-right: 0;
+    }
+    .topbar-catalog-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, #1a2332, #2c3e56);
+    color: #fff !important;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none !important;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
+    white-space: nowrap;
+    }
+    .topbar-catalog-btn:hover {
+    background: linear-gradient(135deg, #2c3e56, #3d5577);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(26, 35, 50, 0.3);
+    color: #fff !important;
+    }
+    .topbar-catalog-btn:active {
+    transform: translateY(0);
+    }
+    .topbar-catalog-btn svg {
+    flex-shrink: 0;
+    }
 
-        @media (max-width: 991px) {
-            .topbar-redesigned {
-                padding: 8px 0;
-            }
-        }
+    /* --- Divider --- */
+    .topbar-divider {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, transparent, #d0d6e0, transparent);
+    margin: 0 8px;
+    flex-shrink: 0;
+    }
 
-        /* ===== Branded Social Icons ===== */
-        .social-icon-branded {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background-color: var(--brand-bg, #555);
-            color: #fff !important;
-            font-size: 18px;
-            text-decoration: none !important;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
+    /* --- Contact Info --- */
+    .topbar-contact-wrap {
+    gap: 12px;
+    }
+    .topbar-contact-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #eef3ff, #dde6fa);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #377dff;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    }
+    .topbar-contact-icon:hover {
+    transform: scale(1.08);
+    }
+    .topbar-contact-info {
+    display: flex;
+    flex-direction: column;
+    }
+    .topbar-phone {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #2d3748 !important;
+    text-decoration: none !important;
+    line-height: 1.3;
+    transition: color 0.25s ease;
+    }
+    .topbar-phone:hover {
+    color: #377dff !important;
+    }
+    .topbar-email {
+    font-size: 12px;
+    color: #718096 !important;
+    text-decoration: none !important;
+    line-height: 1.3;
+    transition: color 0.25s ease;
+    }
+    .topbar-email:hover {
+    color: #377dff !important;
+    }
 
-        .social-icon-branded:hover {
-            transform: translateY(-5px) scale(1.12);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-            color: #fff !important;
-            text-decoration: none !important;
-        }
+    /* --- Cart Item --- */
+    .topbar-cart-item {
+    position: relative;
+    width: auto !important;
+    margin-left: 0 !important;
+    }
+    .topbar-cart-item > a {
+    display: flex !important;
+    align-items: center;
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 8px 12px !important;
+    border-radius: 12px;
+    color: #3c4858 !important;
+    text-decoration: none;
+    transition: background 0.25s ease;
+    }
+    .topbar-cart-item > a:hover {
+    background: #f0f4ff;
+    }
+    .topbar-cart-item > a > div {
+    position: static !important;
+    transform: none !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+    .topbar-cart-item .cart-icon {
+    position: relative;
+    }
+    .topbar-cart-item .cart-icon i {
+    font-size: 22px !important;
+    margin-bottom: 0 !important;
+    }
+    .topbar-cart-item .cart-icon .count-label {
+    top: -8px !important;
+    right: -10px !important;
+    background: linear-gradient(135deg, #377dff, #2c5cc5) !important;
+    font-size: 10px !important;
+    width: 18px !important;
+    height: 18px !important;
+    line-height: 18px !important;
+    }
+    .topbar-cart-item .text-label {
+    display: inline-block !important;
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #3c4858;
+    }
 
-        .social-icon-branded:active {
-            transform: translateY(-2px) scale(1.08);
-        }
+    /* --- Topbar Right Toolbar --- */
+    .topbar-right-toolbar {
+    gap: 4px;
+    flex-shrink: 0;
+    }
 
-        .social-icon-branded svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            display: block;
-        }
+    /* --- Responsive: Medium screens --- */
+    @media (max-width: 1200px) {
+    .topbar-redesigned .topbar-search-wrap {
+    max-width: 400px;
+    }
+    .topbar-contact-info {
+    display: none;
+    }
+    .topbar-contact-icon {
+    width: 38px;
+    height: 38px;
+    }
+    .topbar-divider {
+    margin: 0 8px;
+    }
+    .topbar-catalog-btn {
+    padding: 9px 16px;
+    font-size: 12px;
+    }
+    }
 
-        .footer-social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
-        }
+    @media (max-width: 991px) {
+    .topbar-redesigned {
+    padding: 8px 0;
+    }
+    }
 
-        /* Override old red background on footer social links */
-        .footer-social-links a {
-            background: transparent !important;
-        }
+    /* ===== Branded Social Icons ===== */
+    .social-icon-branded {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--brand-bg, #555);
+    color: #fff !important;
+    font-size: 18px;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
 
+<<<<<<< Updated upstream
         .footer-social-links a::before {
             display: none !important;
         }
@@ -670,22 +641,57 @@
             fill: #fff !important;
             color: #fff !important;
         }
+=======
+    .social-icon-branded:hover {
+    transform: translateY(-5px) scale(1.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    color: #fff !important;
+    text-decoration: none !important;
+    }
+
+    .social-icon-branded:active {
+    transform: translateY(-2px) scale(1.08);
+    }
+
+    .social-icon-branded svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    display: block;
+    }
+
+    .footer-social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    }
+
+    /* Override old red background on footer social links */
+    .footer-social-links a {
+    background: transparent !important;
+    }
+
+    .footer-social-links a::before {
+    display: none !important;
+    }
+>>>>>>> Stashed changes
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')
-        {!! $setting->google_adsense !!}
+    {!! $setting->google_adsense !!}
     @endif
     {{-- Google AdSense End --}}
 
     {{-- Google AnalyTics Start --}}
     @if ($setting->is_google_analytics == '1')
-        {!! $setting->google_analytics !!}
+    {!! $setting->google_analytics !!}
     @endif
     {{-- Google AnalyTics End --}}
 
     {{-- Facebook pixel Start --}}
     @if ($setting->is_facebook_pixel == '1')
-        {!! $setting->facebook_pixel !!}
+    {!! $setting->facebook_pixel !!}
     @endif
     {{-- Facebook pixel End --}}
     <style>
@@ -727,14 +733,14 @@
 body_theme4 @endif
 ">
     @if ($setting->is_loader == 1)
-        <!-- Preloader Start -->
-        @if ($setting->is_loader == 1)
-            <div id="preloader">
-                <img src="{{ url('assets/img/' . $setting->loader) }}" alt="{{ __('Loading...') }}">
-            </div>
-        @endif
+    <!-- Preloader Start -->
+    @if ($setting->is_loader == 1)
+    <div id="preloader">
+        <img src="{{ url('assets/img/' . $setting->loader) }}" alt="{{ __('Loading...') }}">
+    </div>
+    @endif
 
-        <!-- Preloader endif -->
+    <!-- Preloader endif -->
     @endif
 
     <!-- Header-->
@@ -760,51 +766,51 @@ body_theme4 @endif
 
                             {{-- <div class="t-h-dropdown ">
                                 <a class="main-link" href="#">{{ __('Language') }}<i class="icon-chevron-down"></i></a>
-                                <div class="t-h-dropdown-menu">
-                                    @foreach (DB::table('languages')->whereType('Website')->get() as $language)
-                                    <a class="{{ Session::get('language') == $language->id ? 'active' : ($language->is_default == 1 && !Session::has('language') ? 'active' : '') }}"
-                                        href="{{ route('front.language.setup', $language->id) }}"><i
-                                            class="icon-chevron-right pr-2"></i>{{ $language->language }}</a>
-                                    @endforeach
-                                </div>
-                            </div> --}}
+                            <div class="t-h-dropdown-menu">
+                                @foreach (DB::table('languages')->whereType('Website')->get() as $language)
+                                <a class="{{ Session::get('language') == $language->id ? 'active' : ($language->is_default == 1 && !Session::has('language') ? 'active' : '') }}"
+                                    href="{{ route('front.language.setup', $language->id) }}"><i
+                                        class="icon-chevron-right pr-2"></i>{{ $language->language }}</a>
+                                @endforeach
+                            </div>
+                        </div> --}}
 
 
-                            {{-- <div class="t-h-dropdown ">
+                        {{-- <div class="t-h-dropdown ">
                                 <a class="main-link" href="#">{{ __('Currency') }}<i class="icon-chevron-down"></i></a>
-                                <div class="t-h-dropdown-menu">
-                                    @foreach (DB::table('currencies')->get() as $currency)
-                                    <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
-                                        href="{{ route('front.currency.setup', $currency->id) }}"><i
-                                            class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
-                                    @endforeach
-                                </div>
-                            </div> --}}
+                        <div class="t-h-dropdown-menu">
+                            @foreach (DB::table('currencies')->get() as $currency)
+                            <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
+                                href="{{ route('front.currency.setup', $currency->id) }}"><i
+                                    class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
+                            @endforeach
+                        </div>
+                    </div> --}}
 
-                            {{-- <div class="login-register ">
+                    {{-- <div class="login-register ">
                                 @if (!Auth::user())
                                 <a class="track-order-link mr-0" href="{{ route('user.login') }}">
-                                    {{ __('Login') }}
-                                </a>
-                                @else
-                                <div class="t-h-dropdown">
-                                    <div class="main-link">
-                                        <i class="icon-user pr-2"></i> <span class="text-label">{{
+                    {{ __('Login') }}
+                    </a>
+                    @else
+                    <div class="t-h-dropdown">
+                        <div class="main-link">
+                            <i class="icon-user pr-2"></i> <span class="text-label">{{
                                             Auth::user()->first_name }}</span>
-                                    </div>
-                                    <div class="t-h-dropdown-menu">
-                                        <a href="{{ route('user.dashboard') }}"><i
-                                                class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
-                                        <a href="{{ route('user.logout') }}"><i class="icon-chevron-right pr-2"></i>{{
+                        </div>
+                        <div class="t-h-dropdown-menu">
+                            <a href="{{ route('user.dashboard') }}"><i
+                                    class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
+                            <a href="{{ route('user.logout') }}"><i class="icon-chevron-right pr-2"></i>{{
                                             __('Logout') }}</a>
-                                    </div>
-                                </div>
-                                @endif
-                            </div> --}}
                         </div>
                     </div>
-                </div>
+                    @endif
+                </div> --}}
             </div>
+        </div>
+        </div>
+        </div>
         </div>
         <!-- Topbar-->
         <div class="topbar topbar-redesigned">
@@ -826,7 +832,7 @@ body_theme4 @endif
                                         <select name="category" id="category_select" class="categoris topbar-category-select">
                                             <option value="">{{ __('All Categories') }}</option>
                                             @foreach (DB::table('categories')->whereStatus(1)->get() as $category)
-                                                <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->slug }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         <form class="input-group topbar-search-form" id="header_search_form"
@@ -864,7 +870,11 @@ body_theme4 @endif
                                 @if(isset($setting->catalog_file))
                                 <div class="d-none d-md-flex align-items-center topbar-catalog-wrap">
                                     <a href="{{ asset('assets/files/' . $setting->catalog_file) }}" class="topbar-catalog-btn" download>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="7 10 12 15 17 10" />
+                                            <line x1="12" y1="15" x2="12" y2="3" />
+                                        </svg>
                                         <span>{{ __('Catalog') }}</span>
                                     </a>
                                 </div>
@@ -884,191 +894,193 @@ body_theme4 @endif
                                     </div>
                                     <div class="topbar-contact-info">
                                         <a href="tel:{{ $setting->contact_number }}" class="topbar-phone">
-                                            {{ $setting->contact_number }}
-                                        </a>
-                                        <a href="mailto:{{ $setting->contact_mail }}" class="topbar-email">
-                                            {{ $setting->contact_mail }}
-                                        </a>
-                                    </div>
-                                </div>
-                                @endif
+                                {{ $setting->contact_number }}
+                                </a>
+                                <a href="mailto:{{ $setting->contact_mail }}" class="topbar-email">
+                                    {{ $setting->contact_mail }}
+                                </a>
+                            </div>
+                        </div>
+                        @endif
 
-                                --}}
-                                {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
+                        --}}
+                        {{-- <div class="topbar-divider d-none d-md-block"></div> --}}
 
-                                {{-- User Login / Profile --}}
-                                <div class="d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px; margin-right: 20px; position: relative; left: 10px;">
-                                    @if (!Auth::user())
-                                        <a href="{{ route('user.login') }}"
-                                           style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
-                                           onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
-                                           onmouseout="this.style.color='inherit'">
-                                            <span style="display:inline-flex;align-items:center;justify-content:center;
+                        {{-- User Login / Profile --}}
+                        <div class="d-none d-md-flex align-items-center" style="width: auto; justify-content: center; padding: 0; margin-left: 20px; margin-right: 20px; position: relative; left: 10px;">
+                            @if (!Auth::user())
+                            <a href="{{ route('user.login') }}"
+                                style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;font-size:.85rem;font-weight:600;transition:color .2s;"
+                                onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
+                                onmouseout="this.style.color='inherit'">
+                                <span style="display:inline-flex;align-items:center;justify-content:center;
                                                          width:32px;height:32px;border-radius:50%;
                                                          border:2px solid currentColor;">
-                                                <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
-                                            </span>
-                                            <span class="d-none d-lg-inline">{{ __('Login') }}</span>
-                                        </a>
-                                    @else
-                                        <div class="t-h-dropdown">
-                                            <div class="main-link" style="display:inline-flex;align-items:center;cursor:pointer;">
-                                                <span style="display:inline-flex;align-items:center;justify-content:center;
+                                    <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
+                                </span>
+                                <span class="d-none d-lg-inline">{{ __('Login') }}</span>
+                            </a>
+                            @else
+                            <div class="t-h-dropdown">
+                                <div class="main-link" style="display:inline-flex;align-items:center;cursor:pointer;">
+                                    <span style="display:inline-flex;align-items:center;justify-content:center;
                                                              width:32px;height:32px;border-radius:50%;
                                                              background:{{ $setting->primary_color ?? '#4e73df' }};
                                                              color:#fff;flex-shrink:0;">
-                                                    <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
-                                                </span>
-                                            </div>
-                                            <div class="t-h-dropdown-menu" style="min-width:160px;">
-                                                <a href="{{ route('user.dashboard') }}">
-                                                    <i class="icon-grid pr-2"></i>{{ __('Dashboard') }}
-                                                </a>
-                                                <a href="{{ route('user.logout') }}">
-                                                    <i class="icon-log-out pr-2"></i>{{ __('Logout') }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endif
+                                        <i class="icon-user" style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
+                                    </span>
                                 </div>
-
-                                {{-- Divider --}}
-                                <div class="topbar-divider d-none d-md-block"></div>
-
-                                {{-- Cart --}}
-                                <div class="toolbar-item topbar-cart-item">
-                                    <a href="{{ route('front.cart') }}">
-                                        <div>
-                                            <span class="cart-icon"><i class="icon-shopping-cart"></i>
-                                                <span class="count-label cart_count">{{ Session::has('cart') ? count(Session::get('cart')) : '0' }}</span>
-                                            </span>
-                                            <span class="text-label">{{ __('Cart') }}</span>
-                                        </div>
+                                <div class="t-h-dropdown-menu" style="min-width:160px;">
+                                    <a href="{{ route('user.dashboard') }}">
+                                        <i class="icon-grid pr-2"></i>{{ __('Dashboard') }}
                                     </a>
-                                    <div class="toolbar-dropdown cart-dropdown widget-cart cart_view_header"
-                                        id="header_cart_load" data-target="{{ route('front.header.cart') }}">
-                                        @include('includes.header_cart')
-                                    </div>
+                                    <a href="{{ route('user.logout') }}">
+                                        <i class="icon-log-out pr-2"></i>{{ __('Logout') }}
+                                    </a>
                                 </div>
                             </div>
+                            @endif
+                        </div>
 
-                            <!-- Mobile Menu-->
-                            <div class="mobile-menu">
-                                <!-- Slideable (Mobile) Menu-->
-                                <div class="mm-heading-area">
-                                    <h4>{{ __('Navigation') }}</h4>
-                                    <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
-                                        <a href="#">
-                                            <div> <i class="icon-x"></i></div>
-                                        </a>
-                                    </div>
+                        {{-- Divider --}}
+                        <div class="topbar-divider d-none d-md-block"></div>
+
+                        {{-- Cart --}}
+                        <div class="toolbar-item topbar-cart-item">
+                            <a href="{{ route('front.cart') }}">
+                                <div>
+                                    <span class="cart-icon"><i class="icon-shopping-cart"></i>
+                                        <span class="count-label cart_count">{{ Session::has('cart') ? count(Session::get('cart')) : '0' }}</span>
+                                    </span>
+                                    <span class="text-label">{{ __('Cart') }}</span>
                                 </div>
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item" role="presentation99">
-                                        <span class="active" id="mmenu-tab" data-bs-toggle="tab" data-bs-target="#mmenu"
-                                            role="tab" aria-controls="mmenu"
-                                            aria-selected="true">{{ __('Menu') }}</span>
-                                    </li>
-                                    <li class="nav-item" role="presentation99">
-                                        <span class="" id="mcat-tab" data-bs-toggle="tab" data-bs-target="#mcat"
-                                            role="tab" aria-controls="mcat"
-                                            aria-selected="false">{{ __('Category') }}</span>
-                                    </li>
-
-                                </ul>
-                                <div class="tab-content p-0">
-                                    <div class="tab-pane fade show active" id="mmenu" role="tabpanel"
-                                        aria-labelledby="mmenu-tab">
-                                        <nav class="slideable-menu">
-                                            <ul>
-                                                <li class="{{ request()->routeIs('front.index') ? 'active' : '' }}"><a
-                                                        href="{{ route('front.index') }}"><i
-                                                            class="icon-chevron-right"></i>{{ __('Home') }}</a>
-                                                </li>
-                                                @if ($setting->is_shop == 1)
-                                                    <li class="{{ request()->routeIs('front.catalog*') ? 'active' : '' }}">
-                                                        <a href="{{ route('front.catalog') }}"><i
-                                                                class="icon-chevron-right"></i>{{ __('Shop') }}</a>
-                                                    </li>
-                                                @endif
-                                                @if ($setting->is_campaign == 1)
-                                                    <li class="{{ request()->routeIs('front.campaign') ? 'active' : '' }}">
-                                                        <a href="{{ route('front.campaign') }}"><i
-                                                                class="icon-chevron-right"></i>{{ __('Campaign') }}</a>
-                                                    </li>
-                                                @endif
-                                                @if ($setting->is_brands == 1)
-                                                    <li class="{{ request()->routeIs('front.brand') ? 'active' : '' }}">
-                                                        <a href="{{ route('front.brand') }}"><i
-                                                                class="icon-chevron-right"></i>{{ __('Brand') }}</a>
-                                                    </li>
-                                                @endif
-
-                                                @if ($setting->is_blog == 1)
-                                                    <li class="{{ request()->routeIs('front.blog*') ? 'active' : '' }}">
-                                                        <a href="{{ route('front.blog') }}"><i
-                                                                class="icon-chevron-right"></i>{{ __('Blog') }}</a>
-                                                    </li>
-                                                @endif
-                                                <li class="t-h-dropdown">
-                                                    <a class="" href="#"><i
-                                                            class="icon-chevron-right"></i>{{ __('Pages') }} <i
-                                                            class="icon-chevron-down"></i></a>
-                                                    <div class="t-h-dropdown-menu">
-                                                        @if ($setting->is_faq == 1)
-                                                            <a class="{{ request()->routeIs('front.faq*') ? 'active' : '' }}"
-                                                                href="{{ route('front.faq') }}"><i
-                                                                    class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
-                                                        @endif
-                                                        @foreach (DB::table('pages')->wherePos(0)->orwhere('pos', 2)->get() as $page)
-                                                            <a class="{{ request()->url() == route('front.page', $page->slug) ? 'active' : '' }} "
-                                                                href="{{ route('front.page', $page->slug) }}"><i
-                                                                    class="icon-chevron-right pr-2"></i>{{ $page->title }}</a>
-                                                        @endforeach
-                                                    </div>
-                                                </li>
-
-                                                @if ($setting->is_contact == 1)
-                                                    <li class="{{ request()->routeIs('front.contact') ? 'active' : '' }}">
-                                                        <a href="{{ route('front.contact') }}"><i
-                                                                class="icon-chevron-right"></i>{{ __('Contact') }}</a>
-                                                    </li>
-                                                @endif
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <div class="tab-pane fade" id="mcat" role="tabpanel" aria-labelledby="mcat-tab">
-                                        <nav class="slideable-menu">
-                                            @include('includes.mobile-category')
-
-                                        </nav>
-                                    </div>
-                                </div>
-                                {{-- ===== Mobile Social Icons ===== --}}
-                                @if($socials->isNotEmpty())
-                                <div class="d-flex flex-wrap px-3 pb-3" style="gap:10px;border-top:1px solid rgba(255,255,255,.12);margin-top:6px;">
-                                    @foreach($socials as $social)
-                                        @if(!empty($social->link))
-                                            @php
-                                                $smColors=["facebook"=>"#1877F2","instagram"=>"#E1306C","linkedin"=>"#0A66C2","tiktok"=>"#010101","twitter"=>"#1DA1F2","youtube"=>"#FF0000","whatsapp"=>"#25D366","pinterest"=>"#E60023","snapchat"=>"#FFFC00","telegram"=>"#26A5E4"];
-                                                $ic=$social->icon??"";
-                                                $isTT=str_contains(strtolower($ic),"tiktok");
-                                                $bc="#888";
-                                                foreach($smColors as $p=>$cv){if(str_contains(strtolower($ic),$p)){$bc=$cv;break;}}
-                                            @endphp
-                                            <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
-                                               style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:14px;text-decoration:none;">
-                                                @php $isImgM=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImgM)<img src="{{ $ic }}" alt="" style="width:14px;height:14px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:14px;height:14px;display:block;"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/></svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
-                                            </a>
-                                        @endif
-                                    @endforeach
-                                </div>
-                                @endif
+                            </a>
+                            <div class="toolbar-dropdown cart-dropdown widget-cart cart_view_header"
+                                id="header_cart_load" data-target="{{ route('front.header.cart') }}">
+                                @include('includes.header_cart')
                             </div>
                         </div>
                     </div>
+
+                    <!-- Mobile Menu-->
+                    <div class="mobile-menu">
+                        <!-- Slideable (Mobile) Menu-->
+                        <div class="mm-heading-area">
+                            <h4>{{ __('Navigation') }}</h4>
+                            <div class="toolbar-item visible-on-mobile mobile-menu-toggle mm-t-two">
+                                <a href="#">
+                                    <div> <i class="icon-x"></i></div>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation99">
+                                <span class="active" id="mmenu-tab" data-bs-toggle="tab" data-bs-target="#mmenu"
+                                    role="tab" aria-controls="mmenu"
+                                    aria-selected="true">{{ __('Menu') }}</span>
+                            </li>
+                            <li class="nav-item" role="presentation99">
+                                <span class="" id="mcat-tab" data-bs-toggle="tab" data-bs-target="#mcat"
+                                    role="tab" aria-controls="mcat"
+                                    aria-selected="false">{{ __('Category') }}</span>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content p-0">
+                            <div class="tab-pane fade show active" id="mmenu" role="tabpanel"
+                                aria-labelledby="mmenu-tab">
+                                <nav class="slideable-menu">
+                                    <ul>
+                                        <li class="{{ request()->routeIs('front.index') ? 'active' : '' }}"><a
+                                                href="{{ route('front.index') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Home') }}</a>
+                                        </li>
+                                        @if ($setting->is_shop == 1)
+                                        <li class="{{ request()->routeIs('front.catalog*') ? 'active' : '' }}">
+                                            <a href="{{ route('front.catalog') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Shop') }}</a>
+                                        </li>
+                                        @endif
+                                        @if ($setting->is_campaign == 1)
+                                        <li class="{{ request()->routeIs('front.campaign') ? 'active' : '' }}">
+                                            <a href="{{ route('front.campaign') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Campaign') }}</a>
+                                        </li>
+                                        @endif
+                                        @if ($setting->is_brands == 1)
+                                        <li class="{{ request()->routeIs('front.brand') ? 'active' : '' }}">
+                                            <a href="{{ route('front.brand') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Brand') }}</a>
+                                        </li>
+                                        @endif
+
+                                        @if ($setting->is_blog == 1)
+                                        <li class="{{ request()->routeIs('front.blog*') ? 'active' : '' }}">
+                                            <a href="{{ route('front.blog') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Blog') }}</a>
+                                        </li>
+                                        @endif
+                                        <li class="t-h-dropdown">
+                                            <a class="" href="#"><i
+                                                    class="icon-chevron-right"></i>{{ __('Pages') }} <i
+                                                    class="icon-chevron-down"></i></a>
+                                            <div class="t-h-dropdown-menu">
+                                                @if ($setting->is_faq == 1)
+                                                <a class="{{ request()->routeIs('front.faq*') ? 'active' : '' }}"
+                                                    href="{{ route('front.faq') }}"><i
+                                                        class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
+                                                @endif
+                                                @foreach (DB::table('pages')->wherePos(0)->orwhere('pos', 2)->get() as $page)
+                                                <a class="{{ request()->url() == route('front.page', $page->slug) ? 'active' : '' }} "
+                                                    href="{{ route('front.page', $page->slug) }}"><i
+                                                        class="icon-chevron-right pr-2"></i>{{ $page->title }}</a>
+                                                @endforeach
+                                            </div>
+                                        </li>
+
+                                        @if ($setting->is_contact == 1)
+                                        <li class="{{ request()->routeIs('front.contact') ? 'active' : '' }}">
+                                            <a href="{{ route('front.contact') }}"><i
+                                                    class="icon-chevron-right"></i>{{ __('Contact') }}</a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="tab-pane fade" id="mcat" role="tabpanel" aria-labelledby="mcat-tab">
+                                <nav class="slideable-menu">
+                                    @include('includes.mobile-category')
+
+                                </nav>
+                            </div>
+                        </div>
+                        {{-- ===== Mobile Social Icons ===== --}}
+                        @if($socials->isNotEmpty())
+                        <div class="d-flex flex-wrap px-3 pb-3" style="gap:10px;border-top:1px solid rgba(255,255,255,.12);margin-top:6px;">
+                            @foreach($socials as $social)
+                            @if(!empty($social->link))
+                            @php
+                            $smColors=["facebook"=>"#1877F2","instagram"=>"#E1306C","linkedin"=>"#0A66C2","tiktok"=>"#010101","twitter"=>"#1DA1F2","youtube"=>"#FF0000","whatsapp"=>"#25D366","pinterest"=>"#E60023","snapchat"=>"#FFFC00","telegram"=>"#26A5E4"];
+                            $ic=$social->icon??"";
+                            $isTT=str_contains(strtolower($ic),"tiktok");
+                            $bc="#888";
+                            foreach($smColors as $p=>$cv){if(str_contains(strtolower($ic),$p)){$bc=$cv;break;}}
+                            @endphp
+                            <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
+                                style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:14px;text-decoration:none;">
+                                @php $isImgM=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImgM)<img src="{{ $ic }}" alt="" style="width:14px;height:14px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:14px;height:14px;display:block;">
+                                    <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
+                            </a>
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
         <!-- Navbar-->
         <div class="navbar">
@@ -1095,26 +1107,28 @@ body_theme4 @endif
                                         $pnm = ucfirst(str_replace(['-f','-in','-square','-'], ['','','',' '], $nm[1] ?? 'social'));
                                     @endphp
                                     <a href="{{ $social->link }}" target="_blank" rel="noopener noreferrer"
-                                       title="{{ $pnm }}"
-                                       style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:12px;text-decoration:none;flex-shrink:0;transition:opacity .2s,transform .2s;"
-                                       onmouseover="this.style.opacity='.75';this.style.transform='translateY(-2px)'"
-                                       onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-                                        @php $isImg=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImg)<img src="{{ $ic }}" alt="" style="width:12px;height:12px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:12px;height:12px;display:block;"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/></svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                        @endif --}}
-                        @php
-                            $free_shipping = DB::table('shipping_services')
-                                ->whereStatus(1)
-                                ->whereIsCondition(1)
-                                ->first();
-                        @endphp
-
+                        title="{{ $pnm }}"
+                        style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:{{ $bc }};color:#fff;font-size:12px;text-decoration:none;flex-shrink:0;transition:opacity .2s,transform .2s;"
+                        onmouseover="this.style.opacity='.75';this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+                        @php $isImg=preg_match("/^https?:\/\//i",$ic); @endphp@if($isImg)<img src="{{ $ic }}" alt="" style="width:12px;height:12px;object-fit:contain;display:block;">@elseif($isTT)<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" style="width:12px;height:12px;display:block;">
+                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                        </svg>@else<i class="{{ $ic }}" style="line-height:1;"></i>@endif
+                        </a>
+                        @endif
+                        @endforeach
                     </div>
+                    @endif --}}
+                    @php
+                    $free_shipping = DB::table('shipping_services')
+                    ->whereStatus(1)
+                    ->whereIsCondition(1)
+                    ->first();
+                    @endphp
+
                 </div>
             </div>
+        </div>
         </div>
 
     </header>
@@ -1128,31 +1142,31 @@ body_theme4 @endif
         <div class="announcement-with-content">
             <div class="left-area">
                 <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
+    </div>
+    <div class="right-area">
+        <h3 class="">{{ $setting->announcement_title }}</h3>
+        <p>{{ $setting->announcement_details }}</p>
+        <form class="subscriber-form" action="{{ route('front.subscriber.submit') }}" method="post">
+            @csrf
+            <div class="input-group">
+                <input class="form-control" type="email" name="email" placeholder="{{ __('Your e-mail') }}">
+                <span class="input-group-addon"><i class="icon-mail"></i></span>
             </div>
-            <div class="right-area">
-                <h3 class="">{{ $setting->announcement_title }}</h3>
-                <p>{{ $setting->announcement_details }}</p>
-                <form class="subscriber-form" action="{{ route('front.subscriber.submit') }}" method="post">
-                    @csrf
-                    <div class="input-group">
-                        <input class="form-control" type="email" name="email" placeholder="{{ __('Your e-mail') }}">
-                        <span class="input-group-addon"><i class="icon-mail"></i></span>
-                    </div>
-                    <div aria-hidden="true">
-                        <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
-                    </div>
+            <div aria-hidden="true">
+                <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544" tabindex="-1">
+            </div>
 
-                    <button class="btn btn-primary btn-block mt-2" type="submit">
-                        <span>{{ __('Subscribe') }}</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-        @else
-        <a href="{{ $setting->announcement_link }}">
-            <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
-        </a>
-        @endif
+            <button class="btn btn-primary btn-block mt-2" type="submit">
+                <span>{{ __('Subscribe') }}</span>
+            </button>
+        </form>
+    </div>
+    </div>
+    @else
+    <a href="{{ $setting->announcement_link }}">
+        <img src="{{ url('assets/img/' . $setting->announcement) }}" alt="">
+    </a>
+    @endif
 
 
     </div> --}}
@@ -1177,10 +1191,11 @@ body_theme4 @endif
                                     </strong></span>{{ $setting->friday_start }} - {{ $setting->friday_end }}</li>
                         </ul>
                         @php
-                            $socialData   = json_decode($setting->social_link, true) ?? [];
-                            $links        = $socialData['links'] ?? [];
-                            $icons        = $socialData['icons'] ?? [];
+                        $socialData = json_decode($setting->social_link, true) ?? [];
+                        $links = $socialData['links'] ?? [];
+                        $icons = $socialData['icons'] ?? [];
 
+<<<<<<< Updated upstream
                             $socialBrandColors = [
                                 'facebook'  => '#1877F2',
                                 'instagram' => '#E1306C',
@@ -1200,10 +1215,40 @@ body_theme4 @endif
                                 'whatsapp' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>',
                                 'tiktok' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/></svg>'
                             ];
+=======
+                        // Brand colours keyed by substring of FA class name
+                        $socialBrandColors = [
+                        'facebook' => '#1877F2',
+                        'instagram' => '#E1306C',
+                        'linkedin' => '#0A66C2',
+                        'tiktok' => '#010101',
+                        'twitter' => '#1DA1F2',
+                        'youtube' => '#FF0000',
+                        'whatsapp' => '#25D366',
+                        'snapchat' => '#FFFC00',
+                        'pinterest' => '#E60023',
+                        ];
+
+                        // Default icon map if custom ones not set
+                        $defaultIcons = [
+                        0 => 'fab fa-facebook-f',
+                        1 => 'fab fa-instagram',
+                        2 => 'fab fa-linkedin-in',
+                        3 => 'fab fa-twitter',
+                        4 => 'fab fa-youtube',
+                        5 => 'fab fa-whatsapp',
+                        ];
+
+                        // TikTok SVG — FA 5.8.0 does not ship this icon
+                        $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                        </svg>';
+>>>>>>> Stashed changes
                         @endphp
 
                         <div class="footer-social-links d-flex flex-wrap mt-3">
                             @foreach ($links as $link_key => $link)
+<<<<<<< Updated upstream
                                 @if (!empty($link))
                                     @php
                                         $iconClass = strtolower($icons[$link_key] ?? '');
@@ -1230,29 +1275,58 @@ body_theme4 @endif
                                        style="--brand-bg: {{ $brandColor }};">
                                         {!! $svgToRender !!}
                                     </a>
+=======
+                            @if (!empty($link))
+                            @php
+                            $iconClass = $icons[$link_key] ?? $defaultIcons[$link_key] ?? 'fab fa-link';
+                            $isTikTok = str_contains(strtolower($iconClass), 'tiktok');
+                            $brandColor = '#555';
+                            foreach ($socialBrandColors as $platform => $color) {
+                            if (str_contains(strtolower($iconClass), $platform)) {
+                            $brandColor = $color;
+                            break;
+                            }
+                            }
+                            preg_match('/fa-([a-z0-9\-]+)$/i', $iconClass, $m);
+                            $platformName = ucfirst(str_replace(['-f', '-in', '-square', '-'], ['', '', '', ' '], $m[1] ?? 'social'));
+                            @endphp
+                            <a class="social-icon-branded"
+                                href="{{ $link }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="{{ $platformName }}"
+                                title="{{ $platformName }}"
+                                style="--brand-bg: {{ $brandColor }};">
+                                @if ($isTikTok)
+                                {!! $tiktokSvg !!}
+                                @else
+                                <i class="{{ $iconClass }}"></i>
+>>>>>>> Stashed changes
                                 @endif
+                            </a>
+                            @endif
                             @endforeach
 
                             {{-- Fallback: Show icons if no social links configured --}}
                             @if (empty($links))
-                                <a class="social-icon-branded" href="#" title="Facebook" style="--brand-bg: #1877F2;">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="social-icon-branded" href="#" title="Instagram" style="--brand-bg: #E1306C;">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                                <a class="social-icon-branded" href="#" title="WhatsApp" style="--brand-bg: #25D366;">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
+                            <a class="social-icon-branded" href="#" title="Facebook" style="--brand-bg: #1877F2;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="social-icon-branded" href="#" title="Instagram" style="--brand-bg: #E1306C;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a class="social-icon-branded" href="#" title="LinkedIn" style="--brand-bg: #0A66C2;">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a class="social-icon-branded" href="#" title="Twitter" style="--brand-bg: #1DA1F2;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="social-icon-branded" href="#" title="YouTube" style="--brand-bg: #FF0000;">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a class="social-icon-branded" href="#" title="WhatsApp" style="--brand-bg: #25D366;">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
                             @endif
                         </div>
                     </section>
@@ -1263,12 +1337,12 @@ body_theme4 @endif
                         <h3 class="widget-title">{{ __('Usefull Links') }}</h3>
                         <ul>
                             @if ($setting->is_faq == 1)
-                                <li>
-                                    <a class="" href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
-                                </li>
+                            <li>
+                                <a class="" href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
+                            </li>
                             @endif
                             @foreach (DB::table('pages')->wherePos(2)->orwhere('pos', 1)->get() as $page)
-                                <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
+                            <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
                             @endforeach
 
                         </ul>
@@ -1316,9 +1390,9 @@ body_theme4 @endif
     {{-- add whatsapp icon --}}
 
     @if (isset($setting->whatsapp))
-        <a href="https://wa.me/{{$setting->whatsapp}}" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/whatsapp.svg" alt="WhatsApp" />
-        </a>
+    <a href="https://wa.me/{{$setting->whatsapp}}" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/whatsapp.svg" alt="WhatsApp" />
+    </a>
     @endif
 
 
@@ -1331,31 +1405,37 @@ body_theme4 @endif
 
     <!-- Cookie alert dialog  -->
     @if ($setting->is_cookie == 1)
-        @include('cookie-consent::index')
+    @include('cookie-consent::index')
     @endif
     <!-- Cookie alert dialog  -->
 
 
     @php
-        $mainbs = [];
-        $mainbs['is_announcement'] = $setting->is_announcement;
-        $mainbs['announcement_delay'] = $setting->announcement_delay;
-        $mainbs['overlay'] = $setting->overlay;
-        $mainbs = json_encode($mainbs);
+    $mainbs = [];
+    $mainbs['is_announcement'] = $setting->is_announcement;
+    $mainbs['announcement_delay'] = $setting->announcement_delay;
+    $mainbs['overlay'] = $setting->overlay;
+    $mainbs = json_encode($mainbs);
     @endphp
 
     <script>
-        var mainbs = {!! $mainbs !!};
+        var mainbs = {
+            !!$mainbs!!
+        };
         var decimal_separator = '{!! $setting->decimal_separator !!}';
         var thousand_separator = '{!! $setting->thousand_separator !!}';
     </script>
 
     <script>
         let language = {
-            Days: '{{ __('Days') }}',
-            Hrs: '{{ __('Hrs') }}',
-            Min: '{{ __('Min') }}',
-            Sec: '{{ __('Sec') }}',
+            Days: '{{ __('
+            Days ') }}',
+            Hrs: '{{ __('
+            Hrs ') }}',
+            Min: '{{ __('
+            Min ') }}',
+            Sec: '{{ __('
+            Sec ') }}',
         }
     </script>
 
@@ -1369,10 +1449,10 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.plugin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=4') }}"></script>
-    
+
     @if(Auth::check())
     @php
-        $wishlist_item_ids = \App\Models\Wishlist::where('user_id', Auth::user()->id)->pluck('item_id')->toArray();
+    $wishlist_item_ids = \App\Models\Wishlist::where('user_id', Auth::user()->id)->pluck('item_id')->toArray();
     @endphp
     <script>
         window.user_wishlist_items = @json($wishlist_item_ids);
@@ -1399,33 +1479,33 @@ body_theme4 @endif
     @yield('script')
 
     @if ($setting->is_facebook_messenger == '1')
-        <!-- Messenger Chat Plugin Code -->
-        <div id="fb-root"></div>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
 
-        <!-- Your Chat Plugin code -->
-        <div id="fb-customer-chat" class="fb-customerchat">
-        </div>
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
 
-        <script>
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "{{ $setting->facebook_messenger }}");
-            chatbox.setAttribute("attribution", "biz_inbox");
-            window.fbAsyncInit = function () {
-                FB.init({
-                    xfbml: true,
-                    version: 'v11.0'
-                });
-            };
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "{{ $setting->facebook_messenger }}");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v11.0'
+            });
+        };
 
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     @endif
 
 
@@ -1510,18 +1590,20 @@ body_theme4 @endif
     </script>
 
     @if (Session::has('error'))
-        <script>
-            $(document).ready(function () {
-                DangerNotification('{{ Session::get('error') }}')
-            })
-        </script>
+    <script>
+        $(document).ready(function() {
+            DangerNotification('{{ Session::get('
+                error ') }}')
+        })
+    </script>
     @endif
     @if (Session::has('success'))
-        <script>
-            $(document).ready(function () {
-                SuccessNotification('{{ Session::get('success') }}');
-            })
-        </script>
+    <script>
+        $(document).ready(function() {
+            SuccessNotification('{{ Session::get('
+                success ') }}');
+        })
+    </script>
     @endif
 
 </body>

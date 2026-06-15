@@ -1,9 +1,10 @@
 /*
 * File Input
 */
-.fz-14{
+.fz-14 {
   font-size: 14px;
 }
+
 .file {
   position: relative;
   display: inline-block;
@@ -259,9 +260,18 @@ img.admin-setting-img {
 
 /* Switch Slider Ends */
 
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 65px;
+  padding: 0 20px;
+}
+
 .logo img.navbar-brand {
-  height: 60%;
+  height: 45px;
   width: auto;
+  object-fit: contain;
 }
 
 
@@ -438,47 +448,54 @@ input.btn.btn-primary.note-btn.note-btn-primary.note-video-btn {
   padding-left: 30px !important;
 } */
 
-.menu-builder-card-header{
+.menu-builder-card-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-self: center;
 }
-.pre-made-menu-list li{
+
+.pre-made-menu-list li {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.pre-made-menu-list li .addToMenus{
+
+.pre-made-menu-list li .addToMenus {
   padding: 4px 8px;
 }
-.menu-builder-section .card-header h6{
+
+.menu-builder-section .card-header h6 {
   font-size: 16px;
   font-weight: 500;
 }
-.menu-builder-section .list-group-item{
+
+.menu-builder-section .list-group-item {
   display: block !important;
   width: 100% !important;
   border: 1px solid rgba(0, 0, 0, .125);
   position: relative;
   padding: .75rem 1.25rem;
 }
+
 .menu-builder-section .list-group-item {
   font-size: 15px;
   font-weight: 500;
 }
-.sortableLists .list-group-item > div {
+
+.sortableLists .list-group-item>div {
   /* display: flex;
   justify-content: space-between; */
   width: 100% !important;
 }
 
-.sortableLists .list-group-item.sortableListsOpen  div {
+.sortableLists .list-group-item.sortableListsOpen div {
   /* display: flex;
   justify-content: space-between; */
   width: 100% !important;
 }
-.sortableLists .list-group-item.sortableListsOpen  div.float-right {
+
+.sortableLists .list-group-item.sortableListsOpen div.float-right {
   width: auto !important;
 }
