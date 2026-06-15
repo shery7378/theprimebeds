@@ -303,15 +303,19 @@
                             .hero-slider-main .item {
                                 position: relative;
                                 width: 100%;
-                                height: auto !important; /* Override fixed heights */
+                                aspect-ratio: 1920 / 720; /* Adjust to match your slider image's actual width/height ratio */
+                                height: auto;
                                 padding: 0 !important;
                                 display: block;
+                                overflow: hidden;
+                                background-color: #0d2d4e; /* fallback color matching banner if letterboxing occurs */
                             }
                             .hero-slider-main .item img.slider-bg-img {
                                 width: 100%;
-                                height: auto !important;
+                                height: 100%;
                                 max-height: none !important;
-                                object-fit: contain;
+                                object-fit: cover; /* Fill the box uniformly - prevents stretching/half-cut images */
+                                object-position: center;
                                 display: block;
                             }
                             .hero-slider-main .item .item-inner {
@@ -330,7 +334,18 @@
                             .hero-slider-main .item .item-inner * {
                                 pointer-events: auto; /* Re-enable clicks on buttons inside */
                             }
-                            
+
+                            /* Responsive aspect ratios to keep the slider proportional on smaller screens */
+                            @media (max-width: 991px) and (min-width: 768px) {
+                                .hero-slider-main .item { aspect-ratio: 4 / 3; }
+                            }
+                            @media (max-width: 767px) {
+                                .hero-slider-main .item { aspect-ratio: 1 / 1; }
+                            }
+                            @media (max-width: 575px) {
+                                .hero-slider-main .item { aspect-ratio: 4 / 5; }
+                            }
+
                             @media (min-width: 1400px) {
                                 .sright-image {
                                     height: 311px !important;
