@@ -986,6 +986,134 @@
                 justify-content: center !important;
             }
         }
+
+        /* ===== Attractive & Premium Feature Cards Redesign ===== */
+        .service-section {
+            padding: 50px 0 20px !important;
+            background-color: #faf8f5 !important; /* Extremely soft warm luxury backdrop */
+        }
+
+        .single-service.single-service2 {
+            background: #ffffff !important;
+            border: 1px solid #ebe5db !important; /* Elegant warm off-white border */
+            border-radius: 16px !important; /* Smooth premium rounded corners */
+            padding: 20px 20px 20px 96px !important; /* Fixed padding leaving room on the left */
+            display: flex !important;
+            align-items: center !important;
+            height: 100% !important;
+            box-shadow: 0 4px 20px rgba(140, 117, 88, 0.04) !important; /* Subtle warm golden shadow */
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-align: left !important;
+        }
+
+        /* Gold squircle icon backdrop using ::before */
+        .single-service.single-service2::before {
+            content: '' !important;
+            position: absolute !important;
+            left: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 56px !important;
+            height: 56px !important;
+            background: #fcfaf6 !important; /* Inner card background for icon contrast */
+            border-radius: 14px !important;
+            border: 1px solid #f2ede4 !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            z-index: 1 !important;
+        }
+
+        .single-service.single-service2:hover::before {
+            background: #8C7558 !important; /* Fills squircle with gold on card hover */
+            border-color: #8C7558 !important;
+            transform: translateY(-50%) scale(1.1) rotate(5deg) !important;
+        }
+
+        /* Hover slide-up accent line at bottom */
+        .single-service.single-service2::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 0 !important;
+            height: 4px !important;
+            background: linear-gradient(90deg, #8C7558 0%, #b89d77 100%) !important;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            z-index: 3 !important;
+        }
+
+        .single-service.single-service2:hover::after {
+            width: 100% !important;
+        }
+
+        /* Hover animation for the whole card */
+        .single-service.single-service2:hover {
+            transform: translateY(-6px) !important;
+            border-color: #dcd2c3 !important;
+            box-shadow: 0 12px 30px rgba(140, 117, 88, 0.1) !important;
+        }
+
+        /* Icon styling */
+        .single-service.single-service2 img {
+            position: absolute !important;
+            left: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 56px !important;
+            height: 56px !important;
+            object-fit: contain !important;
+            padding: 14px !important; /* Keeps drawing sized correctly */
+            background: transparent !important; /* Keep background transparent to see ::before backdrop */
+            border: none !important;
+            margin-bottom: 0 !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            flex-shrink: 0 !important;
+            z-index: 2 !important;
+            pointer-events: none !important;
+        }
+
+        /* Icon transform on hover */
+        .single-service.single-service2:hover img {
+            filter: brightness(0) invert(1) !important; /* Flips dark drawing color to white */
+            transform: translateY(-50%) scale(1.1) rotate(5deg) !important;
+        }
+
+        /* Content block */
+        .single-service.single-service2 .content {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 4px !important;
+        }
+
+        /* Title inside content */
+        .single-service.single-service2 .content h6,
+        .single-service.single-service2 .content .contactLink {
+            font-family: 'Outfit', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            line-height: 1.4 !important;
+            color: #2c2724 !important;
+            margin: 0 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+            display: block !important;
+        }
+
+        .single-service.single-service2:hover .content h6,
+        .single-service.single-service2:hover .content .contactLink {
+            color: #8C7558 !important; /* Accent color on card hover */
+        }
+
+        /* Description text */
+        .single-service.single-service2 .content p {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            color: #796e65 !important;
+            margin: 0 !important;
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')
@@ -1235,8 +1363,8 @@ body_theme4 @endif
                                             onmouseover="this.style.color='{{ $setting->primary_color ?? '#4e73df' }}'"
                                             onmouseout="this.style.color='inherit'">
                                             <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                                     width:32px;height:32px;border-radius:50%;
-                                                                     border:2px solid currentColor;">
+                                                                         width:32px;height:32px;border-radius:50%;
+                                                                         border:2px solid currentColor;">
                                                 <i class="icon-user"
                                                     style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:2px;"></i>
                                             </span>
@@ -1247,9 +1375,9 @@ body_theme4 @endif
                                             <div class="main-link"
                                                 style="display:inline-flex;align-items:center;cursor:pointer;">
                                                 <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                                         width:32px;height:32px;border-radius:50%;
-                                                                         background:{{ $setting->primary_color ?? '#4e73df' }};
-                                                                         color:#fff;flex-shrink:0;">
+                                                                             width:32px;height:32px;border-radius:50%;
+                                                                             background:{{ $setting->primary_color ?? '#4e73df' }};
+                                                                             color:#fff;flex-shrink:0;">
                                                     <i class="icon-user"
                                                         style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
                                                 </span>
@@ -1554,8 +1682,8 @@ body_theme4 @endif
                             ];
 
                             $tiktokSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
-                                                                                                                <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
-                                                                                                            </svg>';
+                                                                                                                                            <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z" />
+                                                                                                                                        </svg>';
                         @endphp
 
                         <div class="footer-social-links d-flex flex-wrap">
@@ -1925,7 +2053,7 @@ body_theme4 @endif
         <script>
             $(document).ready(function () {
                 DangerNotification('{{ Session::get('
-                            error ') }}')
+                                error ') }}')
             })
         </script>
     @endif
@@ -1933,7 +2061,7 @@ body_theme4 @endif
         <script>
             $(document).ready(function () {
                 SuccessNotification('{{ Session::get('
-                            success ') }}');
+                                success ') }}');
             })
         </script>
     @endif

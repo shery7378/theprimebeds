@@ -182,7 +182,7 @@
                 .top-banner-img {
                     width: 100%;
                     height: auto; /* Natural height by default */
-                    object-fit:fill;
+                    object-fit: cover;
                     object-position: center;
                     display: block;
                 }
@@ -266,7 +266,7 @@
                                 items.forEach(function(img) {
                                     if (img !== firstImg) {
                                         img.style.height = targetHeight + 'px';
-                                        img.style.objectFit = 'fill';
+                                        img.style.objectFit = 'cover';
                                         img.style.width = '100%';
                                     }
                                 });
@@ -289,10 +289,17 @@
 
     @if ($setting->is_slider == 1)
         <div class="slider-area-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
+            <div class="container-fluid p-0">
+                <div class="row m-0">
+                    <div class="col-lg-12 p-0">
                         <style>
+                            .slider-area-wrapper {
+                                margin-top: 0 !important;
+                            }
+                            .hero-slider {
+                                border-radius: 0 !important;
+                                margin-bottom: 30px;
+                            }
                             .hero-slider-main .item {
                                 position: relative;
                                 width: 100%;
@@ -302,7 +309,8 @@
                             }
                             .hero-slider-main .item img.slider-bg-img {
                                 width: 100%;
-                                height: auto;
+                                height: auto !important;
+                                max-height: none !important;
                                 object-fit: contain;
                                 display: block;
                             }
@@ -360,6 +368,7 @@
                         </div>
                     </div>
 
+                    {{-- 
                     @if (isset($hero_banner))
                         <div class="col-lg-4 d-none d-lg-block">
                             <a href="{{ $hero_banner['url1'] }}" class="sright-image">
@@ -396,6 +405,7 @@
                             </a>
                         </div>
                     @endif
+                    --}}
 
                 </div>
             </div>
@@ -1001,13 +1011,14 @@
     @endif
 
     {{-- ==================== CLIENT TESTIMONIALS SECTION ==================== --}}
-    <section class="testimonials-section mt-50 mb-50 container" style="background: linear-gradient(135deg, #f8f9fb 0%, #e8ecf5 100%); padding: 60px 40px; border-radius: 15px;">
+    <section class="testimonials-section mt-50 mb-50 container" style="background: #faf7f2; padding: 75px 40px; border-radius: 24px; border: 1px solid #ebe5db;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center mb-5">
-                        <h2 class="h3">{{ __('Testimonials') }}</h2>
-                        <p class="lead text-muted">{{ __('Hear from our satisfied customers here') }}</p>
+                    <div class="text-center mb-5 border-0" style="margin-bottom: 45px !important; position: relative; z-index: 10;">
+                        <span style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; color: #8C7558; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px;">{{ __('Customer Stories') }}</span>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: #2c2724; margin: 0; position: relative; display: inline-block;">{{ __('Testimonials') }}</h2>
+                        <p style="font-family: 'Outfit', sans-serif; font-size: 15px; color: #796e65; margin-top: 8px; margin-bottom: 0;">{{ __('Hear from our satisfied customers here') }}</p>
                     </div>
                 </div>
             </div>
@@ -1015,44 +1026,42 @@
             @if($testimonials->count() > 0)
             <div class="row">
                 <div class="col-lg-10 mx-auto">
-                    <!-- Progress Bar -->
-                    <div style="height: 4px; background: #f0f0f0; border-radius: 10px; overflow: hidden; margin-bottom: 30px;">
-                        <div id="carousel-progress" style="height: 100%; background: linear-gradient(90deg, #377dff, #ff6b9d); width: 0%; transition: width 0.1s linear;"></div>
-                    </div>
+                    <!-- Hidden Progress Bar (required by JS controller) -->
+                    <div id="carousel-progress" style="display: none; width: 0%;"></div>
 
                     <!-- Main Carousel -->
-                    <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000" style="max-width: 800px; margin: 0 auto; position: relative;">
 
                         <!-- Carousel Items -->
                         <div class="carousel-inner">
                             @foreach ($testimonials as $key => $testimonial)
                             <div class="carousel-item @if($key == 0) active @endif" data-bs-interval="6000">
-                                <div style="padding: 40px 20px;">
-                                    <div style="background: #fff; padding: 60px 45px; border-radius: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.12); text-align: center; position: relative; overflow: hidden;">
-                                        <!-- Quote Icon -->
-                                        <div style="position: absolute; top: -10px; left: -10px; font-size: 80px; color: rgba(55, 125, 255, 0.08); z-index: 1;">
+                                <div style="padding: 20px 20px 40px;">
+                                    <div style="background: #ffffff; padding: 50px 45px; border-radius: 24px; border: 1px solid #ebe5db; box-shadow: 0 10px 40px rgba(140, 117, 88, 0.04); text-align: center; position: relative; overflow: hidden;">
+                                        <!-- Centered Quote Icon -->
+                                        <div style="font-size: 32px; color: #8C7558; opacity: 0.8; margin-bottom: 15px; display: inline-block;">
                                             <i class="fas fa-quote-left"></i>
                                         </div>
 
                                         <!-- Stars -->
-                                        <div style="margin-bottom: 25px; position: relative; z-index: 2;">
+                                        <div style="margin-bottom: 20px; position: relative; z-index: 2;">
                                             @for ($i = 0; $i < $testimonial->rating; $i++)
-                                                <i class="fas fa-star" style="color: #ffc107; margin: 0 5px; font-size: 20px;"></i>
+                                                <i class="fas fa-star" style="color: #e5a93b; margin: 0 4px; font-size: 16px;"></i>
                                             @endfor
                                         </div>
 
                                         <!-- Testimonial Text -->
-                                        <p style="font-style: italic; color: #666; margin-bottom: 35px; line-height: 1.9; font-size: 17px; position: relative; z-index: 2;">{{ $testimonial->testimonial_text }}</p>
+                                        <p style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 500; font-size: 21px; line-height: 1.8; color: #3f3a36; margin-bottom: 30px; position: relative; z-index: 2;">"{{ $testimonial->testimonial_text }}"</p>
 
                                         <!-- Client Info -->
-                                        <div style="border-top: 2px solid #f5f5f5; padding-top: 25px; position: relative; z-index: 2;">
-                                            <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
-                                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #377dff, #ff6b9d); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px;">
+                                        <div style="border-top: 1px solid #ebe5db; padding-top: 25px; position: relative; z-index: 2;">
+                                            <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #FAF7F2 0%, #EADDCF 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8C7558; border: 1px solid #EBE5DB; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif;">
                                                     {{ substr($testimonial->client_name, 0, 1) }}
                                                 </div>
                                                 <div style="text-align: left;">
-                                                    <h5 style="margin: 0 0 3px 0; color: #2c3e56; font-weight: 700; font-size: 17px;">{{ $testimonial->client_name }}</h5>
-                                                    <p style="margin: 0; color: #999; font-size: 13px;">{{ $testimonial->client_title }}</p>
+                                                    <h5 style="margin: 0 0 3px 0; color: #2c2724; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.3px;">{{ $testimonial->client_name }}</h5>
+                                                    <p style="margin: 0; color: #8C7558; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">{{ $testimonial->client_title }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1061,6 +1070,15 @@
                             </div>
                             @endforeach
                         </div>
+
+                        <!-- Pagination Indicators (Dots) -->
+                        @if($testimonials->count() > 1)
+                        <div class="carousel-indicators-custom" style="display: flex; justify-content: center; gap: 8px; margin-top: 10px; margin-bottom: 10px;">
+                            @foreach ($testimonials as $key => $testimonial)
+                            <button class="carousel-indicator-btn @if($key == 0) active @endif" data-bs-slide-to="{{ $key }}" aria-label="Slide {{ $key + 1 }}"></button>
+                            @endforeach
+                        </div>
+                        @endif
 
                         <!-- Navigation Buttons -->
                         @if($testimonials->count() > 1)
@@ -1122,14 +1140,14 @@
         /* Carousel Container */
         #testimonial-carousel {
             position: relative;
-            padding: 0 80px;
+            padding: 0; /* Reset default padding as buttons overlap border */
         }
 
         /* Carousel Items */
         #testimonial-carousel .carousel-item {
             padding: 20px 0;
             transition: opacity 0.8s ease-in-out;
-            min-height: 400px;
+            min-height: 380px;
             align-items: center;
         }
 
@@ -1150,72 +1168,81 @@
         /* Navigation Buttons */
         #testimonial-carousel .carousel-control-prev,
         #testimonial-carousel .carousel-control-next {
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 2;
+            width: 48px !important;
+            height: 48px !important;
+            background-color: #ffffff !important;
+            border: 1px solid #ebe5db !important;
+            border-radius: 50% !important;
+            padding: 0 !important;
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 10 !important;
             display: flex !important;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 1 !important;
+            box-shadow: 0 4px 15px rgba(140, 117, 88, 0.05) !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            cursor: pointer !important;
         }
 
         #testimonial-carousel .carousel-control-prev {
-            left: 10px;
+            left: -24px !important;
         }
 
         #testimonial-carousel .carousel-control-next {
-            right: 10px;
-        }
-
-        #testimonial-carousel .carousel-control-prev:hover,
-        #testimonial-carousel .carousel-control-next:hover {
-            opacity: 1;
+            right: -24px !important;
         }
 
         #testimonial-carousel .carousel-control-prev i,
         #testimonial-carousel .carousel-control-next i {
-            font-size: 28px;
-            color: #377dff;
-            transition: all 0.3s ease;
+            font-size: 16px !important;
+            color: #8C7558 !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        #testimonial-carousel .carousel-control-prev:hover,
+        #testimonial-carousel .carousel-control-next:hover {
+            background-color: #8C7558 !important;
+            border-color: #8C7558 !important;
+            box-shadow: 0 8px 25px rgba(140, 117, 88, 0.2) !important;
         }
 
         #testimonial-carousel .carousel-control-prev:hover i,
         #testimonial-carousel .carousel-control-next:hover i {
-            transform: scale(1.2);
-            color: #ff6b9d;
+            color: #ffffff !important;
         }
 
-        /* Indicator Buttons */
+        #testimonial-carousel .carousel-control-prev:hover {
+            transform: translateY(-50%) translateX(-4px) !important;
+        }
+
+        #testimonial-carousel .carousel-control-next:hover {
+            transform: translateY(-50%) translateX(4px) !important;
+        }
+
+        /* Indicator Buttons (Dots) */
         .carousel-indicator-btn {
-            width: 12px !important;
-            height: 12px !important;
+            width: 10px !important;
+            height: 10px !important;
             border-radius: 50% !important;
-            background: #ddd !important;
+            background: #eaddcf !important; /* Soft warm light beige */
             border: none !important;
-            margin: 0 8px !important;
+            margin: 0 4px !important;
             padding: 0 !important;
-            opacity: 0.6;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            opacity: 1 !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            cursor: pointer !important;
         }
 
         .carousel-indicator-btn:hover {
-            background: #bb86fc !important;
-            opacity: 0.8;
+            background: #c8b7a6 !important;
         }
 
         .carousel-indicator-btn.active {
-            background: linear-gradient(135deg, #377dff, #ff6b9d) !important;
-            opacity: 1;
-            transform: scale(1.2);
+            background: #8C7558 !important; /* Gold active color */
+            transform: scale(1.2) !important;
         }
 
         /* Responsive - Mobile */
@@ -1295,11 +1322,6 @@
             .testimonial-carousel-custom .carousel-control-next {
                 right: 15px;
             }
-
-            .testimonial-carousel-custom .carousel-control-prev i,
-            .testimonial-carousel-custom .carousel-control-next i {
-                font-size: 18px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1309,7 +1331,104 @@
                 margin: 0 5px !important;
             }
         }
-    </style>
+
+        /* ===== Redesigned Animated Counters Section ===== */
+        .animated-counters-section {
+            background: #faf7f2 !important; /* Matches service cards & testimonials background */
+            border: 1px solid #ebe5db !important;
+            border-radius: 24px !important;
+            padding: 70px 40px !important;
+        }
+
+            .counter-box {
+                background: #ffffff !important;
+                border: 1px solid #ebe5db !important;
+                border-radius: 20px !important;
+                padding: 40px 30px !important;
+                box-shadow: 0 8px 30px rgba(140, 117, 88, 0.03) !important;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+
+            .counter-box::after {
+                content: '' !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                width: 0 !important;
+                height: 4px !important;
+                background: linear-gradient(90deg, #8C7558 0%, #b89d77 100%) !important;
+                transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+
+            .counter-box:hover::after {
+                width: 100% !important;
+            }
+
+            .counter-box:hover {
+                transform: translateY(-6px) !important;
+                border-color: #dcd2c3 !important;
+                box-shadow: 0 15px 35px rgba(140, 117, 88, 0.08) !important;
+            }
+
+            /* Icon Badge */
+            .counter-icon-wrap {
+                width: 64px !important;
+                height: 64px !important;
+                border-radius: 50% !important;
+                background: #fcfaf6 !important;
+                border: 1px solid #f2ede4 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 auto 20px !important;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+
+            .counter-box:hover .counter-icon-wrap {
+                background: #8C7558 !important;
+                border-color: #8C7558 !important;
+                transform: scale(1.1) rotate(5deg) !important;
+            }
+
+            .counter-icon-wrap i {
+                font-size: 24px !important;
+                color: #8C7558 !important;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+
+            .counter-box:hover .counter-icon-wrap i {
+                color: #ffffff !important;
+            }
+
+            /* Number text */
+            .counter-number {
+                font-family: 'Outfit', sans-serif !important;
+                font-size: 40px !important;
+                font-weight: 700 !important;
+                color: #2c2724 !important;
+                margin: 0 !important;
+                line-height: 1.2 !important;
+                transition: color 0.3s ease !important;
+            }
+
+            .counter-box:hover .counter-number {
+                color: #8C7558 !important;
+            }
+
+            /* Label Text */
+            .counter-label {
+                font-family: 'Outfit', sans-serif !important;
+                font-size: 12px !important;
+                font-weight: 600 !important;
+                color: #8C7558 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 1.5px !important;
+                margin-top: 10px !important;
+                margin-bottom: 0 !important;
+            }
+        </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1465,28 +1584,34 @@
 
 
     {{-- Interactive Animated Counters Section --}}
-    <section class="animated-counters-section mt-50 mb-50 container" style="background: linear-gradient(135deg, #f8f9fb 0%, #e2e6ec 100%); padding: 60px 40px; border-radius: 12px;">
+    <section class="animated-counters-section mt-50 mb-50 container">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="counter-box" style="padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-                        <i class="icon-check" style="font-size: 40px; color: #377dff; margin-bottom: 15px; display: block;"></i>
-                        <h2 class="animate-counter h1 font-weight-bold" data-target="1500" style="color: #2c3e56; margin: 0;">0</h2>
-                        <p class="text-muted mt-2 mb-0" style="font-size: 16px; font-weight: 500;">Beds Sold</p>
+                    <div class="counter-box">
+                        <div class="counter-icon-wrap">
+                            <i class="icon-check"></i>
+                        </div>
+                        <h2 class="animate-counter counter-number" data-target="1500">0</h2>
+                        <p class="counter-label">Beds Sold</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="counter-box" style="padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-                        <i class="icon-users" style="font-size: 40px; color: #377dff; margin-bottom: 15px; display: block;"></i>
-                        <h2 class="animate-counter h1 font-weight-bold" data-target="1200" style="color: #2c3e56; margin: 0;">0</h2>
-                        <p class="text-muted mt-2 mb-0" style="font-size: 16px; font-weight: 500;">Happy Customers</p>
+                    <div class="counter-box">
+                        <div class="counter-icon-wrap">
+                            <i class="icon-users"></i>
+                        </div>
+                        <h2 class="animate-counter counter-number" data-target="1200">0</h2>
+                        <p class="counter-label">Happy Customers</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 mb-4 mx-auto">
-                    <div class="counter-box" style="padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-                        <i class="icon-star" style="font-size: 40px; color: #377dff; margin-bottom: 15px; display: block;"></i>
-                        <h2 class="animate-counter h1 font-weight-bold" data-target="99" style="color: #2c3e56; margin: 0;">0</h2>
-                        <p class="text-muted mt-2 mb-0" style="font-size: 16px; font-weight: 500;">Positive Reviews (%)</p>
+                    <div class="counter-box">
+                        <div class="counter-icon-wrap">
+                            <i class="icon-star"></i>
+                        </div>
+                        <h2 class="animate-counter counter-number" data-target="99">0</h2>
+                        <p class="counter-label">Positive Reviews (%)</p>
                     </div>
                 </div>
             </div>
