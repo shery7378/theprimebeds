@@ -1879,9 +1879,7 @@ body_theme4 @endif
     @endphp
 
     <script>
-        var mainbs = {
-            !!$mainbs!!
-        };
+        var mainbs = {!! $mainbs !!};
         var decimal_separator = '{!! $setting->decimal_separator !!}';
         var thousand_separator = '{!! $setting->thousand_separator !!}';
     </script>
