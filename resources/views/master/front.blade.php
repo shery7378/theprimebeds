@@ -739,6 +739,26 @@
             background: #f8f6f0;
         }
 
+        /* Disable hover dropdown for cart specifically */
+        .site-header .toolbar .toolbar-item.topbar-cart-item:not(.show-dropdown):hover>.toolbar-dropdown,
+        .site-header .toolbar .toolbar-item.topbar-cart-item:not(.show-dropdown)>.toolbar-dropdown {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(15px) !important;
+            pointer-events: none !important;
+            display: none !important;
+        }
+
+        /* Enable click dropdown for cart */
+        .site-header .toolbar .toolbar-item.topbar-cart-item.show-dropdown>.toolbar-dropdown {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            display: block !important;
+            animation: 0.35s submenu-show;
+        }
+
         .topbar-cart-item>a>div {
             position: static !important;
             transform: none !important;
@@ -2146,6 +2166,20 @@ body_theme4 @endif
             // Update cursor via JS so we don't mess with CSS where it was undone before
             $(document).on('mouseenter', '.product-card', function () {
                 $(this).css('cursor', 'pointer');
+            });
+
+            // Cart click dropdown toggle
+            $(document).on('click', '.topbar-cart-item > a', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).parent().toggleClass('show-dropdown');
+            });
+
+            // Close cart dropdown when clicking outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.topbar-cart-item').length) {
+                    $('.topbar-cart-item').removeClass('show-dropdown');
+                }
             });
 
             // Custom select category dropdown toggle
