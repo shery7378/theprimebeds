@@ -244,6 +244,7 @@
         width: 100%;
         transition: all 0.3s ease;
         background: #fafafa;
+        height: auto;
     }
     .form-wrapper .form-control:hover,
     .form-wrapper .form-select:hover {
