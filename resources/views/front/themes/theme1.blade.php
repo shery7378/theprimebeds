@@ -1109,15 +1109,7 @@
                         </div>
                         @endif
 
-                        <!-- Navigation Buttons -->
-                        @if($testimonials->count() > 3)
-                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev" title="Previous" style="left: -40px; width: 40px; height: 40px; margin-top: auto; margin-bottom: auto;">
-                            <i class="fas fa-chevron-left" style="font-size: 20px;"></i>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next" title="Next" style="right: -40px; width: 40px; height: 40px; margin-top: auto; margin-bottom: auto;">
-                            <i class="fas fa-chevron-right" style="font-size: 20px;"></i>
-                        </button>
-                        @endif
+
                     </div>
                 </div>
             </div>
@@ -1175,23 +1167,8 @@
         /* Carousel Items */
         #testimonial-carousel .carousel-item {
             padding: 20px 0;
-            transition: opacity 0.8s ease-in-out;
             min-height: 380px;
             align-items: center;
-        }
-
-        #testimonial-carousel .carousel-item:not(.active),
-        #testimonial-carousel .carousel-item.carousel-item-next,
-        #testimonial-carousel .carousel-item.carousel-item-prev {
-            visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #testimonial-carousel .carousel-item.active {
-            visibility: visible;
-            opacity: 1;
-            pointer-events: auto;
         }
 
         /* Navigation Buttons */
@@ -1470,6 +1447,7 @@
             // Initialize Bootstrap Carousel
             const carouselElement = new bootstrap.Carousel(carousel, {
                 interval: 6000,
+                ride: 'carousel',
                 wrap: true,
                 touch: true,
                 keyboard: true
