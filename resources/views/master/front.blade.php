@@ -450,12 +450,13 @@
         .topbar-redesigned .topbar-search-box {
             border: 2px solid #e2e6ec;
             border-radius: 50px;
-            overflow: hidden;
+            overflow: visible !important;
             background: #f8f9fb;
             transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             display: flex;
             align-items: center;
             height: 44px;
+            position: relative;
         }
 
         .topbar-redesigned .topbar-search-box:focus-within {
@@ -466,29 +467,97 @@
 
         /* Category Select */
         .topbar-redesigned .topbar-category-select {
-            border: none;
-            border-right: 1px solid #e2e6ec;
-            background: transparent;
-            padding: 0 18px 0 28px !important;
-            /* Adjusted padding to a middle ground */
-            font-size: 13px;
-            font-weight: 500;
-            color: #3c4858;
-            min-width: 195px !important;
-            cursor: pointer;
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236c7a8d' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            padding-right: 30px;
-            height: 100%;
+            display: none !important;
         }
 
-        .topbar-redesigned .topbar-category-select:focus {
-            outline: none;
+        /* Custom Premium Select Dropdown */
+        .topbar-redesigned .custom-category-select-wrapper {
+            position: relative;
+            height: 100%;
+            min-width: 195px;
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar-redesigned .custom-category-select-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0 18px 0 28px;
+            border-right: 1px solid #ebdcd0;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #2c2924;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .topbar-redesigned .custom-category-select-trigger:hover {
+            color: var(--primary-color);
+        }
+
+        .topbar-redesigned .custom-category-select-trigger i {
+            font-size: 10px;
+            color: #b59469; /* matching theme arrow color */
+            transition: transform 0.3s ease, color 0.2s ease;
+            margin-left: 8px;
+        }
+
+        .topbar-redesigned .custom-category-select-wrapper.open .custom-category-select-trigger i {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .topbar-redesigned .custom-category-select-options {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid #ebdcd0;
+            border-radius: 14px;
+            padding: 8px 0;
+            box-shadow: 0 10px 30px rgba(44, 41, 36, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+            z-index: 1050;
+            list-style: none;
+            margin: 0;
+        }
+
+        .topbar-redesigned .custom-category-select-wrapper.open .custom-category-select-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .topbar-redesigned .custom-category-select-option {
+            padding: 10px 20px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #5a5045;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .topbar-redesigned .custom-category-select-option:hover {
+            background: rgba(197, 160, 89, 0.06);
+            color: var(--primary-color);
+            padding-left: 24px;
+        }
+
+        .topbar-redesigned .custom-category-select-option.active {
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--primary-color);
+            font-weight: 700;
         }
 
         /* Search Input */
@@ -1373,6 +1442,18 @@ body_theme4 @endif
                             <div class="search-box-wrap d-none d-lg-flex align-items-center topbar-search-wrap">
                                 <div class="search-box-inner align-self-center">
                                     <div class="search-box d-flex topbar-search-box">
+                                        <div class="custom-category-select-wrapper">
+                                            <div class="custom-category-select-trigger">
+                                                <span class="selected-text">{{ __('All Categories') }}</span>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                            <ul class="custom-category-select-options">
+                                                <li class="custom-category-select-option active" data-value="">{{ __('All Categories') }}</li>
+                                                @foreach (DB::table('categories')->whereStatus(1)->get() as $category)
+                                                    <li class="custom-category-select-option" data-value="{{ $category->slug }}">{{ $category->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                         <select name="category" id="category_select"
                                             class="categoris topbar-category-select">
                                             <option value="">{{ __('All Categories') }}</option>
@@ -2042,6 +2123,45 @@ body_theme4 @endif
             $(document).on('mouseenter', '.product-card', function () {
                 $(this).css('cursor', 'pointer');
             });
+
+            // Custom select category dropdown toggle
+            $(document).on('click', '.custom-category-select-trigger', function (e) {
+                e.stopPropagation();
+                $(this).parent().toggleClass('open');
+            });
+
+            // Close custom select when clicking outside
+            $(document).on('click', function () {
+                $('.custom-category-select-wrapper').removeClass('open');
+            });
+
+            // Option selection on custom select
+            $(document).on('click', '.custom-category-select-option', function () {
+                let value = $(this).attr('data-value');
+                let text = $(this).text();
+                
+                // Update trigger text
+                $(this).closest('.custom-category-select-wrapper').find('.selected-text').text(text);
+                
+                // Set active class
+                $(this).addClass('active').siblings().removeClass('active');
+                
+                // Sync with original select
+                $('#category_select').val(value).trigger('change');
+                
+                // Close dropdown
+                $(this).closest('.custom-category-select-wrapper').removeClass('open');
+            });
+
+            // Init custom select option matching initial select value
+            let initialVal = $('#category_select').val();
+            if (initialVal) {
+                let activeOption = $(`.custom-category-select-option[data-value="${initialVal}"]`);
+                if (activeOption.length) {
+                    $('.custom-category-select-trigger .selected-text').text(activeOption.text());
+                    activeOption.addClass('active').siblings().removeClass('active');
+                }
+            }
         });
     </script>
     @yield('script')
