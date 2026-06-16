@@ -292,7 +292,7 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        background: #31251A;
+        background: var(--primary-color);
         color: #ffffff;
         border: none;
         border-radius: 20px;
@@ -302,13 +302,13 @@
         text-decoration: none;
         cursor: pointer;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 12px rgba(49, 37, 26, 0.15);
+        box-shadow: 0 4px 12px rgba(140, 117, 88, 0.35);
     }
     .btn-browse:hover {
-        background: #1F1710;
+        background: #1f314d;
         color: #ffffff;
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(49, 37, 26, 0.25);
+        box-shadow: 0 6px 16px rgba(31, 49, 77, 0.25);
     }
     .btn-browse:active {
         transform: translateY(0);
