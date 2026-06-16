@@ -120,12 +120,23 @@
           max-height: none !important;
       }
       .empty-cart-btn-primary {
+          display: block;
+          width: 100%;
+          background: var(--primary-color) !important;
+          color: #fff !important;
+          padding: 14px 20px;
+          border-radius: 8px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          text-align: center;
+          text-transform: none;
           transition: all 0.3s ease !important;
       }
       .empty-cart-btn-primary:hover {
-          filter: brightness(85%) !important;
+          background: #2c2c2c !important;
           transform: translateY(-1px);
-          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15) !important;
+          box-shadow: 0 6px 15px rgba(44, 44, 44, 0.3) !important;
           color: #fff !important;
       }
   </style>
@@ -133,7 +144,7 @@
     <a href="{{ route('front.catalog') }}" style="display: block; width: 100%; text-decoration: none;">
         <img src="{{ asset('assets/img/cart_cropped.png') }}" alt="Empty Cart" style="width: 100%; display: block; margin-bottom: 20px;">
         <div style="padding: 0 25px;">
-            <div class="empty-cart-btn-primary" style="display: block; width: 100%; background: var(--primary-color) !important; color: #fff !important; padding: 14px 20px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; text-align: center; text-transform: none;">
+            <div class="empty-cart-btn-primary">
                 {{ __('Start Shopping') }}
             </div>
         </div>

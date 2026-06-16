@@ -318,7 +318,7 @@
            GLOBAL BREADCRUMB HERO STRIP REDESIGN (MATCHING PRODUCT PAGE)
            ============================================================ */
         .page-title {
-            background: #2A4166 !important;
+            background: var(--primary-color) !important;
             padding: 18px 0 !important;
             position: relative !important;
             overflow: hidden !important;
@@ -569,10 +569,10 @@
         }
 
         .topbar-catalog-btn:hover {
-            background: var(--primary-color);
-            filter: brightness(85%);
+            background-color: #2c2c2c !important;
+            background-image: none !important;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3);
             color: #fff !important;
         }
 
@@ -1015,13 +1015,37 @@
         }
 
         .subscriber-form .btn-primary:hover {
+            background-color: #2c2c2c !important;
+            background-image: none !important;
             transform: translateY(-2px) !important;
-            filter: brightness(90%) !important;
-            box-shadow: 0 8px 24px rgba(140, 117, 88, 0.3) !important;
+            box-shadow: 0 8px 24px rgba(44, 44, 44, 0.4) !important;
         }
 
         .subscriber-form .btn-primary:active {
             transform: translateY(0) !important;
+        }
+
+        .contact-us-widget-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff !important;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease !important;
+        }
+
+        .contact-us-widget-btn:hover {
+            background-color: #2c2c2c !important;
+            background-image: none !important;
+            border-color: #2c2c2c !important;
+            box-shadow: 0 6px 15px rgba(44, 44, 44, 0.25);
+            color: #fff !important;
         }
 
         .gateway_image {

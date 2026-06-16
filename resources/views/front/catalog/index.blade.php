@@ -919,7 +919,7 @@
                             <p style="color:rgba(255,255,255,0.65);font-size:13px;margin:0 0 16px;line-height:1.55;">
                                 {{ __('Our sleep experts are ready to help you find the perfect bed.') }}
                             </p>
-                            <a href="{{ route('front.contact') }}" style="display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:rgba(255,255,255,0.15);color:#fff;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.25);transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                            <a href="{{ route('front.contact') }}" class="contact-us-widget-btn">
                                 <i class="fas fa-envelope"></i> {{ __('Contact Us') }}
                             </a>
                         </div>

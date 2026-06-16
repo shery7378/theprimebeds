@@ -181,8 +181,8 @@
         justify-content: center;
         width: 100%;
         padding: 14px;
-        background: #31251A;
-        color: #fff;
+        background: var(--primary-color) !important;
+        color: #fff !important;
         border: none;
         border-radius: 20px;
         font-size: 15px;
@@ -192,11 +192,12 @@
         transition: all 0.25s ease;
     }
     .pc__cta:hover {
-        background: #1F1710;
-        color: #fff;
+        background: #2c2c2c !important;
+        color: #fff !important;
+        box-shadow: 0 6px 15px rgba(44, 44, 44, 0.25);
     }
     .pc__cta.out-of-stock {
-        background: #A3917C;
+        background: #A3917C !important;
     }
 
     /* ── List View ── */

@@ -62,7 +62,7 @@
        BREADCRUMB HERO STRIP
     ============================================================ */
     .pdp-hero-strip {
-        background: #2A4166;
+        background: var(--primary-color);
         padding: 18px 0;
         position: relative;
         overflow: hidden;
