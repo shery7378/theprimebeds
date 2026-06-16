@@ -388,39 +388,39 @@
         background: radial-gradient(circle, rgba(42,65,102,.05) 0%, transparent 70%);
         pointer-events: none;
     }
+    .pdp-price-section {
+        margin-bottom: -10px; /* pull next section closer */
+    }
     .pdp-price-section .price-label {
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #444444;
-        margin-bottom: 6px;
+        display: none; /* Cleaner without the "Price" label */
     }
     .pdp-price-was {
-        font-size: 15px;
-        color: #555555;
+        font-size: 16px;
+        color: #888; /* lighter */
         text-decoration: line-through;
-        margin-right: 12px;
+        margin-right: 8px;
+        font-weight: 500;
     }
     .pdp-price-now {
-        font-size: 2.4rem;
-        font-weight: 900;
-        color: #333333;
+        font-size: 2.8rem; /* Make it the strongest visual element */
+        font-weight: 800;
+        color: #222;
         line-height: 1;
+        letter-spacing: -1px;
     }
     .pdp-price-discount-tag {
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        background: linear-gradient(135deg, #d63031 0%, #e84393 100%);
+        background: var(--primary-color); /* Muted luxury tone / brand color */
         color: #fff;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
-        padding: 4px 10px;
-        border-radius: var(--radius-pill);
+        padding: 4px 12px;
+        border-radius: var(--radius-sm);
         vertical-align: middle;
-        margin-left: 10px;
-        box-shadow: 0 4px 10px rgba(214, 48, 49, 0.25);
+        margin-left: 12px;
+        box-shadow: 0 2px 8px rgba(140, 117, 88, 0.3);
     }
     #discount_info {
         display: none;
@@ -527,6 +527,7 @@
         align-items: center;
         gap: 16px;
         flex-wrap: wrap;
+        margin-bottom: -10px; /* tighter flow */
     }
     .pdp-qty-label {
         font-size: 13px;
@@ -536,39 +537,39 @@
     .pdp-qty-control {
         display: inline-flex;
         align-items: center;
-        background: var(--bg-soft);
-        border: 2px solid var(--border);
-        border-radius: var(--radius-pill);
+        background: #faf9f7; /* softer premium bg */
+        border: 1px solid #e0dbd5; /* subtle premium border */
+        border-radius: 12px;
         overflow: hidden;
     }
     .pdp-qty-control .qty-btn {
-        width: 42px;
-        height: 42px;
+        width: 46px;
+        height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-size: 16px;
-        color: #000000;
+        font-size: 18px;
+        color: #555;
         background: transparent;
         border: none;
-        transition: var(--transition);
-        font-weight: 700;
+        transition: background 0.2s ease, color 0.2s ease;
+        font-weight: 600;
         user-select: none;
     }
     .pdp-qty-control .qty-btn:hover {
-        background: #000000;
-        color: #fff;
+        background: #edeae4; /* Softer hover */
+        color: var(--primary-color);
     }
     .pdp-qty-control .qtyValue {
-        width: 52px;
+        width: 50px;
         text-align: center;
         font-size: 16px;
         font-weight: 700;
         border: none;
         background: transparent;
         outline: none;
-        color: #000000;
+        color: #333;
     }
     .pdp-total-badge {
         margin-left: auto;
@@ -627,17 +628,96 @@
         color: #fff;
     }
 
+    /* ----- CTA SECTION ENHANCEMENTS ----- */
+    .pdp-section-label {
+        display: none; /* Removed heading completely */
+    }
+    .pdp-cta-wrap {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding-top: 4px;            /* even tighter vertical padding */
+        padding-bottom: 4px;
+        justify-content: center;    /* center content */
+        width: 100%;
+    }
+
     .pdp-btn-outline {
-        background: #fff;
-        color: #2A4166;
-        border: 2px solid #2A4166;
-        box-shadow: 0 4px 10px rgba(0,0,0,.03);
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        box-shadow: 0 6px 20px rgba(140, 117, 88, 0.25); /* premium soft shadow */
+        border-radius: 16px;        /* 16px radius */
+        height: 64px;               /* 64px height */
+        padding: 0 20px;            /* horizontal padding for text */
+        width: 100%;                /* 90-100% column width */
+        max-width: none;            /* allow full width of its container */
+        flex: none !important;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: background 0.25s ease, transform 0.25s ease;
     }
     .pdp-btn-outline:hover {
-        background: #f8faff;
-        color: #1f314d;
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 8px 16px rgba(42,65,102,.12);
+        background: #1f314d !important;       /* dark blue hover */
+        transform: translateY(-2px);
+        color: #fff;
+    }
+    
+    /* Sticky Mobile CTA */
+    .pdp-mobile-sticky-cta {
+        display: none; /* hidden on desktop */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 12px 16px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+        z-index: 9999;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-top: 1px solid #eaeaea;
+    }
+    .pdp-mobile-sticky-price {
+        display: flex;
+        flex-direction: column;
+    }
+    .pdp-mobile-sticky-price span {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #222;
+        line-height: 1.1;
+    }
+    .pdp-mobile-sticky-price small {
+        font-size: 12px;
+        color: #888;
+        font-weight: 500;
+    }
+    .pdp-mobile-sticky-btn {
+        flex: 1;
+        height: 52px;
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(140, 117, 88, 0.25);
+    }
+    
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+        .pdp-mobile-sticky-cta {
+            display: flex; /* show on mobile */
+        }
+        .pdp-info-col {
+            padding-bottom: 80px; /* space for sticky bar */
+        }
     }
 
     .pdp-btn-gold {
@@ -1459,7 +1539,7 @@
                                 @if ($item->is_stock())
                                     @if(!$hasCustomizers)
                                         <div class="pdp-cta-wrap">
-                                            <button class="pdp-btn pdp-btn-outline" id="add_to_cart" style="width: 100%;">
+                                            <button class="pdp-btn pdp-btn-outline" id="add_to_cart">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 <span>{{ __('Add to Cart') }}</span>
                                             </button>
@@ -1749,6 +1829,44 @@
 
     </div>{{-- /container --}}
 </div>{{-- /pdp-page-wrapper --}}
+
+{{-- ══════════════════════════════════════════════
+     MOBILE STICKY CTA
+══════════════════════════════════════════════ --}}
+<div class="pdp-mobile-sticky-cta">
+    <div class="pdp-mobile-sticky-price">
+        <span class="pdp-price-now-sticky" id="main_price_sticky" data-price="{{ PriceHelper::grandCurrencyPrice($item) }}">
+            {{ PriceHelper::grandCurrencyPrice($item) }}
+        </span>
+        @if ($item->previous_price != 0)
+            <small><del>{{ PriceHelper::setPreviousPrice($item->previous_price) }}</del></small>
+        @else
+            <small>{{ __('Total Price') }}</small>
+        @endif
+    </div>
+    
+    @if ($item->item_type != 'affiliate')
+        @if ($item->is_stock())
+            @if(!$hasCustomizers)
+                <button class="pdp-mobile-sticky-btn" onclick="document.getElementById('add_to_cart').click();">
+                    {{ __('Add to Cart') }}
+                </button>
+            @else
+                <button class="pdp-mobile-sticky-btn" onclick="window.scrollTo({top: document.querySelector('.pdp-btn-customize').offsetTop - 100, behavior: 'smooth'});">
+                    {{ __('Customize') }}
+                </button>
+            @endif
+        @else
+            <button class="pdp-mobile-sticky-btn" style="background:#aaa; cursor:not-allowed;" disabled>
+                {{ __('Out of Stock') }}
+            </button>
+        @endif
+    @else
+        <a href="{{ $item->affiliate_link }}" target="_blank" class="pdp-mobile-sticky-btn d-flex align-items-center justify-content-center" style="text-decoration:none;">
+            {{ __('Buy Now') }}
+        </a>
+    @endif
+</div>
 
 {{-- ══════════════════════════════════════════════
      DISCOUNT MODAL
