@@ -50,7 +50,7 @@ class UserController extends Controller
     public function index()
     {
         return view("back.user.index", [
-            "datas" => User::latest()->get(),
+            "datas" => User::where("is_merchant", 0)->latest()->get(),
         ]);
     }
 
