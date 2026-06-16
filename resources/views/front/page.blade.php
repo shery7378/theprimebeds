@@ -142,8 +142,8 @@
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: #fff;
-                color: #1a1a1a;
+                background: var(--primary-color);
+                color: #fff;
                 padding: 10px 24px;
                 border-radius: 25px;
                 font-size: 0.9rem;
@@ -151,10 +151,11 @@
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
                 z-index: 1;
                 transition: all 0.3s ease;
+                white-space: nowrap;
             }
 
             .gallery-item:hover .gallery-label {
-                background: #1a1a1a;
+                background: #2c2c2c;
                 color: #fff;
                 transform: translateX(-50%) translateY(-5px);
                 box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
