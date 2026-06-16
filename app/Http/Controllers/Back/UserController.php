@@ -25,15 +25,17 @@ class UserController extends Controller
     {
         $this->middleware("auth:admin");
         $this->middleware("adminlocalize");
-        $this->middleware("permissions:Update Customers")->only(["update"]);
+        $this->middleware("permissions:Update Customers|Manage Merchants")->only(["update"]);
         $this->middleware("permissions:Delete Customers")->only([
             "destroy",
             "getContactDelete",
         ]);
         $this->middleware("permissions:Customer List")->only([
             "index",
-            "show",
             "getContactSupport",
+        ]);
+        $this->middleware("permissions:Customer List|Manage Merchants")->only([
+            "show",
         ]);
         $this->repository = $repository;
     }
