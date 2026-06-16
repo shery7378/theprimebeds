@@ -34,6 +34,7 @@ class SliderController extends Controller
             "update",
         ]);
         $this->middleware("permissions:Delete Site Content")->only(["destroy"]);
+        $this->middleware("permissions:Add Site Content|Update Site Content|Delete Site Content")->only(["index"]);
         $this->repository = $repository;
     }
 

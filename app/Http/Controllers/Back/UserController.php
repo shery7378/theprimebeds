@@ -30,6 +30,11 @@ class UserController extends Controller
             "destroy",
             "getContactDelete",
         ]);
+        $this->middleware("permissions:Customer List")->only([
+            "index",
+            "show",
+            "getContactSupport",
+        ]);
         $this->repository = $repository;
     }
 

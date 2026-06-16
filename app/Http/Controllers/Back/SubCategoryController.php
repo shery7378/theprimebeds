@@ -34,6 +34,7 @@ class SubCategoryController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Categories")->only(["destroy"]);
+        $this->middleware("permissions:Manage Categories")->only(["index"]);
         $this->repository = $repository;
     }
 

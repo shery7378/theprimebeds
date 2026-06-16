@@ -25,6 +25,7 @@ class TestimonialController extends Controller
             "update",
         ]);
         $this->middleware("permissions:Delete Testimonials")->only(["destroy"]);
+        $this->middleware("permissions:Add Testimonials|Update Testimonials|Delete Testimonials")->only(["index"]);
     }
 
     /**

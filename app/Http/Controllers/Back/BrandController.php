@@ -33,6 +33,7 @@ class BrandController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Products")->only(["destroy"]);
+        $this->middleware("permissions:Manage Products")->only(["index"]);
         $this->repository = $repository;
     }
 

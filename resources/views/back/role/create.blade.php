@@ -198,6 +198,27 @@
                                                     </td>
                                                 </tr>
 
+                                                {{-- MERCHANT MANAGEMENT --}}
+                                                <tr>
+                                                    <td class="text-left font-weight-bold">
+                                                        <i class="fas fa-store mr-2 text-info"></i>{{ __('Merchant Management') }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Manage Merchants" id="view_merchants">
+                                                            <label class="custom-control-label" for="view_merchants"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="text-muted">—</span></td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Update Merchants" id="update_merchants">
+                                                            <label class="custom-control-label" for="update_merchants"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="text-muted">—</span></td>
+                                                </tr>
+
                                                 {{-- ECOMMERCE --}}
                                                 <tr>
                                                     <td class="text-left font-weight-bold">

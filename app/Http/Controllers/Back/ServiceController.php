@@ -25,6 +25,16 @@ class ServiceController extends Controller
     {
         $this->middleware('auth:admin');
         $this->middleware('adminlocalize');
+        $this->middleware("permissions:Add Site Content")->only([
+            "create",
+            "store",
+        ]);
+        $this->middleware("permissions:Update Site Content")->only([
+            "edit",
+            "update",
+        ]);
+        $this->middleware("permissions:Delete Site Content")->only(["destroy"]);
+        $this->middleware("permissions:Add Site Content|Update Site Content|Delete Site Content")->only(["index"]);
         $this->repository = $repository;
     }
 

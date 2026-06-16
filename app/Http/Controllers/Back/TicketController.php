@@ -30,6 +30,7 @@ class TicketController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Tickets")->only(["destroy"]);
+        $this->middleware("permissions:Add Tickets|Update Tickets|Delete Tickets")->only(["index"]);
         $this->repository = $repository;
     }
 

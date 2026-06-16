@@ -19,6 +19,17 @@ class TaxController extends Controller
     {
         $this->middleware('auth:admin');
         $this->middleware('adminlocalize');
+        $this->middleware("permissions:Add Ecommerce")->only([
+            "create",
+            "store",
+        ]);
+        $this->middleware("permissions:Update Ecommerce")->only([
+            "edit",
+            "update",
+            "status",
+        ]);
+        $this->middleware("permissions:Delete Ecommerce")->only(["destroy"]);
+        $this->middleware("permissions:Add Ecommerce|Update Ecommerce|Delete Ecommerce")->only(["index"]);
     }
 
     /**

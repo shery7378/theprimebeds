@@ -9,6 +9,14 @@ use App\{
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth:admin");
+        $this->middleware("adminlocalize");
+        $this->middleware("permissions:Manage Products")->only(["index", "show"]);
+        $this->middleware("permissions:Update Products")->only(["status"]);
+        $this->middleware("permissions:Delete Products")->only(["destroy"]);
+    }
     /**
      * Display a listing of the resource.
      *

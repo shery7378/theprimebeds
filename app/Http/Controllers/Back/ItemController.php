@@ -57,6 +57,10 @@ class ItemController extends Controller
             "destroy",
             "galleryDelete",
         ]);
+        $this->middleware("permissions:Manage Products")->only([
+            "index",
+            "stockOut",
+        ]);
         $this->repository = $repository;
     }
 

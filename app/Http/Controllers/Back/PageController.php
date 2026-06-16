@@ -22,6 +22,7 @@ class PageController extends Controller
             "pos",
         ]);
         $this->middleware("permissions:Delete Pages")->only(["destroy"]);
+        $this->middleware("permissions:Add Pages|Update Pages|Delete Pages")->only(["index"]);
     }
 
     /**

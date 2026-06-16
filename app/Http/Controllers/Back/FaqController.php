@@ -20,6 +20,7 @@ class FaqController extends Controller
         $this->middleware("permissions:Add Faqs")->only(["create", "store"]);
         $this->middleware("permissions:Update Faqs")->only(["edit", "update"]);
         $this->middleware("permissions:Delete Faqs")->only(["destroy"]);
+        $this->middleware("permissions:Add Faqs|Update Faqs|Delete Faqs")->only(["index"]);
     }
 
     /**

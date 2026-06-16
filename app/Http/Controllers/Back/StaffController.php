@@ -33,6 +33,7 @@ class StaffController extends Controller
             "update",
         ]);
         $this->middleware("permissions:Delete System Users")->only(["destroy"]);
+        $this->middleware("permissions:Add System Users|Update System Users|Delete System Users")->only(["index"]);
         $this->repository = $repository;
     }
 

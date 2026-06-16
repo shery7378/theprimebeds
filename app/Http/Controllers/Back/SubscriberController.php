@@ -19,6 +19,11 @@ class SubscriberController extends Controller
         $this->middleware("auth:admin");
         $this->middleware("adminlocalize");
         $this->middleware("permissions:Delete Subscribers")->only(["delete"]);
+        $this->middleware("permissions:Subscribers List")->only([
+            "index",
+            "sendMail",
+            "sendMailSubmit",
+        ]);
     }
 
     /**

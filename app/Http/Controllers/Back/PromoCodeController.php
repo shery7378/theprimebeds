@@ -30,6 +30,7 @@ class PromoCodeController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Ecommerce")->only(["destroy"]);
+        $this->middleware("permissions:Add Ecommerce|Update Ecommerce|Delete Ecommerce")->only(["index"]);
     }
 
     /**

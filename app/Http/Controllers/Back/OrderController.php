@@ -38,6 +38,11 @@ class OrderController extends Controller
             "showDispatchView",
         ]);
         $this->middleware("permissions:Delete Orders")->only(["delete"]);
+        $this->middleware("permissions:Manage Orders")->only([
+            "index",
+            "invoice",
+            "printOrder",
+        ]);
     }
 
     /**

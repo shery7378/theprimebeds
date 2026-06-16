@@ -31,6 +31,7 @@ class PostController extends Controller
             "destroy",
             "delete",
         ]);
+        $this->middleware("permissions:Add Blogs|Update Blogs|Delete Blogs")->only(["index"]);
         $this->repository = $repository;
     }
 

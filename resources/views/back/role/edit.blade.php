@@ -141,6 +141,19 @@
                                         </td>
                                     </tr>
 
+                                    {{-- Merchant Management --}}
+                                    <tr>
+                                        <td>{{ __('Merchant Management') }}</td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Manage Merchants" {{ chk('Manage Merchants', $section) }}>
+                                        </td>
+                                        <td><span class="text-muted">—</span></td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Update Merchants" {{ chk('Update Merchants', $section) }}>
+                                        </td>
+                                        <td><span class="text-muted">—</span></td>
+                                    </tr>
+
                                     {{-- Ecommerce --}}
                                     <tr>
                                         <td>{{ __('Ecommerce') }}</td>

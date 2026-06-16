@@ -12,6 +12,7 @@ class TranactionController extends Controller
         $this->middleware("auth:admin");
         $this->middleware("adminlocalize");
         $this->middleware("permissions:Delete Transactions")->only(["Delete"]);
+        $this->middleware("permissions:Transactions")->only(["index"]);
     }
 
     // ------- Index -------//

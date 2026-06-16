@@ -16,6 +16,7 @@ class CampaignController extends Controller
         $this->middleware("permissions:Add Products")->only(["store"]);
         $this->middleware("permissions:Update Products")->only(["status"]);
         $this->middleware("permissions:Delete Products")->only(["destroy"]);
+        $this->middleware("permissions:Manage Products")->only(["index"]);
     }
 
     public function index()

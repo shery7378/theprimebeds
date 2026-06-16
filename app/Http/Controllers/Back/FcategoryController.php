@@ -30,6 +30,7 @@ class FcategoryController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Faqs")->only(["destroy"]);
+        $this->middleware("permissions:Add Faqs|Update Faqs|Delete Faqs")->only(["index"]);
         $this->repository = $repository;
     }
 

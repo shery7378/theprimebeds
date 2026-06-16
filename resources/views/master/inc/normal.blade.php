@@ -140,7 +140,8 @@
     </li>
     @endif
 
-    {{-- MERCHANT MANAGEMENT (always visible to logged-in admins) --}}
+    @if (array_intersect(['Manage Merchants', 'Update Merchants'], $section))
+    {{-- MERCHANT MANAGEMENT --}}
     <li class="nav-item">
         <a data-toggle="collapse" href="#merchantMgmt">
             <i class="fas fa-store"></i>
@@ -162,6 +163,7 @@
             </ul>
         </div>
     </li>
+    @endif
 
     @if (array_intersect(['Add Ecommerce', 'Update Ecommerce', 'Delete Ecommerce'], $section))
     <li class="nav-item">

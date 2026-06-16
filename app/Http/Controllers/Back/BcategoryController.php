@@ -30,6 +30,7 @@ class BcategoryController extends Controller
             "status",
         ]);
         $this->middleware("permissions:Delete Blogs")->only(["destroy"]);
+        $this->middleware("permissions:Add Blogs|Update Blogs|Delete Blogs")->only(["index"]);
         $this->repository = $repository;
     }
 

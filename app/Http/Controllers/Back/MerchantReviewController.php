@@ -11,6 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class MerchantReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth:admin");
+        $this->middleware("adminlocalize");
+        $this->middleware("permissions:Manage Merchants")->only([
+            "pendingPrices",
+            "payouts",
+            "payoutHistory",
+        ]);
+        $this->middleware("permissions:Update Merchants")->only([
+            "approve",
+            "reject",
+            "pay",
+        ]);
+    }
+
     /**
      * List all pending merchant price proposals.
      */
