@@ -60,9 +60,9 @@
     }
 
     .timeline-step-item.active .timeline-icon-box {
-        border-color: #8C7558;
+        border-color: var(--primary-color);
         color: #ffffff;
-        background: #8C7558;
+        background: var(--primary-color);
         box-shadow: 0 0 0 6px #ffffff, 0 8px 20px rgba(140, 117, 88, 0.25);
     }
 
@@ -86,7 +86,7 @@
     .timeline-step-date {
         font-family: 'Outfit', sans-serif;
         font-size: 0.85rem;
-        color: #8C7558;
+        color: var(--primary-color);
         font-weight: 600;
         margin-bottom: 0.4rem;
     }

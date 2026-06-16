@@ -75,7 +75,7 @@
     transition: color 0.3s;
 }
 .product-item .product-title a:hover {
-    color: #377dff;
+    color: var(--primary-color);
 }
 .qtySelector.product-quantity {
     display: flex;
@@ -101,7 +101,7 @@
     font-size: 12px;
 }
 .qtySelector.product-quantity span:hover {
-    background: #377dff;
+    background: var(--primary-color);
     color: white;
 }
 .qtySelector.product-quantity input {
@@ -163,7 +163,7 @@ html.dark-mode .qtySelector.product-quantity span {
     color: #ddd;
 }
 html.dark-mode .qtySelector.product-quantity span:hover {
-    background: #377dff;
+    background: var(--primary-color);
     color: #fff;
 }
 html.dark-mode .qtySelector.product-quantity input {

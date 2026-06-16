@@ -28,9 +28,9 @@
                                                 @endif
 
                                                 <div class="title text-body"
-                                                    style="color:{{ $slider->text_color ?? (isset($setting->slider_color) ? $setting->slider_color : '#fff') }} !important">{{ $slider->title }}</div>
+                                                    style="color:{{ $setting->slider_color ?: ($slider->text_color ?? '#fff') }} !important">{{ $slider->title }}</div>
                                                 <div class="subtitle text-body"
-                                                    style="color:{{ $slider->text_color ?? (isset($setting->slider_color) ? $setting->slider_color : '#fff') }} !important">{{ $slider->details }}</div>
+                                                    style="color:{{ $setting->slider_color ?: ($slider->text_color ?? '#fff') }} !important">{{ $slider->details }}</div>
                                             </div>
                                             @if($slider->link != '#')
                                             <a class="btn btn-primary scale-up delay-1" href="{{ $slider->link }}">

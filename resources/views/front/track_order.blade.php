@@ -49,10 +49,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8C7558;
+    color: var(--primary-color);
     margin: 0 auto 1.5rem;
-    border: 1.5px dashed rgba(140, 117, 88, 0.35);
-    box-shadow: 0 4px 15px rgba(140, 117, 88, 0.02);
+    border: 1.5px dashed var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     animation: pulseIcon 3s infinite ease-in-out;
 }
 
@@ -93,13 +93,13 @@
 }
 
 .track-input-group:focus-within {
-    border-color: #8C7558;
-    box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.12), inset 0 2px 5px rgba(0, 0, 0, 0.01);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05), inset 0 2px 5px rgba(0, 0, 0, 0.01);
     background: #ffffff;
 }
 
 .track-input-icon {
-    color: #8C7558;
+    color: var(--primary-color);
     margin-right: 12px;
     display: flex;
     align-items: center;
@@ -125,7 +125,7 @@
 }
 
 .track-btn {
-    background: #8C7558;
+    background: var(--primary-color);
     color: #ffffff !important;
     border: none;
     border-radius: 50px;
@@ -137,7 +137,7 @@
     text-transform: uppercase;
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(140, 117, 88, 0.2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -157,9 +157,10 @@
 }
 
 .track-btn:hover {
-    background: #735D43;
+    background: var(--primary-color);
+    filter: brightness(85%);
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(140, 117, 88, 0.3);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .track-btn:hover::before {
