@@ -1712,7 +1712,7 @@
         </div>
 
         {{-- Product Variations Card (customization options) --}}
-        @if (!empty($item->variations['customization_level']) || (!empty($item->variations['custom_text'])))
+        <!-- @if (!empty($item->variations['customization_level']) || (!empty($item->variations['custom_text'])))
         <h2 class="pdp-section-heading">
             <span class="heading-icon"><i class="fas fa-sliders-h"></i></span>
             {{ __('Product Variations & Customisation') }}
@@ -1768,7 +1768,7 @@
 
             </div>
         </div>
-        @endif
+        @endif -->
 
         {{-- ══════════════════════════════════════════════
              RELATED PRODUCTS
