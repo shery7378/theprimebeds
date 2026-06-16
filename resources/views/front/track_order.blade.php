@@ -157,10 +157,10 @@
 }
 
 .track-btn:hover {
-    background: var(--primary-color);
-    filter: brightness(85%);
+    background-color: #2c2c2c !important;
+    filter: none;
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 10px 24px rgba(44, 44, 44, 0.3);
 }
 
 .track-btn:hover::before {
