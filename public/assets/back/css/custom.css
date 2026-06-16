@@ -499,3 +499,10 @@ input.btn.btn-primary.note-btn.note-btn-primary.note-video-btn {
 .sortableLists .list-group-item.sortableListsOpen div.float-right {
   width: auto !important;
 }
+/* Fix action list button alignment in tables */
+.action-list {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}

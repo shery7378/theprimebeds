@@ -61,7 +61,8 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th style="width:220px; text-align:left;">{{ __('Module') }}</th>
-                                        <th style="width:130px;">{{ __('Add / View') }}</th>
+                                        <th style="width:130px;">{{ __('View') }}</th>
+                                        <th style="width:130px;">{{ __('Add') }}</th>
                                         <th style="width:130px;">{{ __('Update') }}</th>
                                         <th style="width:130px;">{{ __('Delete') }}</th>
                                     </tr>
@@ -70,15 +71,17 @@
 
                                     {{-- ===== CATALOG ===== --}}
                                     <tr class="section-header">
-                                        <td colspan="4">🗂 {{ __('Catalog') }}</td>
+                                        <td colspan="5">🗂 {{ __('Catalog') }}</td>
                                     </tr>
 
                                     {{-- Categories --}}
                                     <tr>
                                         <td>{{ __('Categories') }}</td>
                                         <td>
+                                            <input type="checkbox" name="section[]" value="Manage Categories" {{ chk('Manage Categories', $section) }}>
+                                        </td>
+                                        <td>
                                             <input type="checkbox" name="section[]" value="Add Categories" {{ chk('Add Categories', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Categories" {{ chk('Update Categories', $section) }}>
@@ -92,8 +95,10 @@
                                     <tr>
                                         <td>{{ __('Products') }}</td>
                                         <td>
+                                            <input type="checkbox" name="section[]" value="Manage Products" {{ chk('Manage Products', $section) }}>
+                                        </td>
+                                        <td>
                                             <input type="checkbox" name="section[]" value="Add Products" {{ chk('Add Products', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Products" {{ chk('Update Products', $section) }}>
@@ -105,7 +110,7 @@
 
                                     {{-- ===== SALES ===== --}}
                                     <tr class="section-header">
-                                        <td colspan="4">🛒 {{ __('Sales') }}</td>
+                                        <td colspan="5">🛒 {{ __('Sales') }}</td>
                                     </tr>
 
                                     {{-- Orders --}}
@@ -113,8 +118,8 @@
                                         <td>{{ __('Orders') }}</td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Manage Orders" {{ chk('Manage Orders', $section) }}>
-                                            <br><small class="text-muted">View</small>
                                         </td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Orders" {{ chk('Update Orders', $section) }}>
                                         </td>
@@ -128,8 +133,8 @@
                                         <td>{{ __('Transactions') }}</td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Transactions" {{ chk('Transactions', $section) }}>
-                                            <br><small class="text-muted">View</small>
                                         </td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Delete Transactions" {{ chk('Delete Transactions', $section) }}>
@@ -139,9 +144,9 @@
                                     {{-- Ecommerce --}}
                                     <tr>
                                         <td>{{ __('Ecommerce') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Ecommerce" {{ chk('Add Ecommerce', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Ecommerce" {{ chk('Update Ecommerce', $section) }}>
@@ -153,7 +158,7 @@
 
                                     {{-- ===== CUSTOMERS ===== --}}
                                     <tr class="section-header">
-                                        <td colspan="4">👥 {{ __('Customers') }}</td>
+                                        <td colspan="5">👥 {{ __('Customers') }}</td>
                                     </tr>
 
                                     {{-- Customer List --}}
@@ -161,8 +166,8 @@
                                         <td>{{ __('Customers') }}</td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Customer List" {{ chk('Customer List', $section) }}>
-                                            <br><small class="text-muted">View</small>
                                         </td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Customers" {{ chk('Update Customers', $section) }}>
                                         </td>
@@ -176,8 +181,8 @@
                                         <td>{{ __('Subscribers') }}</td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Subscribers List" {{ chk('Subscribers List', $section) }}>
-                                            <br><small class="text-muted">View</small>
                                         </td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Delete Subscribers" {{ chk('Delete Subscribers', $section) }}>
@@ -187,9 +192,9 @@
                                     {{-- Tickets --}}
                                     <tr>
                                         <td>{{ __('Manages Tickets') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Tickets" {{ chk('Add Tickets', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Tickets" {{ chk('Update Tickets', $section) }}>
@@ -201,15 +206,15 @@
 
                                     {{-- ===== CONTENT ===== --}}
                                     <tr class="section-header">
-                                        <td colspan="4">📝 {{ __('Content') }}</td>
+                                        <td colspan="5">📝 {{ __('Content') }}</td>
                                     </tr>
 
                                     {{-- Manage Site --}}
                                     <tr>
                                         <td>{{ __('Manage Site') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Site Content" {{ chk('Add Site Content', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Site Content" {{ chk('Update Site Content', $section) }}>
@@ -222,9 +227,9 @@
                                     {{-- Faqs --}}
                                     <tr>
                                         <td>{{ __('Manage Faqs') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Faqs" {{ chk('Add Faqs', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Faqs" {{ chk('Update Faqs', $section) }}>
@@ -237,9 +242,9 @@
                                     {{-- Blogs --}}
                                     <tr>
                                         <td>{{ __('Manage Blogs') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Blogs" {{ chk('Add Blogs', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Blogs" {{ chk('Update Blogs', $section) }}>
@@ -252,9 +257,9 @@
                                     {{-- Testimonials --}}
                                     <tr>
                                         <td>{{ __('Testimonials') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Testimonials" {{ chk('Add Testimonials', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Testimonials" {{ chk('Update Testimonials', $section) }}>
@@ -267,9 +272,9 @@
                                     {{-- Pages --}}
                                     <tr>
                                         <td>{{ __('Manages Pages') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add Pages" {{ chk('Add Pages', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Pages" {{ chk('Update Pages', $section) }}>
@@ -281,15 +286,15 @@
 
                                     {{-- ===== SYSTEM ===== --}}
                                     <tr class="section-header">
-                                        <td colspan="4">⚙️ {{ __('System') }}</td>
+                                        <td colspan="5">⚙️ {{ __('System') }}</td>
                                     </tr>
 
                                     {{-- System Users --}}
                                     <tr>
                                         <td>{{ __('System Users') }}</td>
+                                        <td><span class="text-muted">—</span></td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Add System Users" {{ chk('Add System Users', $section) }}>
-                                            <br><small class="text-muted">Add</small>
                                         </td>
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update System Users" {{ chk('Update System Users', $section) }}>
@@ -302,7 +307,7 @@
                                     {{-- System Backup --}}
                                     <tr>
                                         <td>{{ __('System Backup') }}</td>
-                                        <td colspan="3" class="text-center">
+                                        <td colspan="4" class="text-center">
                                             <input type="checkbox" name="section[]" value="System Backup" {{ chk('System Backup', $section) }}>
                                             <small class="text-muted ml-1">{{ __('Allow Backup') }}</small>
                                         </td>

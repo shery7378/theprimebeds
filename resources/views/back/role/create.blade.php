@@ -38,11 +38,42 @@
                                         <i class="fas fa-lock mr-2"></i>{{ __('Permissions') }}
                                     </h5>
 
+                                    <style>
+                                    .perm-table th, .perm-table td { vertical-align: middle !important; text-align: center; }
+                                    .perm-table td:first-child { text-align: left; font-weight: 600; }
+                                    .perm-table .custom-control {
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding-left: 0;
+                                        margin: 0;
+                                        vertical-align: middle;
+                                    }
+                                    .perm-table .custom-control-label {
+                                        position: relative;
+                                        margin: 0;
+                                        cursor: pointer;
+                                    }
+                                    .perm-table .custom-control-label:empty {
+                                        width: 1rem;
+                                        padding: 0;
+                                    }
+                                    .perm-table .custom-control-label:not(:empty) {
+                                        padding-left: 1.5rem;
+                                    }
+                                    .perm-table .custom-control-label::before,
+                                    .perm-table .custom-control-label::after {
+                                        left: 0;
+                                    }
+                                    </style>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered align-middle text-center">
+                                        <table class="table table-bordered align-middle text-center perm-table">
                                             <thead style="background-color:#343a40; color:#fff;">
                                                 <tr>
                                                     <th class="text-left" style="width:220px;">{{ __('Module') }}</th>
+                                                    <th style="width:120px;">
+                                                        <i class="fas fa-eye mr-1"></i>{{ __('View') }}
+                                                    </th>
                                                     <th style="width:120px;">
                                                         <i class="fas fa-plus-circle mr-1"></i>{{ __('Add') }}
                                                     </th>
@@ -60,6 +91,12 @@
                                                 <tr>
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-list-alt mr-2 text-primary"></i>{{ __('Categories') }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Manage Categories" id="view_categories">
+                                                            <label class="custom-control-label" for="view_categories"></label>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
@@ -85,6 +122,12 @@
                                                 <tr>
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fab fa-product-hunt mr-2 text-success"></i>{{ __('Products') }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Manage Products" id="view_products">
+                                                            <label class="custom-control-label" for="view_products"></label>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
@@ -118,8 +161,8 @@
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Manage Orders" id="manage_orders">
                                                             <label class="custom-control-label" for="manage_orders"></label>
                                                         </div>
-                                                        <small class="text-muted d-block">{{ __('View') }}</small>
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Update Orders" id="update_orders">
@@ -144,8 +187,8 @@
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Transactions" id="view_transactions">
                                                             <label class="custom-control-label" for="view_transactions"></label>
                                                         </div>
-                                                        <small class="text-muted d-block">{{ __('View') }}</small>
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
@@ -160,6 +203,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-newspaper mr-2 text-primary"></i>{{ __('Ecommerce') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Ecommerce" id="add_ecommerce">
@@ -190,8 +234,8 @@
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Customer List" id="view_customers">
                                                             <label class="custom-control-label" for="view_customers"></label>
                                                         </div>
-                                                        <small class="text-muted d-block">{{ __('View') }}</small>
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Update Customers" id="update_customers">
@@ -211,6 +255,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-comments mr-2 text-info"></i>{{ __('Manages Tickets') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Tickets" id="add_tickets">
@@ -236,6 +281,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-tasks mr-2 text-warning"></i>{{ __('Manage Site') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Site Content" id="add_site">
@@ -261,6 +307,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-question-circle mr-2 text-secondary"></i>{{ __('Manage Faqs') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Faqs" id="add_faqs">
@@ -286,6 +333,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-rss-square mr-2 text-danger"></i>{{ __('Manage Blogs') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Blogs" id="add_blogs">
@@ -311,6 +359,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-book mr-2 text-primary"></i>{{ __('Manages Pages') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Pages" id="add_pages">
@@ -341,8 +390,8 @@
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Subscribers List" id="view_subscribers">
                                                             <label class="custom-control-label" for="view_subscribers"></label>
                                                         </div>
-                                                        <small class="text-muted d-block">{{ __('View') }}</small>
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
@@ -357,6 +406,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-star mr-2 text-warning"></i>{{ __('Testimonials') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="Add Testimonials" id="add_testimonials">
@@ -382,9 +432,10 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="far fa-user mr-2 text-dark"></i>{{ __('System Users') }}
                                                     </td>
+                                                    <td><span class="text-muted">—</span></td>
                                                     <td>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Add System Users" id="add_system_users">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Add System_users" id="add_system_users">
                                                             <label class="custom-control-label" for="add_system_users"></label>
                                                         </div>
                                                     </td>
@@ -407,7 +458,7 @@
                                                     <td class="text-left font-weight-bold">
                                                         <i class="fas fa-hdd mr-2 text-secondary"></i>{{ __('System Backup') }}
                                                     </td>
-                                                    <td colspan="3" class="text-center">
+                                                    <td colspan="4" class="text-center">
                                                         <div class="custom-control custom-checkbox d-inline-block">
                                                             <input type="checkbox" class="custom-control-input" name="section[]" value="System Backup" id="system_backup">
                                                             <label class="custom-control-label" for="system_backup">{{ __('Allow Backup') }}</label>
