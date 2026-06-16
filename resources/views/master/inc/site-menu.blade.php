@@ -28,7 +28,7 @@
     .site-menu .t-h-dropdown-menu {
         background: #ffffff !important;
         border: 1px solid #EBE5DB !important;
-        border-top: 3px solid #8C7558 !important; /* Elegant Gold Top Accent */
+        border-top: 3px solid var(--primary-color) !important; /* Elegant Gold Top Accent */
         border-radius: 12px !important;
         box-shadow: 0 10px 40px rgba(51, 43, 35, 0.08) !important;
         padding: 14px 8px !important;
@@ -87,7 +87,7 @@
         content: '';
         width: 6px;
         height: 6px;
-        background-color: #8C7558;
+        background-color: var(--primary-color);
         border-radius: 50%;
         margin-right: 0;
         opacity: 0;
@@ -98,7 +98,7 @@
     /* Active & Hover States */
     .site-menu .t-h-dropdown-menu a:hover {
         background-color: #F8F6F0 !important; /* Soft beige hover bg */
-        color: #8C7558 !important; /* Gold text */
+        color: var(--primary-color) !important; /* Gold text */
         padding-left: 20px !important; /* Move text slightly right */
     }
 

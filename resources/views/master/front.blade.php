@@ -61,6 +61,9 @@
         <link rel="stylesheet" href="{{ asset('assets/front/css/rtl.css') }}">
     @endif
     <style>
+        :root {
+            --primary-color: {{ $setting->primary_color ?? '#8C7558' }};
+        }
         {{ $setting->custom_css }}
         /* =============================================
     SLIDER NAVIGATION ARROWS (HIDDEN)
@@ -130,7 +133,7 @@
             font-size: 13px !important;
             font-weight: 600 !important;
             letter-spacing: 0px !important;
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             background: #ffffff !important;
             line-height: 1 !important;
             white-space: nowrap !important;
@@ -185,16 +188,16 @@
             text-decoration: none !important;
             border-radius: 0 !important;
             box-shadow: none !important;
-            background: #8C7558 !important;
+            background: var(--primary-color) !important;
             /* Solid Theme Color */
-            transition: background 0.2s ease !important;
+            transition: background 0.2s ease, filter 0.2s ease !important;
             margin: 0 !important;
             pointer-events: auto !important;
         }
 
         .product-card .product-button-group a.product-button:hover {
-            background: #735D43 !important;
-            /* Darker solid color on hover */
+            background: var(--primary-color) !important;
+            filter: brightness(85%) !important;
         }
 
         .product-card .product-button-group a.product-button i {
@@ -238,7 +241,7 @@
         }
 
         .product-card .product-title a:hover {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
         }
 
         /* Title Flex Wrapper */
@@ -456,8 +459,8 @@
         }
 
         .topbar-redesigned .topbar-search-box:focus-within {
-            border-color: #377dff;
-            box-shadow: 0 0 0 4px rgba(55, 125, 255, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
             background: #fff;
         }
 
@@ -514,7 +517,7 @@
         .topbar-redesigned .topbar-search-btn {
             background: transparent;
             border: none;
-            color: #377dff;
+            color: var(--primary-color);
             /* Blue icon to match theme */
             padding: 0 18px;
             cursor: pointer;
@@ -525,7 +528,8 @@
         }
 
         .topbar-redesigned .topbar-search-btn:hover {
-            color: #1e4ba8;
+            color: var(--primary-color);
+            opacity: 0.85;
         }
 
         .topbar-redesigned .topbar-search-btn:active {
@@ -551,7 +555,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 22px;
-            background: linear-gradient(135deg, #1a2332, #2c3e56);
+            background: var(--primary-color);
             color: #fff !important;
             border-radius: 50px;
             font-size: 13px;
@@ -560,14 +564,15 @@
             letter-spacing: 0.3px;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             white-space: nowrap;
         }
 
         .topbar-catalog-btn:hover {
-            background: linear-gradient(135deg, #2c3e56, #3d5577);
+            background: var(--primary-color);
+            filter: brightness(85%);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(26, 35, 50, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             color: #fff !important;
         }
 
@@ -596,12 +601,13 @@
         .topbar-contact-icon {
             width: 42px;
             height: 42px;
-            background: linear-gradient(135deg, #eef3ff, #dde6fa);
+            background: #FAF7F2;
+            border: 1px solid #EBE5DB;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #377dff;
+            color: var(--primary-color);
             flex-shrink: 0;
             transition: transform 0.3s ease;
         }
@@ -625,7 +631,7 @@
         }
 
         .topbar-phone:hover {
-            color: #377dff !important;
+            color: var(--primary-color) !important;
         }
 
         .topbar-email {
@@ -637,7 +643,7 @@
         }
 
         .topbar-email:hover {
-            color: #377dff !important;
+            color: var(--primary-color) !important;
         }
 
         /* --- Cart Item --- */
@@ -661,7 +667,7 @@
         }
 
         .topbar-cart-item>a:hover {
-            background: #f0f4ff;
+            background: #f8f6f0;
         }
 
         .topbar-cart-item>a>div {
@@ -684,7 +690,7 @@
         .topbar-cart-item .cart-icon .count-label {
             top: -8px !important;
             right: -10px !important;
-            background: linear-gradient(135deg, #377dff, #2c5cc5) !important;
+            background: var(--primary-color) !important;
             font-size: 10px !important;
             width: 18px !important;
             height: 18px !important;
@@ -755,7 +761,7 @@
         }
 
         .site-footer .widget-title {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             /* Gold title */
             font-family: 'Playfair Display', Georgia, serif !important;
             font-size: 19px !important;
@@ -790,7 +796,7 @@
         }
 
         .site-footer p strong {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             /* Bronze label */
             font-weight: 600 !important;
         }
@@ -811,7 +817,7 @@
 
         /* Contact Info Styling */
         .site-footer .contact-icon {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             margin-right: 12px !important;
             font-size: 16px !important;
             width: 20px !important;
@@ -860,14 +866,14 @@
             display: inline-block !important;
             width: 0 !important;
             height: 1px !important;
-            background-color: #8C7558 !important;
+            background-color: var(--primary-color) !important;
             margin-right: 0 !important;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
             opacity: 0 !important;
         }
 
         .site-footer .widget-links ul li a:hover {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             transform: translateX(6px) !important;
             /* Elegant shift to the right */
         }
@@ -928,9 +934,9 @@
         }
 
         .site-footer .footer-social-links a.social-icon-branded:hover {
-            background: var(--brand-bg, #8C7558) !important;
-            background-color: var(--brand-bg, #8C7558) !important;
-            border-color: var(--brand-bg, #8C7558) !important;
+            background: var(--brand-bg, var(--primary-color)) !important;
+            background-color: var(--brand-bg, var(--primary-color)) !important;
+            border-color: var(--brand-bg, var(--primary-color)) !important;
             color: #ffffff !important;
             transform: translateY(-3px) !important;
             box-shadow: 0 6px 15px rgba(140, 117, 88, 0.25) !important;
@@ -973,7 +979,7 @@
         }
 
         .subscriber-form .form-control:focus {
-            border-bottom-color: #8C7558 !important;
+            border-bottom-color: var(--primary-color) !important;
             box-shadow: none !important;
             background-color: transparent !important;
         }
@@ -983,7 +989,7 @@
             left: 0 !important;
             top: 50% !important;
             transform: translateY(-50%) !important;
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             z-index: 10 !important;
             pointer-events: none !important;
             font-size: 16px !important;
@@ -992,7 +998,7 @@
         }
 
         .subscriber-form .btn-primary {
-            background: linear-gradient(135deg, #8C7558 0%, #6E5B45 100%) !important;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6E5B45 100%) !important;
             border: none !important;
             border-radius: 30px !important;
             color: #ffffff !important;
@@ -1010,6 +1016,7 @@
 
         .subscriber-form .btn-primary:hover {
             transform: translateY(-2px) !important;
+            filter: brightness(90%) !important;
             box-shadow: 0 8px 24px rgba(140, 117, 88, 0.3) !important;
         }
 
@@ -1049,7 +1056,7 @@
         }
 
         .footer-copyright a:hover {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
         }
 
         .footer-copyright-links {
@@ -1118,9 +1125,9 @@
         }
 
         .single-service.single-service2:hover::before {
-            background: #8C7558 !important;
+            background: var(--primary-color) !important;
             /* Fills squircle with gold on card hover */
-            border-color: #8C7558 !important;
+            border-color: var(--primary-color) !important;
             transform: translateY(-50%) scale(1.1) rotate(5deg) !important;
         }
 
@@ -1132,7 +1139,7 @@
             left: 0 !important;
             width: 0 !important;
             height: 4px !important;
-            background: linear-gradient(90deg, #8C7558 0%, #b89d77 100%) !important;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #b89d77 100%) !important;
             transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
             z-index: 3 !important;
         }
@@ -1200,7 +1207,7 @@
 
         .single-service.single-service2:hover .content h6,
         .single-service.single-service2:hover .content .contactLink {
-            color: #8C7558 !important;
+            color: var(--primary-color) !important;
             /* Accent color on card hover */
         }
 
@@ -1793,7 +1800,7 @@ body_theme4 @endif
                                     @php
                                         $iconClass = $icons[$link_key] ?? $defaultIcons[$link_key] ?? 'fab fa-link';
                                         $isTikTok = str_contains(strtolower($iconClass), 'tiktok');
-                                        $brandColor = '#8C7558';
+                                        $brandColor = $setting->primary_color ?? '#8C7558';
 
                                         foreach ($socialBrandColors as $platform => $color) {
                                             if (str_contains(strtolower($iconClass), $platform) || str_contains(strtolower($link), $platform)) {

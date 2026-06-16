@@ -19,7 +19,7 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background: #1a2332;
+        background: var(--primary-color);
     }
     .catalog-hero__bg {
         position: absolute;
@@ -160,15 +160,15 @@
         white-space: nowrap !important;
     }
     #catalog_quick_filter_list li a:hover {
-        color: #b59469 !important;
-        background: rgba(181, 148, 105, 0.08) !important;
-        border-color: #b59469 !important;
+        color: var(--primary-color) !important;
+        background: rgba(0, 0, 0, 0.03) !important;
+        border-color: var(--primary-color) !important;
     }
     #catalog_quick_filter_list li.active a {
         color: #ffffff !important;
-        background: #b59469 !important;
-        border-color: #b59469 !important;
-        box-shadow: 0 4px 10px rgba(181, 148, 105, 0.15) !important;
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
     }
     .catalog-toolbar__right {
         display: flex !important;
@@ -202,8 +202,8 @@
         transition: all 0.2s !important;
     }
     .catalog-sort-select:focus {
-        border-color: #b59469 !important;
-        box-shadow: 0 0 0 3px rgba(181,148,105,0.1) !important;
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05) !important;
     }
     .catalog-count-badge {
         font-size: 13px !important;
@@ -238,8 +238,8 @@
     .catalog-view-toggle .list-view:hover,
     .catalog-view-toggle .list-view.active {
         background: #ffffff !important;
-        color: #b59469 !important;
-        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.15) !important;
+        color: var(--primary-color) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
     }
 
     @media (max-width: 768px) {
@@ -266,7 +266,7 @@
     }
     .sidebar-card:hover {
         box-shadow: 0 16px 40px rgba(44, 41, 36, 0.06);
-        border-color: #b59469;
+        border-color: var(--primary-color);
     }
     .sidebar-card__header {
         padding: 22px 24px;
@@ -280,14 +280,15 @@
         width: 36px;
         height: 36px;
         border-radius: 10px;
-        background: rgba(181, 148, 105, 0.1);
+        background: #faf8f5;
+        border: 1px solid #ebdcd0;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #b59469;
+        color: var(--primary-color);
         font-size: 14px;
         flex-shrink: 0;
-        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
     .sidebar-card__title {
         font-size: 14px;
@@ -339,7 +340,7 @@
     }
     #category_list > li.expanded > a.category_search,
     #category_list > li.active > a.category_search {
-        color: #b59469 !important;
+        color: var(--primary-color) !important;
     }
     .category-chevron {
         transition: transform 0.3s ease, color 0.3s ease !important;
@@ -348,7 +349,7 @@
     }
     #category_list > li.expanded > a.category_search .category-chevron {
         transform: rotate(180deg) !important;
-        color: #b59469 !important;
+        color: var(--primary-color) !important;
     }
     
     /* Subcategory List (Beige Inset Panel) */
@@ -441,11 +442,11 @@
         background: transparent !important;
     }
     #category_list li a.subcategory:hover {
-        background: rgba(181, 148, 105, 0.08) !important;
-        color: #b59469 !important;
+        background: rgba(0, 0, 0, 0.03) !important;
+        color: var(--primary-color) !important;
     }
     #category_list li.active > a.subcategory {
-        background: #b59469 !important;
+        background: var(--primary-color) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
     }
@@ -471,11 +472,11 @@
         background: transparent !important;
     }
     #childcategory_list li a.childcategory:hover {
-        background: rgba(181, 148, 105, 0.08) !important;
-        color: #b59469 !important;
+        background: rgba(0, 0, 0, 0.03) !important;
+        color: var(--primary-color) !important;
     }
     #childcategory_list li.active > a.childcategory {
-        background: #b59469 !important;
+        background: var(--primary-color) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
     }
@@ -489,7 +490,7 @@
     }
     .price-filter-card:hover {
         box-shadow: 0 16px 40px rgba(44, 41, 36, 0.06) !important;
-        border-color: #b59469 !important;
+        border-color: var(--primary-color) !important;
     }
     .price-filter-header {
         padding: 22px 24px !important;
@@ -506,14 +507,15 @@
         width: 36px !important;
         height: 36px !important;
         border-radius: 10px !important;
-        background: rgba(181, 148, 105, 0.1) !important;
+        background: #faf8f5 !important;
+        border: 1px solid #ebdcd0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        color: #b59469 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         flex-shrink: 0 !important;
-        box-shadow: 0 2px 8px rgba(181, 148, 105, 0.05) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
     }
     .price-filter-title {
         font-size: 14px !important;
@@ -625,7 +627,7 @@
         box-sizing: border-box !important;
     }
     .price-inputs-divider {
-        color: #b59469 !important;
+        color: var(--primary-color) !important;
         font-weight: 700 !important;
         font-size: 14.5px !important;
         padding: 0 10px !important;
@@ -639,7 +641,7 @@
         justify-content: center;
         gap: 8px;
         padding: 11px 20px;
-        background: linear-gradient(135deg, #1a2332, #2d4270);
+        background: var(--primary-color);
         color: #fff;
         border-radius: 12px;
         cursor: pointer;
@@ -908,7 +910,7 @@
                     </div>
 
                     {{-- Need Help Card --}}
-                    <div class="sidebar-card" style="background: linear-gradient(135deg, #1a2332, #2d4270); border: none;">
+                    <div class="sidebar-card" style="background: var(--primary-color); border: none;">
                         <div class="sidebar-card__body" style="padding: 22px 20px; text-align: center;">
                             <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
                                 <i class="fas fa-headset" style="color:#fff;font-size:20px;"></i>

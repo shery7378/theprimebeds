@@ -1029,10 +1029,24 @@ $(function ($) {
                 .toolbar-dropdown.cart-dropdown * {
                     max-height: none !important;
                 }
+                .empty-cart-btn-primary {
+                    transition: all 0.3s ease !important;
+                }
+                .empty-cart-btn-primary:hover {
+                    filter: brightness(85%) !important;
+                    transform: translateY(-1px);
+                    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15) !important;
+                    color: #fff !important;
+                }
             </style>
-            <div style="text-align: center; width: 100%; overflow: hidden;">
-              <a href="` + mainurl + `/catalog" style="display: block; width: 100%;">
-                  <img src="` + mainurl + `/assets/img/cart.png" alt="Empty Cart" style="width: 100%; display: block;">
+            <div style="text-align: center; width: 100%; overflow: hidden; padding: 0 0 25px 0; background: #fff;">
+              <a href="` + mainurl + `/catalog" style="display: block; width: 100%; text-decoration: none;">
+                  <img src="` + mainurl + `/assets/img/cart_cropped.png" alt="Empty Cart" style="width: 100%; display: block; margin-bottom: 20px;">
+                  <div style="padding: 0 25px;">
+                      <div class="empty-cart-btn-primary" style="display: block; width: 100%; background: var(--primary-color) !important; color: #fff !important; padding: 14px 20px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; text-align: center; text-transform: none;">
+                          Start Shopping
+                      </div>
+                  </div>
               </a>
             </div>
           `;

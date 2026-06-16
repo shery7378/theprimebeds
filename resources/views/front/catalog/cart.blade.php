@@ -84,17 +84,17 @@
         height: 110px;
         border-radius: 50%;
         background: #F8F6F0;
-        border: 1.5px dashed rgba(140, 117, 88, 0.35);
+        border: 1.5px dashed var(--primary-color);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: inset 0 4px 10px rgba(140, 117, 88, 0.03);
+        box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.02);
     }
 
     .icon-container {
         position: relative;
         z-index: 2;
-        color: #8C7558;
+        color: var(--primary-color);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -191,7 +191,7 @@
         display: inline-flex;
         align-items: center;
         gap: 12px;
-        background: #8C7558;
+        background: var(--primary-color);
         color: #ffffff !important;
         font-family: 'Outfit', sans-serif;
         font-size: 14px;
@@ -201,7 +201,7 @@
         padding: 15px 40px;
         border-radius: 50px;
         text-decoration: none !important;
-        box-shadow: 0 8px 24px rgba(140, 117, 88, 0.25);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         overflow: hidden;
@@ -219,9 +219,10 @@
     }
 
     .empty-cart-btn:hover {
-        background: #735D43;
+        background: var(--primary-color);
+        filter: brightness(85%);
         transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(140, 117, 88, 0.35);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
     }
 
     .empty-cart-btn:hover::before {
@@ -253,23 +254,23 @@
               <!-- Custom Luxury Bed Illustration SVG -->
               <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Headboard -->
-                <path d="M12 40V18C12 15.7909 13.7909 14 16 14H48C50.2091 14 52 15.7909 52 18V40" stroke="#8C7558" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 40V18C12 15.7909 13.7909 14 16 14H48C50.2091 14 52 15.7909 52 18V40" stroke="var(--primary-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 <!-- Headboard Tufting Details -->
-                <circle cx="22" cy="22" r="1.2" fill="#8C7558"/>
-                <circle cx="32" cy="22" r="1.2" fill="#8C7558"/>
-                <circle cx="42" cy="22" r="1.2" fill="#8C7558"/>
-                <circle cx="27" cy="28" r="1.2" fill="#8C7558"/>
-                <circle cx="37" cy="28" r="1.2" fill="#8C7558"/>
+                <circle cx="22" cy="22" r="1.2" fill="var(--primary-color)"/>
+                <circle cx="32" cy="22" r="1.2" fill="var(--primary-color)"/>
+                <circle cx="42" cy="22" r="1.2" fill="var(--primary-color)"/>
+                <circle cx="27" cy="28" r="1.2" fill="var(--primary-color)"/>
+                <circle cx="37" cy="28" r="1.2" fill="var(--primary-color)"/>
                 <!-- Pillows -->
-                <rect x="16" y="30" width="13" height="7" rx="2" stroke="#8C7558" stroke-width="1.5" fill="#ffffff"/>
-                <rect x="35" y="30" width="13" height="7" rx="2" stroke="#8C7558" stroke-width="1.5" fill="#ffffff"/>
+                <rect x="16" y="30" width="13" height="7" rx="2" stroke="var(--primary-color)" stroke-width="1.5" fill="#ffffff"/>
+                <rect x="35" y="30" width="13" height="7" rx="2" stroke="var(--primary-color)" stroke-width="1.5" fill="#ffffff"/>
                 <!-- Mattress / Bed Base -->
-                <path d="M10 40H54V46C54 47.1046 53.1046 48 52 48H12C10.8954 48 10 47.1046 10 46V40Z" stroke="#8C7558" stroke-width="1.8" stroke-linejoin="round" fill="#F8F6F0"/>
+                <path d="M10 40H54V46C54 47.1046 53.1046 48 52 48H12C10.8954 48 10 47.1046 10 46V40Z" stroke="var(--primary-color)" stroke-width="1.8" stroke-linejoin="round" fill="#F8F6F0"/>
                 <!-- Duvet Fold -->
-                <path d="M10 40C20 40 22 43 32 43C42 43 44 40 54 40" stroke="#8C7558" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 40C20 40 22 43 32 43C42 43 44 40 54 40" stroke="var(--primary-color)" stroke-width="1.5" stroke-linecap="round"/>
                 <!-- Bed Legs -->
-                <line x1="14" y1="48" x2="14" y2="52" stroke="#8C7558" stroke-width="2.2" stroke-linecap="round"/>
-                <line x1="50" y1="48" x2="50" y2="52" stroke="#8C7558" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="14" y1="48" x2="14" y2="52" stroke="var(--primary-color)" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="50" y1="48" x2="50" y2="52" stroke="var(--primary-color)" stroke-width="2.2" stroke-linecap="round"/>
               </svg>
             </div>
           </div>

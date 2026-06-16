@@ -103,7 +103,7 @@
     border-radius: 4px;
 }
 .luxury-register-form-side::-webkit-scrollbar-thumb:hover {
-    background: #8C7558;
+    background: var(--primary-color);
 }
 
 /* Background Blobs */
@@ -158,7 +158,7 @@
 
 .form-header p {
     font-size: 14px;
-    color: #8C7558;
+    color: var(--primary-color);
     margin: 0;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .luxury-input-group .form-control:focus {
-    border-color: #8C7558 !important;
+    border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
     background: #ffffff !important;
 }
@@ -210,7 +210,7 @@
     left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    color: #8C7558;
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     pointer-events: none;
@@ -258,7 +258,7 @@
 }
 
 .custom-merchant-toggle input:checked + .toggle-switch {
-    background: #8C7558;
+    background: var(--primary-color);
 }
 
 .custom-merchant-toggle input:checked + .toggle-switch::before {
@@ -288,7 +288,7 @@
 
 .url-preview {
     font-size: 12px;
-    color: #8C7558;
+    color: var(--primary-color);
     margin-top: 6px;
     display: block;
 }
@@ -302,7 +302,7 @@
 .luxury-submit-btn {
     width: 100%;
     padding: 14px 24px;
-    background: linear-gradient(135deg, #8C7558 0%, #735D43 100%) !important;
+    background: linear-gradient(135deg, var(--primary-color) 0%, rgba(0,0,0,0.15) 100%) !important;
     border: none !important;
     border-radius: 12px !important;
     color: #ffffff !important;
@@ -345,7 +345,7 @@
 /* Login prompt */
 .login-prompt {
     font-size: 14px;
-    color: #8C7558;
+    color: var(--primary-color);
     margin-top: 24px;
     margin-bottom: 0;
 }
@@ -358,7 +358,7 @@
 }
 
 .login-link:hover {
-    color: #8C7558;
+    color: var(--primary-color);
     text-decoration: underline;
 }
 

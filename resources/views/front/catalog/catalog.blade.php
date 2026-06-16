@@ -69,7 +69,7 @@
         font-size: 13px;
         font-weight: 600;
         letter-spacing: 0px;
-        color: #8C7558;
+        color: var(--primary-color);
         background: #ffffff;
         line-height: 1;
         white-space: nowrap;
@@ -148,7 +148,7 @@
         text-decoration: none;
         transition: color 0.2s;
     }
-    .pc__title a:hover { color: #8C7558; }
+    .pc__title a:hover { color: var(--primary-color); }
 
     .pc__prices {
         display: flex;
@@ -263,14 +263,15 @@
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        background: rgba(181, 148, 105, 0.1);
+        background: #faf8f5;
+        border: 1px solid #ebdcd0;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #b59469;
+        color: var(--primary-color);
         font-size: 32px;
         margin-bottom: 24px;
-        box-shadow: 0 4px 12px rgba(181, 148, 105, 0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
     }
     .catalog-empty-state h4 {
         font-size: 22px;

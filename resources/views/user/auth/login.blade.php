@@ -144,7 +144,7 @@
 
 .form-header p {
     font-size: 14px;
-    color: #8C7558;
+    color: var(--primary-color);
     margin: 0;
 }
 
@@ -183,7 +183,7 @@
 }
 
 .luxury-input-group .form-control:focus {
-    border-color: #8C7558 !important;
+    border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
     background: #ffffff !important;
 }
@@ -193,7 +193,7 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: #8C7558;
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     pointer-events: none;
@@ -202,7 +202,7 @@
 
 .forgot-link {
     font-size: 13px;
-    color: #8C7558;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
@@ -231,14 +231,14 @@
 }
 
 .password-toggle-btn:hover {
-    color: #8C7558;
+    color: var(--primary-color);
 }
 
 /* Submit Button */
 .luxury-submit-btn {
     width: 100%;
     padding: 14px 24px;
-    background: linear-gradient(135deg, #8C7558 0%, #735D43 100%) !important;
+    background: linear-gradient(135deg, var(--primary-color) 0%, rgba(0,0,0,0.15) 100%) !important;
     border: none !important;
     border-radius: 12px !important;
     color: #ffffff !important;
@@ -281,7 +281,7 @@
 /* Register prompt */
 .register-prompt {
     font-size: 14px;
-    color: #8C7558;
+    color: var(--primary-color);
     margin-top: 24px;
     margin-bottom: 0;
 }
@@ -294,7 +294,7 @@
 }
 
 .register-link:hover {
-    color: #8C7558;
+    color: var(--primary-color);
     text-decoration: underline;
 }
 
