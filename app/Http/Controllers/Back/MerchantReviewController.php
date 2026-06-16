@@ -16,6 +16,7 @@ class MerchantReviewController extends Controller
         $this->middleware("auth:admin");
         $this->middleware("adminlocalize");
         $this->middleware("permissions:Manage Merchants")->only([
+            "index",
             "pendingPrices",
             "payouts",
             "payoutHistory",
@@ -25,6 +26,18 @@ class MerchantReviewController extends Controller
             "reject",
             "pay",
         ]);
+    }
+
+    /**
+     * List all registered merchants.
+     */
+    public function index()
+    {
+        $merchants = User::where('is_merchant', true)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return view('back.merchant.index', compact('merchants'));
     }
 
     /**

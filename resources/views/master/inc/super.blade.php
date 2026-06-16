@@ -138,6 +138,11 @@
         <div class="collapse" id="merchantMgmt">
             <ul class="nav nav-collapse">
                 <li>
+                    <a class="sub-link" href="{{ route('back.merchant.index') }}">
+                        <span class="sub-item">{{ __('Merchants') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a class="sub-link" href="{{ route('back.merchant.pending_prices') }}">
                         <span class="sub-item">{{ __('Pending Prices') }}</span>
                     </a>

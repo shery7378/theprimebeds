@@ -779,6 +779,7 @@ Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
         );
 
         // -------- MERCHANT MANAGEMENT --------
+        Route::get('/merchants', 'Back\MerchantReviewController@index')->name('back.merchant.index');
         Route::get('/merchant/pending-prices', 'Back\MerchantReviewController@pendingPrices')->name('back.merchant.pending_prices');
         Route::get('/merchant/approve/{id}', 'Back\MerchantReviewController@approve')->name('back.merchant.approve');
         Route::get('/merchant/reject/{id}', 'Back\MerchantReviewController@reject')->name('back.merchant.reject');
