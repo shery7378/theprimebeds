@@ -349,7 +349,7 @@ Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
         Route::group(
             [
                 "middleware" =>
-                    "permissions:Customer List|Update Customers|Delete Customers|Manage Merchants",
+                    "permissions:Customer List|Update Customers|Delete Customers|Manage Merchants|Delete Merchants",
             ],
             function () {
                 //------------ USER ------------

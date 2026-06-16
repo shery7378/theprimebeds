@@ -151,7 +151,9 @@
                                         <td>
                                             <input type="checkbox" name="section[]" value="Update Merchants" {{ chk('Update Merchants', $section) }}>
                                         </td>
-                                        <td><span class="text-muted">—</span></td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Delete Merchants" {{ chk('Delete Merchants', $section) }}>
+                                        </td>
                                     </tr>
 
                                     {{-- Ecommerce --}}

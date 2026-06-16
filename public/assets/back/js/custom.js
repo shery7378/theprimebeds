@@ -44,7 +44,13 @@
     }
 
     $('#confirm-delete').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('action', $(e.relatedTarget).data('href'));
+        var $form = $(this).find('.btn-ok');
+        $form.attr('action', $(e.relatedTarget).data('href'));
+        $form.find('button[type="submit"]').prop('disabled', false);
+    });
+
+    $('#confirm-delete').find('.btn-ok').on('submit', function () {
+        $(this).find('button[type="submit"]').prop('disabled', true);
     });
 
     $(document).on('show.bs.modal', '#statusModal', function (e) {

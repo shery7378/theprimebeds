@@ -27,8 +27,10 @@ class UserController extends Controller
         $this->middleware("adminlocalize");
         $this->middleware("permissions:Update Customers|Manage Merchants")->only(["update"]);
         $this->middleware("permissions:Delete Customers")->only([
-            "destroy",
             "getContactDelete",
+        ]);
+        $this->middleware("permissions:Delete Customers|Delete Merchants")->only([
+            "destroy",
         ]);
         $this->middleware("permissions:Customer List")->only([
             "index",
@@ -82,8 +84,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $isMerchant = $user->is_merchant;
         ImageHelper::handleDeletedImage($user, "photo", "images");
         $user->delete();
+        
+        if ($isMerchant) {
+            return redirect()
+                ->route("back.merchant.index")
+                ->withSuccess(__("Merchant Deleted Successfully."));
+        }
+
         return redirect()
             ->route("back.user.index")
             ->withSuccess(__("Customer Deleted Successfully."));

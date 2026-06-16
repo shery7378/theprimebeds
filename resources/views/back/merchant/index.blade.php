@@ -57,8 +57,13 @@
                                     <a class="btn btn-secondary btn-sm mr-1" href="{{ route('back.user.show', $merchant->id) }}" title="{{ __('View Profile') }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('back.merchant.payout_history', $merchant->id) }}" class="btn btn-dark btn-sm" title="{{ __('Payout History') }}">
+                                    <a href="{{ route('back.merchant.payout_history', $merchant->id) }}" class="btn btn-dark btn-sm mr-1" title="{{ __('Payout History') }}">
                                         <i class="fas fa-history"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#confirm-delete" href="javascript:;"
+                                        data-href="{{ route('back.user.destroy', $merchant->id) }}" title="{{ __('Delete') }}">
+                                        <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </div>
                             </td>
@@ -80,4 +85,38 @@
         </div>
     </div>
 </div>
+
+{{-- DELETE MODAL --}}
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+		<!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ __('Confirm Delete?') }}</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+		</div>
+
+		<!-- Modal Body -->
+        <div class="modal-body">
+			{{ __('You are going to delete this Customer/Merchant. All contents related with this user will be lost.') }} {{ __('Do you want to delete it?') }}
+		</div>
+
+		<!-- Modal footer -->
+        <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+			<form action="" class="d-inline btn-ok" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+			</form>
+		</div>
+
+      </div>
+    </div>
+  </div>
+{{-- DELETE MODAL ENDS --}}
+
 @endsection

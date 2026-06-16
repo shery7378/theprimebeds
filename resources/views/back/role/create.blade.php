@@ -216,7 +216,12 @@
                                                             <label class="custom-control-label" for="update_merchants"></label>
                                                         </div>
                                                     </td>
-                                                    <td><span class="text-muted">—</span></td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Delete Merchants" id="delete_merchants">
+                                                            <label class="custom-control-label" for="delete_merchants"></label>
+                                                        </div>
+                                                    </td>
                                                 </tr>
 
                                                 {{-- ECOMMERCE --}}
