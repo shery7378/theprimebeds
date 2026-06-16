@@ -8,70 +8,86 @@
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-sm-flex align-items-center justify-content-between">
-                <h3 class=" mb-0  pl-3"><b>{{ __('Customers Details') }}</b> </h3>
+                <h3 class="mb-0 bc-title"><b>{{ __('Customers Details') }}</b> </h3>
                 <a class="btn btn-primary btn-sm" href="{{route('back.user.index')}}"><i class="fas fa-chevron-left"></i> {{ __('Back') }}</a>
                 </div>
         </div>
     </div>
 
-	<!-- Form -->
 	<div class="row">
 
 		<div class="col-xl-12 col-lg-12 col-md-12">
-        <form action="{{route('back.user.update',$user->id)}}" method="POST">
-            @csrf
-            @method('PUT')
-            @include('alerts.alerts')
-			<div class="card">
 
+			<div class="card o-hidden border-0 shadow-lg">
+				<div class="card-body ">
 					<!-- Nested Row within Card Body -->
-                    <div class="card-body">
-                        <div class="gd-responsive-table">
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th>{{ __("First Name") }}</th>
-                                    <td> <input type="text" name="first_name" class="form-control" id="text"
-                                     value="{{$user->first_name}}" ></td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __("Last Name") }}</th>
-                                    <td><input type="text" name="last_name" class="form-control" id="text"
-                                     value="{{$user->last_name}}" ></td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __("Email Address") }}</th>
-                                    <td><input type="text" name="email" class="form-control" id="text"
-                                         value="{{$user->email}}" ></td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __("Phone Number") }}</th>
-                                    <td><input type="text" name="phone" class="form-control" id="text"
-                                         value="{{$user->phone}}" ></td>
-                                </tr>
-                                <input type="hidden" name="user_id" id="" value="{{$user->id}}">
-                                <tr>
-                                    <th>{{ __("Password") }}</th>
-                                    <td><input type="password" name="password" class="form-control" id="text"
-                                        placeholder="{{ __('Password') }}" value="" ></td>
-                                </tr>
+					<div class="row justify-content-center">
+						<div class="col-lg-12">
+                                <form class="admin-form" action="{{ route('back.user.update',$user->id) }}" method="POST" enctype="multipart/form-data">
 
-                                <tr>
-                                    <th>{{ __("Total Orders") }}</th>
-                                    <td>{{count($user->orders)}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __("Joined") }}</th>
-                                    <td>{{$user->created_at->diffForHumans()}}</td>
-                                </tr>
+                                    @csrf
+                                    @method('PUT')
 
+									@include('alerts.alerts')
 
+									<div class="form-group">
+										<label for="name">{{ __('Current Image') }}</label>
+										<br>
+											<img class="admin-img"
+												src="{{ $user->photo ? asset('assets/img/'.$user->photo) : asset('assets/img/placeholder.png') }}"
+												alt="No Image Found">
+										<br>
+										<span class="mt-1">{{ __('Image Size Should Be 70 x 70.') }}</span>
+									</div>
 
-                            </table>
-                            <button type="submit" class="btn btn-secondary ">{{ __('Submit') }}</button>
-                        </div>
-                    </div>
+									<div class="form-group position-relative ">
+										<label class="file">
+											<input type="file"  accept="image/*"  class="upload-photo" name="photo" id="file" aria-label="File browser example">
+											<span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+										</label>
+									</div>
+									<div class="form-group">
+										<label for="first_name">{{ __('First Name') }} *</label>
+										<input type="text" name="first_name" class="form-control" id="first_name" placeholder="{{ __('First Name') }}"
+											value="{{$user->first_name}}" required>
+									</div>
+
+									<div class="form-group">
+										<label for="last_name">{{ __('Last Name') }} *</label>
+										<input type="text" name="last_name" class="form-control" id="last_name" placeholder="{{ __('Last Name') }}"
+											value="{{$user->last_name}}" required>
+									</div>
+
+									<div class="form-group">
+										<label for="email">{{ __('Email Address') }} *</label>
+										<input type="email" name="email" class="form-control" id="email"
+											placeholder="{{ __('Email Address') }}" value="{{$user->email}}" required>
+									</div>
+
+									<div class="form-group">
+										<label for="phone">{{ __('Phone Number') }} *</label>
+										<input type="text" name="phone" class="form-control" id="phone"
+											placeholder="{{ __('Phone Number') }}" value="{{$user->phone}}" required>
+									</div>
+
+                                    <input type="hidden" name="user_id" value="{{$user->id}}">
+
+									<div class="form-group">
+										<label for="password">{{ __('Password') }}</label>
+										<input type="password" name="password" class="form-control" id="password"
+											placeholder="{{ __('Password') }}" value="" >
+									</div>
+
+									<div class="form-group">
+										<button type="submit" class="btn btn-secondary ">{{ __('Submit') }}</button>
+									</div>
+
+								</form>
+						</div>
+					</div>
+				</div>
 			</div>
-        </form>
+
 		</div>
 
 	</div>
