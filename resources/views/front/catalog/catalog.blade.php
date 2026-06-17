@@ -395,8 +395,8 @@
                         <div class="pc__cta-wrapper">
                             @if ($item->item_type != 'affiliate')
                                 @if ($item->is_stock())
-                                <a class="pc__cta add_to_single_cart" data-target="{{ $item->id }}" href="javascript:;" title="{{ __('Add to bag') }}">
-                                    {{ __('Add to bag') }}
+                                <a class="pc__cta add_to_single_cart" data-target="{{ $item->id }}" href="javascript:;" title="{{ __('Add to Cart') }}">
+                                    {{ __('Add to Cart') }}
                                 </a>
                                 @else
                                 <a class="pc__cta out-of-stock" href="{{ route('front.product', $item->slug) }}">
@@ -488,8 +488,8 @@
                         <div class="pc__cta-wrapper" style="width: 200px;">
                             @if ($item->item_type != 'affiliate')
                                 @if ($item->is_stock())
-                                <a class="pc__cta add_to_single_cart" data-target="{{ $item->id }}" href="javascript:;" title="{{ __('Add to bag') }}">
-                                    {{ __('Add to bag') }}
+                                <a class="pc__cta add_to_single_cart" data-target="{{ $item->id }}" href="javascript:;" title="{{ __('Add to Cart') }}">
+                                    {{ __('Add to Cart') }}
                                 </a>
                                 @else
                                 <a class="pc__cta out-of-stock" href="{{ route('front.product', $item->slug) }}">

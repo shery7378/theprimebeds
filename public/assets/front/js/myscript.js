@@ -1282,13 +1282,16 @@ $(function ($) {
               ? $("#but_to_cart")
               : $("#add_to_cart");
         }
-        let originalHtml = $btn.html();
+        $btn.each(function() {
+          let $el = $(this);
+          $el.data('original-html', $el.html());
+        });
 
-        $btn
-          .prop("disabled", true)
-          .html(
-            `<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> ${originalHtml}`,
-          );
+        $btn.prop("disabled", true);
+        $btn.each(function() {
+          let $el = $(this);
+          $el.html(`<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> ` + $el.data('original-html'));
+        });
 
         let discountPct =
           window._activeDiscountPct &&
@@ -1324,7 +1327,7 @@ $(function ($) {
               if (add_type == 1) {
                 location.href = mainurl + "/checkout/billing/address";
               } else {
-                successNotification(data.message);
+                // successNotification(data.message);
               }
               if (data.redirect) {
                 // successNotification(data.message);
@@ -1335,24 +1338,32 @@ $(function ($) {
           complete: function () {
             // Restore button text & enable again after AJAX finishes
             $btn.prop("disabled", false);
+            
+            let successHtml = "<i class='fas fa-check' style='margin-right: 5px;'></i> Added to Cart";
+              
+            $btn.html(successHtml);
+            
             if (check != 0) {
-              $btn.html("<i class='fas fa-check' style='margin-right: 5px;'></i> Added");
               $btn.css({ "font-size": "12px", "font-weight": "600", "display": "flex", "align-items": "center", "justify-content": "center", "color": "#fff", "text-decoration": "none" });
               if ($btn[0]) {
                 $btn[0].style.setProperty("background-color", "#28a745", "important");
                 $btn[0].style.setProperty("border-color", "#28a745", "important");
               }
-              setTimeout(function () {
-                $btn.html(originalHtml);
+            }
+            
+            setTimeout(function () {
+              $btn.each(function() {
+                let $el = $(this);
+                $el.html($el.data('original-html'));
+              });
+              if (check != 0) {
                 $btn.css({ "font-size": "", "font-weight": "", "display": "", "align-items": "", "justify-content": "", "color": "", "text-decoration": "" });
                 if ($btn[0]) {
                   $btn[0].style.removeProperty("background-color");
                   $btn[0].style.removeProperty("border-color");
                 }
-              }, 3000);
-            } else {
-              $btn.html(originalHtml);
-            }
+              }
+            }, 3000);
           },
         });
       }
