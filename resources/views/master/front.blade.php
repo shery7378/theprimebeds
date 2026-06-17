@@ -1332,6 +1332,189 @@
             color: #796e65 !important;
             margin: 0 !important;
         }
+        /* ===== User Dropdown Redesign ===== */
+        .user-dropdown-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50px;
+            transition: background 0.3s ease;
+        }
+
+        .user-dropdown-trigger:hover {
+            background: #f4f1eb;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6E5B45 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(140, 117, 88, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .user-dropdown-trigger:hover .user-avatar {
+            transform: scale(1.05);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 15px);
+            right: -10px;
+            width: 260px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ebe5db;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1050;
+            overflow: hidden;
+        }
+
+        .user-dropdown-wrap:hover .user-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-header {
+            padding: 20px;
+            background: #faf8f5;
+            border-bottom: 1px solid #ebe5db;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-dropdown-header .header-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .user-dropdown-header .header-info {
+            overflow: hidden;
+        }
+
+        .user-dropdown-header .header-info h6 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c2724;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-dropdown-header .header-info p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: #796e65;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-dropdown-links {
+            padding: 10px;
+        }
+
+        .dropdown-link-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            text-decoration: none !important;
+            color: #4e453e;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link-item:hover {
+            background: #faf8f5;
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .dropdown-link-item .icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #f4f1eb;
+            color: #796e65;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link-item:hover .icon-wrap {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(140, 117, 88, 0.2);
+        }
+
+        .dropdown-link-item .link-arrow {
+            font-size: 12px;
+            color: #c4b8a7;
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-link-item:hover .link-arrow {
+            color: var(--primary-color);
+            transform: translateX(3px);
+        }
+
+        .dropdown-link-item.logout-link {
+            margin-top: 5px;
+            border-top: 1px dashed #ebe5db;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .dropdown-link-item.logout-link:hover {
+            color: #e63946;
+            background: #fff0f1;
+        }
+
+        .dropdown-link-item.logout-link:hover .icon-wrap {
+            background: #e63946;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
+            color: #fff;
+        }
+
+        .dropdown-link-item.logout-link:hover .link-arrow {
+            color: #e63946;
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')
@@ -1601,24 +1784,34 @@ body_theme4 @endif
                                             <span class="d-none d-lg-inline">{{ __('Login') }}</span>
                                         </a>
                                     @else
-                                        <div class="t-h-dropdown">
-                                            <div class="main-link"
-                                                style="display:inline-flex;align-items:center;cursor:pointer;">
-                                                <span style="display:inline-flex;align-items:center;justify-content:center;
-                                                                                         width:32px;height:32px;border-radius:50%;
-                                                                                         background:{{ $setting->primary_color ?? '#4e73df' }};
-                                                                                         color:#fff;flex-shrink:0;">
-                                                    <i class="icon-user"
-                                                        style="font-size:15px;line-height:1;margin:0!important;padding:0!important;position:relative;top:0px;left:-1px;"></i>
-                                                </span>
+                                        <div class="user-dropdown-wrap">
+                                            <div class="user-dropdown-trigger">
+                                                <div class="user-avatar">
+                                                    <i class="icon-user"></i>
+                                                </div>
                                             </div>
-                                            <div class="t-h-dropdown-menu" style="min-width:160px;">
-                                                <a href="{{ route('user.dashboard') }}">
-                                                    <i class="icon-grid pr-2"></i>{{ __('Dashboard') }}
-                                                </a>
-                                                <a href="{{ route('user.logout') }}">
-                                                    <i class="icon-log-out pr-2"></i>{{ __('Logout') }}
-                                                </a>
+                                            <div class="user-dropdown-menu">
+                                                <div class="user-dropdown-header">
+                                                    <div class="header-avatar">
+                                                        <i class="icon-user"></i>
+                                                    </div>
+                                                    <div class="header-info">
+                                                        <h6>{{ Auth::user()->first_name }} {{ Auth::user()->last_name ?? '' }}</h6>
+                                                        <p>{{ Auth::user()->email }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="user-dropdown-links">
+                                                    <a href="{{ route('user.dashboard') }}" class="dropdown-link-item">
+                                                        <div class="icon-wrap"><i class="icon-grid"></i></div>
+                                                        <span>{{ __('Dashboard') }}</span>
+                                                        <i class="icon-chevron-right link-arrow"></i>
+                                                    </a>
+                                                    <a href="{{ route('user.logout') }}" class="dropdown-link-item logout-link">
+                                                        <div class="icon-wrap"><i class="icon-log-out"></i></div>
+                                                        <span>{{ __('Logout') }}</span>
+                                                        <i class="icon-chevron-right link-arrow"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
