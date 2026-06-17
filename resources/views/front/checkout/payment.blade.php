@@ -80,7 +80,111 @@
                                         $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
                                     @endphp
 
-                                    <select name="shipping_id" class="form-control" id="shipping_id_select" required>
+    <style>
+                                        .custom-shipping-select-trigger {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                            width: 100%;
+                                            padding: 12px 20px;
+                                            background: #ffffff !important;
+                                            border: 1.5px solid #ebdcd0 !important;
+                                            border-radius: 14px !important;
+                                            font-size: 13.5px !important;
+                                            font-weight: 600 !important;
+                                            color: #2c2924 !important;
+                                            cursor: pointer;
+                                            user-select: none;
+                                            transition: all 0.22s ease;
+                                            font-family: 'Outfit', sans-serif;
+                                        }
+                                        .custom-shipping-select-trigger:hover {
+                                            border-color: #8C7558 !important;
+                                        }
+                                        .custom-shipping-select-wrapper.open .custom-shipping-select-trigger {
+                                            border-color: #8C7558 !important;
+                                            box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
+                                        }
+                                        .custom-shipping-select-trigger i {
+                                            font-size: 10px;
+                                            color: #b59469;
+                                            transition: transform 0.3s ease, color 0.2s ease;
+                                            margin-left: 8px;
+                                        }
+                                        .custom-shipping-select-wrapper.open .custom-shipping-select-trigger i {
+                                            transform: rotate(180deg);
+                                            color: #8C7558 !important;
+                                        }
+                                        .custom-shipping-select-options {
+                                            position: absolute;
+                                            top: calc(100% + 8px);
+                                            left: 0;
+                                            right: 0;
+                                            background: rgba(255, 255, 255, 0.98) !important;
+                                            backdrop-filter: blur(8px);
+                                            border: 1.5px solid #ebdcd0 !important;
+                                            border-radius: 14px !important;
+                                            padding: 8px 0 !important;
+                                            margin: 0;
+                                            list-style: none;
+                                            display: none;
+                                            z-index: 1050;
+                                            box-shadow: 0 10px 30px rgba(44, 41, 36, 0.05);
+                                            max-height: 250px;
+                                            overflow-y: auto;
+                                        }
+                                        .custom-shipping-select-option {
+                                            padding: 10px 20px !important;
+                                            font-size: 13.5px !important;
+                                            font-weight: 600 !important;
+                                            color: #5a5045 !important;
+                                            cursor: pointer;
+                                            transition: all 0.22s ease;
+                                            font-family: 'Outfit', sans-serif;
+                                        }
+                                        .custom-shipping-select-option:not(.placeholder-option):hover {
+                                            background: rgba(197, 160, 89, 0.06) !important;
+                                            color: #8C7558 !important;
+                                            padding-left: 24px !important;
+                                        }
+                                        .custom-shipping-select-option.active {
+                                            background: rgba(197, 160, 89, 0.1) !important;
+                                            color: #8C7558 !important;
+                                            font-weight: 700 !important;
+                                        }
+                                        .custom-shipping-select-option.placeholder-option {
+                                            color: #b59469 !important;
+                                            cursor: not-allowed;
+                                            border-bottom: 1px solid rgba(235, 220, 208, 0.5);
+                                            font-weight: 500 !important;
+                                        }
+                                    </style>
+                                    <div class="custom-shipping-select-wrapper mb-3" style="position: relative; width: 100%;">
+                                        <div class="custom-shipping-select-trigger">
+                                            <span class="selected-shipping-text" style="color: #b59469;">{{ __('Select Shipping Method') }}</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                        <ul class="custom-shipping-select-options">
+                                            <li class="custom-shipping-select-option placeholder-option">{{ __('Select Shipping Method') }}</li>
+                                            @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $shipping)
+                                                @if ($shipping->id == 1 && isset($free_shipping) &&  $free_shipping->minimum_price <= $cart_total)
+                                                    <li class="custom-shipping-select-option" data-value="{{ $shipping->id }}">
+                                                        {{ $shipping->title }}
+                                                    </li>
+                                                @else
+                                                    @if ($shipping->id != 1)
+                                                        <li class="custom-shipping-select-option" data-value="{{ $shipping->id }}">
+                                                            {{ $shipping->title }} ({{ PriceHelper::setCurrencyPrice($shipping->price) }})
+                                                            @if($shipping->title == 'collect')
+                                                                - {{ __('Sign and Print Creation LTD, 41 High Street , EH22 1JB') }}
+                                                            @endif
+                                                        </li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <select name="shipping_id" class="form-control d-none" id="shipping_id_select" required>
                                         <option value="" selected disabled>{{ __('Select Shipping Method') }}</option>
                                         @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $shipping)
                                             @if ($shipping->id == 1 && isset($free_shipping) &&  $free_shipping->minimum_price <= $cart_total)
@@ -249,6 +353,36 @@ document.addEventListener('DOMContentLoaded', function() {
             stateMessage.classList.add('text-primary');
         });
     }
+
+    // Toggle shipping dropdown open/close
+    $(document).on('click', '.custom-shipping-select-trigger', function(e) {
+        e.stopPropagation();
+        $('.custom-shipping-select-options').slideToggle(200);
+        $(this).closest('.custom-shipping-select-wrapper').toggleClass('open');
+    });
+
+    // Close shipping dropdown when clicking outside
+    $(document).on('click', function() {
+        $('.custom-shipping-select-options').slideUp(150);
+        $('.custom-shipping-select-wrapper').removeClass('open');
+    });
+
+    // Select shipping option
+    $(document).on('click', '.custom-shipping-select-option:not(.placeholder-option)', function() {
+        let val = $(this).data('value');
+        let text = $(this).text().trim();
+        let select = $('#shipping_id_select');
+        
+        select.val(val).trigger('change');
+        if (select[0]) {
+            select[0].dispatchEvent(new Event('change'));
+        }
+        $('.selected-shipping-text').text(text).css('color', '#2c2924');
+        
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.custom-shipping-select-options').slideUp(150);
+        $('.custom-shipping-select-wrapper').removeClass('open');
+    });
 });
 </script>
 @endsection

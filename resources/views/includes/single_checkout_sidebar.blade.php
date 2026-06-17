@@ -165,37 +165,91 @@
                     $gateways = DB::table('payment_settings')->whereStatus(1)->get();
                 @endphp
                 <style>
+                    .custom-payment-select-trigger {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                        padding: 12px 20px;
+                        background: #ffffff !important;
+                        border: 1.5px solid #ebdcd0 !important;
+                        border-radius: 14px !important;
+                        font-size: 13.5px !important;
+                        font-weight: 600 !important;
+                        color: #2c2924 !important;
+                        cursor: pointer;
+                        user-select: none;
+                        transition: all 0.22s ease;
+                        font-family: 'Outfit', sans-serif;
+                    }
                     .custom-payment-select-trigger:hover {
-                        background: #fff !important;
-                        border-color: var(--primary-color, #8C7558) !important;
+                        border-color: #8C7558 !important;
                     }
                     .custom-payment-select-wrapper.open .custom-payment-select-trigger {
-                        background: #fff !important;
-                        border-color: var(--primary-color, #8C7558) !important;
+                        border-color: #8C7558 !important;
                         box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
+                    }
+                    .custom-payment-select-trigger i {
+                        font-size: 10px;
+                        color: #b59469;
+                        transition: transform 0.3s ease, color 0.2s ease;
+                        margin-left: 8px;
                     }
                     .custom-payment-select-wrapper.open .custom-payment-select-trigger i {
                         transform: rotate(180deg);
-                        color: var(--primary-color, #8C7558) !important;
+                        color: #8C7558 !important;
+                    }
+                    .custom-payment-select-options {
+                        position: absolute;
+                        top: calc(100% + 8px);
+                        left: 0;
+                        right: 0;
+                        background: rgba(255, 255, 255, 0.98) !important;
+                        backdrop-filter: blur(8px);
+                        border: 1.5px solid #ebdcd0 !important;
+                        border-radius: 14px !important;
+                        padding: 8px 0 !important;
+                        margin: 0;
+                        list-style: none;
+                        display: none;
+                        z-index: 1050;
+                        box-shadow: 0 10px 30px rgba(44, 41, 36, 0.05);
+                        max-height: 250px;
+                        overflow-y: auto;
+                    }
+                    .custom-payment-select-option {
+                        padding: 10px 20px !important;
+                        font-size: 13.5px !important;
+                        font-weight: 600 !important;
+                        color: #5a5045 !important;
+                        cursor: pointer;
+                        transition: all 0.22s ease;
+                        font-family: 'Outfit', sans-serif;
                     }
                     .custom-payment-select-option:not(.placeholder-option):hover {
-                        background-color: rgba(140, 117, 88, 0.08) !important;
-                        color: var(--primary-color, #8C7558) !important;
-                        padding-left: 20px !important;
+                        background: rgba(197, 160, 89, 0.06) !important;
+                        color: #8C7558 !important;
+                        padding-left: 24px !important;
                     }
                     .custom-payment-select-option.active {
-                        background-color: rgba(140, 117, 88, 0.12) !important;
-                        color: var(--primary-color, #8C7558) !important;
-                        font-weight: 600 !important;
+                        background: rgba(197, 160, 89, 0.1) !important;
+                        color: #8C7558 !important;
+                        font-weight: 700 !important;
+                    }
+                    .custom-payment-select-option.placeholder-option {
+                        color: #b59469 !important;
+                        cursor: not-allowed;
+                        border-bottom: 1px solid rgba(235, 220, 208, 0.5);
+                        font-weight: 500 !important;
                     }
                 </style>
-                <div class="custom-payment-select-wrapper mb-3" style="position: relative; width: 100%; font-family: 'Outfit', sans-serif;">
-                    <div class="custom-payment-select-trigger" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; font-weight: 500; color: #374151; cursor: pointer; user-select: none; transition: all 0.3s ease;">
-                        <span class="selected-payment-text" style="color: #9ca3af;">{{ __('Select a payment method') }}</span>
-                        <i class="fas fa-chevron-down" style="font-size: 11px; color: #8C7558; transition: transform 0.3s ease;"></i>
+                <div class="custom-payment-select-wrapper mb-3" style="position: relative; width: 100%;">
+                    <div class="custom-payment-select-trigger">
+                        <span class="selected-payment-text" style="color: #b59469;">{{ __('Select a payment method') }}</span>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <ul class="custom-payment-select-options" style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 6px 0; margin: 0; list-style: none; display: none; z-index: 1000; max-height: 250px; overflow-y: auto;">
-                        <li class="custom-payment-select-option placeholder-option" style="padding: 10px 16px; font-size: 14px; font-weight: 500; color: #9ca3af; cursor: not-allowed; border-bottom: 1px solid #f3f4f6;">{{ __('Select a payment method') }}</li>
+                    <ul class="custom-payment-select-options">
+                        <li class="custom-payment-select-option placeholder-option">{{ __('Select a payment method') }}</li>
                         @foreach ($gateways as $gateway)
                             @php
                                 $show = true;
@@ -352,7 +406,7 @@
             let select = $('.payment_gateway');
             
             select.val(val).trigger('change');
-            $('.selected-payment-text').text(text).css('color', '#1e293b');
+            $('.selected-payment-text').text(text).css('color', '#2c2924');
             
             $(this).addClass('active').siblings().removeClass('active');
             $('.custom-payment-select-options').slideUp(150);
