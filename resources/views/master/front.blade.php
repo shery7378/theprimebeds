@@ -1515,6 +1515,36 @@
         .dropdown-link-item.logout-link:hover .link-arrow {
             color: #e63946;
         }
+
+        /* Global Premium Form Controls & Select Dropdowns */
+        .form-control-premium {
+            background-color: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 8px !important;
+            padding: 12px 16px !important;
+            font-size: 14.5px !important;
+            color: #374151 !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            height: auto !important; /* Fix vertical clipping */
+            font-family: 'Outfit', sans-serif !important;
+        }
+        .form-control-premium:focus {
+            background-color: #fff !important;
+            border-color: var(--primary-color, #8C7558) !important;
+            box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
+        }
+        select.form-control-premium {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238C7558' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 16px center !important;
+            background-size: 12px !important;
+            padding-right: 44px !important;
+            cursor: pointer !important;
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')

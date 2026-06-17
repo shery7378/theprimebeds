@@ -164,7 +164,54 @@
                 @php
                     $gateways = DB::table('payment_settings')->whereStatus(1)->get();
                 @endphp
-                <select class="form-control form-control-premium payment_gateway" required>
+                <style>
+                    .custom-payment-select-trigger:hover {
+                        background: #fff !important;
+                        border-color: var(--primary-color, #8C7558) !important;
+                    }
+                    .custom-payment-select-wrapper.open .custom-payment-select-trigger {
+                        background: #fff !important;
+                        border-color: var(--primary-color, #8C7558) !important;
+                        box-shadow: 0 0 0 4px rgba(140, 117, 88, 0.1) !important;
+                    }
+                    .custom-payment-select-wrapper.open .custom-payment-select-trigger i {
+                        transform: rotate(180deg);
+                        color: var(--primary-color, #8C7558) !important;
+                    }
+                    .custom-payment-select-option:not(.placeholder-option):hover {
+                        background-color: rgba(140, 117, 88, 0.08) !important;
+                        color: var(--primary-color, #8C7558) !important;
+                        padding-left: 20px !important;
+                    }
+                    .custom-payment-select-option.active {
+                        background-color: rgba(140, 117, 88, 0.12) !important;
+                        color: var(--primary-color, #8C7558) !important;
+                        font-weight: 600 !important;
+                    }
+                </style>
+                <div class="custom-payment-select-wrapper mb-3" style="position: relative; width: 100%; font-family: 'Outfit', sans-serif;">
+                    <div class="custom-payment-select-trigger" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; font-weight: 500; color: #374151; cursor: pointer; user-select: none; transition: all 0.3s ease;">
+                        <span class="selected-payment-text" style="color: #9ca3af;">{{ __('Select a payment method') }}</span>
+                        <i class="fas fa-chevron-down" style="font-size: 11px; color: #8C7558; transition: transform 0.3s ease;"></i>
+                    </div>
+                    <ul class="custom-payment-select-options" style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 6px 0; margin: 0; list-style: none; display: none; z-index: 1000; max-height: 250px; overflow-y: auto;">
+                        <li class="custom-payment-select-option placeholder-option" style="padding: 10px 16px; font-size: 14px; font-weight: 500; color: #9ca3af; cursor: not-allowed; border-bottom: 1px solid #f3f4f6;">{{ __('Select a payment method') }}</li>
+                        @foreach ($gateways as $gateway)
+                            @php
+                                $show = true;
+                                if (PriceHelper::CheckDigitalPaymentGateway() && $gateway->unique_keyword == 'cod') {
+                                    $show = false;
+                                }
+                            @endphp
+                            @if ($show)
+                                <li class="custom-payment-select-option" data-value="{{ $gateway->unique_keyword }}" style="padding: 10px 16px; font-size: 14.5px; font-weight: 500; color: #374151; cursor: pointer; transition: all 0.2s ease;">
+                                    {{ $gateway->name }}
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+                <select class="form-control form-control-premium payment_gateway d-none" required>
                     <option value="" selected disabled>{{ __('Select a payment method') }}</option>
                     @foreach ($gateways as $gateway)
                         @if (PriceHelper::CheckDigitalPaymentGateway())
@@ -276,6 +323,33 @@
                 $('.single_checkout_payment').removeAttr('id');
                 $('.single_checkout_payment').attr('disabled', true);
             }
+        });
+
+        // Toggle payment dropdown open/close
+        $(document).on('click', '.custom-payment-select-trigger', function(e) {
+            e.stopPropagation();
+            $('.custom-payment-select-options').slideToggle(200);
+            $(this).closest('.custom-payment-select-wrapper').toggleClass('open');
+        });
+
+        // Close payment dropdown when clicking outside
+        $(document).on('click', function() {
+            $('.custom-payment-select-options').slideUp(150);
+            $('.custom-payment-select-wrapper').removeClass('open');
+        });
+
+        // Select payment option
+        $(document).on('click', '.custom-payment-select-option:not(.placeholder-option)', function() {
+            let val = $(this).data('value');
+            let text = $(this).text().trim();
+            let select = $('.payment_gateway');
+            
+            select.val(val).trigger('change');
+            $('.selected-payment-text').text(text).css('color', '#1e293b');
+            
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.custom-payment-select-options').slideUp(150);
+            $('.custom-payment-select-wrapper').removeClass('open');
         });
     </script>
 @endsection
