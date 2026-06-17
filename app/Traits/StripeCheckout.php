@@ -91,11 +91,11 @@ trait StripeCheckout
             $cart_total,
         );
         $orderData["shipping_info"] = json_encode(
-            Session::get("shipping_address"),
+            Session::has("shipping_address") ? Session::get("shipping_address") : $data,
             true,
         );
         $orderData["billing_info"] = json_encode(
-            Session::get("billing_address"),
+            Session::has("billing_address") ? Session::get("billing_address") : $data,
             true,
         );
         $orderData["payment_method"] = "Stripe";
@@ -253,9 +253,7 @@ trait StripeCheckout
             if ($setting->is_twilio == 1) {
                 // message
                 $sms = new SmsHelper();
-                $user_number = json_decode($order->billing_info, true)[
-                    "bill_phone"
-                ];
+                $user_number = json_decode($order->billing_info, true) ? json_decode($order->billing_info, true)["bill_phone"] : ($order_input_data["bill_phone"] ?? null);
                 if ($user_number) {
                     $sms->SendSms(
                         $user_number,
@@ -270,7 +268,7 @@ trait StripeCheckout
                 "type" => "Order",
                 "user_name" => isset($user)
                     ? $user->displayName()
-                    : Session::get("billing_address")["bill_first_name"],
+                    : (Session::has("billing_address") ? Session::get("billing_address")["bill_first_name"] : ($order_input_data["bill_first_name"] ?? "Customer")),
                 "order_cost" => $total_amount,
                 "transaction_number" => $order->transaction_number,
                 "site_title" => Setting::first()->title,

@@ -531,7 +531,14 @@ class CheckoutController extends Controller
                 Session::put('merchant_earnings_processed_' . $order_id, true);
             }
 
-            Mail::to($shippping_info['ship_email'])->send(new orderMail($cart,$order));
+            $email_to = ($shippping_info['ship_email'] ?? null) ?? (($shippping_info['bill_email'] ?? null) ?? ($order->user->email ?? ''));
+            if (!empty($email_to)) {
+                try {
+                    Mail::to($email_to)->send(new orderMail($cart,$order));
+                } catch (\Exception $e) {
+                    // Ignore email error until admin configures SMTP
+                }
+            }
             $setting = Setting::first();
             if ($setting->is_twilio == 1) {
                 // message
