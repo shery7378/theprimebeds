@@ -32,15 +32,15 @@ class SocialLoginController extends Controller
 
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->stateless()->redirect();
     }
 
     public function handleProviderCallback($provider)
     {
         try {
-            $socialUser = Socialite::driver($provider)->user();
+            $socialUser = Socialite::driver($provider)->stateless()->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->user();
         } catch (\Exception $e) {
-
+            \Log::error('Socialite Error: ' . $e->getMessage());
             return redirect('/');
         }
 
@@ -48,6 +48,7 @@ class SocialLoginController extends Controller
         if (User::where('email', $socialUser->email)->exists()) {
             $auser = User::where('email', $socialUser->email)->first();
             Auth::login($auser);
+            \Log::info('Existing user logged in via Google: ' . $auser->email . ' Check Auth::check(): ' . (Auth::check() ? 'true' : 'false'));
             return redirect()->route('user.dashboard');
         } else {
             $name = $this->split_name($socialUser->name);
@@ -56,6 +57,7 @@ class SocialLoginController extends Controller
             $user->first_name = $name[0];
             $user->last_name = $name[1];
             $user->save();
+            \Log::info('New user created via Google: ' . $user->email);
 
 
             Notification::create([
@@ -81,6 +83,7 @@ class SocialLoginController extends Controller
         }
 
         Auth::login($user);
+        \Log::info('Auth::check() after new user login: ' . (Auth::check() ? 'true' : 'false'));
         return redirect()->route('user.dashboard');
     }
 
