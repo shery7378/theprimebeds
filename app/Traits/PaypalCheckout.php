@@ -34,7 +34,10 @@ trait PaypalCheckout
         $data = PaymentSetting::whereUniqueKeyword("paypal")->first();
         $paydata = $data->convertJsonData();
 
-        $this->gateway = Omnipay::create("PayPal_Rest");
+        $guzzleClient = new \GuzzleHttp\Client(['verify' => false]);
+        $httpClient = new \Omnipay\Common\Http\Client($guzzleClient);
+
+        $this->gateway = Omnipay::create("PayPal_Rest", $httpClient);
         $this->gateway->setClientId($paydata["client_id"]);
         $this->gateway->setSecret($paydata["client_secret"]);
         $this->gateway->setTestMode(
