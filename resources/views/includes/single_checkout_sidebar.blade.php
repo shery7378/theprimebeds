@@ -202,6 +202,10 @@
                                 if (PriceHelper::CheckDigitalPaymentGateway() && $gateway->unique_keyword == 'cod') {
                                     $show = false;
                                 }
+                                // Commented out/hidden Bank Transfer for now
+                                if ($gateway->unique_keyword == 'bank') {
+                                    $show = false;
+                                }
                             @endphp
                             @if ($show)
                                 <li class="custom-payment-select-option" data-value="{{ $gateway->unique_keyword }}" style="padding: 10px 16px; font-size: 14.5px; font-weight: 500; color: #374151; cursor: pointer; transition: all 0.2s ease;">
@@ -214,12 +218,15 @@
                 <select class="form-control form-control-premium payment_gateway d-none" required>
                     <option value="" selected disabled>{{ __('Select a payment method') }}</option>
                     @foreach ($gateways as $gateway)
-                        @if (PriceHelper::CheckDigitalPaymentGateway())
-                            @if ($gateway->unique_keyword != 'cod')
+                        {{-- Commented out/hidden Bank Transfer for now --}}
+                        @if ($gateway->unique_keyword != 'bank')
+                            @if (PriceHelper::CheckDigitalPaymentGateway())
+                                @if ($gateway->unique_keyword != 'cod')
+                                    <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
+                                @endif
+                            @else
                                 <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
                             @endif
-                        @else
-                            <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
                         @endif
                     @endforeach
                 </select>
