@@ -71,7 +71,7 @@ class CheckoutController extends Controller
         foreach ($cart as $key => $item) {
             // Use discounted price from session (unit price * qty)
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
@@ -132,7 +132,7 @@ class CheckoutController extends Controller
         foreach ($cart as $key => $item) {
 
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
@@ -235,7 +235,7 @@ class CheckoutController extends Controller
         foreach ($cart as $key => $item) {
 
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
@@ -309,7 +309,7 @@ class CheckoutController extends Controller
         foreach ($cart as $key => $item) {
 
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
@@ -345,115 +345,112 @@ class CheckoutController extends Controller
 
     public function checkout(PaymentRequest $request)
     {
-
-
-
         PriceHelper::checkCheckout($request);
 
-        $input = $request->all();
+            $input = $request->all();
 
-        $checkout = false;
-        $payment_redirect = false;
-        $payment = null;
+            $checkout = false;
+            $payment_redirect = false;
+            $payment = null;
 
-        if (Session::has('currency')) {
-            $currency = Currency::findOrFail(Session::get('currency'));
-        } else {
-            $currency = Currency::where('is_default', 1)->first();
-        }
-
-
-        $usd_supported = array(
-            "USD",
-            "GBP",
-
-        );
+            if (Session::has('currency')) {
+                $currency = Currency::findOrFail(Session::get('currency'));
+            } else {
+                $currency = Currency::where('is_default', 1)->first();
+            }
 
 
-        $paypal_supported = ['USD', 'EUR', 'AUD', 'BRL', 'CAD', 'HKD', 'JPY', 'MXN', 'NZD', 'PHP', 'GBP', 'RUB'];
-        $paystack_supported = ['NGN', "GHS", "USD", "ZAR", "KES"];
-        switch ($input['payment_method']) {
+            $usd_supported = array(
+                "USD",
+                "GBP",
 
-            case 'Stripe':
-                if (!in_array($currency->name, $usd_supported)) {
-                    Session::flash('error', __('Currency Not Supported'));
-                    return redirect()->back();
-                }
-                $checkout = true;
-                $payment_redirect = true;
-                $payment = $this->stripeSubmit($input);
-                break;
-
-            case 'Paypal':
-                if (!in_array($currency->name, $paypal_supported)) {
-                    Session::flash('error', __('Currency Not Supported'));
-                    return redirect()->back();
-                }
-                $checkout = true;
-                $payment_redirect = true;
-                $payment = $this->paypalSubmit($input);
-                break;
+            );
 
 
-            case 'Mollie':
-                if (!in_array($currency->name, $usd_supported)) {
-                    Session::flash('error', __('Currency Not Supported'));
-                    return redirect()->back();
-                }
-                $checkout = true;
-                $payment_redirect = true;
-                $payment = $this->MollieSubmit($input);
-                break;
+            $paypal_supported = ['USD', 'EUR', 'AUD', 'BRL', 'CAD', 'HKD', 'JPY', 'MXN', 'NZD', 'PHP', 'GBP', 'RUB'];
+            $paystack_supported = ['NGN', "GHS", "USD", "ZAR", "KES"];
+            switch ($input['payment_method']) {
 
-            case 'Paystack':
-                if (!in_array($currency->name, $paystack_supported)) {
-                    Session::flash('error', __('Currency Not Supported'));
-                    return redirect()->back();
-                }
-                $checkout = true;
-                $payment = $this->PaystackSubmit($input);
+                case 'Stripe':
+                    if (!in_array($currency->name, $usd_supported)) {
+                        Session::flash('error', __('Currency Not Supported'));
+                        return redirect()->back();
+                    }
+                    $checkout = true;
+                    $payment_redirect = true;
+                    $payment = $this->stripeSubmit($input);
+                    break;
 
-                break;
-
-            case 'Bank':
-                $checkout = true;
-                $payment = $this->BankSubmit($input);
-                break;
-
-            case 'Paytabs':
-                $checkout = true;
-                $payment_redirect = true;
-                $payment = $this->PayTabsSubmit($input);
-                break;
-
-            case 'Cash On Delivery':
-                $checkout = true;
-                $payment = $this->cashOnDeliverySubmit($input);
-                break;
-        }
+                case 'Paypal':
+                    if (!in_array($currency->name, $paypal_supported)) {
+                        Session::flash('error', __('Currency Not Supported'));
+                        return redirect()->back();
+                    }
+                    $checkout = true;
+                    $payment_redirect = true;
+                    $payment = $this->paypalSubmit($input);
+                    break;
 
 
+                case 'Mollie':
+                    if (!in_array($currency->name, $usd_supported)) {
+                        Session::flash('error', __('Currency Not Supported'));
+                        return redirect()->back();
+                    }
+                    $checkout = true;
+                    $payment_redirect = true;
+                    $payment = $this->MollieSubmit($input);
+                    break;
 
-        if ($checkout) {
-            if ($payment_redirect) {
+                case 'Paystack':
+                    if (!in_array($currency->name, $paystack_supported)) {
+                        Session::flash('error', __('Currency Not Supported'));
+                        return redirect()->back();
+                    }
+                    $checkout = true;
+                    $payment = $this->PaystackSubmit($input);
 
-                if ($payment['status']) {
-                    return redirect()->away($payment['link']);
+                    break;
+
+                case 'Bank':
+                    $checkout = true;
+                    $payment = $this->BankSubmit($input);
+                    break;
+
+                case 'Paytabs':
+                    $checkout = true;
+                    $payment_redirect = true;
+                    $payment = $this->PayTabsSubmit($input);
+                    break;
+
+                case 'Cash On Delivery':
+                    $checkout = true;
+                    $payment = $this->cashOnDeliverySubmit($input);
+                    break;
+            }
+
+
+
+            if ($checkout) {
+                if ($payment_redirect) {
+
+                    if ($payment['status']) {
+                        return redirect()->away($payment['link']);
+                    } else {
+                        Session::put('message', $payment['message']);
+                        return redirect()->route('front.checkout.cancle');
+                    }
                 } else {
-                    Session::put('message', $payment['message']);
-                    return redirect()->route('front.checkout.cancle');
+                    if ($payment['status']) {
+                        return redirect()->route('front.checkout.success');
+                    } else {
+                        Session::put('message', $payment['message']);
+                        return redirect()->route('front.checkout.cancle');
+                    }
                 }
             } else {
-                if ($payment['status']) {
-                    return redirect()->route('front.checkout.success');
-                } else {
-                    Session::put('message', $payment['message']);
-                    return redirect()->route('front.checkout.cancle');
-                }
+                return redirect()->route('front.checkout.cancle');
             }
-        } else {
-            return redirect()->route('front.checkout.cancle');
-        }
     }
 
     public function paymentRedirect(Request $request)
@@ -579,15 +576,16 @@ class CheckoutController extends Controller
         $cart_total = 0;
         foreach ($cart as $key => $item) {
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
         }
 
         $shipping = [];
-        if ($shipping_id) {
-            $shipping = ShippingService::findOrFail($shipping_id);
+        $shipping = null;
+        if ($shipping_id && is_numeric($shipping_id)) {
+            $shipping = ShippingService::find($shipping_id);
         }
         $discount = [];
         if (Session::has('coupon')) {
@@ -598,12 +596,14 @@ class CheckoutController extends Controller
         $grand_total = $grand_total - ($discount ? $discount['discount'] : 0);
 
         $state_price = 0;
-        if ($state_id) {
-            $state = State::findOrFail($state_id);
-            if ($state->type == 'fixed') {
-                $state_price = $state->price;
-            } else {
-                $state_price = ($cart_total * $state->price) / 100;
+        if ($state_id && is_numeric($state_id)) {
+            $state = State::find($state_id);
+            if ($state) {
+                if ($state->type == 'fixed') {
+                    $state_price = $state->price;
+                } else {
+                    $state_price = ($cart_total * $state->price) / 100;
+                }
             }
         } else {
             if (Auth::check() && Auth::user()->state_id) {
@@ -642,13 +642,16 @@ class CheckoutController extends Controller
         $cart_total = 0;
         foreach ($cart as $key => $item) {
             $cart_total += $item['price'] * $item['qty'];
-            $main_item = Item::findOrFail($key);
+            $main_item = Item::findOrFail(PriceHelper::GetItemId($key));
             if ($main_item->tax) {
                 $total_tax += $main_item::taxCalculate($main_item);
             }
         }
 
-        $shipping = ShippingService::findOrFail($shipping_id);
+        $shipping = null;
+        if ($shipping_id && is_numeric($shipping_id)) {
+            $shipping = ShippingService::find($shipping_id);
+        }
 
         $discount = [];
         if (Session::has('coupon')) {
@@ -659,12 +662,14 @@ class CheckoutController extends Controller
         $grand_total = $grand_total - ($discount ? $discount['discount'] : 0);
 
         $state_price = 0;
-        if ($state_id && $state_id != 'undefined') {
-            $state = State::findOrFail($state_id);
-            if ($state->type == 'fixed') {
-                $state_price = $state->price;
-            } else {
-                $state_price = ($cart_total * $state->price) / 100;
+        if ($state_id && is_numeric($state_id)) {
+            $state = State::find($state_id);
+            if ($state) {
+                if ($state->type == 'fixed') {
+                    $state_price = $state->price;
+                } else {
+                    $state_price = ($cart_total * $state->price) / 100;
+                }
             }
         } else {
             if (Auth::check() && Auth::user()->state_id) {

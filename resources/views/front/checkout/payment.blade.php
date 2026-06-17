@@ -216,7 +216,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Only open modal if valid
             if (isValid) {
                 const targetModalId = this.getAttribute('data-modal-target');
-                const modal = new bootstrap.Modal(document.querySelector(targetModalId));
+                const modalElement = document.querySelector(targetModalId);
+                
+                if (shippingSelect) {
+                    const shippingInput = modalElement.querySelector('.shipping_id_setup');
+                    if(shippingInput) shippingInput.value = shippingSelect.value;
+                }
+                if (stateSelect) {
+                    const stateInput = modalElement.querySelector('.state_id_setup');
+                    if(stateInput) stateInput.value = stateSelect.value;
+                }
+
+                const modal = new bootstrap.Modal(modalElement);
                 modal.show();
             }
         });

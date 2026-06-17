@@ -67,11 +67,11 @@ trait StripeCheckout
             $discount = Session::get("coupon");
         }
 
-        // if (!PriceHelper::Digital()) {
-        //     $shipping = null;
-        // } else {
-        $shipping = ShippingService::findOrFail($data["shipping_id"]);
-        // }
+        if (!PriceHelper::Digital()) {
+            $shipping = null;
+        } else {
+            $shipping = ShippingService::findOrFail($data["shipping_id"]);
+        }
 
         $orderData["state"] = $data["state_id"]
             ? json_encode(State::findOrFail($data["state_id"]), true)
@@ -114,9 +114,7 @@ trait StripeCheckout
                 "?session_id={CHECKOUT_SESSION_ID}";
             $response = $stripe->checkout->sessions->create([
                 "success_url" => $notify_url,
-                "customer_email" => Session::get("shipping_address")[
-                    "ship_email"
-                ],
+                "customer_email" => Session::has("shipping_address") ? Session::get("shipping_address")["ship_email"] : $data["bill_email"],
                 "payment_method_types" => ["card"],
 
                 "line_items" => [

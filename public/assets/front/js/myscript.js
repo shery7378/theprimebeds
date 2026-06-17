@@ -1442,30 +1442,41 @@ $(function ($) {
 
 $(document).on("change", "#state_id_select", function () {
   var url = $("option:selected", this).attr("data-href");
-  var state_id = $(this).val();
-  var shipping_id = $("#shipping_id_select option:selected").val();
+  var state_id = $(this).val() || "";
+  var shipping_id = $("#shipping_id_select option:selected").val() || "";
+  $(".state_id_setup").val(state_id);
   url = url + "?state_id=" + state_id + "&shipping_id=" + shipping_id;
   $.get(url, function (response) {
     $(".set__state_price_tr").removeClass("d-none");
     $(".set__state_price").text(response.state_price);
     $(".grand_total_set").text(response.grand_total);
-    $(".state_id_setup").val(state_id);
     $(".state_message").addClass("d-none");
   });
 });
 
 $(document).on("change", "#shipping_id_select", function () {
   var url = $("option:selected", this).attr("data-href");
-  var state_id = $("#state_id_select option:selected").val();
-  var shipping_id = $(this).val();
+  var state_id = $("#state_id_select option:selected").val() || "";
+  var shipping_id = $(this).val() || "";
+  $(".shipping_id_setup").val(shipping_id);
   url = url + "?state_id=" + state_id + "&shipping_id=" + shipping_id;
   $.get(url, function (response) {
     $(".set__shipping_price_tr").removeClass("d-none");
     $(".set__shipping_price").text(response.shipping_price);
     $(".grand_total_set").text(response.grand_total);
-    $(".shipping_id_setup").val(shipping_id);
     $(".shipping_message").addClass("d-none");
   });
+});
+
+$(document).ready(function () {
+  var initial_state = $("#state_id_select").val();
+  if (initial_state) {
+    $(".state_id_setup").val(initial_state);
+  }
+  var initial_shipping = $("#shipping_id_select").val();
+  if (initial_shipping) {
+    $(".shipping_id_setup").val(initial_shipping);
+  }
 });
 
 $(document).on("click", "#trams__condition", function () {

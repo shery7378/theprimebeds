@@ -203,7 +203,30 @@
 @section('script')
     <script>
         // Show the modal on #single_checkout_payment change
-        $(document).on("click", "#single_checkout_payment", function() {
+        $(document).on("click", "#single_checkout_payment", function(e) {
+            // 1. Validate billing form fields
+            let billingForm = document.getElementById('checkoutBilling');
+            if (billingForm && !billingForm.reportValidity()) {
+                e.preventDefault();
+                return false;
+            }
+
+            // 2. Validate shipping options
+            let shippingSelect = document.getElementById('shipping_id_select');
+            let stateSelect = document.getElementById('state_id_select');
+
+            if (shippingSelect && !shippingSelect.value) {
+                alert('Please select a shipping method.');
+                e.preventDefault();
+                return false;
+            }
+
+            if (stateSelect && !stateSelect.value) {
+                alert('Please select a shipping state.');
+                e.preventDefault();
+                return false;
+            }
+
             let keyword = $('.payment_gateway').val();
             let modalElement = document.getElementById(keyword);
 
@@ -215,8 +238,8 @@
                 // Get all input fields from the #checkoutBilling form
                 let allinput = $("#checkoutBilling input");
 
-                // Clear the modal form before appending new hidden inputs
-                $(modalElement).find('form').html(); // Clear modal form content
+                // Clear any previously appended inputs from checkoutBilling
+                $(modalElement).find('form').find('.billing-field').remove();
 
                 // Loop through each input and append a hidden input in the modal form
                 allinput.each(function() {
@@ -224,11 +247,20 @@
                     let hiddenInput = $('<input>')
                         .attr('type', 'hidden') // Set the input type to hidden
                         .attr('name', $(this).attr('name')) // Use the same name attribute
+                        .addClass('billing-field')
                         .val($(this).val()); // Set the value of the hidden input
 
                     // Append the hidden input to the modal form
                     $(modalElement).find('form').append(hiddenInput);
                 });
+
+                // Explicitly set shipping and state values in the modal
+                if (shippingSelect) {
+                    $(modalElement).find('.shipping_id_setup').val(shippingSelect.value);
+                }
+                if (stateSelect) {
+                    $(modalElement).find('.state_id_setup').val(stateSelect.value);
+                }
             }
         });
 

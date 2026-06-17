@@ -1,14 +1,15 @@
      <!-- Modal Cash on Transfer-->
      <div class="modal fade" id="cod" tabindex="-1" aria-hidden="true">
-         <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
+    <div class="modal-dialog">
+        <form action="{{ route('front.checkout.submit') }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
                      <h6 class="modal-title">{{ __('Transaction Cash On Delivery') }}</h6>
                      <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span
                              aria-hidden="true">&times;</span></button>
                  </div>
-                 <form action="{{ route('front.checkout.submit') }}" method="POST">
-                     @csrf
+                 
                      <input type="hidden" name="payment_method" value="Cash On Delivery" id="">
                      <input type="hidden" name="state_id"
                          value="{{ auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : '' }}"
@@ -92,9 +93,11 @@
 
      <!-- Modal Stripe -->
      <div class="modal fade" id="stripe" tabindex="-1" aria-hidden="true">
-         <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
+    <div class="modal-dialog">
+        <form class="interactive-credit-card row" action="{{ route('front.checkout.submit') }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
                      <h6 class="modal-title">Card Payment</h6>
                      <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span
                              aria-hidden="true">&times;</span></button>
@@ -102,9 +105,7 @@
                  <div class="modal-body">
                      <div class="card-body">
 
-                         <form class="interactive-credit-card row" action="{{ route('front.checkout.submit') }}"
-                             method="POST">
-                             @csrf
+                         
 
                              <input type="hidden" name="payment_method" value="Stripe">
                              <input type="hidden" name="shipping_id" value="" class="shipping_id_setup">
@@ -120,16 +121,18 @@
                      <button class="btn btn-primary btn-sm"
                          type="submit"><span>Checkout with card</span></button>
                  </div>
-                 </form>
-             </div>
-         </div>
-     </div>
+            </div>
+        </form>
+    </div>
+</div>
 
      <!-- Modal Authorize -->
      {{-- <div class="modal fade" id="authorize" tabindex="-1" aria-hidden="true">
-         <div class="modal-dialog">
-             <div class="modal-content">
-                 <div class="modal-header">
+    <div class="modal-dialog">
+        <form class="interactive-credit-card row" action="{{ route('front.authorize.submit') }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
                      <h6 class="modal-title">{{ __('Transactions via Authorize.Net') }}</h6>
                      <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span
                              aria-hidden="true">&times;</span></button>
@@ -137,9 +140,7 @@
                  <div class="modal-body">
                      <div class="card-body">
                          <div class="card-wrapper"></div>
-                         <form class="interactive-credit-card row" action="{{ route('front.authorize.submit') }}"
-                             method="POST">
-                             @csrf
+                         
                              <div class="form-group col-sm-12">
                                  <input class="form-control" type="text" name="card"
                                      placeholder="{{ __('Card Number') }}" required>
@@ -171,10 +172,10 @@
                      <button class="btn btn-primary btn-sm"
                          type="submit"><span>{{ __('Chekout With Stripe') }}</span></button>
                  </div>
-                 </form>
-             </div>
-         </div>
-     </div> --}}
+            </div>
+        </form>
+    </div>
+</div> --}}
 
 
      {{-- PAYPAL --}}
@@ -467,7 +468,9 @@
 
       <!-- Modal Paytabs -->
       {{-- <div class="modal fade" id="paytabs" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal-dialog">
+        <form class="interactive-credit-card row" action="{{ route('front.paytab.submit') }}" method="POST">
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title">{{ __('Transactions via Paytabs') }}</h6>
@@ -477,9 +480,7 @@
                 <div class="modal-body">
                     <div class="card-body">
 
-                        <form class="interactive-credit-card row" action="{{ route('front.paytab.submit') }}"
-                            method="POST">
-                            @csrf
+                        
 
                             <input type="hidden" name="payment_method" value="Paytabs">
                             <input type="hidden" name="shipping_id" value="" class="shipping_id_setup">
@@ -495,7 +496,7 @@
                     <button class="btn btn-primary btn-sm"
                         type="submit"><span>{{ __('Chekout With Paytabs') }}</span></button>
                 </div>
-                </form>
             </div>
-        </div>
-    </div> --}}
+        </form>
+    </div>
+</div> --}}

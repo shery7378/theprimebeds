@@ -330,12 +330,16 @@ class PriceHelper
     {
         $cart = Session::get("cart");
         $check_digital = false;
-        foreach ($cart as $key => $item) {
-            if ($item["item_type"] == "normal") {
-                $check_digital = true;
+        if ($cart) {
+            foreach ($cart as $key => $item) {
+                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                    $check_digital = true;
+                }
+                if (!empty($item["is_customized"])) {
+                    $check_digital = true;
+                }
             }
         }
-
         return $check_digital;
     }
 
@@ -343,9 +347,14 @@ class PriceHelper
     {
         $cart = Session::get("cart");
         $check_digital = true;
-        foreach ($cart as $key => $item) {
-            if ($item["item_type"] == "normal") {
-                $check_digital = false;
+        if ($cart) {
+            foreach ($cart as $key => $item) {
+                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                    $check_digital = false;
+                }
+                if (!empty($item["is_customized"])) {
+                    $check_digital = false;
+                }
             }
         }
         return $check_digital;
@@ -496,9 +505,17 @@ class PriceHelper
     {
         $cart = Session::get("cart");
         $return = false;
-        foreach ($cart as $item) {
-            if ($item["type"] == "normal") {
-                $return = true;
+        if ($cart) {
+            foreach ($cart as $item) {
+                if (isset($item["type"]) && $item["type"] == "normal") {
+                    $return = true;
+                }
+                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                    $return = true;
+                }
+                if (!empty($item["is_customized"])) {
+                    $return = true;
+                }
             }
         }
         return $return;
