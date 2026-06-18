@@ -1064,8 +1064,8 @@ $(function ($) {
           $(".cart_view_header").html(emptyCartHtml);
           $(".cart_count").text("0");
         } else {
-          // Show loading state while recalculating totals for remaining items
-          $(".cart_view_header").html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #002e3b;"></i></div>');
+          // Fade out the deleted item and disable clicks on it instead of showing a full-cart loader spinner
+          $(this).closest('.d-flex.flex-column.mb-3').css('opacity', '0.4').css('pointer-events', 'none');
         }
 
         let removeUrl = mainurl + "/cart/destroy/" + item_id;
@@ -1282,13 +1282,13 @@ $(function ($) {
               ? $("#but_to_cart")
               : $("#add_to_cart");
         }
-        $btn.each(function() {
+        $btn.each(function () {
           let $el = $(this);
           $el.data('original-html', $el.html());
         });
 
         $btn.prop("disabled", true);
-        $btn.each(function() {
+        $btn.each(function () {
           let $el = $(this);
           $el.html(`<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> ` + $el.data('original-html'));
         });
@@ -1338,11 +1338,11 @@ $(function ($) {
           complete: function () {
             // Restore button text & enable again after AJAX finishes
             $btn.prop("disabled", false);
-            
+
             let successHtml = "<i class='fas fa-check' style='margin-right: 5px;'></i> Added to Cart";
-              
+
             $btn.html(successHtml);
-            
+
             if (check != 0) {
               $btn.css({ "font-size": "12px", "font-weight": "600", "display": "flex", "align-items": "center", "justify-content": "center", "color": "#fff", "text-decoration": "none" });
               if ($btn[0]) {
@@ -1350,9 +1350,9 @@ $(function ($) {
                 $btn[0].style.setProperty("border-color", "#28a745", "important");
               }
             }
-            
+
             setTimeout(function () {
-              $btn.each(function() {
+              $btn.each(function () {
                 let $el = $(this);
                 $el.html($el.data('original-html'));
               });

@@ -2364,7 +2364,7 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/scripts.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.plugin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=9') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=11') }}"></script>
 
     @if(Auth::check())
         @php
@@ -2400,6 +2400,9 @@ body_theme4 @endif
 
             // Close cart dropdown when clicking outside
             $(document).on('click', function (e) {
+                if (!document.body.contains(e.target)) {
+                    return;
+                }
                 if (!$(e.target).closest('.topbar-cart-item').length) {
                     $('.topbar-cart-item').removeClass('show-dropdown');
                 }
