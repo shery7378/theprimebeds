@@ -73,6 +73,7 @@ class CartController extends Controller
             Session::put('cart', $cart);
         } else {
             Session::forget('cart');
+            Session::forget('coupon'); // clear coupon when cart is empty
         }
         Session::flash('success', __('Cart item remove successfully.'));
         return back();
