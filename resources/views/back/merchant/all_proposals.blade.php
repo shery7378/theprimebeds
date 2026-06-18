@@ -14,7 +14,7 @@
         width: 100% !important;
     }
     .proposals-table {
-        min-width: 1000px !important;
+        min-width: 900px !important;
         width: 100% !important;
         margin: 0 !important;
     }
@@ -266,13 +266,12 @@
                 <table class="table proposals-table" id="proposals-table" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>{{ __('#') }}</th>
-                            <th>{{ __('Merchant Details') }}</th>
-                            <th>{{ __('Product') }}</th>
+                            <th>{{ __('Merchant Name') }}</th>
+                            <th>{{ __('Image') }}</th>
+                            <th>{{ __('Product Name') }}</th>
                             <th>{{ __('Base Price') }}</th>
                             <th>{{ __('Proposed Price') }}</th>
                             <th>{{ __('Status') }}</th>
-                            <th>{{ __('Submitted') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -280,39 +279,20 @@
                         @forelse($proposals as $mp)
                         @php
                             $basePrice = $mp->item->purchase_price > 0 ? $mp->item->purchase_price : $mp->item->discount_price;
-                            $avatarLetter = strtoupper(substr($mp->user->first_name ?? 'M', 0, 1));
                         @endphp
                         <tr>
-                            <td><strong>{{ $loop->iteration + ($proposals->firstItem() - 1) }}</strong></td>
                             <td>
-                                <div class="merchant-profile-box">
-                                    <div class="merchant-avatar">{{ $avatarLetter }}</div>
-                                    <div>
-                                        <div class="merchant-info-title">{{ $mp->user->first_name }} {{ $mp->user->last_name }}</div>
-                                        <div class="merchant-meta-item">
-                                            <i class="fas fa-envelope"></i><span>{{ $mp->user->email }}</span>
-                                        </div>
-                                        @if($mp->user->phone)
-                                        <div class="merchant-meta-item">
-                                            <i class="fas fa-phone"></i><span>{{ $mp->user->phone }}</span>
-                                        </div>
-                                        @endif
-                                        <div class="mt-1">
-                                            <span class="store-badge"><i class="fas fa-store"></i>{{ $mp->user->store_name }}</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="merchant-info-title">{{ $mp->user->first_name }} {{ $mp->user->last_name }}</div>
                             </td>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    @if($mp->item->photo)
-                                    <img src="{{ asset('assets/img/'.$mp->item->photo) }}" class="product-thumb-premium mr-3">
-                                    @endif
-                                    <div>
-                                        <div class="product-title-premium">{{ $mp->item->name }}</div>
-                                        <div><span class="sku-code">SKU: {{ $mp->item->sku }}</span></div>
-                                    </div>
-                                </div>
+                                @if($mp->item->photo)
+                                <img src="{{ asset('assets/img/'.$mp->item->photo) }}" class="product-thumb-premium">
+                                @else
+                                <span class="text-muted">--</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="product-title-premium">{{ $mp->item->name }}</div>
                             </td>
                             <td><span class="price-badge-base">{{ \App\Helpers\PriceHelper::setCurrencyPrice($basePrice) }}</span></td>
                             <td><span class="price-badge-proposed">{{ \App\Helpers\PriceHelper::setCurrencyPrice($mp->merchant_price) }}</span></td>
@@ -325,7 +305,6 @@
                                     <span class="status-badge-rejected"><i class="fas fa-times-circle"></i>{{ __('Rejected') }}</span>
                                 @endif
                             </td>
-                            <td><small class="text-muted">{{ $mp->updated_at->diffForHumans() }}</small></td>
                             <td>
                                 @if($mp->status === 'pending')
                                     <div class="d-flex align-items-center" style="gap: 6px;">
@@ -343,7 +322,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted py-5">
+                            <td colspan="7" class="text-center text-muted py-5">
                                 <i class="fas fa-box-open fa-3x mb-3 d-block text-gray-400"></i>
                                 <h5>{{ __('No proposals found.') }}</h5>
                             </td>
