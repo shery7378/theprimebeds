@@ -1146,12 +1146,14 @@
     </section>
 
     @if ($setting->is_blogs == 1)
-        <div class="blog-section-h page_section mt-50 mb-30">
+        <section class="blog-section-h mt-50 mb-50 container" style="background: #faf7f2; padding: 75px 40px; border-radius: 24px; border: 1px solid #ebe5db;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="section-title">
-                            <h2 class="h3">{{ __('Our Blog') }}</h2>
+                        <div class="text-center mb-5" style="margin-bottom: 45px !important; position: relative; z-index: 10;">
+                            <span style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; color: var(--primary-color); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px;">{{ __('Latest News') }}</span>
+                            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: #2c2724; margin: 0; position: relative; display: inline-block;">{{ __('Our Blog') }}</h2>
+                            <p style="font-family: 'Outfit', sans-serif; font-size: 15px; color: #796e65; margin-top: 8px; margin-bottom: 0;">{{ __('Stay updated with our latest design trends and sleep tips') }}</p>
                         </div>
                     </div>
                 </div>
@@ -1160,24 +1162,23 @@
                         <div class="home-blog-slider owl-carousel">
                             @foreach ($posts as $post)
                                 <div class="slider-item">
-                                    <a href="{{ route('front.blog.details', $post->slug) }}" class="blog-post">
-                                        <div class="post-thumb">
+                                    <a href="{{ route('front.blog.details', $post->slug) }}" class="blog-card-custom">
+                                        <div class="blog-card-thumb">
                                             <img class="lazy"
                                                 src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
                                                 alt="Blog Post">
                                         </div>
-                                        <div class="post-body">
-
-                                            <h3 class="post-title"> {{ Str::limit($post->title, 55) }}
-                                            </h3>
-                                            <ul class="post-meta">
-
-                                                <li><i class="icon-user"></i>{{ __('Admin') }}</li>
-                                                <li><i class="icon-clock"></i>{{ date('jS F, Y', strtotime($post->created_at)) }}
-                                                </li>
+                                        <div class="blog-card-body">
+                                            <ul class="blog-card-meta">
+                                                <li><i class="icon-user"></i> {{ __('Admin') }}</li>
+                                                <li><i class="icon-clock"></i> {{ date('jS F, Y', strtotime($post->created_at)) }}</li>
                                             </ul>
-                                            <p>{{ Str::limit(strip_tags($post->details), 120) }}
-                                            </p>
+                                            <h3 class="blog-card-title">{{ Str::limit($post->title, 55) }}</h3>
+                                            <p class="blog-card-details">{{ Str::limit(strip_tags($post->details), 110) }}</p>
+                                            <div class="blog-card-link">
+                                                <span>{{ __('Read Article') }}</span>
+                                                <i class="icon-arrow-right"></i>
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
@@ -1186,10 +1187,172 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     @endif
 
     <style>
+        /* ===== Redesigned Blog Section ===== */
+        .blog-card-custom {
+            display: flex !important;
+            flex-direction: column !important;
+            background: #ffffff !important;
+            border: 1px solid #ebe5db !important;
+            border-radius: 24px !important;
+            overflow: hidden !important;
+            text-decoration: none !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            box-shadow: 0 8px 30px rgba(140, 117, 88, 0.02) !important;
+            height: 100% !important;
+        }
+
+        .blog-card-custom:hover {
+            transform: translateY(-8px) !important;
+            border-color: #dcd2c3 !important;
+            box-shadow: 0 16px 40px rgba(140, 117, 88, 0.08) !important;
+        }
+
+        .blog-card-thumb {
+            position: relative !important;
+            width: 100% !important;
+            aspect-ratio: 16 / 10 !important;
+            overflow: hidden !important;
+            background: #faf8f5 !important;
+        }
+
+        .blog-card-thumb img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .blog-card-custom:hover .blog-card-thumb img {
+            transform: scale(1.06) !important;
+        }
+
+        .blog-card-body {
+            padding: 24px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex-grow: 1 !important;
+            text-align: left !important;
+        }
+
+        .blog-card-meta {
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 0 12px 0 !important;
+            display: flex !important;
+            gap: 16px !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 13px !important;
+            color: #a3917c !important;
+            font-weight: 500 !important;
+        }
+
+        .blog-card-meta li {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+
+        .blog-card-meta li i {
+            color: var(--primary-color) !important;
+            font-size: 14px !important;
+        }
+
+        .blog-card-title {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: #2c2724 !important;
+            line-height: 1.4 !important;
+            margin: 0 0 10px 0 !important;
+            transition: color 0.3s ease !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+
+        .blog-card-custom:hover .blog-card-title {
+            color: var(--primary-color) !important;
+        }
+
+        .blog-card-details {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 14px !important;
+            color: #796e65 !important;
+            line-height: 1.6 !important;
+            margin: 0 0 20px 0 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 3 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+
+        .blog-card-link {
+            margin-top: auto !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: var(--primary-color) !important;
+            transition: gap 0.3s ease !important;
+        }
+
+        .blog-card-link i {
+            font-size: 12px !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .blog-card-custom:hover .blog-card-link {
+            gap: 12px !important;
+        }
+
+        .blog-card-custom:hover .blog-card-link i {
+            transform: translateX(3px) !important;
+        }
+
+        /* Carousel Navigation Styling override */
+        .home-blog-slider .owl-dots {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            margin-top: 35px !important;
+            padding: 0 !important;
+            list-style: none !important;
+            width: 100% !important;
+        }
+
+        .home-blog-slider .owl-dot {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            outline: none !important;
+        }
+
+        .home-blog-slider .owl-dot span {
+            display: block !important;
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            background: #eaddcf !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            margin: 0 !important;
+        }
+
+        .home-blog-slider .owl-dot:hover span {
+            background: #c8b7a6 !important;
+        }
+
+        .home-blog-slider .owl-dot.active span {
+            background: var(--primary-color) !important;
+            transform: scale(1.2) !important;
+        }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
