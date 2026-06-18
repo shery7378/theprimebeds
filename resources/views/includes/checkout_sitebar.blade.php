@@ -82,7 +82,7 @@
                         <small class="text-dark font-weight-bold" style="font-size: 13px;">{{ $discount['code']['title'] ?? '' }}</small>
                     </div>
                     <a href="{{ route('front.promo.destroy') }}" class="btn btn-sm btn-danger shadow-sm" style="border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600;">
-                        <i class="fas fa-times mr-1"></i>{{ __('Remove') }}
+                        {{ __('Remove') }}
                     </a>
                 </div>
             @else
