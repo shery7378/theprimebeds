@@ -16,19 +16,7 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        $allProducts      = $user->merchantProducts()->with('item')->latest()->get();
-        $activeProductsCount  = $allProducts->where('status', 'approved')->count();
-        $pendingProductsCount = $allProducts->where('status', 'pending')->count();
-        $rejectedProductsCount = $allProducts->where('status', 'rejected')->count();
-        $recentProducts   = $allProducts->take(5);
-        $totalEarnings    = $user->earnings_balance;
-
-        return view('user.merchant.dashboard', compact(
-            'activeProductsCount', 'pendingProductsCount', 'rejectedProductsCount',
-            'recentProducts', 'totalEarnings', 'user'
-        ));
+        return redirect()->route('back.dashboard');
     }
 
     /**
@@ -54,14 +42,7 @@ class MerchantController extends Controller
      */
     public function catalog()
     {
-        $user = Auth::user();
-        if (!$user->is_merchant) return redirect()->route('user.merchant.dashboard');
-
-        // Get all active items
-        $items = Item::where('status', 1)->paginate(15);
-        $merchantProducts = $user->merchantProducts()->pluck('merchant_price', 'item_id')->toArray();
-
-        return view('user.merchant.catalog', compact('items', 'merchantProducts'));
+        return redirect()->route('back.dashboard');
     }
 
     /**
@@ -69,12 +50,7 @@ class MerchantController extends Controller
      */
     public function myProducts()
     {
-        $user = Auth::user();
-        if (!$user->is_merchant) return redirect()->route('user.merchant.dashboard');
-
-        $merchantProducts = $user->merchantProducts()->with('item')->paginate(15);
-
-        return view('user.merchant.my_products', compact('merchantProducts', 'user'));
+        return redirect()->route('back.dashboard');
     }
 
     /**

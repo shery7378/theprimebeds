@@ -41,6 +41,7 @@ class AccountController extends Controller
      */
     public function index()
     {
+
         $days = "";
         $sales = "";
         for($i = 0; $i < 30; $i++) {

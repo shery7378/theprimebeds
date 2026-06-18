@@ -156,6 +156,23 @@
                                         </td>
                                     </tr>
 
+                                    {{-- Merchant Pricing --}}
+                                    <tr>
+                                        <td>{{ __('Merchant Pricing') }}</td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Manage Merchant Pricing" {{ chk('Manage Merchant Pricing', $section) }}>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Add Merchant Pricing" {{ chk('Add Merchant Pricing', $section) }}>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Update Merchant Pricing" {{ chk('Update Merchant Pricing', $section) }}>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="section[]" value="Delete Merchant Pricing" {{ chk('Delete Merchant Pricing', $section) }}>
+                                        </td>
+                                    </tr>
+
                                     {{-- Ecommerce --}}
                                     <tr>
                                         <td>{{ __('Ecommerce') }}</td>

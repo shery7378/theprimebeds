@@ -17,14 +17,20 @@ class MerchantReviewController extends Controller
         $this->middleware("adminlocalize");
         $this->middleware("permissions:Manage Merchants")->only([
             "index",
-            "pendingPrices",
             "payouts",
             "payoutHistory",
         ]);
         $this->middleware("permissions:Update Merchants")->only([
-            "approve",
-            "reject",
             "pay",
+        ]);
+        $this->middleware("permissions:Manage Merchant Pricing")->only([
+            "pendingPrices",
+        ]);
+        $this->middleware("permissions:Update Merchant Pricing")->only([
+            "approve",
+        ]);
+        $this->middleware("permissions:Delete Merchant Pricing")->only([
+            "reject",
         ]);
     }
 

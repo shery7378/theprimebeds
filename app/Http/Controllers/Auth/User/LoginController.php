@@ -69,6 +69,13 @@ class LoginController extends Controller
       }
 
 
+      $user = Auth::user();
+      if ($user->is_merchant == 1) {
+        Auth::logout();
+        Session::flash('error', __('Merchants must log in through the admin panel.'));
+        return redirect()->route('back.login');
+      }
+
       if ($request->has('modal')) {
         return redirect()->back();
       } else {

@@ -539,6 +539,7 @@
                   </div>
                 </div>
 
+                {{--
                 <!-- Custom toggle for merchant registration -->
                 <div class="custom-checkbox-wrapper">
                   <label class="custom-merchant-toggle" for="is_merchant">
@@ -562,6 +563,7 @@
                     @enderror
                   </div>
                 </div>
+                --}}
 
                 <!-- Submit Button -->
                 <button class="btn luxury-submit-btn" type="submit">
@@ -580,6 +582,7 @@
     </div>
   </div>
 
+  {{--
   <script>
       // Toggle merchant store container
       document.getElementById('is_merchant')?.addEventListener('change', function(e) {
@@ -601,5 +604,6 @@
           document.getElementById('reg_store_preview').innerText = val || 'my-awesome-store';
       });
   </script>
+  --}}
 @endsection
 

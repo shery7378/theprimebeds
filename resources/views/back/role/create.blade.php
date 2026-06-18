@@ -224,6 +224,37 @@
                                                     </td>
                                                 </tr>
 
+                                                {{-- MERCHANT PRICING --}}
+                                                <tr>
+                                                    <td class="text-left font-weight-bold">
+                                                        <i class="fas fa-tags mr-2 text-info"></i>{{ __('Merchant Pricing') }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Manage Merchant Pricing" id="view_merchant_pricing">
+                                                            <label class="custom-control-label" for="view_merchant_pricing"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Add Merchant Pricing" id="add_merchant_pricing">
+                                                            <label class="custom-control-label" for="add_merchant_pricing"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Update Merchant Pricing" id="update_merchant_pricing">
+                                                            <label class="custom-control-label" for="update_merchant_pricing"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" name="section[]" value="Delete Merchant Pricing" id="delete_merchant_pricing">
+                                                            <label class="custom-control-label" for="delete_merchant_pricing"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
                                                 {{-- ECOMMERCE --}}
                                                 <tr>
                                                     <td class="text-left font-weight-bold">

@@ -140,7 +140,7 @@
     </li>
     @endif
 
-    @if (array_intersect(['Manage Merchants', 'Update Merchants'], $section))
+    @if (array_intersect(['Manage Merchants', 'Update Merchants', 'Manage Merchant Pricing'], $section))
     {{-- MERCHANT MANAGEMENT --}}
     <li class="nav-item">
         <a data-toggle="collapse" href="#merchantMgmt">
@@ -150,21 +150,27 @@
         </a>
         <div class="collapse" id="merchantMgmt">
             <ul class="nav nav-collapse">
+                @if (in_array('Manage Merchants', $section))
                 <li>
                     <a class="sub-link" href="{{ route('back.merchant.index') }}">
                         <span class="sub-item">{{ __('Merchants') }}</span>
                     </a>
                 </li>
+                @endif
+                @if (in_array('Manage Merchant Pricing', $section))
                 <li>
                     <a class="sub-link" href="{{ route('back.merchant.pending_prices') }}">
                         <span class="sub-item">{{ __('Pending Prices') }}</span>
                     </a>
                 </li>
+                @endif
+                @if (in_array('Manage Merchants', $section))
                 <li>
                     <a class="sub-link" href="{{ route('back.merchant.payouts') }}">
                         <span class="sub-item">{{ __('Payouts') }}</span>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </li>
