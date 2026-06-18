@@ -1145,6 +1145,50 @@
         </div>
     </section>
 
+    @if ($setting->is_blogs == 1)
+        <div class="blog-section-h page_section mt-50 mb-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="h3">{{ __('Our Blog') }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="home-blog-slider owl-carousel">
+                            @foreach ($posts as $post)
+                                <div class="slider-item">
+                                    <a href="{{ route('front.blog.details', $post->slug) }}" class="blog-post">
+                                        <div class="post-thumb">
+                                            <img class="lazy"
+                                                src="{{ url('assets/img/' . json_decode($post->photo, true)[array_key_first(json_decode($post->photo, true))]) }}"
+                                                alt="Blog Post">
+                                        </div>
+                                        <div class="post-body">
+
+                                            <h3 class="post-title"> {{ Str::limit($post->title, 55) }}
+                                            </h3>
+                                            <ul class="post-meta">
+
+                                                <li><i class="icon-user"></i>{{ __('Admin') }}</li>
+                                                <li><i class="icon-clock"></i>{{ date('jS F, Y', strtotime($post->created_at)) }}
+                                                </li>
+                                            </ul>
+                                            <p>{{ Str::limit(strip_tags($post->details), 120) }}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <style>
         @keyframes fadeInUp {
             from {
