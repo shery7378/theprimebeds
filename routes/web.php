@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
-    Route::prefix("admin")->group(function () {
+    $prefix = request()->segment(1) == 'merchant' ? 'merchant' : 'admin';
+    Route::prefix($prefix)->group(function () {
         //------------ AUTH ------------
         Route::get("/login", "Auth\Back\LoginController@showForm")->name(
             "back.login",
@@ -786,6 +787,10 @@ Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
         Route::get('/merchant/payouts', 'Back\MerchantReviewController@payouts')->name('back.merchant.payouts');
         Route::post('/merchant/pay', 'Back\MerchantReviewController@pay')->name('back.merchant.pay');
         Route::get('/merchant/payout-history/{userId}', 'Back\MerchantReviewController@payoutHistory')->name('back.merchant.payout_history');
+        Route::get('/merchant/product-pricing', 'Back\MerchantReviewController@productPricing')->name('back.merchant.product_pricing');
+        Route::post('/merchant/product-pricing/submit', 'Back\MerchantReviewController@submitPrice')->name('back.merchant.submit_price');
+        Route::delete('/merchant/product-pricing/delete/{id}', 'Back\MerchantReviewController@deletePrice')->name('back.merchant.delete_price');
+        Route::get('/merchant/all-proposals', 'Back\MerchantReviewController@allProposals')->name('back.merchant.all_proposals');
     });
 });
 

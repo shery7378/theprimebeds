@@ -162,4 +162,36 @@ class Item extends Model
     {
         return $this->is_stock();
     }
+
+    public function getDiscountPriceAttribute($value)
+    {
+        if (request() && !request()->is('admin') && !request()->is('admin/*') && !request()->is('merchant') && !request()->is('merchant/*') && session()->has('merchant_id')) {
+            $merchantId = session()->get('merchant_id');
+            $merchantProduct = \App\Models\MerchantProduct::where('user_id', $merchantId)
+                ->where('item_id', $this->id)
+                ->where('is_active', true)
+                ->where('status', 'approved')
+                ->first();
+            if ($merchantProduct) {
+                return $merchantProduct->merchant_price;
+            }
+        }
+        return $value;
+    }
+
+    public function getPreviousPriceAttribute($value)
+    {
+        if (request() && !request()->is('admin') && !request()->is('admin/*') && !request()->is('merchant') && !request()->is('merchant/*') && session()->has('merchant_id')) {
+            $merchantId = session()->get('merchant_id');
+            $exists = \App\Models\MerchantProduct::where('user_id', $merchantId)
+                ->where('item_id', $this->id)
+                ->where('is_active', true)
+                ->where('status', 'approved')
+                ->exists();
+            if ($exists) {
+                return null;
+            }
+        }
+        return $value;
+    }
 }

@@ -195,6 +195,11 @@
                         <span class="sub-item">{{ __('Payment') }}</span>
                     </a>
                 </li>
+                <li>
+                    <a class="sub-link" href="{{ route('back.merchant.all_proposals') }}">
+                        <span class="sub-item">{{ __('Merchant Proposals') }}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </li>

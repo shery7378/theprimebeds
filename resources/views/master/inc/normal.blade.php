@@ -145,7 +145,13 @@
     <li class="nav-item">
         <a data-toggle="collapse" href="#merchantMgmt">
             <i class="fas fa-store"></i>
-            <p>{{ __('Merchant Management') }}</p>
+            <p>
+                @if (Auth::guard('admin')->user()->role && strtolower(Auth::guard('admin')->user()->role->name) == 'merchant')
+                    {{ __('Product Management') }}
+                @else
+                    {{ __('Merchant Management') }}
+                @endif
+            </p>
             <span class="caret"></span>
         </a>
         <div class="collapse" id="merchantMgmt">
@@ -161,6 +167,13 @@
                 <li>
                     <a class="sub-link" href="{{ route('back.merchant.pending_prices') }}">
                         <span class="sub-item">{{ __('Pending Prices') }}</span>
+                    </a>
+                </li>
+                @endif
+                @if (Auth::guard('admin')->user()->role && strtolower(Auth::guard('admin')->user()->role->name) == 'merchant')
+                <li>
+                    <a class="sub-link" href="{{ route('back.merchant.product_pricing') }}">
+                        <span class="sub-item">{{ __('Product Pricing') }}</span>
                     </a>
                 </li>
                 @endif
@@ -214,6 +227,13 @@
                         <span class="sub-item">{{ __('Payment') }}</span>
                     </a>
                 </li>
+                @if (in_array('Manage Merchant Pricing', $section))
+                <li>
+                    <a class="sub-link" href="{{ route('back.merchant.all_proposals') }}">
+                        <span class="sub-item">{{ __('Merchant Proposals') }}</span>
+                    </a>
+                </li>
+                @endif
             </ul>
         </div>
     </li>

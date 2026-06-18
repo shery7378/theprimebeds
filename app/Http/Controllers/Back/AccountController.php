@@ -41,6 +41,241 @@ class AccountController extends Controller
      */
     public function index()
     {
+        $admin = Auth::guard('admin')->user();
+        if ($admin->role && strtolower($admin->role->name) == 'merchant') {
+            $user = \App\Models\User::where('email', $admin->email)->first();
+            if ($user) {
+                $merchantProductIds = \App\Models\MerchantProduct::where('user_id', $user->id)->pluck('item_id')->toArray();
+                
+                // Get all orders containing merchant products
+                $allOrders = Order::all()->filter(function($order) use ($merchantProductIds) {
+                    $cart = json_decode($order->cart, true);
+                    if (!$cart) return false;
+                    foreach ($cart as $key => $item) {
+                        $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                        if (in_array($itemId, $merchantProductIds)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+
+                $deliveredOrders = $allOrders->where('order_status', 'Delivered');
+                $todayOrders = $allOrders->filter(function($order) {
+                    return \Carbon\Carbon::parse($order->created_at)->isToday();
+                });
+                $monthOrders = $deliveredOrders->filter(function($order) {
+                    return \Carbon\Carbon::parse($order->created_at)->isCurrentMonth();
+                });
+                $yearOrders = $deliveredOrders->filter(function($order) {
+                    return \Carbon\Carbon::parse($order->created_at)->gt(\Carbon\Carbon::now()->subDays(365));
+                });
+
+                // Calculate product sales quantities
+                $totalProductSale = 0;
+                foreach ($deliveredOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $totalProductSale += $item['qty'] ?? 1;
+                            }
+                        }
+                    }
+                }
+
+                $totalTodayProductSale = 0;
+                foreach ($todayOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $totalTodayProductSale += $item['qty'] ?? 1;
+                            }
+                        }
+                    }
+                }
+
+                $totalCurrentMonthProductSale = 0;
+                foreach ($monthOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $totalCurrentMonthProductSale += $item['qty'] ?? 1;
+                            }
+                        }
+                    }
+                }
+
+                $totalLatYearProductSale = 0;
+                foreach ($yearOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $totalLatYearProductSale += $item['qty'] ?? 1;
+                            }
+                        }
+                    }
+                }
+
+                // Calculate merchant earnings
+                $totalEarningVal = 0;
+                foreach ($deliveredOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $mProduct = \App\Models\MerchantProduct::where('user_id', $user->id)->where('item_id', $itemId)->first();
+                                if ($mProduct) {
+                                    $totalEarningVal += $mProduct->merchant_price * ($item['qty'] ?? 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $totalTodayEarningVal = 0;
+                foreach ($todayOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $mProduct = \App\Models\MerchantProduct::where('user_id', $user->id)->where('item_id', $itemId)->first();
+                                if ($mProduct) {
+                                    $totalTodayEarningVal += $mProduct->merchant_price * ($item['qty'] ?? 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $totalMonthEarningVal = 0;
+                foreach ($monthOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $mProduct = \App\Models\MerchantProduct::where('user_id', $user->id)->where('item_id', $itemId)->first();
+                                if ($mProduct) {
+                                    $totalMonthEarningVal += $mProduct->merchant_price * ($item['qty'] ?? 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $totalYearEarningVal = 0;
+                foreach ($yearOrders as $order) {
+                    $cart = json_decode($order->cart, true);
+                    if ($cart) {
+                        foreach ($cart as $key => $item) {
+                            $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                            if (in_array($itemId, $merchantProductIds)) {
+                                $mProduct = \App\Models\MerchantProduct::where('user_id', $user->id)->where('item_id', $itemId)->first();
+                                if ($mProduct) {
+                                    $totalYearEarningVal += $mProduct->merchant_price * ($item['qty'] ?? 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $curr = \App\Models\Currency::where('is_default', 1)->first();
+                $setting = \App\Models\Setting::first();
+                if ($setting->currency_direction == 1) {
+                    $totalEarning = $curr->sign . $totalEarningVal;
+                    $totalTodayEarning = $curr->sign . $totalTodayEarningVal;
+                    $totalMonthEarning = $curr->sign . $totalMonthEarningVal;
+                    $totalYearEarning = $curr->sign . $totalYearEarningVal;
+                } else {
+                    $totalEarning = $totalEarningVal . $curr->sign;
+                    $totalTodayEarning = $totalTodayEarningVal . $curr->sign;
+                    $totalMonthEarning = $totalMonthEarningVal . $curr->sign;
+                    $totalYearEarning = $totalYearEarningVal . $curr->sign;
+                }
+
+                // Chart Days
+                $days = "";
+                $sales = "";
+                $earning_days = "";
+                $total_incomess = "";
+                for ($i = 0; $i < 30; $i++) {
+                    $dayStr = date("d M", strtotime('-'. $i .' days'));
+                    $dateStr = date("Y-m-d", strtotime('-'. $i .' days'));
+                    
+                    $days .= "'".$dayStr."',";
+                    $earning_days .= "'".$dayStr."',";
+                    
+                    $dayOrders = $allOrders->filter(function($order) use ($dateStr) {
+                        return date("Y-m-d", strtotime($order->created_at)) == $dateStr;
+                    });
+                    
+                    $sales .= "'".$dayOrders->count()."',";
+                    
+                    $dayEarnings = 0;
+                    foreach ($dayOrders->where('order_status', 'Delivered') as $order) {
+                        $cart = json_decode($order->cart, true);
+                        if ($cart) {
+                            foreach ($cart as $key => $item) {
+                                $itemId = \App\Helpers\PriceHelper::GetItemId($key);
+                                if (in_array($itemId, $merchantProductIds)) {
+                                    $mProduct = \App\Models\MerchantProduct::where('user_id', $user->id)->where('item_id', $itemId)->first();
+                                    if ($mProduct) {
+                                        $dayEarnings += $mProduct->merchant_price * ($item['qty'] ?? 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $total_incomess .= "'".$dayEarnings."',";
+                }
+                $days = rtrim($days, ", ");
+                $earning_days = rtrim($earning_days, ", ");
+                $sales = rtrim($sales, ", ");
+                $check_income = rtrim($total_incomess, ", ");
+
+                return view('back.dashboard.index', [
+                    'totalUsers' => 0,
+                    'totalItems' => \App\Models\MerchantProduct::where('user_id', $user->id)->count(),
+                    'totalOrders' => $allOrders->count(),
+                    'totalPendingOrders' => $allOrders->where('order_status', 'Pending')->count(),
+                    'totalDeliveredOrders' => $allOrders->where('order_status', 'Delivered')->count(),
+                    'totalCanceledOrders' => $allOrders->where('order_status', 'Canceled')->count(),
+                    'recentUsers' => collect([]),
+                    'recentOrders' => $allOrders->sortByDesc('id')->take(10),
+                    'totalBrand' => 0,
+                    'totalCategory' => 0,
+                    'totalReview' => 0,
+                    'totalTransaction' => 0,
+                    'totalPendingTicket' => 0,
+                    'totalTicket' => 0,
+                    'totalBlog' => 0,
+                    'totalSubscriber' => 0,
+                    'totalProductSale' => $totalProductSale,
+                    'totalCurrentMonthProductSale' => $totalCurrentMonthProductSale,
+                    'totalTodayProductSale' => $totalTodayProductSale,
+                    'totalLatYearProductSale' => $totalLatYearProductSale,
+                    'totalEarning' => $totalEarning,
+                    'totalTodayEarning' => $totalTodayEarning,
+                    'totalMonthEarning' => $totalMonthEarning,
+                    'totalYearEarning' => $totalYearEarning,
+                    'totalSystemUserEarning' => 0,
+                    'order_days' => $days,
+                    'earning_days' => $earning_days,
+                    'order_sales' => $sales,
+                    'total_incomess' => $check_income,
+                ]);
+            }
+        }
 
         $days = "";
         $sales = "";

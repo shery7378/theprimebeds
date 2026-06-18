@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MerchantPayout;
 use App\Models\MerchantProduct;
 use App\Models\User;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,10 @@ class MerchantReviewController extends Controller
         ]);
         $this->middleware("permissions:Manage Merchant Pricing")->only([
             "pendingPrices",
+            "productPricing",
+            "submitPrice",
+            "deletePrice",
+            "allProposals",
         ]);
         $this->middleware("permissions:Update Merchant Pricing")->only([
             "approve",
@@ -51,10 +56,21 @@ class MerchantReviewController extends Controller
      */
     public function pendingPrices()
     {
-        $pendingProducts = MerchantProduct::with(['user', 'item'])
+        $query = MerchantProduct::with(['user', 'item'])
             ->where('status', 'pending')
-            ->latest()
-            ->paginate(20);
+            ->latest();
+
+        $admin = Auth::guard('admin')->user();
+        if ($admin->role && strtolower($admin->role->name) == 'merchant') {
+            $user = User::where('email', $admin->email)->first();
+            if ($user) {
+                $query->where('user_id', $user->id);
+            } else {
+                $query->where('user_id', 0);
+            }
+        }
+
+        $pendingProducts = $query->paginate(20);
 
         return view('back.merchant.pending_prices', compact('pendingProducts'));
     }
@@ -138,5 +154,117 @@ class MerchantReviewController extends Controller
         $history  = MerchantPayout::where('user_id', $userId)->latest()->paginate(20);
 
         return view('back.merchant.payout_history', compact('merchant', 'history'));
+    }
+
+    /**
+     * Show products catalog and allow merchant to submit prices.
+     */
+    public function productPricing(Request $request)
+    {
+        $admin = Auth::guard('admin')->user();
+        
+        // Find corresponding user
+        $user = User::where('email', $admin->email)->first();
+        if (!$user || !$user->is_merchant) {
+            return redirect()->route('back.dashboard')->with('error', __('Only merchants can manage product pricing.'));
+        }
+
+        // Get all items/products in the system (available for pricing)
+        $query = Item::where('status', 1);
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $items = $query->latest('id')->paginate(20);
+
+        // Fetch all proposed prices for this merchant
+        $myProposals = MerchantProduct::where('user_id', $user->id)
+            ->pluck('merchant_price', 'item_id')
+            ->toArray();
+
+        // Fetch statuses too
+        $myStatuses = MerchantProduct::where('user_id', $user->id)
+            ->pluck('status', 'item_id')
+            ->toArray();
+
+        return view('back.merchant.product_pricing', compact('items', 'myProposals', 'myStatuses'));
+    }
+
+    /**
+     * Submit or update a price proposal.
+     */
+    public function submitPrice(Request $request)
+    {
+        $admin = Auth::guard('admin')->user();
+        $user = User::where('email', $admin->email)->first();
+        if (!$user || !$user->is_merchant) {
+            return redirect()->back()->with('error', __('Only merchants can submit pricing.'));
+        }
+
+        $request->validate([
+            'item_id' => 'required|exists:items,id',
+            'merchant_price' => 'required|numeric|min:0',
+        ]);
+
+        $item = Item::findOrFail($request->item_id);
+
+        MerchantProduct::updateOrCreate(
+            ['user_id' => $user->id, 'item_id' => $item->id],
+            ['merchant_price' => $request->merchant_price, 'is_active' => false, 'status' => 'pending']
+        );
+
+        return redirect()->back()->with('success', __('Price proposal submitted successfully and is pending approval.'));
+    }
+
+    /**
+     * Delete/cancel a price proposal.
+     */
+    public function deletePrice($id)
+    {
+        $admin = Auth::guard('admin')->user();
+        $user = User::where('email', $admin->email)->first();
+        if (!$user || !$user->is_merchant) {
+            return redirect()->back()->with('error', __('Only merchants can manage pricing.'));
+        }
+
+        $merchantProduct = MerchantProduct::where('user_id', $user->id)
+            ->where('item_id', $id)
+            ->firstOrFail();
+
+        $merchantProduct->delete();
+
+        return redirect()->back()->with('success', __('Price proposal removed.'));
+    }
+
+    /**
+     * List all merchant price proposals (for admin).
+     */
+    public function allProposals(Request $request)
+    {
+        $query = MerchantProduct::with(['user', 'item'])->latest();
+
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->whereHas('user', function($qu) use ($search) {
+                    $qu->where('first_name', 'like', '%' . $search . '%')
+                       ->orWhere('last_name', 'like', '%' . $search . '%')
+                       ->orWhere('email', 'like', '%' . $search . '%')
+                       ->orWhere('store_name', 'like', '%' . $search . '%');
+                })->orWhereHas('item', function($qi) use ($search) {
+                    $qi->where('name', 'like', '%' . $search . '%')
+                       ->orWhere('sku', 'like', '%' . $search . '%');
+                });
+            });
+        }
+
+        $proposals = $query->paginate(20);
+
+        return view('back.merchant.all_proposals', compact('proposals'));
     }
 }

@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->is('admin') || $request->is('admin/*')) {
+        if ($request->is('admin') || $request->is('admin/*') || $request->is('merchant') || $request->is('merchant/*')) {
             return redirect()->guest('/admin/login');
         }
         if ($request->is('user') || $request->is('user/*')) {
