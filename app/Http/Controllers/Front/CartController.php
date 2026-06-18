@@ -80,7 +80,15 @@ class CartController extends Controller
 
     public function promoStore(Request $request)
     {
-        return response()->json($this->repository->promoStore($request));
+        if ($request->ajax()) {
+            return response()->json($this->repository->promoStore($request));
+        }
+        // Fallback for non‑AJAX submissions – apply promo and redirect back
+        $result = $this->repository->promoStore($request);
+        if (isset($result['status']) && $result['status']) {
+            return back()->with('success', $result['message'] ?? __('Promo applied'));
+        }
+        return back()->with('error', $result['message'] ?? __('Failed to apply promo'));
     }
 
     public function shippingStore(Request $request)

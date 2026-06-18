@@ -105,40 +105,38 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof jQuery !== 'undefined') {
-                $(document).on("submit", "#checkout_coupon_form", function (e) {
-                    e.preventDefault();
-                    var form = $(this);
-                    var url = form.attr("action");
-                    var btn = form.find("button");
-                    
-                    btn.prop("disabled", true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: form.serialize(),
-                        success: function (data) {
-                            if (data.status == true) {
-                                successNotification(data.message);
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 800);
-                            } else {
-                                dangerNotification(data.message);
-                                btn.prop("disabled", false).html("Apply");
-                            }
-                        },
-                        error: function() {
-                            dangerNotification("Something went wrong. Please try again.");
-                            btn.prop("disabled", false).html("Apply");
-                        }
-                    });
-                });
-            }
+    (function waitForJquery() {
+        if (typeof jQuery === 'undefined') {
+            setTimeout(waitForJquery, 50);
+            return;
+        }
+        $(document).on('submit', '#checkout_coupon_form', function (e) {
+            e.preventDefault();
+            var $form = $(this);
+            var url = $form.attr('action');
+            var $btn = $form.find('button');
+            $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $form.serialize(),
+                success: function (resp) {
+                    if (resp.status) {
+                        successNotification(resp.message);
+                        setTimeout(function () { location.reload(); }, 800);
+                    } else {
+                        dangerNotification(resp.message);
+                        $btn.prop('disabled', false).html('{{ __("Apply") }}');
+                    }
+                },
+                error: function () {
+                    dangerNotification('Something went wrong. Please try again.');
+                    $btn.prop('disabled', false).html('{{ __("Apply") }}');
+                }
+            });
         });
-    </script>
+    })();
+</script>
 
 
 

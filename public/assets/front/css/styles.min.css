@@ -326,7 +326,7 @@ blockquote cite::before {
 
 .a2a_kit a:hover::before,
 .announcement-with-content .left-area img,
-.btn.btn-primary:hover::before,
+
 .d-inline-block img,
 .footer-social-links a:hover::before,
 .fw-section,
@@ -2426,6 +2426,7 @@ select.form-control.input-light {
 .btn-primary,
 .btn-primary:hover {
   background-color: #377dff;
+  color: #fff;
 }
 
 .btn-success:hover {
