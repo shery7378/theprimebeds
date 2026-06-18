@@ -44,7 +44,6 @@ class StaffRepository
             $user->last_name = $lastName;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            $user->password = bcrypt($request['password']);
             $user->is_merchant = 1;
             
             // Generate unique store name
@@ -104,9 +103,6 @@ class StaffRepository
             $user->last_name = $lastName;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            if ($request->password) {
-                $user->password = bcrypt($request['password']);
-            }
             $user->is_merchant = 1;
 
             if (!$user->store_name) {

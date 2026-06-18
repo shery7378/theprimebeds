@@ -50,10 +50,14 @@ class EmailHelper
     {
         $template = EmailTemplate::whereType($emailData['type'])->first();
         try {
-            $email_body = preg_replace("/{user_name}/", $emailData['user_name'], $template->body);
-            $email_body = preg_replace("/{order_cost}/", $emailData['order_cost'], $email_body);
-            $email_body = preg_replace("/{transaction_number}/", $emailData['transaction_number'], $email_body);
+            $email_body = preg_replace("/{user_name}/", isset($emailData['user_name']) ? $emailData['user_name'] : '', $template->body);
+            $email_body = preg_replace("/{order_cost}/", isset($emailData['order_cost']) ? $emailData['order_cost'] : '', $email_body);
+            $email_body = preg_replace("/{transaction_number}/", isset($emailData['transaction_number']) ? $emailData['transaction_number'] : '', $email_body);
             $email_body = preg_replace("/{site_title}/", $this->setting->title, $email_body);
+            $email_body = preg_replace("/{site_url}/", url('/'), $email_body);
+            $email_body = preg_replace("/{product_name}/", isset($emailData['product_name']) ? $emailData['product_name'] : '', $email_body);
+            $email_body = preg_replace("/{proposed_price}/", isset($emailData['proposed_price']) ? $emailData['proposed_price'] : '', $email_body);
+            $email_body = preg_replace("/{base_price}/", isset($emailData['base_price']) ? $emailData['base_price'] : '', $email_body);
 
             $this->mail->setFrom($this->setting->email_from, $this->setting->email_from_name);
             $this->mail->addAddress($emailData['to']);
@@ -61,7 +65,7 @@ class EmailHelper
             $this->mail->Subject = $template->subject;
             $this->mail->Body = $email_body;
             $this->mail->send();
-            if ($this->setting->order_mail == 1) {
+            if ($this->setting->order_mail == 1 && $emailData['type'] === 'Order') {
                 $this->adminMail($emailData);
             }
         } catch (Exception $e) {

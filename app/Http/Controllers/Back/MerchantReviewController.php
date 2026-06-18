@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
+use App\Helpers\EmailHelper;
 
 class MerchantReviewController extends Controller
 {
@@ -80,10 +82,40 @@ class MerchantReviewController extends Controller
      */
     public function approve($id)
     {
-        $merchantProduct = MerchantProduct::findOrFail($id);
+        $merchantProduct = MerchantProduct::with(['user', 'item'])->findOrFail($id);
         $merchantProduct->status = 'approved';
         $merchantProduct->is_active = true;
         $merchantProduct->save();
+
+        // Create Database Notification for Merchant
+        Notification::create([
+            'user_id' => $merchantProduct->user_id,
+            'merchant_product_id' => $merchantProduct->id,
+            'type' => 'price_approved'
+        ]);
+
+        // Send Email Notification to Merchant
+        if ($merchantProduct->user && $merchantProduct->user->email) {
+            $basePriceVal = $merchantProduct->item->purchase_price > 0 ? $merchantProduct->item->purchase_price : $merchantProduct->item->discount_price;
+            $formattedBasePrice = \App\Helpers\PriceHelper::setCurrencyPrice($basePriceVal);
+            $formattedPrice = \App\Helpers\PriceHelper::setCurrencyPrice($merchantProduct->merchant_price);
+            $emailData = [
+                'to' => $merchantProduct->user->email,
+                'type' => 'Merchant Price Approved',
+                'user_name' => trim($merchantProduct->user->first_name . ' ' . $merchantProduct->user->last_name),
+                'product_name' => $merchantProduct->item->name,
+                'proposed_price' => $formattedPrice,
+                'base_price' => $formattedBasePrice,
+            ];
+
+            $setting = \App\Models\Setting::first();
+            if ($setting && $setting->is_queue_enabled == 1) {
+                dispatch(new \App\Jobs\EmailSendJob($emailData, 'template'));
+            } else {
+                $emailHelper = new EmailHelper();
+                $emailHelper->sendTemplateMail($emailData);
+            }
+        }
 
         return redirect()->back()->with('success', __('Price approved and product is now live on the merchant storefront.'));
     }

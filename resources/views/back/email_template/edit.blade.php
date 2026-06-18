@@ -34,6 +34,32 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($template->type === 'Merchant Price Approved')
+                                <tr>
+                                    <td>{user_name}</td>
+                                    <td>{{ __('Name of the Merchant') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{product_name}</td>
+                                    <td>{{ __('Name of the Product') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{base_price}</td>
+                                    <td>{{ __('Base Price of the Product') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{proposed_price}</td>
+                                    <td>{{ __('Approved Proposed Price') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{site_title}</td>
+                                    <td>{{ __('Site Title') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{site_url}</td>
+                                    <td>{{ __('Website URL') }}</td>
+                                </tr>
+                                @else
                                 <tr>
                                     <td>{user_name}</td>
                                     <td>{{ __('Name of the customer') }}</td>
@@ -50,6 +76,7 @@
                                     <td>{transaction_number}</td>
                                     <td>{{ __('Order Transaction Number') }}</td>
                                 </tr>
+                                @endif
                                 </tbody>
                             </table>
                             </div>

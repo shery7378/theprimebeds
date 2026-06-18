@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
 
-    protected $fillable = ['order_id','user_id'];
+    protected $fillable = ['order_id','user_id','type','merchant_product_id'];
+
+    public function merchantProduct()
+    {
+        return $this->belongsTo('App\Models\MerchantProduct', 'merchant_product_id');
+    }
 
     public function order()
     {

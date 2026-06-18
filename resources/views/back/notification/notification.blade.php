@@ -25,46 +25,105 @@
                     <small>{{ __('Clear All') }}</small>
                 </a>
             </div>
-            @forelse(App\Models\Notification::orderby('id','desc')->get() as $notf)
-            @if($notf->user_id != null)
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="{{ route('back.user.show',$notf->user_id) }}">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                        <i class="fas fa-user text-white"></i>
+			@php
+                $admin = Auth::guard('admin')->user();
+                $isMerchant = $admin->role && strtolower($admin->role->name) == 'merchant';
+                
+                if ($isMerchant) {
+                    $merchantUser = \App\Models\User::where('email', $admin->email)->first();
+                    $merchantUserId = $merchantUser ? $merchantUser->id : 0;
+                    $notifications = \App\Models\Notification::where('user_id', $merchantUserId)
+                        ->whereIn('type', ['price_approved', 'price_rejected'])
+                        ->orderby('id','desc')
+                        ->get();
+                } else {
+                    $notifications = \App\Models\Notification::where(function($q) {
+                        $q->whereNull('type')
+                          ->orWhereIn('type', ['registration', 'order', 'admin']);
+                    })
+                    ->orderby('id','desc')
+                    ->get();
+                }
+            @endphp
+            @forelse($notifications as $notf)
+                @if($isMerchant)
+                    @if($notf->type === 'price_approved' && $notf->merchantProduct && $notf->merchantProduct->item)
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('back.merchant.product_pricing') }}">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                <i class="fas fa-check text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
+                                <span class="font-weight-bold">{{ __('Congrats! Your proposed price for ') . $notf->merchantProduct->item->name . __(' has been approved.') }}</span>
+                            </div>
+                            </a>
                         </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
-                        {{ __('A new user has registered.') }}
-                    </div>
-                    </a>
-                </div>
-                <br>
-            @endif
-            @if($notf->order_id != null)
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="{{ route('back.order.invoice',$notf->order_id) }}">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-success">
-                        <i class="fas fa-donate text-white"></i>
+                        <br>
+                    @elseif($notf->type === 'price_rejected' && $notf->merchantProduct && $notf->merchantProduct->item)
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('back.merchant.product_pricing') }}">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-danger">
+                                <i class="fas fa-times text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
+                                <span>{{ __('Your proposed price for ') . $notf->merchantProduct->item->name . __(' has been rejected.') }}</span>
+                            </div>
+                            </a>
                         </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
-                        {{ __('You have recieved a new order.') }}
-                    </div>
-                    </a>
-                </div>
-                <br>
-            @endif
-
+                        <br>
+                    @endif
+                @else
+                    @if($notf->user_id != null)
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('back.user.show',$notf->user_id) }}">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                <i class="fas fa-user text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
+                                {{ __('A new user has registered.') }}
+                            </div>
+                            </a>
+                        </div>
+                        <br>
+                    @endif
+                    @if($notf->order_id != null)
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-sm" href="{{route('back.notification.delete',$notf->id)}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('back.order.invoice',$notf->order_id) }}">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                <i class="fas fa-donate text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notf->created_at->diffForHumans() }}</div>
+                                {{ __('You have recieved a new order.') }}
+                            </div>
+                            </a>
+                        </div>
+                        <br>
+                    @endif
+                @endif
             @empty
                 <p>{{__('No Notifications')}}</p>
             @endforelse

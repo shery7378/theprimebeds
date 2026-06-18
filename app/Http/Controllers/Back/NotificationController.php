@@ -7,6 +7,7 @@ use App\{
     Http\Controllers\Controller
 };
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
@@ -41,7 +42,17 @@ class NotificationController extends Controller
 
     public function delete($id)
     {
-        Notification::findOrFail($id)->delete();
+        $admin = Auth::guard('admin')->user();
+        $notification = Notification::findOrFail($id);
+        
+        if ($admin->role && strtolower($admin->role->name) == 'merchant') {
+            $merchantUser = \App\Models\User::where('email', $admin->email)->first();
+            if ($merchantUser && $notification->user_id == $merchantUser->id) {
+                $notification->delete();
+            }
+        } else {
+            $notification->delete();
+        }
         return back()->withSuccess(__('Notification Delete Successfully.'));
     }
 
@@ -52,7 +63,20 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function clear_notf(){
-        Notification::truncate();
+        $admin = Auth::guard('admin')->user();
+        if ($admin->role && strtolower($admin->role->name) == 'merchant') {
+            $merchantUser = \App\Models\User::where('email', $admin->email)->first();
+            if ($merchantUser) {
+                Notification::where('user_id', $merchantUser->id)
+                    ->whereIn('type', ['price_approved', 'price_rejected'])
+                    ->delete();
+            }
+        } else {
+            Notification::where(function($q) {
+                $q->whereNull('type')
+                  ->orWhereIn('type', ['registration', 'order', 'admin']);
+            })->delete();
+        }
     }
 
 }

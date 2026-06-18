@@ -75,8 +75,24 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span
-                                    class="badge badge-danger badge-counter">{{ App\Models\Notification::countRegistration() + App\Models\Notification::countOrder() }}</span>
+                                @php
+                                    $admin = Auth::guard('admin')->user();
+                                    $isMerchant = $admin->role && strtolower($admin->role->name) == 'merchant';
+                                    if ($isMerchant) {
+                                        $merchantUser = \App\Models\User::where('email', $admin->email)->first();
+                                        $merchantUserId = $merchantUser ? $merchantUser->id : 0;
+                                        $unreadCount = \App\Models\Notification::where('user_id', $merchantUserId)
+                                            ->where('is_read', 0)
+                                            ->whereIn('type', ['price_approved', 'price_rejected'])
+                                            ->count();
+                                    } else {
+                                        $unreadCount = \App\Models\Notification::where(function($q) {
+                                            $q->whereNull('type')
+                                              ->orWhereIn('type', ['registration', 'order', 'admin']);
+                                        })->where('is_read', 0)->count();
+                                    }
+                                @endphp
+                                <span class="badge badge-danger badge-counter">{{ $unreadCount }}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
