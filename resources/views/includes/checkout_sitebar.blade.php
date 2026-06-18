@@ -57,11 +57,11 @@
                 </tr>
             @endif
 
-            @if ($shipping)
+            @if (PriceHelper::CheckDigital())
                 <tr class="d-none set__shipping_price_tr">
                     <td>{{ __('Shipping') }}:</td>
                     <td class="text-gray-dark set__shipping_price">
-                        {{ PriceHelper::setCurrencyPrice($shipping ? $shipping->price : 0) }}</td>
+                        {{ PriceHelper::setCurrencyPrice(0) }}</td>
                 </tr>
             @endif
             <tr>

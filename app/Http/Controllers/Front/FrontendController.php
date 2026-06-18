@@ -521,6 +521,15 @@ class FrontendController extends Controller
                         ->sortBy(fn($item) => -($itemCounts[$item->id] ?? 0))
                         ->values();
                     if ($items->isNotEmpty()) {
+                        if ($items->count() < 12) {
+                            $fallback = Item::with("category")
+                                ->whereStatus(1)
+                                ->whereNotIn("id", $items->pluck("id"))
+                                ->orderBy("id", "desc")
+                                ->take(12 - $items->count())
+                                ->get();
+                            $items = $items->merge($fallback);
+                        }
                         return $items;
                     }
                 }

@@ -401,5 +401,3 @@
   </script>
 @endsection
 {{-- DELETE MODAL ENDS --}}
-
-@endsection
