@@ -326,91 +326,47 @@
         @if ($checkType != 'list')
             @foreach ($items as $item)
             <div class="col-xxl-4 col-md-4 col-6">
-                <div class="pc">
-
-                    {{-- Thumbnail --}}
-                    <a class="pc__thumb-link" href="{{ route('front.product', $item->slug) }}">
-                        <div class="pc__thumb">
-                            <img class="lazy" src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
-
-                            {{-- Left Action Buttons --}}
-                            <div class="pc__actions">
-                                <a class="pc__action-btn wishlist_store"
-                                   href="{{ route('user.wishlist.store', $item->id) }}"
-                                   title="{{ __('Add to Wishlist') }}"
-                                   onclick="event.stopPropagation();">
-                                    <i class="icon-heart"></i>
-                                </a>
-                                @if ($item->item_type != 'affiliate')
-                                    @if ($item->is_stock())
-                                    <a class="pc__action-btn add_to_single_cart"
-                                       data-target="{{ $item->id }}"
-                                       href="javascript:;"
-                                       title="{{ __('Quick Add to Cart') }}"
-                                       onclick="event.stopPropagation();">
-                                        <i class="icon-shopping-cart"></i>
-                                    </a>
-                                    @endif
-                                @endif
+                <div class="product-card">
+                    <div class="product-thumb">
+                        @if (!$item->is_stock())
+                            <div class="product-badge bg-secondary border-default text-body">
+                                {{ __('out of stock') }}
                             </div>
-
-                            {{-- Right Badges --}}
-                            <div class="pc__badges">
-                                @if ($item->is_stock())
-                                    @if($item->is_type != 'undefine')
-                                    <span class="pc__badge">
-                                        {{ __(ucfirst(str_replace('_', ' ', $item->is_type))) }}
-                                    </span>
-                                    @endif
-                                @else
-                                    <span class="pc__badge badge-stock">{{ __('Out of Stock') }}</span>
-                                @endif
-
-                                @if($item->previous_price && $item->previous_price != 0 && $item->previous_price > $item->discount_price)
-                                <span class="pc__badge">
-                                    -{{ PriceHelper::DiscountPercentage($item) }} off
-                                </span>
-                                @endif
-                            </div>
+                        @endif
+                        @php $discPct = PriceHelper::DiscountPercentage($item); @endphp
+                        @if($discPct)
+                            <div class="product-badge product-badge2 bg-info">-{{ $discPct }}</div>
+                        @endif
+                        <img class="lazy" src="{{ url('assets/img/' . $item->thumbnail) }}" alt="{{ $item->name }}">
+                        <div class="product-button-group">
+                            <a class="product-button wishlist_store"
+                                href="{{ route('user.wishlist.store', $item->id) }}"
+                                title="{{ __('Wishlist') }}"><i class="icon-heart"></i></a>
+                            <a class="product-button"
+                                href="{{ route('front.product', $item->slug) }}"
+                                title="{{ __('Details') }}"><i class="icon-search"></i></a>
+                            @include('includes.item_footer', ['sitem' => $item])
                         </div>
-                    </a>
-
-                    {{-- Body --}}
-                    <div class="pc__body">
-                        <div class="pc__info-row">
-                            <h3 class="pc__title">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-category">
+                            <a href="{{ route('front.catalog') . '?category=' . $item->category->slug }}">{{ $item->category->name }}</a>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 class="product-title m-0">
                                 <a href="{{ route('front.product', $item->slug) }}">
                                     {{ Str::limit($item->name, 52) }}
                                 </a>
                             </h3>
-
-                            <div class="pc__prices">
-                                @if ($item->previous_price != 0)
-                                <span class="pc__price-old">{{ PriceHelper::setPreviousPrice($item->previous_price) }}</span>
-                                @endif
-                                <span class="pc__price-current">{{ PriceHelper::grandCurrencyPrice($item) }}</span>
-                            </div>
+                            <a class="wishlist_store" href="{{ route('user.wishlist.store', $item->id) }}" title="{{ __('Wishlist') }}" style="color: var(--primary-color); font-size: 18px; line-height: 1;"><i class="icon-heart"></i></a>
                         </div>
-
-                        <div class="pc__cta-wrapper">
-                            @if ($item->item_type != 'affiliate')
-                                @if ($item->is_stock())
-                                <a class="pc__cta add_to_single_cart" data-target="{{ $item->id }}" href="javascript:;" title="{{ __('Add to Cart') }}">
-                                    {{ __('Add to Cart') }}
-                                </a>
-                                @else
-                                <a class="pc__cta out-of-stock" href="{{ route('front.product', $item->slug) }}">
-                                    {{ __('View') }}
-                                </a>
-                                @endif
-                            @else
-                            <a class="pc__cta" href="{{ $item->affiliate_link }}" target="_blank">
-                                {{ __('Buy Now') }}
-                            </a>
+                        <h4 class="product-price">
+                            @if ($item->previous_price != 0)
+                                <del>{{ PriceHelper::setPreviousPrice($item->previous_price) }}</del>
                             @endif
-                        </div>
+                            {{ PriceHelper::grandCurrencyPrice($item) }}
+                        </h4>
                     </div>
-
                 </div>
             </div>
             @endforeach
