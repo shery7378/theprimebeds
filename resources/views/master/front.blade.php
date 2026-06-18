@@ -2364,7 +2364,7 @@ body_theme4 @endif
     <script type="text/javascript" src="{{ asset('assets/front/js/scripts.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/lazy.plugin.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=11') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js?v=12') }}"></script>
 
     @if(Auth::check())
         @php

@@ -1071,14 +1071,10 @@ $(function ($) {
         let removeUrl = mainurl + "/cart/destroy/" + item_id;
         $.get(removeUrl, function (response) {
           if (!isLastItem) {
-            $(".cart_view_header").load($("#header_cart_load").attr("data-target"));
-            let newHtml = $(response);
-            let countText = newHtml.find(".cart_count:first").text();
-            if (countText !== "") {
-              $(".cart_count").text(countText);
-            } else {
-              $(".cart_count").text("0");
-            }
+            $(".cart_view_header").load($("#header_cart_load").attr("data-target"), function () {
+              let newCount = $(".cart_view_header").find(".decreaseQtycart").length;
+              $(".cart_count").text(newCount);
+            });
           }
 
           if ($("#view_cart_load").length > 0) {
