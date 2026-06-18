@@ -134,7 +134,7 @@ $(function ($) {
       navText: [],
       nav: true,
       dots: false,
-      loop: true,
+      loop: false,
       mouseDrag: true,
       touchDrag: true,
       autoplay: true,

@@ -1,7 +1,7 @@
 @extends('master.front')
 
 @section('title')
-    {{__('Campaign Product')}}
+    {{__('Campaign Product')}}@if(isset($category)) - {{ $category->name }}@endif
 @endsection
 
 @section('meta')
@@ -20,6 +20,10 @@
                 <li class="separator"></li>
                 <li><a href="{{route('front.campaign')}}">{{__('Campaign Products')}}</a>
                 </li>
+                @if(isset($category))
+                    <li class="separator"></li>
+                    <li><a href="{{route('front.campaign', ['category' => $category->slug])}}">{{ $category->name }}</a></li>
+                @endif
               </ul>
           </div>
       </div>
@@ -33,10 +37,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2 class="h3">{{ $setting->campaign_title }}</h2>
-                        <div class="right-area">
-                                <div class="countdown countdown-alt" data-date-time="{{$setting->campaign_end_date}}"></div>
-                        </div>
+                        <h2 class="h3">{{ $setting->campaign_title }}@if(isset($category)) - {{ $category->name }}@endif</h2>
                     </div>
                 </div>
             </div>
@@ -45,27 +46,9 @@
                 <div class="col-gd">
                 <div class="product-card">
                     <div class="product-thumb">
-                        @if ($compaign_item->item->is_stock())
-                            <div class="product-badge
-                            @if($compaign_item->item->is_type == 'feature')
-                            bg-warning
-                            @elseif($compaign_item->item->is_type == 'new')
-
-                            @elseif($compaign_item->item->is_type == 'top')
-                            bg-info
-                            @elseif($compaign_item->item->is_type == 'best')
-                            bg-dark
-                            @elseif($compaign_item->item->is_type == 'flash_deal')
-                            bg-success
-                            @endif
-                            ">
-                            {{   ucfirst(str_replace('_',' ',$compaign_item->item->is_type))   }}
-                            </div>
-
-                            @else
-                            <div class="product-badge bg-secondary border-default text-body
-                            ">{{__('out of stock')}}</div>
-                            @endif
+                        @if (!$compaign_item->item->is_stock())
+                            <div class="product-badge bg-secondary border-default text-body">{{__('out of stock')}}</div>
+                        @endif
 
                             @php $discPct = PriceHelper::DiscountPercentage($compaign_item->item); @endphp
                             @if($discPct)

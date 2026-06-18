@@ -49,4 +49,4 @@
     @endforeach
 </div>
 
-<script type="text/javascript" src="{{asset('assets/front/js/extraindex.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/front/js/extraindex.js?v=9')}}"></script>

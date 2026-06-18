@@ -9,6 +9,7 @@ use App\{
     Models\Setting,
     Models\Subscriber,
     Helpers\EmailHelper,
+    Helpers\PriceHelper,
     Http\Controllers\Controller,
     Http\Requests\ReviewRequest,
     Http\Requests\SubscribeRequest,
@@ -377,6 +378,81 @@ class FrontendController extends Controller
 
         // {"title1":"Watchtt","subtitle1":"50% OFF","url1":"#","title2":"Man","subtitle2":"40% OFF","url2":"#","img1":"1637766462banner-h2-4-1.jpeg","img2":"1637766420banner-h2-4-1.jpeg"}
 
+        $campaign_items = CampaignItem::with("item.category")
+            ->whereStatus(1)
+            ->whereIsFeature(1)
+            ->orderby("id", "desc")
+            ->get();
+
+        $deals_of_the_week = [];
+        $grouped_campaign = [];
+        foreach ($campaign_items as $compaign_item) {
+            $item = $compaign_item->item;
+            if ($item && $item->category && $item->status == 1) {
+                $grouped_campaign[$item->category->id][] = $item;
+            }
+        }
+
+        $banner_first = json_decode($home_customize->banner_first, true);
+
+        foreach ($grouped_campaign as $categoryId => $items) {
+            $category = $items[0]->category;
+            $max_discount = 0;
+            $best_item = null;
+            
+            foreach ($items as $item) {
+                $discount_pct = PriceHelper::DiscountPercentage($item);
+                $numeric_discount = (int)str_replace('%', '', $discount_pct);
+                if ($numeric_discount >= $max_discount) {
+                    $max_discount = $numeric_discount;
+                    $best_item = $item;
+                }
+            }
+            
+            if ($max_discount > 0 && $best_item) {
+                $matched_image = null;
+                if ($banner_first) {
+                    for ($i = 1; $i <= 3; $i++) {
+                        if (isset($banner_first['title' . $i]) && 
+                            (stripos($category->name, $banner_first['title' . $i]) !== false || 
+                             stripos($banner_first['title' . $i], $category->name) !== false)) {
+                            $matched_image = $banner_first['img' . $i] ?? null;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!$matched_image && $banner_first) {
+                    $index = count($deals_of_the_week) + 1;
+                    $matched_image = $banner_first['img' . $index] ?? null;
+                }
+
+                $deals_of_the_week[] = [
+                    'category_name' => $category->name,
+                    'category_slug' => $category->slug,
+                    'discount_text' => $max_discount . '% OFF',
+                    'image' => $matched_image ?: $best_item->thumbnail,
+                ];
+            }
+        }
+
+        if (empty($deals_of_the_week)) {
+            if ($banner_first) {
+                for ($i = 1; $i <= 3; $i++) {
+                    if (isset($banner_first['title' . $i]) && isset($banner_first['subtitle' . $i])) {
+                        $catName = $banner_first['title' . $i];
+                        $categoryObj = Category::where('name', 'like', '%' . $catName . '%')->first();
+                        $deals_of_the_week[] = [
+                            'category_name' => $catName,
+                            'category_slug' => $categoryObj ? $categoryObj->slug : '',
+                            'discount_text' => $banner_first['subtitle' . $i],
+                            'image' => $banner_first['img' . $i] ?? '',
+                        ];
+                    }
+                }
+            }
+        }
+
         return view("front.index", [
             "top_banner" =>
                 $home_customize->top_banner != "[]" &&
@@ -389,11 +465,8 @@ class FrontendController extends Controller
                     : null,
             "banner_first" => json_decode($home_customize->banner_first, true),
             "sliders" => $sliders,
-            "campaign_items" => CampaignItem::with("item")
-                ->whereStatus(1)
-                ->whereIsFeature(1)
-                ->orderby("id", "desc")
-                ->get(),
+            "campaign_items" => $campaign_items,
+            "deals_of_the_week" => $deals_of_the_week,
             "services" => Service::orderby("id", "desc")->get(),
             "posts" => Post::with("category")
                 ->orderby("id", "desc")
@@ -693,15 +766,28 @@ class FrontendController extends Controller
 
     // -------------------------------- CAMPAIGN ----------------------------------------
 
-    public function compaignProduct()
+    public function compaignProduct(Request $request)
     {
         if (Setting::first()->is_campaign == 0) {
             return back();
         }
+        
+        $category_slug = $request->query('category');
+        $category = $category_slug ? Category::whereSlug($category_slug)->first() : null;
+
         $compaign_items = CampaignItem::whereStatus(1)
+            ->when($category, function ($query) use ($category) {
+                return $query->whereHas('item', function ($q) use ($category) {
+                    $q->where('category_id', $category->id);
+                });
+            })
             ->orderby("id", "desc")
             ->get();
-        return view("front.campaign", ["campaign_items" => $compaign_items]);
+            
+        return view("front.campaign", [
+            "campaign_items" => $compaign_items,
+            "category" => $category
+        ]);
     }
 
     // -------------------------------- CAMPAIGN ----------------------------------------

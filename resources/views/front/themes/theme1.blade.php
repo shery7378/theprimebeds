@@ -6,6 +6,40 @@
 
 @section('content')
 <style>
+    .genius-banner.deal-banner {
+        height: 240px;
+        background-color: #f5f5f5;
+        position: relative;
+    }
+    .genius-banner.deal-banner::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.25);
+        transition: background 0.3s ease;
+        z-index: 1;
+    }
+    .genius-banner.deal-banner:hover::after {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    .genius-banner.deal-banner .inner-content {
+        z-index: 2;
+    }
+    .genius-banner.deal-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    @media (max-width: 767px) {
+        .genius-banner.deal-banner {
+            height: 180px;
+        }
+    }
+
     .contactLink{
         cursor: pointer;
         text-decoration: none;
@@ -462,6 +496,7 @@
     @endif
 
 
+    @if(false)
     @if ($setting->campaign_status == 1)
         <div class="deal-of-day-section mt-20">
             <div class="container">
@@ -542,51 +577,38 @@
             </div>
         </div>
     @endif
+    @endif
 
 
-    @if ($setting->is_three_c_b_first == 1)
+    @if ($setting->is_three_c_b_first == 1 && !empty($deals_of_the_week))
+        @php
+            $displayDeals = array_slice($deals_of_the_week, 0, 3);
+        @endphp
         <div class="bannner-section mt-60">
             <div class="container ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="h3">{{ $setting->campaign_title }}</h2>
+                            <div class="right-area">
+                                <a class="right_link" href="{{ route('front.campaign') }}">{{ __('View All') }} <i
+                                        class="icon-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row gx-3">
-                    <div class="col-md-4">
-                        <a href="{{ $banner_first['firsturl1'] }}" class="genius-banner">
-                            <img src="{{ url('assets/img/' . $banner_first['img1']) }}" alt="">
-                            <div class="inner-content">
-                                @if (isset($banner_first['subtitle1']))
-                                    <p style="color:{{ isset($banner_first['subtitle_color1']) && $banner_first['subtitle_color1'] ? $banner_first['subtitle_color1'] : '#fff' }} !important">{{ $banner_first['subtitle1'] }}</p>
-                                @endif
-                                @if (isset($banner_first['title1']))
-                                    <h4 style="color:{{ isset($banner_first['title_color1']) && $banner_first['title_color1'] ? $banner_first['title_color1'] : '#fff' }} !important">{{ $banner_first['title1'] }}</h4>
-                                @endif
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{{ $banner_first['firsturl2'] }}" class="genius-banner">
-                            <img src="{{ url('assets/img/' . $banner_first['img2']) }}" alt="">
-                            <div class="inner-content">
-                                @if (isset($banner_first['subtitle2']))
-                                    <p style="color:{{ isset($banner_first['subtitle_color2']) && $banner_first['subtitle_color2'] ? $banner_first['subtitle_color2'] : '#fff' }} !important">{{ $banner_first['subtitle2'] }}</p>
-                                @endif
-                                @if (isset($banner_first['title2']))
-                                    <h4 style="color:{{ isset($banner_first['title_color2']) && $banner_first['title_color2'] ? $banner_first['title_color2'] : '#fff' }} !important">{{ $banner_first['title2'] }}</h4>
-                                @endif
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{{ $banner_first['firsturl3'] }}" class="genius-banner">
-                            <img src="{{ url('assets/img/' . $banner_first['img3']) }}" alt="">
-                            <div class="inner-content">
-                                @if (isset($banner_first['subtitle3']))
-                                    <p style="color:{{ isset($banner_first['subtitle_color3']) && $banner_first['subtitle_color3'] ? $banner_first['subtitle_color3'] : '#fff' }} !important">{{ $banner_first['subtitle3'] }} </p>
-                                @endif
-                                @if (isset($banner_first['title3']))
-                                    <h4 style="color:{{ isset($banner_first['title_color3']) && $banner_first['title_color3'] ? $banner_first['title_color3'] : '#fff' }} !important">{{ $banner_first['title3'] }}</h4>
-                                @endif
-                            </div>
-                        </a>
-                    </div>
+                    @foreach ($displayDeals as $deal)
+                        <div class="col-md-4 col-sm-6 mb-3">
+                            <a href="{{ !empty($deal['category_slug']) ? route('front.campaign', ['category' => $deal['category_slug']]) : (isset($deal['url']) ? $deal['url'] : '#') }}" class="genius-banner deal-banner">
+                                <img src="{{ url('assets/img/' . $deal['image']) }}" alt="{{ $deal['category_name'] }}">
+                                <div class="inner-content">
+                                    <p style="color: #fff !important">{{ $deal['discount_text'] }}</p>
+                                    <h4 style="color: #fff !important">{{ $deal['category_name'] }}</h4>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
