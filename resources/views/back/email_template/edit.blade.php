@@ -101,7 +101,7 @@
 
 									<div class="form-group">
 										<label for="body">{{ __('Body') }} *</label>
-										<textarea name="body" id="body" class="form-control " rows="5"
+										<textarea name="body" id="body" class="form-control text-editor" rows="5"
 											placeholder="{{ __('Enter Email Body') }}"
 											>{{ $template->body }}</textarea>
 									</div>
