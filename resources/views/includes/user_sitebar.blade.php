@@ -12,7 +12,7 @@
                 <img id="avater_photo_view"
                      src="{{ $user->photo ? url('assets/img/'.$user->photo) : url('assets/img/placeholder.png') }}"
                      alt="User Avatar"
-                     class="user-avatar">
+                     class="sidebar-user-avatar">
                 <span class="user-badge-dot"></span>
                 <button type="button" class="user-avatar-edit" onclick="document.getElementById('user_avatar_upload').click()" title="{{ __('Edit Avatar') }}">
                     <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
@@ -185,7 +185,7 @@
     margin-top: -38px;
     margin-bottom: 10px;
 }
-.user-avatar {
+.sidebar-user-avatar {
     width: 76px;
     height: 76px;
     border-radius: 50%;
