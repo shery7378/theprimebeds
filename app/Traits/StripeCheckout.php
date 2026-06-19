@@ -108,31 +108,94 @@ trait StripeCheckout
         $stripe = new \Stripe\StripeClient(
             Config::get("services.stripe.secret"),
         );
+        $discount_val = ($discount ? $discount["discount"] : 0);
+        $cart_discount_ratio = $cart_total > 0 ? max(0, ($cart_total - $discount_val) / $cart_total) : 1;
+
+        $line_items = [];
+        foreach ($cart as $key => $item) {
+            $item_price = 0;
+            $quantity = 1;
+            
+            if (!empty($item["is_customized"])) {
+                $item_price = (float) ($item["price"] ?? 0);
+                $quantity = (int) ($item["quantity"] ?? 1);
+            } else {
+                $item_price = (float) $item["price"];
+                $quantity = (int) $item["qty"];
+            }
+
+            // Apply the coupon deduction directly to the item price
+            $item_price = $item_price * $cart_discount_ratio;
+
+            $product_data = [
+                "name" => $item["name"] ?? 'Product',
+            ];
+
+            $line_items[] = [
+                "price_data" => [
+                    "product_data" => $product_data,
+                    "unit_amount" => round(100 * PriceHelper::setConvertPrice($item_price)),
+                    "currency" => PriceHelper::setCurrencyName(),
+                ],
+                "quantity" => $quantity,
+            ];
+        }
+
+        if ($shipping && $shipping->price > 0) {
+            $line_items[] = [
+                "price_data" => [
+                    "product_data" => [
+                        "name" => __("Shipping") . " (" . $shipping->title . ")",
+                    ],
+                    "unit_amount" => round(100 * PriceHelper::setConvertPrice($shipping->price)),
+                    "currency" => PriceHelper::setCurrencyName(),
+                ],
+                "quantity" => 1,
+            ];
+        }
+
+        if ($total_tax > 0) {
+            $line_items[] = [
+                "price_data" => [
+                    "product_data" => [
+                        "name" => __("Estimated Tax"),
+                    ],
+                    "unit_amount" => round(100 * PriceHelper::setConvertPrice($total_tax)),
+                    "currency" => PriceHelper::setCurrencyName(),
+                ],
+                "quantity" => 1,
+            ];
+        }
+
+        $state_price = PriceHelper::StatePrce($data["state_id"], $cart_total);
+        if ($state_price > 0) {
+            $line_items[] = [
+                "price_data" => [
+                    "product_data" => [
+                        "name" => __("State Tax"),
+                    ],
+                    "unit_amount" => round(100 * PriceHelper::setConvertPrice($state_price)),
+                    "currency" => PriceHelper::setCurrencyName(),
+                ],
+                "quantity" => 1,
+            ];
+        }
+
         try {
             $notify_url =
                 route("front.checkout.redirect") .
                 "?session_id={CHECKOUT_SESSION_ID}";
-            $response = $stripe->checkout->sessions->create([
+                
+            $sessionData = [
                 "success_url" => $notify_url,
                 "customer_email" => Session::has("shipping_address") ? Session::get("shipping_address")["ship_email"] : $data["bill_email"],
                 "payment_method_types" => ["card"],
-
-                "line_items" => [
-                    [
-                        "price_data" => [
-                            "product_data" => [
-                                "name" => $setting->title . " " . __("Order"),
-                            ],
-                            "unit_amount" => 100 * $total_amount,
-                            "currency" => PriceHelper::setCurrencyName(),
-                        ],
-                        "quantity" => 1,
-                    ],
-                ],
-
+                "line_items" => $line_items,
                 "mode" => "payment",
                 "allow_promotion_codes" => false,
-            ]);
+            ];
+
+            $response = $stripe->checkout->sessions->create($sessionData);
             Session::put("order_data", $orderData);
             Session::put("order_input_data", $data);
             return [
