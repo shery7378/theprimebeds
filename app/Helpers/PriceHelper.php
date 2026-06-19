@@ -332,7 +332,7 @@ class PriceHelper
         $check_digital = false;
         if ($cart) {
             foreach ($cart as $key => $item) {
-                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                if (isset($item["item_type"]) && ($item["item_type"] == "normal" || $item["item_type"] == "digital")) {
                     $check_digital = true;
                 }
                 if (!empty($item["is_customized"])) {
@@ -349,7 +349,7 @@ class PriceHelper
         $check_digital = true;
         if ($cart) {
             foreach ($cart as $key => $item) {
-                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                if (isset($item["item_type"]) && ($item["item_type"] == "normal" || $item["item_type"] == "digital")) {
                     $check_digital = false;
                 }
                 if (!empty($item["is_customized"])) {
@@ -507,10 +507,10 @@ class PriceHelper
         $return = false;
         if ($cart) {
             foreach ($cart as $item) {
-                if (isset($item["type"]) && $item["type"] == "normal") {
+                if (isset($item["type"]) && ($item["type"] == "normal" || $item["type"] == "digital")) {
                     $return = true;
                 }
-                if (isset($item["item_type"]) && $item["item_type"] == "normal") {
+                if (isset($item["item_type"]) && ($item["item_type"] == "normal" || $item["item_type"] == "digital")) {
                     $return = true;
                 }
                 if (!empty($item["is_customized"])) {
@@ -539,11 +539,27 @@ class PriceHelper
     public static function checkCheckout($request)
     {
         $setting = Setting::first();
-        if ($setting->is_single_checkout == 0) {
+        if ($setting->is_single_checkout == 0 && $request->single_page_checkout != 1) {
             return true;
         }
 
-        Session::put("billing_address", $request->all());
+        if ($request->is_shipping_address_selected == 1) {
+            $billing = [
+                "bill_first_name" => $request->bill_first_name,
+                "bill_last_name" => $request->bill_last_name,
+                "bill_email" => $request->bill_email,
+                "bill_phone" => $request->bill_phone,
+                "bill_company" => null,
+                "bill_address1" => null,
+                "bill_address2" => null,
+                "bill_zip" => null,
+                "bill_city" => null,
+                "bill_country" => null,
+            ];
+            Session::put("billing_address", $billing);
+        } else {
+            Session::put("billing_address", $request->all());
+        }
 
         if (PriceHelper::CheckDigital()) {
             $shipping = [

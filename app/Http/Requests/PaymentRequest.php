@@ -22,6 +22,20 @@ class PaymentRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if ($this->has('bill_address1') && !$this->has('bill_address')) {
+            $this->merge([
+                'bill_address' => $this->bill_address1
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

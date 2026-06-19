@@ -22,7 +22,7 @@
                          <button class="btn btn-primary btn-sm" type="button"
                              data-bs-dismiss="modal"><span>{{ __('Cancel') }}</span></button>
                          <button  class="btn btn-primary btn-sm"
-                             type="submit"><span>{{ __('Cash On Delivery') }} asdfasdf</span></button>
+                             type="submit"><span>{{ __('Cash On Delivery') }}</span></button>
                  </div>
             </div>
         </form>

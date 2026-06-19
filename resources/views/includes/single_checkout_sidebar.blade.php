@@ -180,7 +180,7 @@
                         data-zip="{{ Auth::user()->ship_zip }}" 
                         data-city="{{ Auth::user()->ship_city }}" 
                         data-country="{{ Auth::user()->ship_country }}">
-                        {{ __('Shipping Address 1') }}: {{ Auth::user()->ship_address1 }}
+                        {{ Auth::user()->ship_address1 }}
                     </li>
                 @endif
                 @if(Auth::user()->ship_address2)
@@ -189,7 +189,7 @@
                         data-zip="{{ Auth::user()->ship_zip }}" 
                         data-city="{{ Auth::user()->ship_city }}" 
                         data-country="{{ Auth::user()->ship_country }}">
-                        {{ __('Shipping Address 2') }}: {{ Auth::user()->ship_address2 }}
+                        {{ Auth::user()->ship_address2 }}
                     </li>
                 @endif
             </ul>
@@ -294,7 +294,7 @@
                         @foreach ($gateways as $gateway)
                             @php
                                 $show = true;
-                                if (PriceHelper::CheckDigitalPaymentGateway() && $gateway->unique_keyword == 'cod') {
+                                if ($gateway->unique_keyword == 'cod') {
                                     $show = false;
                                 }
                                 // Commented out/hidden Bank Transfer for now
@@ -314,14 +314,8 @@
                     <option value="" selected disabled>{{ __('Select a payment method') }}</option>
                     @foreach ($gateways as $gateway)
                         {{-- Commented out/hidden Bank Transfer for now --}}
-                        @if ($gateway->unique_keyword != 'bank')
-                            @if (PriceHelper::CheckDigitalPaymentGateway())
-                                @if ($gateway->unique_keyword != 'cod')
-                                    <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
-                                @endif
-                            @else
-                                <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
-                            @endif
+                        @if ($gateway->unique_keyword != 'bank' && $gateway->unique_keyword != 'cod')
+                            <option value="{{ $gateway->unique_keyword }}">{{ $gateway->name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -436,6 +430,16 @@
 
                     // Append the hidden input to the modal form
                     $(modalElement).find('form').append(hiddenInput);
+
+                    // Map bill_address1 to bill_address to satisfy validation in payment controllers
+                    if ($(this).attr('name') === 'bill_address1') {
+                        let billAddressInput = $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'bill_address')
+                            .addClass('billing-field')
+                            .val($(this).val());
+                        $(modalElement).find('form').append(billAddressInput);
+                    }
                 });
 
                 // Explicitly set shipping and state values in the modal
@@ -499,6 +503,7 @@
             $('#checkout-zip').val($(this).data('zip'));
             $('#checkout-city').val($(this).data('city'));
             $('#billing-country').val($(this).data('country')).trigger('change');
+            $('#is_shipping_address_selected').val('1');
             
             $(this).addClass('active').siblings().removeClass('active');
             $(this).closest('.custom-payment-select-options').slideUp(150);

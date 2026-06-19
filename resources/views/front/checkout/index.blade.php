@@ -302,6 +302,7 @@
                                 <form id="checkoutBilling" action="{{ route('front.checkout.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="single_page_checkout" value="1">
+                                    <input type="hidden" name="is_shipping_address_selected" id="is_shipping_address_selected" value="0">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
