@@ -340,8 +340,21 @@
                     </div>
                 @endif
 
+                <style>
+                    .pay-now-btn, .modal-footer .btn-primary {
+                        transition: all 0.3s ease;
+                    }
+                    .pay-now-btn:not(:disabled):hover, .modal-footer .btn-primary:not(:disabled):hover {
+                        background-color: #1a365d !important;
+                        border-color: #1a365d !important;
+                        color: #ffffff !important;
+                        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.25);
+                    }
+                </style>
                 <button id="single_checkout_payment" disabled="true"
-                    class="btn btn-primary mt-4 single_checkout_payment" type="submit"><span>@lang('Pay now')</span></button>
+                    class="btn btn-primary mt-4 single_checkout_payment pay-now-btn" type="submit" style="width: 100%; font-size: 16px; padding: 12px; font-weight: 600; border-radius: 8px;">
+                    <span>@lang('Pay now')</span>
+                </button>
             </div>
 
         </div>
@@ -353,7 +366,21 @@
     <script>
         // Show the modal on #single_checkout_payment change
         $(document).on("click", "#single_checkout_payment", function(e) {
-            // 1. Validate billing form fields
+            // 1. Validate Saved Address Selection (if present)
+            if ($('.custom-address-wrapper').length > 0) {
+                let addressText = $('.custom-address-wrapper .selected-address-text').text().trim();
+                if (addressText === 'Select an Address' || addressText === '{{ __("Select an Address") }}') {
+                    if (typeof window.dangerNotification === 'function') {
+                        window.dangerNotification('{{ __("Please select a saved address to continue.") }}');
+                    } else {
+                        alert('{{ __("Please select a saved address to continue.") }}');
+                    }
+                    e.preventDefault();
+                    return false;
+                }
+            }
+
+            // 1.5 Validate billing form fields
             let billingForm = document.getElementById('checkoutBilling');
             if (billingForm && !billingForm.reportValidity()) {
                 e.preventDefault();
@@ -365,13 +392,21 @@
             let stateSelect = document.getElementById('state_id_select');
 
             if (shippingSelect && !shippingSelect.value) {
-                alert('Please select a shipping method.');
+                if (typeof window.dangerNotification === 'function') {
+                    window.dangerNotification('Please select a shipping method.');
+                } else {
+                    alert('Please select a shipping method.');
+                }
                 e.preventDefault();
                 return false;
             }
 
             if (stateSelect && !stateSelect.value) {
-                alert('Please select a shipping state.');
+                if (typeof window.dangerNotification === 'function') {
+                    window.dangerNotification('Please select a shipping state.');
+                } else {
+                    alert('Please select a shipping state.');
+                }
                 e.preventDefault();
                 return false;
             }

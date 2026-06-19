@@ -625,6 +625,9 @@ $(function ($) {
       );
     }
     // Notifications Ends
+    
+    window.successNotification = successNotification;
+    window.dangerNotification = dangerNotification;
 
     $(document).on("click", ".list-view", function () {
       let viewCheck = $(this).attr("data-step");

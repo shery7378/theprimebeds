@@ -119,7 +119,7 @@
                      <button class="btn btn-primary btn-sm" type="button"
                          data-bs-dismiss="modal"><span>{{ __('Cancel') }}</span></button>
                      <button class="btn btn-primary btn-sm"
-                         type="submit"><span>{{ __('Chekout With Stripe') }}</span></button>
+                         type="submit"><span>{{ __('Checkout With Stripe') }}</span></button>
                  </div>
             </div>
         </form>
@@ -170,7 +170,7 @@
                      <button class="btn btn-primary btn-sm" type="button"
                          data-bs-dismiss="modal"><span>{{ __('Cancel') }}</span></button>
                      <button class="btn btn-primary btn-sm"
-                         type="submit"><span>{{ __('Chekout With Stripe') }}</span></button>
+                         type="submit"><span>{{ __('Checkout With Stripe') }}</span></button>
                  </div>
             </div>
         </form>
@@ -683,7 +683,7 @@
                     <button class="btn btn-primary btn-sm" type="button"
                         data-bs-dismiss="modal"><span>{{ __('Cancel') }}</span></button>
                     <button class="btn btn-primary btn-sm"
-                        type="submit"><span>{{ __('Chekout With Paytabs') }}</span></button>
+                        type="submit"><span>{{ __('Checkout With Paytabs') }}</span></button>
                 </div>
             </div>
         </form>
