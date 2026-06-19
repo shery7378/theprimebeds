@@ -156,6 +156,40 @@
         </div>
     </section>
 
+    @if(Auth::check() && (Auth::user()->bill_address1 || Auth::user()->bill_address2))
+    <section class="checkout-premium-card mb-4">
+        <h3 class="widget-title" style="font-size: 15px;">{{ __('Saved Addresses') }}</h3>
+        
+        <div class="custom-payment-select-wrapper custom-address-wrapper mb-3" style="position: relative; width: 100%;">
+            <div class="custom-payment-select-trigger custom-address-trigger">
+                <span class="selected-address-text" style="color: #b59469;">{{ __('Select an Address') }}</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <ul class="custom-payment-select-options custom-address-options">
+                <li class="custom-payment-select-option placeholder-option">{{ __('Select an Address') }}</li>
+                @if(Auth::user()->bill_address1)
+                    <li class="custom-payment-select-option address-option" 
+                        data-address="{{ Auth::user()->bill_address1 }}" 
+                        data-zip="{{ Auth::user()->bill_zip }}" 
+                        data-city="{{ Auth::user()->bill_city }}" 
+                        data-country="{{ Auth::user()->bill_country }}">
+                        {{ __('Billing Address 1') }}: {{ Auth::user()->bill_address1 }}
+                    </li>
+                @endif
+                @if(Auth::user()->bill_address2)
+                    <li class="custom-payment-select-option address-option" 
+                        data-address="{{ Auth::user()->bill_address2 }}" 
+                        data-zip="{{ Auth::user()->bill_zip }}" 
+                        data-city="{{ Auth::user()->bill_city }}" 
+                        data-country="{{ Auth::user()->bill_country }}">
+                        {{ __('Billing Address 2') }}: {{ Auth::user()->bill_address2 }}
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </section>
+    @endif
+
     <!-- Order Summary Widget-->
     <section class="checkout-premium-card mb-0">
         <h3 class="widget-title">{{ __('Pay now') }}</h3>
@@ -389,7 +423,8 @@
         // Toggle payment dropdown open/close
         $(document).on('click', '.custom-payment-select-trigger', function(e) {
             e.stopPropagation();
-            $('.custom-payment-select-options').slideToggle(200);
+            $('.custom-payment-select-wrapper').not($(this).closest('.custom-payment-select-wrapper')).removeClass('open').find('.custom-payment-select-options').slideUp(150);
+            $(this).siblings('.custom-payment-select-options').slideToggle(200);
             $(this).closest('.custom-payment-select-wrapper').toggleClass('open');
         });
 
@@ -400,17 +435,32 @@
         });
 
         // Select payment option
-        $(document).on('click', '.custom-payment-select-option:not(.placeholder-option)', function() {
+        $(document).on('click', '.custom-payment-select-option:not(.placeholder-option):not(.address-option)', function() {
             let val = $(this).data('value');
             let text = $(this).text().trim();
             let select = $('.payment_gateway');
             
             select.val(val).trigger('change');
-            $('.selected-payment-text').text(text).css('color', '#2c2924');
+            $(this).closest('.custom-payment-select-wrapper').find('.selected-payment-text').text(text).css('color', '#2c2924');
             
             $(this).addClass('active').siblings().removeClass('active');
-            $('.custom-payment-select-options').slideUp(150);
-            $('.custom-payment-select-wrapper').removeClass('open');
+            $(this).closest('.custom-payment-select-options').slideUp(150);
+            $(this).closest('.custom-payment-select-wrapper').removeClass('open');
+        });
+
+        // Quick Address Selection Auto-fill
+        $(document).on('click', '.address-option', function() {
+            let text = $(this).text().trim();
+            $(this).closest('.custom-payment-select-wrapper').find('.selected-address-text').text(text).css('color', '#2c2924');
+            
+            $('#checkout-address1').val($(this).data('address'));
+            $('#checkout-zip').val($(this).data('zip'));
+            $('#checkout-city').val($(this).data('city'));
+            $('#billing-country').val($(this).data('country')).trigger('change');
+            
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).closest('.custom-payment-select-options').slideUp(150);
+            $(this).closest('.custom-payment-select-wrapper').removeClass('open');
         });
     </script>
 @endsection
