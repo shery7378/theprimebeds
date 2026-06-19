@@ -462,11 +462,15 @@
                                     <tr>
                                         <td>
                                             <a href="{{ route('user.order.invoice', $order->id) }}" class="order-number">
-                                                #{{ $order->order_number }}
+                                                #{{ $order->transaction_number }}
                                             </a>
                                         </td>
                                         <td style="font-weight:500;">
-                                            {{ config('settings.currency_symbol') }}{{ number_format($order->pay_amount, 2) }}
+                                            @if (isset($setting) && $setting->currency_direction == 1)
+                                                {{$order->currency_sign}}{{PriceHelper::OrderTotal($order)}}
+                                            @else
+                                                {{PriceHelper::OrderTotal($order)}}{{$order->currency_sign}}
+                                            @endif
                                         </td>
                                         <td>
                                             @php
