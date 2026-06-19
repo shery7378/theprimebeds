@@ -122,32 +122,39 @@
     </section>
     @endif
 
-    <section class="checkout-premium-card mb-4">
-        {{-- Coupon / Promo Code Section --}}
-        <div class="promo-section-checkout p-3 rounded shadow-sm" style="background-color: #f8f9fa; border: 2px dashed #cbd5e1;">
+    <section class="checkout-premium-card mb-4" style="border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #f0f0f0;">
+        <div class="p-4">
             @if ($discount)
-                <div class="d-flex align-items-center justify-content-between p-3 rounded" style="background: #e6f4ea; border: 1px solid #34a853; gap: 8px;">
-                    <div>
-                        <span class="d-block text-success font-weight-bold" style="font-size: 14px;">
-                            <i class="fas fa-check-circle me-1"></i>{{ __('Coupon Active') }}
-                        </span>
-                        <small class="text-dark font-weight-bold" style="font-size: 13px;">{{ $discount['code']['title'] ?? '' }}</small>
+                <div class="active-coupon-box d-flex align-items-center justify-content-between p-3" style="background: linear-gradient(145deg, #f2fcf5, #e6f7eb); border: 1px dashed #75c98e; border-radius: 10px; transition: transform 0.2s ease;">
+                    <div class="d-flex align-items-center">
+                        <div class="coupon-icon-wrapper mr-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #d4f0df; border-radius: 50%; color: #28a745; box-shadow: 0 2px 6px rgba(40,167,69,0.2);">
+                            <i class="fas fa-check" style="font-size: 18px;"></i>
+                        </div>
+                        <div>
+                            <span class="d-block text-success font-weight-bold" style="font-size: 15px; margin-bottom: 3px;">
+                                {{ __('Coupon Applied!') }}
+                            </span>
+                            <span class="text-dark font-weight-bold" style="font-size: 13px;">
+                                {{ $discount['code']['title'] ?? '' }}
+                            </span>
+                        </div>
                     </div>
-                    <a href="{{ route('front.promo.destroy') }}" class="btn btn-sm btn-danger shadow-sm" style="border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600;">
+                    <a href="{{ route('front.promo.destroy') }}" class="btn btn-sm btn-outline-danger" style="border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
                        {{ __('Remove') }}
                     </a>
                 </div>
             @else
-                <h6 class="mb-3 font-weight-bold text-dark" style="font-size: 15px;">
-                    <i class="fas fa-ticket-alt text-primary mr-2"></i>{{ __('Have a Promo Code?') }}
+                <h6 class="mb-3 font-weight-bold text-dark d-flex align-items-center" style="font-size: 16px;">
+                    <i class="fas fa-ticket-alt mr-2" style="color: #b59469;"></i>{{ __('Have a Promo Code?') }}
                 </h6>
                 <form method="post" id="checkout_coupon_form_single" action="{{ route('front.promo.submit') }}">
                     @csrf
-                    <div class="d-flex align-items-stretch shadow-sm rounded" style="gap: 0;">
-                        <input class="form-control" name="code" type="text" placeholder="{{ __('Enter code...') }}" required 
-                            style="border-radius: 8px 0 0 8px; border: 1px solid #ced4da; border-right: none; padding: 10px 15px; font-size: 14px; min-height: 45px; margin-bottom: 0; box-shadow: none;">
-                        <button class="btn btn-primary m-0 px-4" type="submit" 
-                            style="border-radius: 0 8px 8px 0; font-size: 14px; font-weight: bold; min-height: 45px; display: inline-flex; align-items: center; justify-content: center; text-transform: none; letter-spacing: 0; transition: all 0.3s ease;">
+                    <div class="promo-input-group d-flex shadow-sm" style="border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; transition: border-color 0.3s ease;">
+                        <input class="form-control border-0" name="code" type="text" placeholder="{{ __('Enter your code here...') }}" required 
+                            style="padding: 12px 16px; font-size: 14px; box-shadow: none; flex-grow: 1; background: #f8fafc;">
+                        <button class="btn m-0 px-4 text-white" type="submit" 
+                            style="background: #b59469; border: none; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; transition: background 0.3s ease;"
+                            onmouseover="this.style.background='#9e8058'" onmouseout="this.style.background='#b59469'">
                             {{ __('Apply') }}
                         </button>
                     </div>
