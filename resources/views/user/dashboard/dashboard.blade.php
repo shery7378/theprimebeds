@@ -378,10 +378,10 @@
         font-weight: 600;
         text-align: center;
     }
-    .pill-pending   { background: var(--amber-bg); color: var(--amber-fg); }
-    .pill-delivered { background: var(--teal-bg); color: var(--teal-fg); }
-    .pill-processing{ background: var(--blue-bg); color: var(--blue-fg); }
-    .pill-canceled  { background: var(--red-bg); color: var(--red-fg); }
+    .pill-pending   { background: var(--amber-bg) !important; color: var(--amber-fg) !important; }
+    .pill-delivered { background: var(--teal-bg) !important; color: var(--teal-fg) !important; }
+    .pill-processing{ background: var(--blue-bg) !important; color: var(--blue-fg) !important; }
+    .pill-canceled  { background: var(--red-bg) !important; color: var(--red-fg) !important; }
 </style>
 @endpush
 
@@ -471,12 +471,12 @@
                                         <td>
                                             @php
                                                 $statusMap = [
-                                                    'delivered'  => ['pill-delivered', __('Delivered')],
-                                                    'processing' => ['pill-processing', __('Processing')],
-                                                    'pending'    => ['pill-pending',   __('Pending')],
-                                                    'canceled'   => ['pill-canceled',  __('Cancelled')],
+                                                    'Delivered'  => ['pill-delivered', __('Delivered')],
+                                                    'Processing' => ['pill-processing', __('Processing')],
+                                                    'Pending'    => ['pill-pending',   __('Pending')],
+                                                    'Canceled'   => ['pill-canceled',  __('Cancelled')],
                                                 ];
-                                                [$cls, $label] = $statusMap[$order->status] ?? ['pill-pending', ucfirst($order->status)];
+                                                [$cls, $label] = $statusMap[$order->order_status] ?? ['pill-pending', $order->order_status];
                                             @endphp
                                             <span class="status-pill {{ $cls }}">{{ $label }}</span>
                                         </td>
