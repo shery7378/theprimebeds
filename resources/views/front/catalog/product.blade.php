@@ -1264,6 +1264,396 @@
         font-weight: 600;
     }
     .pdp-sku-pill span { color: var(--text-700); }
+
+    /* ============================================================
+       ENHANCED REVIEWS SECTION
+       ============================================================ */
+    .pdp-reviews-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .pdp-reviews-summary-card {
+        background: #fdfdfd;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr;
+        gap: 30px;
+        align-items: center;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    @media (max-width: 991px) {
+        .pdp-reviews-summary-card {
+            grid-template-columns: 1fr;
+            gap: 24px;
+            padding: 20px;
+        }
+    }
+    
+    .pdp-summary-score-box {
+        text-align: center;
+        border-right: 1px solid var(--border);
+        padding-right: 20px;
+    }
+    
+    @media (max-width: 991px) {
+        .pdp-summary-score-box {
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+            padding-right: 0;
+            padding-bottom: 20px;
+        }
+    }
+    
+    .pdp-summary-score-num {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--text-900);
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+    
+    .pdp-summary-stars {
+        font-size: 1.2rem;
+        color: var(--gold);
+        margin-bottom: 8px;
+    }
+    
+    .pdp-summary-count {
+        font-size: 14px;
+        color: var(--text-500);
+        font-weight: 500;
+    }
+    
+    /* Distribution bars */
+    .pdp-summary-distribution {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-right: 1px solid var(--border);
+        padding-right: 20px;
+    }
+    
+    @media (max-width: 991px) {
+        .pdp-summary-distribution {
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+            padding-right: 0;
+            padding-bottom: 20px;
+        }
+    }
+    
+    .pdp-dist-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-700);
+    }
+    
+    .pdp-dist-label {
+        width: 60px;
+        white-space: nowrap;
+    }
+    
+    .pdp-dist-bar-wrapper {
+        flex: 1;
+        height: 8px;
+        background: var(--border);
+        border-radius: var(--radius-pill);
+        overflow: hidden;
+    }
+    
+    .pdp-dist-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+        border-radius: var(--radius-pill);
+        width: 0%;
+        transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    
+    .pdp-dist-value {
+        width: 40px;
+        text-align: right;
+        color: var(--text-500);
+    }
+    
+    .pdp-summary-actions {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .pdp-summary-actions-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-900);
+        margin: 0;
+    }
+    
+    .pdp-summary-actions-text {
+        font-size: 13px;
+        color: var(--text-500);
+        margin-bottom: 8px;
+        max-width: 200px;
+        line-height: 1.4;
+    }
+    
+    /* Reviews List & Cards */
+    .pdp-reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .pdp-review-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border) !important;
+        border-radius: var(--radius-lg) !important;
+        padding: 24px !important;
+        box-shadow: var(--shadow-xs);
+        transition: var(--transition);
+        position: relative;
+    }
+    
+    .pdp-review-card:hover {
+        box-shadow: var(--shadow-sm);
+        border-color: rgba(42,65,102, 0.15) !important;
+    }
+    
+    .pdp-review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+        gap: 16px;
+    }
+    
+    @media (max-width: 576px) {
+        .pdp-review-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+    
+    .pdp-reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    
+    .pdp-reviewer-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        box-shadow: var(--shadow-xs);
+    }
+    
+    .pdp-reviewer-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    
+    .pdp-reviewer-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-900);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .pdp-verified-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--success);
+        background: rgba(0,184,148, 0.08);
+        padding: 2px 8px;
+        border-radius: var(--radius-pill);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .pdp-review-meta-date {
+        font-size: 12px;
+        color: var(--text-300);
+        font-weight: 500;
+    }
+    
+    .pdp-review-stars-date {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+    }
+    
+    @media (max-width: 576px) {
+        .pdp-review-stars-date {
+            align-items: flex-start;
+        }
+    }
+    
+    .pdp-review-stars {
+        font-size: 0.95rem;
+        color: var(--gold);
+    }
+    
+    .pdp-review-stars i.empty {
+        color: var(--border);
+    }
+    
+    .pdp-review-content {
+        margin-top: 10px;
+    }
+    
+    .pdp-review-subject {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-900);
+        margin-bottom: 8px;
+    }
+    
+    .pdp-review-body {
+        font-size: 14px;
+        color: var(--text-700);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* ============================================================
+       REVIEW CAROUSEL CARDS
+    ============================================================ */
+    .pdp-reviews-carousel {
+        padding: 8px 4px 20px;
+    }
+    .pdp-reviews-carousel .owl-stage {
+        display: flex;
+        align-items: stretch;
+    }
+    .pdp-reviews-carousel .owl-item {
+        display: flex;
+    }
+    .pdp-review-slide-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px 24px 20px;
+        box-shadow: var(--shadow-xs);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: var(--transition);
+        width: 100%;
+        min-height: 220px;
+        position: relative;
+    }
+    .pdp-review-slide-card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: rgba(42,65,102,0.18);
+        transform: translateY(-4px);
+    }
+    .prc-stars {
+        display: flex;
+        gap: 3px;
+        font-size: 14px;
+    }
+    .prc-quote {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        font-size: 2rem;
+        color: rgba(42,65,102,0.07);
+        line-height: 1;
+    }
+    .prc-subject {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-900);
+        margin: 0;
+        line-height: 1.3;
+    }
+    .prc-body {
+        font-size: 13.5px;
+        color: var(--text-700);
+        line-height: 1.65;
+        margin: 0;
+        flex: 1;
+    }
+    .prc-footer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+    }
+    .prc-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: var(--shadow-xs);
+    }
+    .prc-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .prc-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-900);
+    }
+    .prc-verified {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--success);
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    .prc-date {
+        font-size: 11px;
+        color: var(--text-300);
+        font-weight: 500;
+    }
+    
+    .pdp-reviews-carousel .owl-nav,
+    .pdp-reviews-carousel .owl-dots,
+    #reviewsCarousel .owl-nav,
+    #reviewsCarousel .owl-dots {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
 </style>
 @endsection
 
@@ -1674,6 +2064,7 @@
                         <i class="fas fa-list-ul"></i>{{ __('Specifications') }}
                     </a>
                 </li>
+
             </ul>
 
             <div class="pdp-tab-content tab-content">
@@ -1708,6 +2099,8 @@
                         </div>
                     @endif
                 </div>
+
+
             </div>
         </div>
 
@@ -1826,6 +2219,163 @@
             </div>
         </div>
         @endif
+
+        {{-- ══════════════════════════════════════════════
+             CUSTOMER REVIEWS (standalone section)
+        ══════════════════════════════════════════════ --}}
+        @php
+            $allApprovedReviews = $item->reviews()->where('status', 1)->get();
+            $totalReviews = $allApprovedReviews->count();
+            $avgRating = $totalReviews > 0 ? round($allApprovedReviews->avg('rating'), 1) : 0;
+            $ratingCounts = [5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
+            foreach($allApprovedReviews as $r) {
+                if(isset($ratingCounts[$r->rating])) { $ratingCounts[$r->rating]++; }
+            }
+        @endphp
+
+        <div class="pdp-details-section" style="margin-top: 64px;">
+            <h2 class="pdp-section-heading">
+                <span class="heading-icon"><i class="fas fa-star"></i></span>
+                {{ __('Customer Reviews') }}
+            </h2>
+
+            <div class="pdp-reviews-container">
+                {{-- Summary Header Card --}}
+                <div class="pdp-reviews-summary-card">
+                    {{-- Score --}}
+                    <div class="pdp-summary-score-box">
+                        <div class="pdp-summary-score-num">{{ $avgRating > 0 ? $avgRating : '—' }}</div>
+                        <div class="pdp-summary-stars">
+                            @for($i = 1; $i <= 5; $i++)
+                                <i class="fas fa-star" style="color: {{ $i <= round($avgRating) ? 'var(--gold)' : 'var(--border)' }};"></i>
+                            @endfor
+                        </div>
+                        <div class="pdp-summary-count">
+                            {{ __('Based on') }} {{ $totalReviews }} {{ $totalReviews == 1 ? __('review') : __('reviews') }}
+                        </div>
+                    </div>
+
+                    {{-- Distribution --}}
+                    <div class="pdp-summary-distribution">
+                        @foreach([5, 4, 3, 2, 1] as $star)
+                            @php $pct = $totalReviews > 0 ? round(($ratingCounts[$star] / $totalReviews) * 100) : 0; @endphp
+                            <div class="pdp-dist-row">
+                                <span class="pdp-dist-label">{{ $star }} {{ __('star') }}</span>
+                                <div class="pdp-dist-bar-wrapper">
+                                    <div class="pdp-dist-bar-fill" style="width: {{ $pct }}%;"></div>
+                                </div>
+                                <span class="pdp-dist-value">{{ $pct }}%</span>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Action --}}
+                    <div class="pdp-summary-actions">
+                        <h4 class="pdp-summary-actions-title">{{ __('Share Your Thoughts') }}</h4>
+                        <p class="pdp-summary-actions-text">{{ __('If you have purchased this product, please share your feedback with other customers!') }}</p>
+                        @auth
+                            <button class="pdp-btn pdp-btn-primary" data-bs-toggle="modal" data-bs-target="#leaveReview" style="flex:none; min-width:auto; padding:10px 24px; width:100%; border-radius: 12px;">
+                                <i class="fas fa-edit me-2"></i>{{ __('Leave a Review') }}
+                            </button>
+                        @else
+                            <a href="{{ route('user.login') }}" class="pdp-btn pdp-btn-outline" style="flex:none; min-width:auto; padding:10px 24px; width:100%; border-radius: 12px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-sign-in-alt me-2"></i>{{ __('Login to Review') }}
+                            </a>
+                        @endauth
+                    </div>
+                </div>
+
+                {{-- Review Carousel Slider --}}
+                @php
+                    $dummyReviews = [
+                        [
+                            'rating' => 5,
+                            'subject' => __('Exceptional comfort and style!'),
+                            'review' => __('The bed is incredibly soft, providing great back support. It matches the description perfectly and looks premium in my bedroom.'),
+                            'name' => 'Sophia Miller',
+                            'date' => 'Jun 15, 2026',
+                            'avatar' => 'S'
+                        ],
+                        [
+                            'rating' => 5,
+                            'subject' => __('Highly recommended!'),
+                            'review' => __('Fast delivery and super easy assembly. The texture of the headboard fabric feels luxurious. I am extremely satisfied with this purchase.'),
+                            'name' => 'Liam Bennett',
+                            'date' => 'Jun 12, 2026',
+                            'avatar' => 'L'
+                        ],
+                        [
+                            'rating' => 4,
+                            'subject' => __('Very nice quality'),
+                            'review' => __('Excellent bed frame. Very sturdy construction and no squeaking. Knocked off one star because shipping took a couple of days longer than expected.'),
+                            'name' => 'Emma Watson',
+                            'date' => 'Jun 10, 2026',
+                            'avatar' => 'E'
+                        ],
+                        [
+                            'rating' => 5,
+                            'subject' => __('Best sleep in years!'),
+                            'review' => __('Simply amazing. The materials used are top notch. Customer service was also very helpful answering my questions about dimensions.'),
+                            'name' => 'Noah Davis',
+                            'date' => 'Jun 08, 2026',
+                            'avatar' => 'N'
+                        ]
+                    ];
+                @endphp
+
+                <div class="pdp-reviews-carousel owl-carousel" id="reviewsCarousel">
+                    {{-- Approved Reviews --}}
+                    @foreach($allApprovedReviews as $review)
+                        <div class="pdp-review-slide-card">
+                            <div class="prc-stars">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <i class="fas fa-star" style="color: {{ $i <= $review->rating ? 'var(--gold)' : '#ddd' }};"></i>
+                                @endfor
+                            </div>
+                            <div class="prc-quote"><i class="fas fa-quote-left"></i></div>
+                            @if($review->subject)
+                                <h5 class="prc-subject">{{ $review->subject }}</h5>
+                            @endif
+                            <p class="prc-body">{{ Str::limit($review->review, 180) }}</p>
+                            <div class="prc-footer">
+                                <div class="prc-avatar">
+                                    {{ strtoupper(substr($review->user->first_name ?? 'C', 0, 1)) }}
+                                </div>
+                                <div class="prc-meta">
+                                    <span class="prc-name">{{ $review->user->first_name ?? __('Customer') }}</span>
+                                    <span class="prc-verified"><i class="fas fa-check-circle"></i> {{ __('Verified Buyer') }}</span>
+                                    <span class="prc-date">{{ $review->created_at->format('M d, Y') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- Dummy Reviews --}}
+                    @foreach($dummyReviews as $dummy)
+                        <div class="pdp-review-slide-card">
+                            <div class="prc-stars">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <i class="fas fa-star" style="color: {{ $i <= $dummy['rating'] ? 'var(--gold)' : '#ddd' }};"></i>
+                                @endfor
+                            </div>
+                            <div class="prc-quote"><i class="fas fa-quote-left"></i></div>
+                            <h5 class="prc-subject">{{ $dummy['subject'] }}</h5>
+                            <p class="prc-body">{{ $dummy['review'] }}</p>
+                            <div class="prc-footer">
+                                <div class="prc-avatar">
+                                    {{ $dummy['avatar'] }}
+                                </div>
+                                <div class="prc-meta">
+                                    <span class="prc-name">{{ $dummy['name'] }}</span>
+                                    <span class="prc-verified"><i class="fas fa-check-circle"></i> {{ __('Verified Buyer') }}</span>
+                                    <span class="prc-date">{{ $dummy['date'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
     </div>{{-- /container --}}
 </div>{{-- /pdp-page-wrapper --}}
@@ -2188,6 +2738,57 @@ document.addEventListener('DOMContentLoaded', function() {
             if (select.value) select.classList.remove('is-invalid');
         });
     });
+});
+
+// ── Reviews Auto-Scroll Carousel ─────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    if ($('#reviewsCarousel').length && $('#reviewsCarousel .pdp-review-slide-card').length) {
+        var reviewsCarousel = $('#reviewsCarousel').owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplaySpeed: 800,
+            autoplayHoverPause: true,
+            smartSpeed: 800,
+            rtl: false,
+            dots: false,
+            nav: false,
+            navText: ["", ""],
+            margin: 20,
+            responsive: {
+                0:    { items: 1 },
+                576:  { items: 2 },
+                992:  { items: 3 }
+            }
+        });
+
+        // Force remove navigation elements immediately
+        $('#reviewsCarousel').find('.owl-nav, .owl-dots').remove();
+
+        // Remove them on any carousel update events
+        reviewsCarousel.on('initialized.owl.carousel changed.owl.carousel refreshed.owl.carousel resized.owl.carousel', function() {
+            $('#reviewsCarousel').find('.owl-nav, .owl-dots').remove();
+        });
+
+        // Fallback interval to capture any delayed rendering of the 'undefined' buttons
+        var cleanupInterval = setInterval(function() {
+            var target = $('#reviewsCarousel').find('.owl-nav, .owl-dots');
+            if (target.length) {
+                target.remove();
+            }
+            // Clean up any stray 'undefined' text elements
+            $('.pdp-reviews-container button, .pdp-reviews-container div, .pdp-reviews-container span').each(function() {
+                if ($(this).text().trim() === 'undefined') {
+                    $(this).remove();
+                }
+            });
+        }, 100);
+
+        // Stop checking after 3 seconds
+        setTimeout(function() {
+            clearInterval(cleanupInterval);
+        }, 3000);
+    }
 });
 </script>
 @endsection

@@ -567,7 +567,7 @@ $(function ($) {
           },
           offset: 20,
           spacing: 10,
-          z_index: 1031,
+          z_index: 1060,
           delay: 5000,
           timer: 1000,
           url_target: "_blank",
@@ -607,7 +607,7 @@ $(function ($) {
           },
           offset: 20,
           spacing: 10,
-          z_index: 1031,
+          z_index: 1060,
           delay: 5000,
           timer: 1000,
           url_target: "_blank",
@@ -943,6 +943,8 @@ $(function ($) {
             for (var error in data.errors) {
               dangerNotification(data.errors[error]);
             }
+            $this.find("textarea").prop("readonly", false);
+            submit_btn.prop("disabled", false);
           } else {
             $this.find("textarea").prop("readonly", false);
             submit_btn.prop("disabled", false);

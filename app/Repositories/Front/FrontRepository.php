@@ -69,8 +69,8 @@ class FrontRepository
             return __('Your Review Updated Successfully.');
         }
     
-        // Check if the user has purchased the product
-        $orders = Order::where('user_id', $user->id)->get();
+        // Check if the user has purchased the product and it has been delivered
+        $orders = Order::where('user_id', $user->id)->where('order_status', 'Delivered')->get();
         $isProductPurchased = false;
     
         foreach ($orders as $order) {
@@ -86,7 +86,7 @@ class FrontRepository
         if (!$isProductPurchased) {
             return [
                 'errors' => [
-                    0 => __("Buy This Product First"),
+                    0 => __("You can only review a product after it has been delivered."),
                 ],
             ];
         }
