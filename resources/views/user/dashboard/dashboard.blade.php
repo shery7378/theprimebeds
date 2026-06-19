@@ -4,6 +4,7 @@
 @endsection
 
 @push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
     /* ── Reset & base ─────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; }
@@ -18,10 +19,11 @@
         --text-mid:    #4b5563;
         --text-light:  #9ca3af;
 
-        /* accent – indigo-violet family, pairs crisply with white */
-        --accent:      #6366f1;
-        --accent-soft: #eef0fe;
-        --accent-mid:  #c7d2fe;
+        /* accent – brand color family, pairs crisply with white */
+        --accent:      var(--primary-color, #8C7558);
+        --accent-hover:var(--primary-color, #8C7558);
+        --accent-soft: #fcf9f2;
+        --accent-mid:  #e9e0d2;
 
         /* status chips */
         --teal-bg:     #ecfdf5;  --teal-fg:   #065f46;  --teal-dot:  #10b981;
@@ -29,36 +31,79 @@
         --red-bg:      #fef2f2;  --red-fg:    #991b1b;  --red-dot:   #ef4444;
         --blue-bg:     #eff6ff;  --blue-fg:   #1e40af;  --blue-dot:  #3b82f6;
         --purple-bg:   #f5f3ff;  --purple-fg: #4c1d95;  --purple-dot:#8b5cf6;
+        
+        --pill-pending-bg:   #fffbeb; --pill-pending-fg:   #d97706;
+        --pill-delivered-bg: #ecfdf5; --pill-delivered-fg: #059669;
+        --pill-completed-bg: #f3f4f6; --pill-completed-fg: #4b5563; /* or blue */
+        --pill-canceled-bg:  #fef2f2; --pill-canceled-fg:  #dc2626;
     }
 
-    /* ── Layout scaffolding ───────────────────────── */
-    body { background: var(--bg); }
+    body { background: var(--bg); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
     .dash-wrapper {
         max-width: 1120px;
         margin: 0 auto;
-        padding: 2rem 1.25rem 3rem;
+        padding: 2rem 1.25rem 4rem;
+        transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (min-width: 992px) {
+        body.sidebar-active .dash-wrapper {
+            padding-left: 300px;
+        }
     }
 
     .dash-grid {
         display: grid;
-        grid-template-columns: 260px 1fr;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
         align-items: start;
     }
 
-    @media (max-width: 991px) {
-        .dash-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── Sidebar ──────────────────────────────────── */
+    /* ── Sidebar (Global Off-canvas) ───────────────────────── */
     .sidebar {
         background: var(--surface);
-        border-radius: 16px;
         border: 1px solid var(--border);
-        overflow: hidden;
-        position: sticky;
-        top: 1.5rem;
+        position: fixed;
+        top: 130px;
+        left: -320px;
+        bottom: 0;
+        width: 280px;
+        height: calc(100vh - 130px);
+        z-index: 9999;
+        border-radius: 0;
+        margin: 0;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+    }
+        
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        z-index: 9998;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .btn-sidebar-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--text-dark);
+        cursor: pointer;
+        padding: 0;
     }
 
     .sidebar-profile {
@@ -155,599 +200,307 @@
     }
 
     /* ── Main column ──────────────────────────────── */
-    .main-col { display: flex; flex-direction: column; gap: 1.25rem; }
+    .main-col { display: flex; flex-direction: column; gap: 1.5rem; }
 
-    /* ── Welcome bar ──────────────────────────────── */
-    .welcome-bar {
-        background: var(--surface);
-        border-radius: 16px;
-        border: 1px solid var(--border);
-        padding: 1.25rem 1.5rem;
+    /* ── Top Header ───────────────────────────────── */
+    .dash-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
+        padding-bottom: 0.5rem;
     }
-
-    .welcome-text h2 {
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .header-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+    }
+    .header-info h1 {
         font-size: 18px;
         font-weight: 700;
         color: var(--text-dark);
-        margin: 0 0 3px;
+        margin: 0 0 4px;
     }
-
-    .welcome-text p {
-        font-size: 13px;
+    .header-info .breadcrumbs {
+        font-size: 12px;
         color: var(--text-light);
-        margin: 0;
-    }
-
-    .welcome-actions { display: flex; gap: 8px; }
-
-    .btn-outline {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         gap: 6px;
-        padding: 8px 14px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        background: var(--bg);
-        color: var(--text-mid);
-        font-size: 13px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: border-color 0.15s, background 0.15s;
-        cursor: pointer;
-        white-space: nowrap;
     }
-
-    .btn-outline:hover { border-color: var(--accent-mid); background: var(--accent-soft); color: var(--accent); }
-
-    .btn-primary {
+    .header-info .breadcrumbs i { font-size: 14px; }
+    
+    .header-right {
+        display: flex;
+        gap: 12px;
+    }
+    .btn-header {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         padding: 8px 16px;
-        border-radius: 8px;
-        border: none;
-        background: var(--accent);
-        color: #fff;
+        border-radius: 6px;
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
-        transition: opacity 0.15s;
-        white-space: nowrap;
+        transition: all 0.2s;
     }
-
-    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+    }
+    .btn-primary:hover {
+        background: var(--accent-hover);
+        color: #fff;
+    }
 
     /* ── Stat cards grid ──────────────────────────── */
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    }
+    @media (max-width: 768px) {
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+        .stats-grid { grid-template-columns: 1fr; }
     }
 
     .stat-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 1.1rem 1.25rem;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        transition: box-shadow 0.2s, transform 0.2s;
+        border-radius: 12px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
-
-    .stat-card:hover {
-        box-shadow: 0 4px 20px rgba(99,102,241,0.08);
-        transform: translateY(-2px);
-    }
-
-    .stat-card-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .stat-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        flex-shrink: 0;
-    }
-
-    .stat-icon.purple { background: var(--purple-bg); color: var(--purple-dot); }
-    .stat-icon.teal   { background: var(--teal-bg);   color: var(--teal-dot);   }
-    .stat-icon.amber  { background: var(--amber-bg);  color: var(--amber-dot);  }
-    .stat-icon.red    { background: var(--red-bg);    color: var(--red-dot);    }
-    .stat-icon.blue   { background: var(--blue-bg);   color: var(--blue-dot);   }
-
-    .stat-chip {
-        font-size: 10.5px;
-        font-weight: 600;
-        padding: 3px 8px;
-        border-radius: 20px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
-
-    .stat-chip.purple { background: var(--purple-bg); color: var(--purple-fg); }
-    .stat-chip.teal   { background: var(--teal-bg);   color: var(--teal-fg);   }
-    .stat-chip.amber  { background: var(--amber-bg);  color: var(--amber-fg);  }
-    .stat-chip.red    { background: var(--red-bg);    color: var(--red-fg);    }
-    .stat-chip.blue   { background: var(--blue-bg);   color: var(--blue-fg);   }
-
-    .stat-num {
-        font-size: 28px;
-        font-weight: 700;
+    .stat-card-title {
+        font-size: 13px;
         color: var(--text-dark);
-        line-height: 1;
+        font-weight: 600;
+        margin-bottom: 12px;
     }
+    .stat-card-value {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    .val-accent { color: var(--accent); }
+    .val-green  { color: var(--teal-fg); }
+    .val-amber  { color: var(--amber-fg); }
+    .val-blue   { color: var(--blue-fg); }
 
-    .stat-label {
-        font-size: 12.5px;
+    .stat-card-sub {
+        font-size: 12px;
         color: var(--text-light);
-        margin-top: 2px;
     }
 
-    /* ── Two-col lower row ────────────────────────── */
-    .lower-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    @media (max-width: 700px) {
-        .lower-row { grid-template-columns: 1fr; }
-    }
-
-    /* ── Panel card ───────────────────────────────── */
-    .panel {
+    /* ── Orders Table ─────────────────────────────── */
+    .table-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 14px;
-        overflow: hidden;
-    }
-
-    .panel-header {
-        padding: 1rem 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .panel-title {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
-    }
-
-    .panel-link {
-        font-size: 12px;
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-    }
-
-    .panel-link:hover { text-decoration: underline; }
-
-    .panel-body { padding: 0.25rem 0; }
-
-    /* ── Empty state ──────────────────────────────── */
-    .empty-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        padding: 1.75rem 1rem;
-        text-align: center;
-    }
-
-    .empty-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: var(--accent-soft);
-        color: var(--accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-    }
-
-    .empty-title {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin: 0;
-    }
-
-    .empty-sub {
-        font-size: 12px;
-        color: var(--text-light);
-        margin: 0;
-    }
-
-    .empty-cta {
-        margin-top: 4px;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 7px 14px;
-        border-radius: 8px;
-        background: var(--accent);
-        color: #fff;
-        font-size: 12.5px;
-        font-weight: 600;
-        text-decoration: none;
-    }
-
-    /* ── Quick actions ────────────────────────────── */
-    .quick-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-    }
-
-    @media (max-width: 600px) {
-        .quick-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .quick-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 7px;
-        padding: 1rem 0.5rem;
         border-radius: 12px;
-        border: 1px solid var(--border);
-        background: var(--bg);
-        color: var(--text-mid);
-        font-size: 12px;
-        font-weight: 500;
-        text-decoration: none;
-        text-align: center;
-        transition: background 0.15s, border-color 0.15s, color 0.15s;
-        cursor: pointer;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
-
-    .quick-btn:hover {
-        background: var(--accent-soft);
-        border-color: var(--accent-mid);
-        color: var(--accent);
-    }
-
-    .quick-btn i {
-        font-size: 22px;
-        color: var(--accent);
-    }
-
-    /* ── Breadcrumb ───────────────────────────────── */
-    .dash-breadcrumb {
+    .table-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border);
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 6px;
-        font-size: 13px;
-        color: var(--text-light);
-        margin-bottom: 1.25rem;
+    }
+    .table-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0;
     }
 
-    .dash-breadcrumb a {
-        color: var(--text-light);
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .custom-table th {
+        background: #fafbfc;
+        padding: 12px 1.5rem;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-mid);
+        border-bottom: 1px solid var(--border);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .custom-table td {
+        padding: 16px 1.5rem;
+        border-bottom: 1px solid var(--border);
+        font-size: 13.5px;
+        color: var(--text-dark);
+        vertical-align: middle;
+    }
+    .custom-table tr:last-child td {
+        border-bottom: none;
+    }
+    .custom-table tbody tr:hover {
+        background: #fdfdfd;
+    }
+
+    .order-number {
+        font-weight: 600;
+        color: var(--text-dark);
         text-decoration: none;
     }
+    .order-number:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
 
-    .dash-breadcrumb a:hover { color: var(--accent); }
-
-    .dash-breadcrumb span { color: var(--text-mid); font-weight: 500; }
-
-    .dash-breadcrumb .sep { font-size: 10px; }
+    .status-pill {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 11.5px;
+        font-weight: 600;
+        text-align: center;
+    }
+    .pill-pending   { background: var(--amber-bg); color: var(--amber-fg); }
+    .pill-delivered { background: var(--teal-bg); color: var(--teal-fg); }
+    .pill-processing{ background: var(--blue-bg); color: var(--blue-fg); }
+    .pill-canceled  { background: var(--red-bg); color: var(--red-fg); }
 </style>
 @endpush
 
 @section('content')
+
+@include('includes.user_sitebar')
+
 <div class="dash-wrapper">
-
-    {{-- Breadcrumb --}}
-    <nav class="dash-breadcrumb" aria-label="breadcrumb">
-        <a href="{{ route('front.index') }}">
-            <i class="ti ti-home" style="font-size:14px; vertical-align:-2px;"></i>
-            {{ __('Home') }}
-        </a>
-        <span class="sep">›</span>
-        <span>{{ __('Dashboard') }}</span>
-    </nav>
-
     <div class="dash-grid">
-
-        {{-- ── Sidebar ── --}}
-        <aside class="sidebar">
-            <div class="sidebar-profile">
-                <div class="avatar-ring">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
-                </div>
-                <p class="sidebar-name">{{ auth()->user()->name }}</p>
-                <p class="sidebar-since">{{ __('Joined') }} {{ auth()->user()->created_at->format('M Y') }}</p>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="{{ route('user.dashboard') }}" class="nav-link active">
-                    <i class="ti ti-layout-dashboard"></i>
-                    {{ __('Dashboard') }}
-                </a>
-                <a href="{{ route('user.profile') }}" class="nav-link">
-                    <i class="ti ti-user"></i>
-                    {{ __('Profile') }}
-                </a>
-                <a href="{{ route('user.ticket') }}" class="nav-link">
-                    <i class="ti ti-headset"></i>
-                    {{ __('Support Tickets') }}
-                </a>
-
-                <div class="nav-divider"></div>
-
-                <a href="{{ route('user.order.index') }}" class="nav-link">
-                    <i class="ti ti-shopping-bag"></i>
-                    {{ __('Orders') }}
-                    @if($allorders > 0)
-                        <span class="nav-badge">{{ $allorders }}</span>
-                    @endif
-                </a>
-                <a href="{{ route('user.address') }}" class="nav-link">
-                    <i class="ti ti-map-pin"></i>
-                    {{ __('Addresses') }}
-                </a>
-                <a href="{{ route('user.wishlist.index') }}" class="nav-link">
-                    <i class="ti ti-heart"></i>
-                    {{ __('Wishlist') }}
-                </a>
-
-                @if(auth()->check() && auth()->user()->is_merchant == 1)
-                    <div class="nav-divider"></div>
-
-                    <a href="{{ route('user.merchant.dashboard') }}" class="nav-link">
-                        <i class="ti ti-store"></i>
-                        {{ __('Merchant Dashboard') }}
-                    </a>
-                @endif
-            </nav>
-        </aside>
-
         {{-- ── Main content ── --}}
         <main class="main-col">
 
-            {{-- Welcome bar --}}
-            <div class="welcome-bar">
-                <div class="welcome-text">
-                    <h2>{{ __('Welcome back') }}, {{ explode(' ', auth()->user()->name)[0] }} :wave:</h2>
-                    <p>{{ __("Here's a summary of your account activity.") }}</p>
+            {{-- Top Header --}}
+            <div class="dash-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="btn-sidebar-toggle">
+                        <i class="ti ti-menu-2"></i>
+                    </button>
+                    <div class="header-avatar">
+                        {{ strtoupper(substr(auth()->user()->first_name, 0, 1)) }}
+                    </div>
+                    <div class="header-info">
+                        <h1>{{ __('Welcome back') }}, {{ auth()->user()->first_name }}!</h1>
+                        <p style="margin: 0; font-size: 13px; color: var(--text-light);">{{ __('Here is an overview of your account today.') }}</p>
+                    </div>
                 </div>
-                <div class="welcome-actions">
-                    <a href="{{ route('front.catalog') }}" class="btn-outline">
-                        <i class="ti ti-shopping-cart" style="font-size:14px;"></i>
-                        {{ __('Shop now') }}
-                    </a>
-                    <a href="{{ route('user.order.index') }}" class="btn-primary">
-                        <i class="ti ti-truck-delivery" style="font-size:14px;"></i>
-                        {{ __('Track order') }}
+                <div class="header-right">
+                    <a href="{{ route('user.profile') }}" class="btn-header btn-primary">
+                        <i class="ti ti-settings"></i> {{ __('Settings') }}
                     </a>
                 </div>
             </div>
 
             {{-- Stats grid --}}
             <div class="stats-grid">
-
                 <div class="stat-card">
-                    <div class="stat-card-top">
-                        <div class="stat-icon purple">
-                            <i class="ti ti-shopping-bag"></i>
-                        </div>
-                        <span class="stat-chip purple">{{ __('All') }}</span>
-                    </div>
-                    <div>
-                        <div class="stat-num">{{ $allorders }}</div>
-                        <div class="stat-label">{{ __('Total orders') }}</div>
-                    </div>
+                    <div class="stat-card-title">{{ __('Total Orders') }}</div>
+                    <div class="stat-card-value val-accent">{{ $allorders }}</div>
+                    <div class="stat-card-sub">{{ __('Lifetime orders') }}</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-card-top">
-                        <div class="stat-icon teal">
-                            <i class="ti ti-circle-check"></i>
-                        </div>
-                        <span class="stat-chip teal">{{ __('Done') }}</span>
-                    </div>
-                    <div>
-                        <div class="stat-num">{{ $delivered }}</div>
-                        <div class="stat-label">{{ __('Completed') }}</div>
-                    </div>
+                    <div class="stat-card-title">{{ __('Completed') }}</div>
+                    <div class="stat-card-value val-green">{{ $delivered }}</div>
+                    <div class="stat-card-sub">{{ __('Successfully delivered') }}</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-card-top">
-                        <div class="stat-icon amber">
-                            <i class="ti ti-refresh"></i>
-                        </div>
-                        <span class="stat-chip amber">{{ __('Active') }}</span>
-                    </div>
-                    <div>
-                        <div class="stat-num">{{ $progress }}</div>
-                        <div class="stat-label">{{ __('Processing') }}</div>
-                    </div>
+                    <div class="stat-card-title">{{ __('Processing') }}</div>
+                    <div class="stat-card-value val-blue">{{ $progress }}</div>
+                    <div class="stat-card-sub">{{ __('Currently active') }}</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-card-top">
-                        <div class="stat-icon blue">
-                            <i class="ti ti-clock"></i>
-                        </div>
-                        <span class="stat-chip blue">{{ __('Waiting') }}</span>
-                    </div>
-                    <div>
-                        <div class="stat-num">{{ $pending }}</div>
-                        <div class="stat-label">{{ __('Pending') }}</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-top">
-                        <div class="stat-icon red">
-                            <i class="ti ti-x"></i>
-                        </div>
-                        <span class="stat-chip red">{{ __('Closed') }}</span>
-                    </div>
-                    <div>
-                        <div class="stat-num">{{ $canceled }}</div>
-                        <div class="stat-label">{{ __('Cancelled') }}</div>
-                    </div>
-                </div>
-
-            </div>
-
-            {{-- Quick actions --}}
-            <div class="panel">
-                <div class="panel-header">
-                    <p class="panel-title">{{ __('Quick actions') }}</p>
-                </div>
-                <div style="padding: 1rem;">
-                    <div class="quick-grid">
-                        <a href="{{ route('user.order.index') }}" class="quick-btn">
-                            <i class="ti ti-truck-delivery"></i>
-                            {{ __('Track order') }}
-                        </a>
-                        <a href="{{ route('user.address') }}" class="quick-btn">
-                            <i class="ti ti-map-pin"></i>
-                            {{ __('Manage addresses') }}
-                        </a>
-                        <a href="{{ route('user.ticket') }}" class="quick-btn">
-                            <i class="ti ti-headset"></i>
-                            {{ __('Open a ticket') }}
-                        </a>
-                        <a href="{{ route('user.profile') }}" class="quick-btn">
-                            <i class="ti ti-user-edit"></i>
-                            {{ __('Edit profile') }}
-                        </a>
-                    </div>
+                    <div class="stat-card-title">{{ __('Pending') }}</div>
+                    <div class="stat-card-value val-amber">{{ $pending }}</div>
+                    <div class="stat-card-sub">{{ __('Awaiting action') }}</div>
                 </div>
             </div>
 
-            {{-- Lower row: Recent orders + Wishlist --}}
-            <div class="lower-row">
-
-                {{-- Recent orders --}}
-                <div class="panel">
-                    <div class="panel-header">
-                        <p class="panel-title">{{ __('Recent orders') }}</p>
-                        <a href="{{ route('user.order.index') }}" class="panel-link">
-                            {{ __('View all') }} <i class="ti ti-arrow-right" style="font-size:12px;"></i>
-                        </a>
-                    </div>
-                    <div class="panel-body">
-                        @if(isset($recentOrders) && $recentOrders->count())
-                            @foreach($recentOrders as $order)
-                            <div style="display:flex; align-items:center; gap:10px; padding:10px 1.25rem; border-bottom:1px solid var(--border);">
-                                <div style="width:34px;height:34px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                    <i class="ti ti-package" style="font-size:16px;"></i>
-                                </div>
-                                <div style="flex:1;min-width:0;">
-                                    <p style="font-size:13px;font-weight:600;color:var(--text-dark);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        #{{ $order->order_number }}
-                                    </p>
-                                    <p style="font-size:11px;color:var(--text-light);margin:0;">
-                                        {{ $order->created_at->format('M d, Y') }}
-                                    </p>
-                                </div>
-                                @php
-                                    $statusMap = [
-                                        'delivered'  => ['teal',  __('Delivered')],
-                                        'processing' => ['amber', __('Processing')],
-                                        'pending'    => ['blue',  __('Pending')],
-                                        'canceled'   => ['red',   __('Cancelled')],
-                                    ];
-                                    [$cls, $label] = $statusMap[$order->status] ?? ['blue', ucfirst($order->status)];
-                                @endphp
-                                <span class="stat-chip {{ $cls }}">{{ $label }}</span>
-                            </div>
-                            @endforeach
-                        @else
-                            <div class="empty-state">
-                                <div class="empty-icon">
-                                    <i class="ti ti-shopping-bag"></i>
-                                </div>
-                                <p class="empty-title">{{ __('No orders yet') }}</p>
-                                <p class="empty-sub">{{ __('Your recent orders will appear here.') }}</p>
-                                <a href="{{ route('front.catalog') }}" class="empty-cta">
-                                    <i class="ti ti-arrow-right" style="font-size:13px;"></i>
-                                    {{ __('Start shopping') }}
-                                </a>
-                            </div>
-                        @endif
-                    </div>
+            {{-- Orders Table --}}
+            <div class="table-card">
+                <div class="table-header">
+                    <h2 class="table-title">{{ __('Orders Table') }}</h2>
+                    <a href="{{ route('user.order.index') }}" style="font-size:13px; color:var(--text-mid); text-decoration:none;"><i class="ti ti-arrows-maximize"></i></a>
                 </div>
-
-                {{-- Wishlist --}}
-                <div class="panel">
-                    <div class="panel-header">
-                        <p class="panel-title">{{ __('Wishlist') }}</p>
-                        <a href="{{ route('user.wishlist.index') }}" class="panel-link">
-                            {{ __('View all') }} <i class="ti ti-arrow-right" style="font-size:12px;"></i>
-                        </a>
-                    </div>
-                    <div class="panel-body">
-                        @if(isset($wishlistItems) && $wishlistItems->count())
-                            @foreach($wishlistItems->take(4) as $item)
-                            <div style="display:flex; align-items:center; gap:10px; padding:10px 1.25rem; border-bottom:1px solid var(--border);">
-                                <div style="width:36px;height:36px;border-radius:8px;overflow:hidden;background:var(--bg);flex-shrink:0;">
-                                    @if($item->product->thumbnail)
-                                        <img src="{{ asset($item->product->thumbnail) }}" style="width:100%;height:100%;object-fit:cover;" alt="{{ $item->product->name }}">
-                                    @else
-                                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-light);">
-                                            <i class="ti ti-photo" style="font-size:16px;"></i>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div style="flex:1;min-width:0;">
-                                    <p style="font-size:13px;font-weight:600;color:var(--text-dark);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                        {{ $item->product->name }}
-                                    </p>
-                                    <p style="font-size:11px;color:var(--text-light);margin:0;">
-                                        {{ config('settings.currency_symbol') }}{{ number_format($item->product->price, 0) }}
-                                    </p>
-                                </div>
-                                <i class="ti ti-heart-filled" style="font-size:16px;color:#f472b6;flex-shrink:0;"></i>
-                            </div>
-                            @endforeach
-                        @else
-                            <div class="empty-state">
-                                <div class="empty-icon">
-                                    <i class="ti ti-heart"></i>
-                                </div>
-                                <p class="empty-title">{{ __('Wishlist is empty') }}</p>
-                                <p class="empty-sub">{{ __('Save items you love for later.') }}</p>
-                                <a href="{{ route('front.catalog') }}" class="empty-cta">
-                                    <i class="ti ti-arrow-right" style="font-size:13px;"></i>
-                                    {{ __('Explore products') }}
-                                </a>
-                            </div>
-                        @endif
-                    </div>
+                
+                <div style="overflow-x:auto;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('Order ID') }}</th>
+                                <th>{{ __('Amount') }}</th>
+                                <th>{{ __('Status') }}</th>
+                                <th>{{ __('Date') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(isset($recentOrders) && $recentOrders->count() > 0)
+                                @foreach($recentOrders as $order)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('user.order.invoice', $order->id) }}" class="order-number">
+                                                #{{ $order->order_number }}
+                                            </a>
+                                        </td>
+                                        <td style="font-weight:500;">
+                                            {{ config('settings.currency_symbol') }}{{ number_format($order->pay_amount, 2) }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $statusMap = [
+                                                    'delivered'  => ['pill-delivered', __('Delivered')],
+                                                    'processing' => ['pill-processing', __('Processing')],
+                                                    'pending'    => ['pill-pending',   __('Pending')],
+                                                    'canceled'   => ['pill-canceled',  __('Cancelled')],
+                                                ];
+                                                [$cls, $label] = $statusMap[$order->status] ?? ['pill-pending', ucfirst($order->status)];
+                                            @endphp
+                                            <span class="status-pill {{ $cls }}">{{ $label }}</span>
+                                        </td>
+                                        <td style="color:var(--text-mid);">
+                                            {{ $order->created_at->format('n/j/Y') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="4" style="text-align:center; padding: 3rem 1rem;">
+                                        <div style="color:var(--text-light); margin-bottom:8px;"><i class="ti ti-shopping-bag" style="font-size:24px;"></i></div>
+                                        <div style="font-weight:500;">{{ __('No orders found') }}</div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
 
         </main>
     </div>
 </div>
+
+
 @endsection

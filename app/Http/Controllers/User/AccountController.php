@@ -42,12 +42,15 @@ class AccountController extends Controller
             return redirect()->route('user.merchant.dashboard');
         }
 
+        $recentOrders = Order::whereUserId($user->id)->orderBy('id', 'desc')->take(5)->get();
+
         return view('user.dashboard.dashboard',[
             'allorders' => Order::whereUserId($user->id)->count(),
             'pending'   => Order::whereUserId($user->id)->whereOrderStatus('pending')->count(),
             'progress'  => Order::whereUserId($user->id)->whereOrderStatus('In Progress')->count(),
             'delivered' => Order::whereUserId($user->id)->whereOrderStatus('Delivered')->count(),
-            'canceled'  => Order::whereUserId($user->id)->whereOrderStatus('Canceled')->count()
+            'canceled'  => Order::whereUserId($user->id)->whereOrderStatus('Canceled')->count(),
+            'recentOrders' => $recentOrders
         ]);
     }
 

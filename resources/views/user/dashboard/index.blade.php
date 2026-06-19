@@ -4,6 +4,9 @@
 @endsection
 @section('content')
 
+@include('includes.user_sitebar')
+
+<div class="dash-wrapper">
 <!-- Page Title-->
 <div class="page-title">
     <div class="container">
@@ -20,9 +23,14 @@
   </div>
   <!-- Page Content-->
   <div class="container padding-bottom-3x mb-1">
-  <div class="row">
-         @include('includes.user_sitebar')
-          <div class="col-lg-8">
+      <div class="d-flex align-items-center mb-4" style="gap: 12px;">
+          <button id="sidebarToggle" class="btn-sidebar-toggle">
+              <i class="ti ti-menu-2"></i>
+          </button>
+          <span style="font-size: 14.5px; font-weight: 600; color: var(--text-dark);">{{ __('Menu') }}</span>
+      </div>
+      <div class="row">
+          <div class="col-lg-12">
             <div class="card" style="border-radius: 20px; box-shadow: 0 4px 24px rgba(26,58,92,.10); border: none;">
                 <div class="card-body">
                     <div class="padding-top-2x mt-2 hidden-lg-up"></div>
@@ -90,4 +98,5 @@
           </div>
         </div>
   </div>
+</div>
 @endsection
