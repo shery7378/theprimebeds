@@ -2164,63 +2164,6 @@
         @endif -->
 
         {{-- ══════════════════════════════════════════════
-             RELATED PRODUCTS
-        ══════════════════════════════════════════════ --}}
-        @if (count($related_items) > 0)
-        <div class="pdp-related-section">
-            <div class="section-title">
-                <h2 class="h3">{{ __('You May Also Like') }}</h2>
-            </div>
-
-            <div class="relatedproductslider owl-carousel">
-                @foreach ($related_items as $related)
-                    <div class="slider-item">
-                        <div class="product-card">
-                            <div class="product-thumb">
-                                @if (!$related->is_stock())
-                                    <div class="product-badge bg-secondary border-default text-body">
-                                        {{ __('out of stock') }}
-                                    </div>
-                                @endif
-
-                                @php $discPct = PriceHelper::DiscountPercentage($related); @endphp
-                                @if($discPct)
-                                    <div class="product-badge bg-warning" style="background-color:#daa520 !important;">-{{ $discPct }}</div>
-                                @endif
-                                <img class="lazy" src="{{ url('assets/img/' . $related->thumbnail) }}" alt="{{ $related->name }}">
-                                <div class="product-button-group">
-                                    <a class="product-button wishlist_store"
-                                        href="{{ route('user.wishlist.store', $related->id) }}"
-                                        title="{{ __('Wishlist') }}"><i class="icon-heart"></i></a>
-                                    <a class="product-button"
-                                        href="{{ route('front.product', $related->slug) }}"
-                                        title="{{ __('Details') }}"><i class="icon-search"></i></a>
-                                    @include('includes.item_footer', ['sitem' => $related])
-                                </div>
-                            </div>
-                            <div class="product-card-body">
-                                <div class="product-category"><a
-                                        href="{{ route('front.catalog') . '?category=' . $related->category->slug }}">{{ $related->category->name }}</a>
-                                </div>
-                                <h3 class="product-title"><a
-                                        href="{{ route('front.product', $related->slug) }}">
-                                        {{ Str::limit($related->name, 35) }}
-                                    </a></h3>
-                                <h4 class="product-price">
-                                    @if ($related->previous_price != 0)
-                                        <del>{{ PriceHelper::setPreviousPrice($related->previous_price) }}</del>
-                                    @endif
-                                    {{ PriceHelper::grandCurrencyPrice($related) }}
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        @endif
-
-        {{-- ══════════════════════════════════════════════
              CUSTOMER REVIEWS (standalone section)
         ══════════════════════════════════════════════ --}}
         @php
@@ -2240,50 +2183,6 @@
             </h2>
 
             <div class="pdp-reviews-container">
-                {{-- Summary Header Card --}}
-                <div class="pdp-reviews-summary-card">
-                    {{-- Score --}}
-                    <div class="pdp-summary-score-box">
-                        <div class="pdp-summary-score-num">{{ $avgRating > 0 ? $avgRating : '—' }}</div>
-                        <div class="pdp-summary-stars">
-                            @for($i = 1; $i <= 5; $i++)
-                                <i class="fas fa-star" style="color: {{ $i <= round($avgRating) ? 'var(--gold)' : 'var(--border)' }};"></i>
-                            @endfor
-                        </div>
-                        <div class="pdp-summary-count">
-                            {{ __('Based on') }} {{ $totalReviews }} {{ $totalReviews == 1 ? __('review') : __('reviews') }}
-                        </div>
-                    </div>
-
-                    {{-- Distribution --}}
-                    <div class="pdp-summary-distribution">
-                        @foreach([5, 4, 3, 2, 1] as $star)
-                            @php $pct = $totalReviews > 0 ? round(($ratingCounts[$star] / $totalReviews) * 100) : 0; @endphp
-                            <div class="pdp-dist-row">
-                                <span class="pdp-dist-label">{{ $star }} {{ __('star') }}</span>
-                                <div class="pdp-dist-bar-wrapper">
-                                    <div class="pdp-dist-bar-fill" style="width: {{ $pct }}%;"></div>
-                                </div>
-                                <span class="pdp-dist-value">{{ $pct }}%</span>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    {{-- Action --}}
-                    <div class="pdp-summary-actions">
-                        <h4 class="pdp-summary-actions-title">{{ __('Share Your Thoughts') }}</h4>
-                        <p class="pdp-summary-actions-text">{{ __('If you have purchased this product, please share your feedback with other customers!') }}</p>
-                        @auth
-                            <button class="pdp-btn pdp-btn-primary" data-bs-toggle="modal" data-bs-target="#leaveReview" style="flex:none; min-width:auto; padding:10px 24px; width:100%; border-radius: 12px;">
-                                <i class="fas fa-edit me-2"></i>{{ __('Leave a Review') }}
-                            </button>
-                        @else
-                            <a href="{{ route('user.login') }}" class="pdp-btn pdp-btn-outline" style="flex:none; min-width:auto; padding:10px 24px; width:100%; border-radius: 12px; height: 46px; display: inline-flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-sign-in-alt me-2"></i>{{ __('Login to Review') }}
-                            </a>
-                        @endauth
-                    </div>
-                </div>
 
                 {{-- Review Carousel Slider --}}
                 @php
@@ -2377,6 +2276,63 @@
             </div>
         </div>
 
+
+        {{-- ══════════════════════════════════════════════
+             RELATED PRODUCTS
+        ══════════════════════════════════════════════ --}}
+        @if (count($related_items) > 0)
+        <div class="pdp-related-section">
+            <div class="section-title">
+                <h2 class="h3">{{ __('You May Also Like') }}</h2>
+            </div>
+
+            <div class="relatedproductslider owl-carousel">
+                @foreach ($related_items as $related)
+                    <div class="slider-item">
+                        <div class="product-card">
+                            <div class="product-thumb">
+                                @if (!$related->is_stock())
+                                    <div class="product-badge bg-secondary border-default text-body">
+                                        {{ __('out of stock') }}
+                                    </div>
+                                @endif
+
+                                @php $discPct = PriceHelper::DiscountPercentage($related); @endphp
+                                @if($discPct)
+                                    <div class="product-badge bg-warning" style="background-color:#daa520 !important;">-{{ $discPct }}</div>
+                                @endif
+                                <img class="lazy" src="{{ url('assets/img/' . $related->thumbnail) }}" alt="{{ $related->name }}">
+                                <div class="product-button-group">
+                                    <a class="product-button wishlist_store"
+                                        href="{{ route('user.wishlist.store', $related->id) }}"
+                                        title="{{ __('Wishlist') }}"><i class="icon-heart"></i></a>
+                                    <a class="product-button"
+                                        href="{{ route('front.product', $related->slug) }}"
+                                        title="{{ __('Details') }}"><i class="icon-search"></i></a>
+                                    @include('includes.item_footer', ['sitem' => $related])
+                                </div>
+                            </div>
+                            <div class="product-card-body">
+                                <div class="product-category"><a
+                                        href="{{ route('front.catalog') . '?category=' . $related->category->slug }}">{{ $related->category->name }}</a>
+                                </div>
+                                <h3 class="product-title"><a
+                                        href="{{ route('front.product', $related->slug) }}">
+                                        {{ Str::limit($related->name, 35) }}
+                                    </a></h3>
+                                <h4 class="product-price">
+                                    @if ($related->previous_price != 0)
+                                        <del>{{ PriceHelper::setPreviousPrice($related->previous_price) }}</del>
+                                    @endif
+                                    {{ PriceHelper::grandCurrencyPrice($related) }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </div>{{-- /container --}}
 </div>{{-- /pdp-page-wrapper --}}
 
