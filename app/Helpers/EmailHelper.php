@@ -63,7 +63,14 @@ class EmailHelper
             $this->mail->addAddress($emailData['to']);
             $this->mail->isHTML(true);
             $this->mail->Subject = $template->subject;
-            $this->mail->Body = $email_body;
+            
+            $logo_cid = '';
+            if (!empty($this->setting->logo) && file_exists(public_path('assets/img/'.$this->setting->logo))) {
+                $this->mail->addEmbeddedImage(public_path('assets/img/'.$this->setting->logo), 'logo_cid');
+                $logo_cid = 'cid:logo_cid';
+            }
+            
+            $this->mail->Body = view('emails.layout', ['body' => $email_body, 'setting' => $this->setting, 'logo_cid' => $logo_cid])->render();
             $this->mail->send();
             if ($this->setting->order_mail == 1 && $emailData['type'] === 'Order') {
                 $this->adminMail($emailData);
@@ -84,7 +91,14 @@ class EmailHelper
             $this->mail->addAddress($emailData['to']);
             $this->mail->isHTML(true);
             $this->mail->Subject = $emailData['subject'];
-            $this->mail->Body = $emailData['body'];
+            
+            $logo_cid = '';
+            if (!empty($this->setting->logo) && file_exists(public_path('assets/img/'.$this->setting->logo))) {
+                $this->mail->addEmbeddedImage(public_path('assets/img/'.$this->setting->logo), 'logo_cid');
+                $logo_cid = 'cid:logo_cid';
+            }
+            
+            $this->mail->Body = view('emails.layout', ['body' => $emailData['body'], 'setting' => $this->setting, 'logo_cid' => $logo_cid])->render();
 
             $this->mail->send();
         } catch (Exception $e) {
@@ -122,7 +136,14 @@ class EmailHelper
             $this->mail->addAddress($this->setting->contact_email);
             $this->mail->isHTML(true);
             $this->mail->Subject = $template->subject;
-            $this->mail->Body = $email_body;
+            
+            $logo_cid = '';
+            if (!empty($this->setting->logo) && file_exists(public_path('assets/img/'.$this->setting->logo))) {
+                $this->mail->addEmbeddedImage(public_path('assets/img/'.$this->setting->logo), 'logo_cid');
+                $logo_cid = 'cid:logo_cid';
+            }
+            
+            $this->mail->Body = view('emails.layout', ['body' => $email_body, 'setting' => $this->setting, 'logo_cid' => $logo_cid])->render();
 
 
 
