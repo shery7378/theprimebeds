@@ -156,7 +156,7 @@
         </div>
     </section>
 
-    @if(Auth::check() && (Auth::user()->bill_address1 || Auth::user()->bill_address2))
+    @if(Auth::check() && (Auth::user()->ship_address1 || Auth::user()->ship_address2))
     <section class="checkout-premium-card mb-4">
         <h3 class="widget-title" style="font-size: 15px;">{{ __('Saved Addresses') }}</h3>
         
@@ -167,22 +167,22 @@
             </div>
             <ul class="custom-payment-select-options custom-address-options">
                 <li class="custom-payment-select-option placeholder-option">{{ __('Select an Address') }}</li>
-                @if(Auth::user()->bill_address1)
+                @if(Auth::user()->ship_address1)
                     <li class="custom-payment-select-option address-option" 
-                        data-address="{{ Auth::user()->bill_address1 }}" 
-                        data-zip="{{ Auth::user()->bill_zip }}" 
-                        data-city="{{ Auth::user()->bill_city }}" 
-                        data-country="{{ Auth::user()->bill_country }}">
-                        {{ __('Billing Address 1') }}: {{ Auth::user()->bill_address1 }}
+                        data-address="{{ Auth::user()->ship_address1 }}" 
+                        data-zip="{{ Auth::user()->ship_zip }}" 
+                        data-city="{{ Auth::user()->ship_city }}" 
+                        data-country="{{ Auth::user()->ship_country }}">
+                        {{ __('Shipping Address 1') }}: {{ Auth::user()->ship_address1 }}
                     </li>
                 @endif
-                @if(Auth::user()->bill_address2)
+                @if(Auth::user()->ship_address2)
                     <li class="custom-payment-select-option address-option" 
-                        data-address="{{ Auth::user()->bill_address2 }}" 
-                        data-zip="{{ Auth::user()->bill_zip }}" 
-                        data-city="{{ Auth::user()->bill_city }}" 
-                        data-country="{{ Auth::user()->bill_country }}">
-                        {{ __('Billing Address 2') }}: {{ Auth::user()->bill_address2 }}
+                        data-address="{{ Auth::user()->ship_address2 }}" 
+                        data-zip="{{ Auth::user()->ship_zip }}" 
+                        data-city="{{ Auth::user()->ship_city }}" 
+                        data-country="{{ Auth::user()->ship_country }}">
+                        {{ __('Shipping Address 2') }}: {{ Auth::user()->ship_address2 }}
                     </li>
                 @endif
             </ul>
