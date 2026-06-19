@@ -1545,6 +1545,159 @@
             padding-right: 44px !important;
             cursor: pointer !important;
         }
+
+        /* ===== Premium Search Suggest Box ===== */
+        .site-header .search-box-wrap .input-group .serch-result {
+            position: absolute !important;
+            top: calc(100% + 8px) !important;
+            right: 0 !important;
+            left: auto !important;
+            width: 420px !important; /* A bit wider to look perfect and spacious */
+            height: auto !important; /* Dynamically adjust height to content */
+            background: #ffffff !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+            border: 1px solid #ebe5db !important;
+            z-index: 9999 !important;
+            overflow: hidden !important;
+            padding: 8px 0 0 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .site-header .search-box-wrap .input-group .serch-result .s-r-inner {
+            height: auto !important; /* Dynamically adjust height to content */
+            max-height: 320px !important;
+            overflow-y: auto !important;
+            padding: 0 8px !important;
+        }
+
+        /* Custom Scrollbar for search results */
+        .site-header .search-box-wrap .input-group .serch-result .s-r-inner::-webkit-scrollbar {
+            width: 6px !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .s-r-inner::-webkit-scrollbar-track {
+            background: #faf8f5 !important;
+            border-radius: 10px !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .s-r-inner::-webkit-scrollbar-thumb {
+            background: #c4b8a7 !important;
+            border-radius: 10px !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .s-r-inner::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color, #8C7558) !important;
+        }
+
+        /* Each product card in search suggest list */
+        .site-header .search-box-wrap .input-group .serch-result .product-card {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 12px !important;
+            padding: 10px !important;
+            border-bottom: 1px solid #f4f1eb !important;
+            background: transparent !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
+            margin-bottom: 4px !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            width: 100% !important;
+            box-shadow: none !important;
+            position: relative !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .product-card:hover {
+            background: #faf8f5 !important;
+            transform: translateX(3px) !important;
+        }
+
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-thumb {
+            width: 50px !important;
+            height: 50px !important;
+            flex-shrink: 0 !important;
+            border-radius: 6px !important;
+            overflow: hidden !important;
+            border: 1px solid #ebe5db !important;
+            background: #fff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-thumb img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+        }
+
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-card-body {
+            flex-grow: 1 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            text-align: left !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 2px !important;
+            border: none !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+        }
+
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-card-body .product-title {
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #2c2724 !important;
+            line-height: 1.25 !important;
+            position: static !important;
+            float: none !important;
+            display: block !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-card-body .product-title a {
+            color: #2c2724 !important;
+            text-decoration: none !important;
+            transition: color 0.2s !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-card-body .product-title a:hover {
+            color: var(--primary-color, #8C7558) !important;
+        }
+
+        .site-header .search-box-wrap .input-group .serch-result .product-card .product-card-body .product-price {
+            margin: 0 !important;
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            color: var(--primary-color, #8C7558) !important;
+            position: static !important;
+            float: none !important;
+            display: block !important;
+        }
+
+        /* View all results footer */
+        .site-header .search-box-wrap .input-group .serch-result .bottom-area {
+            background: #faf8f5 !important;
+            border-top: 1px solid #ebe5db !important;
+            padding: 10px 12px !important;
+            text-align: center !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .bottom-area a {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            color: var(--primary-color, #8C7558) !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            transition: opacity 0.2s !important;
+        }
+        .site-header .search-box-wrap .input-group .serch-result .bottom-area a:hover {
+            opacity: 0.8 !important;
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')
