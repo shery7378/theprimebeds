@@ -10,7 +10,7 @@
         {{-- Our Story Custom Design --}}
         <style>
             .story-hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('assets/images/about/hero_bed.png') }}') center/cover no-repeat;
+                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('assets/images/about/hero_mountain.png') }}') center/cover no-repeat;
                 min-height: 380px;
                 display: flex;
                 align-items: center;
@@ -403,7 +403,7 @@
         {{-- Default Page Layout --}}
         <style>
             .default-page-hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/images/about/hero_bed.png') }}') center/cover no-repeat;
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/images/about/hero_mountain.png') }}') center/cover no-repeat;
                 min-height: 280px;
                 display: flex;
                 align-items: center;
