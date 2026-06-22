@@ -10,7 +10,7 @@
         {{-- Our Story Custom Design --}}
         <style>
             .story-hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://picsum.photos/seed/hero1/1600/900') center/cover no-repeat;
+                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset('assets/images/about/hero_bed.png') }}') center/cover no-repeat;
                 min-height: 380px;
                 display: flex;
                 align-items: center;
@@ -310,42 +310,42 @@
             <div class="container">
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/start/800/600" alt="The Start">
+                        <img src="{{ asset('assets/images/about/the-start.jpg') }}" alt="The Start">
                         <div class="gallery-label">{{ __('The Start') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/team/800/600" alt="The Team">
+                        <img src="{{ asset('assets/images/about/the-team.jpg') }}" alt="The Team">
                         <div class="gallery-label">{{ __('The Team') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/friends/800/600" alt="Customers to Friends">
+                        <img src="{{ asset('assets/images/about/customers-to-friends.jpg') }}" alt="Customers to Friends">
                         <div class="gallery-label">{{ __('Customers to Friends') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/stars/800/600" alt="Selling to the Stars">
+                        <img src="{{ asset('assets/images/about/selling-to-the-stars.jpg') }}" alt="Selling to the Stars">
                         <div class="gallery-label">{{ __('Selling to the Stars') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/designs/800/600" alt="Our Famous Designs">
+                        <img src="{{ asset('assets/images/about/our-famous-designs.jpg') }}" alt="Our Famous Designs">
                         <div class="gallery-label">{{ __('Our Famous Designs') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/community/800/600" alt="Community">
+                        <img src="{{ asset('assets/images/about/community.jpg') }}" alt="Community">
                         <div class="gallery-label">{{ __('Community') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/hq/800/600" alt="LBC HQ">
+                        <img src="{{ asset('assets/images/about/lbc-hq.jpg') }}" alt="LBC HQ">
                         <div class="gallery-label">{{ __('LBC HQ') }}</div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/uk/800/600" alt="UK">
+                        <img src="{{ asset('assets/images/about/uk.jpg') }}" alt="UK">
                         <div class="gallery-label">{{ __('UK') }}</div>
                     </div>
                 </div>
@@ -403,7 +403,7 @@
         {{-- Default Page Layout --}}
         <style>
             .default-page-hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/seed/hero2/1600/900') center/cover no-repeat;
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('assets/images/about/hero_bed.png') }}') center/cover no-repeat;
                 min-height: 280px;
                 display: flex;
                 align-items: center;
