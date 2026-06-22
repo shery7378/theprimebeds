@@ -410,6 +410,18 @@
 
 {{-- Hero Section --}}
 <div class="contact-hero">
+    <div class="hero-content" style="z-index: 1;">
+        <h1 style="color: #fff; font-size: 5rem; font-weight: 800; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); letter-spacing: 2px;">Contact Us</h1>
+        <p style="font-size: 1.8rem; margin-bottom: 15px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); font-weight: 600;">
+            <i class="fas fa-comments" style="margin-right: 10px; opacity: 0.8;"></i> We love a chat!
+        </p>
+        <p style="font-size: 1.4rem; color: #e0e0e0; margin-bottom: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
+            <i class="fas fa-map-marker-alt" style="margin-right: 10px; opacity: 0.8;"></i> Feel free to contact us
+        </p>
+        <p style="font-size: 1.4rem; color: #e0e0e0; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);">
+            <i class="fas fa-thumbs-up" style="margin-right: 10px; opacity: 0.8;"></i> and we'll be happy to help
+        </p>
+    </div>
 </div>
 
 {{-- Main Contact Section --}}
