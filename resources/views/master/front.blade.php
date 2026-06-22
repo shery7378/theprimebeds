@@ -64,6 +64,13 @@
         :root {
             --primary-color: {{ $setting->primary_color ?? '#8C7558' }};
         }
+        /* Fix search result dropdown overlapping the search bar */
+        .site-header .search-box-wrap .input-group .serch-result {
+            margin-top: 8px !important;
+            border-top: 1px solid #e0e0e0 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        }
         {{ $setting->custom_css }}
         /* =============================================
     SLIDER NAVIGATION ARROWS (HIDDEN)
