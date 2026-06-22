@@ -1,7 +1,29 @@
 @extends('master.front')
 
 @section('styleplugins')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
+.select2-container--default .select2-selection--single {
+    height: auto !important;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 30px;
+    padding-left: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+    top: 0;
+}
+.select2-results__option {
+    display: flex;
+    align-items: center;
+}
+
     /* ============================================================
        DESIGN TOKENS
     ============================================================ */
@@ -1753,28 +1775,14 @@
                         <div class="product-thumbnails insize">
                             <div class="product-details-slider owl-carousel" id="product-gallery">
                                 <div class="item">
-                                    <img src="{{ url('assets/img/' . $item->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
+                                    <img src="{{ filter_var($item->photo, FILTER_VALIDATE_URL) ? $item->photo : asset('assets/img/' . $item->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
                                 </div>
                                 @foreach ($galleries as $gallery)
                                     <div class="item">
-                                        <img src="{{ url('assets/img/' . $gallery->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
+                                        <img src="{{ filter_var($gallery->photo, FILTER_VALIDATE_URL) ? $gallery->photo : asset('assets/img/' . $gallery->photo) }}" alt="{{ $item->name }}" data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
                                     </div>
                                 @endforeach
-                                @foreach (($attributes ?? collect()) as $attribute)
-                                    @foreach (($attribute->options ?? collect()) as $option)
-                                        @php $images = json_decode($option->variation_images, true) ?? []; @endphp
-                                        @foreach (($images ?? []) as $img)
-                                            @if (!empty($img))
-                                                <div class="item">
-                                                    <img src="{{ url('assets/img/' . $img) }}" alt="zoom"
-                                                        data-option-id="{{ $option->id }}"
-                                                        data-attribute-id="{{ $attribute->id }}"
-                                                        data-index="{{ $imageIndex++ }}" style="border-radius: 0;" />
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -1783,9 +1791,9 @@
                     <div class="pdp-thumbs-strip">
                         <div class="product-thumbnails">
                             <div class="owl-carousel product-thumbnails-slider">
-                                <div class="item"><img src="{{ url('assets/img/' . $item->photo) }}" alt="thumb" /></div>
+                                <div class="item"><img src="{{ filter_var($item->photo, FILTER_VALIDATE_URL) ? $item->photo : asset('assets/img/' . $item->photo) }}" alt="thumb" /></div>
                                 @foreach ($galleries as $gallery)
-                                    <div class="item"><img src="{{ url('assets/img/' . $gallery->photo) }}" alt="thumb" /></div>
+                                    <div class="item"><img src="{{ filter_var($gallery->photo, FILTER_VALIDATE_URL) ? $gallery->photo : asset('assets/img/' . $gallery->photo) }}" alt="thumb" /></div>
                                 @endforeach
                             </div>
                         </div>
@@ -1858,30 +1866,41 @@
                         @if(($attributes ?? collect())->filter(fn($a) => ($a->options ?? collect())->count() > 0)->count() > 0)
                         <div>
                             <div class="pdp-section-label"><i class="fas fa-layer-group"></i>{{ __('Select Options') }}</div>
-                            <div class="pdp-attr-grid">
+                            <div class="custom-accordion-wrapper" style="margin-top: 15px;">
                                 @foreach (($attributes ?? collect()) as $attribute)
                                     @if (($attribute->options ?? collect())->count() != 0)
-                                        <div class="pdp-attr-group">
-                                            <label for="attr-{{ $attribute->id }}">{{ $attribute->name }}</label>
-                                            <select class="attribute_option" id="attr-{{ $attribute->id }}">
-                                                <option value="">{{ __('Select') }} {{ $attribute->name }}</option>
-                                                @foreach (($attribute->options ?? collect())->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE) as $option)
-                                                    @php
-                                                        $stockRaw = $option->stock ?? '';
-                                                        $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
-                                                        $images   = json_decode($option->variation_images, true) ?: [];
-                                                    @endphp
-                                                    <option value="{{ $option->name }}"
-                                                        data-type="{{ $attribute->id }}"
-                                                        data-href="{{ $option->id }}"
-                                                        data-images='@json($images)'
-                                                        data-target="{{ PriceHelper::setConvertPrice($option->price) }}"
-                                                        @if ($isOut) disabled style="color:#d63031;font-weight:600;background:#fff0f0;" @endif>
-                                                        {{ $option->name }} @if ($isOut) — {{ __('Out of stock') }} @endif
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span class="invalid-msg"><i class="fas fa-exclamation-circle me-1"></i>{{ __('Please select') }} {{ $attribute->name }}</span>
+                                        <div class="custom-accordion-item" style="background: #fff; border: 1px solid #eaeaea; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px; overflow: visible;">
+                                            <div class="custom-accordion-header" style="padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="$(this).next('.custom-accordion-body').slideToggle(); $(this).find('.toggle-icon').text($(this).find('.toggle-icon').text() == '+' ? '-' : '+');">
+                                                <div style="font-weight: 500; color: #000; font-size: 15px;">
+                                                    <span class="toggle-icon" style="margin-right: 8px;">+</span> 
+                                                    {{ $attribute->name }} 
+                                                    <span style="color: #e84118; margin-left: 4px;">*</span>
+                                                </div>
+                                                <i class="fas fa-check-circle" style="color: #000; font-size: 18px;"></i>
+                                            </div>
+                                            <div class="custom-accordion-body" style="padding: 0 20px 20px 20px; display: none;">
+                                                <select class="attribute_option" id="attr-{{ $attribute->id }}" style="width: 100%;">
+                                                    <option value="">{{ __('Select') }} {{ $attribute->name }}</option>
+                                                    @foreach (($attribute->options ?? collect())->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE) as $option)
+                                                        @php
+                                                            $stockRaw = $option->stock ?? '';
+                                                            $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
+                                                            $images   = json_decode($option->variation_images, true) ?: [];
+                                                            $firstImg = !empty($images) ? (filter_var($images[0], FILTER_VALIDATE_URL) ? $images[0] : asset('assets/img/' . $images[0])) : '';
+                                                        @endphp
+                                                        <option value="{{ $option->name }}"
+                                                            data-type="{{ $attribute->id }}"
+                                                            data-href="{{ $option->id }}"
+                                                            data-images='@json($images)'
+                                                            data-image="{{ $firstImg }}"
+                                                            data-target="{{ PriceHelper::setConvertPrice($option->price) }}"
+                                                            @if ($isOut) disabled style="color:#d63031;font-weight:600;background:#fff0f0;" @endif>
+                                                            {{ $option->name }} @if ($isOut) — {{ __('Out of stock') }} @endif
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="invalid-msg" style="display:none; color:red; font-size:12px; margin-top:5px;"><i class="fas fa-exclamation-circle me-1"></i>{{ __('Please select') }} {{ $attribute->name }}</span>
+                                            </div>
                                         </div>
                                     @endif
                                 @endforeach
@@ -2746,5 +2765,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+</script>
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        function formatState (state) {
+            if (!state.id) { return state.text; }
+            var img = $(state.element).data('image');
+            if(!img) return state.text;
+            var $state = $(
+                '<span style="display:flex; align-items:center;"><img src="' + img + '" class="img-flag" style="height:36px; width:36px; object-fit:contain; margin-right:12px; border-radius:4px; border:1px solid #eee;" /> ' + state.text + '</span>'
+            );
+            return $state;
+        };
+        
+        $('.attribute_option').select2({
+            templateResult: formatState,
+            templateSelection: formatState,
+            minimumResultsForSearch: Infinity,
+            width: '100%'
+        });
+    });
 </script>
 @endsection
