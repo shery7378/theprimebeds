@@ -33,6 +33,10 @@
         html.sidebar-active .dash-wrapper {
             padding-left: 300px;
         }
+        
+        .sidebar-overlay.active {
+            display: none !important;
+        }
     }
 
     /* ── Sidebar (Global Off-canvas) ───────────────────────── */

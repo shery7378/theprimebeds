@@ -76,17 +76,27 @@
                 </div>
             </div>
             <div class="row">
+                @php
+                    $bill = json_decode($order->billing_info, true) ?: [];
+                    $ship = json_decode($order->shipping_info, true) ?: [];
+                    
+                    $billAddress1 = $bill['bill_address1'] ?? '';
+                    $shipAddress1 = $ship['ship_address1'] ?? '';
+                    $billCity = $bill['bill_city'] ?? '';
+                    $shipCity = $ship['ship_city'] ?? '';
+                    $billZip = $bill['bill_zip'] ?? '';
+                    $shipZip = $ship['ship_zip'] ?? '';
+
+                    $isSameAddress = ($billAddress1 == $shipAddress1 && $billCity == $shipCity && $billZip == $shipZip);
+                @endphp
+
+                @if(!$isSameAddress && $billAddress1)
                 <div class="col-12 col-md-6">
                     <h5>{{ __('Billing Address :') }}</h5>
-                    @php
-                        $bill = json_decode($order->billing_info, true);
-
-                    @endphp
-
-                    <span class="text-muted">{{ __('Name') }}: </span>{{ $bill['bill_first_name'] }}
-                    {{ $bill['bill_last_name'] }}<br>
-                    <span class="text-muted">{{ __('Email') }}: </span>{{ $bill['bill_email'] }}<br>
-                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $bill['bill_phone'] }}<br>
+                    <span class="text-muted">{{ __('Name') }}: </span>{{ $bill['bill_first_name'] ?? '' }}
+                    {{ $bill['bill_last_name'] ?? '' }}<br>
+                    <span class="text-muted">{{ __('Email') }}: </span>{{ $bill['bill_email'] ?? '' }}<br>
+                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $bill['bill_phone'] ?? '' }}<br>
                     @if (isset($bill['bill_address1']))
                         <span class="text-muted">{{ __('Address') }}: </span>{{ $bill['bill_address1'] }},
                         {{ isset($bill['bill_address2']) ? $bill['bill_address2'] : '' }}<br>
@@ -106,38 +116,34 @@
                     @if (isset($bill['bill_company']))
                         <span class="text-muted">{{ __('Company') }}: </span>{{ $bill['bill_company'] }}<br>
                     @endif
-
-
                 </div>
-                <div class="col-12 col-md-6">
+                @endif
+
+                <div class="col-12 {{ (!$isSameAddress && $billAddress1) ? 'col-md-6' : 'col-md-12' }}">
                     <h5>{{ __('Shipping Address :') }}</h5>
-                    @php
-                        $ship = json_decode($order->shipping_info, true);
-                    @endphp
-                    <span class="text-muted">{{ __('Name') }}: </span>{{ $ship['ship_first_name'] }}
-                    {{ $ship['ship_last_name'] }} <br>
-                    <span class="text-muted">{{ __('Email') }}: </span>{{ $ship['ship_email'] }}<br>
-                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $ship['ship_phone'] }}<br>
-                    @if (isset($ship['ship_address1']))
-                        <span class="text-muted">{{ __('Address') }}: </span>{{ $ship['ship_address1'] }},
-                        {{ isset($ship['ship_address2']) ? $ship['ship_address2'] : '' }}<br>
+                    <span class="text-muted">{{ __('Name') }}: </span>{{ $ship['ship_first_name'] ?? ($ship['bill_first_name'] ?? '') }}
+                    {{ $ship['ship_last_name'] ?? ($ship['bill_last_name'] ?? '') }} <br>
+                    <span class="text-muted">{{ __('Email') }}: </span>{{ $ship['ship_email'] ?? ($ship['bill_email'] ?? '') }}<br>
+                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $ship['ship_phone'] ?? ($ship['bill_phone'] ?? '') }}<br>
+                    @if (isset($ship['ship_address1']) || isset($ship['bill_address1']))
+                        <span class="text-muted">{{ __('Address') }}: </span>{{ $ship['ship_address1'] ?? $ship['bill_address1'] }},
+                        {{ isset($ship['ship_address2']) ? $ship['ship_address2'] : (isset($ship['bill_address2']) ? $ship['bill_address2'] : '') }}<br>
                     @endif
-                    @if (isset($ship['ship_country']))
-                        <span class="text-muted">{{ __('Country') }}: </span>{{ $ship['ship_country'] }}<br>
+                    @if (isset($ship['ship_country']) || isset($ship['bill_country']))
+                        <span class="text-muted">{{ __('Country') }}: </span>{{ $ship['ship_country'] ?? $ship['bill_country'] }}<br>
                     @endif
-                    @if (isset($ship['ship_city']))
-                        <span class="text-muted">{{ __('City') }}: </span>{{ $ship['ship_city'] }}<br>
+                    @if (isset($ship['ship_city']) || isset($ship['bill_city']))
+                        <span class="text-muted">{{ __('City') }}: </span>{{ $ship['ship_city'] ?? $ship['bill_city'] }}<br>
                     @endif
                     @if (isset($state['name']))
                         <span class="text-muted">{{ __('State') }}: </span>{{ $state['name'] }}<br>
                     @endif
-                    @if (isset($ship['ship_zip']))
-                        <span class="text-muted">{{ __('Zip') }}: </span>{{ $ship['ship_zip'] }}<br>
+                    @if (isset($ship['ship_zip']) || isset($ship['bill_zip']))
+                        <span class="text-muted">{{ __('Zip') }}: </span>{{ $ship['ship_zip'] ?? $ship['bill_zip'] }}<br>
                     @endif
-                    @if (isset($ship['ship_company']))
-                        <span class="text-muted">{{ __('Company') }}: </span>{{ $ship['ship_company'] }}<br>
+                    @if (isset($ship['ship_company']) || isset($ship['bill_company']))
+                        <span class="text-muted">{{ __('Company') }}: </span>{{ $ship['ship_company'] ?? $ship['bill_company'] }}<br>
                     @endif
-
                 </div>
             </div>
             <div class="row">

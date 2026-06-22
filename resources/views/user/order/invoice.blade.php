@@ -430,6 +430,35 @@
 
                 {{-- Address Grid --}}
                 <div class="row mb-5 g-4">
+                    @php
+                        $bill = json_decode($order->billing_info, true) ?: [];
+                        $billFirstName = !empty($bill['bill_first_name']) ? $bill['bill_first_name'] : ($order->user->first_name ?? '');
+                        $billLastName = !empty($bill['bill_last_name']) ? $bill['bill_last_name'] : ($order->user->last_name ?? '');
+                        $billEmail = !empty($bill['bill_email']) ? $bill['bill_email'] : ($order->user->email ?? '');
+                        $billPhone = !empty($bill['bill_phone']) ? $bill['bill_phone'] : ($order->user->phone ?? '');
+                        $billAddress1 = !empty($bill['bill_address1']) ? $bill['bill_address1'] : ($order->user->bill_address1 ?? '');
+                        $billAddress2 = !empty($bill['bill_address2']) ? $bill['bill_address2'] : ($order->user->bill_address2 ?? '');
+                        $billCity = !empty($bill['bill_city']) ? $bill['bill_city'] : ($order->user->bill_city ?? '');
+                        $billZip = !empty($bill['bill_zip']) ? $bill['bill_zip'] : ($order->user->bill_zip ?? '');
+                        $billCountry = !empty($bill['bill_country']) ? $bill['bill_country'] : ($order->user->bill_country ?? '');
+                        $billCompany = !empty($bill['bill_company']) ? $bill['bill_company'] : ($order->user->bill_company ?? '');
+
+                        $ship = json_decode($order->shipping_info, true) ?: [];
+                        $shipFirstName = $ship['ship_first_name'] ?? ($ship['bill_first_name'] ?? '');
+                        $shipLastName = $ship['ship_last_name'] ?? ($ship['bill_last_name'] ?? '');
+                        $shipEmail = $ship['ship_email'] ?? ($ship['bill_email'] ?? '');
+                        $shipPhone = $ship['ship_phone'] ?? ($ship['bill_phone'] ?? '');
+                        $shipAddress1 = $ship['ship_address1'] ?? ($ship['bill_address1'] ?? '');
+                        $shipAddress2 = $ship['ship_address2'] ?? ($ship['bill_address2'] ?? '');
+                        $shipCity = $ship['ship_city'] ?? ($ship['bill_city'] ?? '');
+                        $shipZip = $ship['ship_zip'] ?? ($ship['bill_zip'] ?? '');
+                        $shipCountry = $ship['ship_country'] ?? ($ship['bill_country'] ?? '');
+                        $shipCompany = $ship['ship_company'] ?? ($ship['bill_company'] ?? '');
+
+                        $isSameAddress = ($billAddress1 == $shipAddress1 && $billCity == $shipCity && $billZip == $shipZip);
+                    @endphp
+
+                    @if(!$isSameAddress && $billAddress1)
                     <div class="col-md-6">
                         <div class="address-box-card">
                             <div class="address-box-header">
@@ -437,68 +466,32 @@
                                 <h5>{{ __('Billing Address') }}</h5>
                             </div>
                             <div class="address-box-body">
-                                @php
-                                    $bill = json_decode($order->billing_info, true) ?: [];
-                                    $billFirstName = !empty($bill['bill_first_name']) ? $bill['bill_first_name'] : ($order->user->first_name ?? '');
-                                    $billLastName = !empty($bill['bill_last_name']) ? $bill['bill_last_name'] : ($order->user->last_name ?? '');
-                                    $billEmail = !empty($bill['bill_email']) ? $bill['bill_email'] : ($order->user->email ?? '');
-                                    $billPhone = !empty($bill['bill_phone']) ? $bill['bill_phone'] : ($order->user->phone ?? '');
-                                    $billAddress1 = !empty($bill['bill_address1']) ? $bill['bill_address1'] : ($order->user->bill_address1 ?? '');
-                                    $billAddress2 = !empty($bill['bill_address2']) ? $bill['bill_address2'] : ($order->user->bill_address2 ?? '');
-                                    $billCity = !empty($bill['bill_city']) ? $bill['bill_city'] : ($order->user->bill_city ?? '');
-                                    $billZip = !empty($bill['bill_zip']) ? $bill['bill_zip'] : ($order->user->bill_zip ?? '');
-                                    $billCountry = !empty($bill['bill_country']) ? $bill['bill_country'] : ($order->user->bill_country ?? '');
-                                    $billCompany = !empty($bill['bill_company']) ? $bill['bill_company'] : ($order->user->bill_company ?? '');
-
-                                    // Fix for existing orders: if the billing address starts with/contains "shipping", clear it from billing card
-                                    if ($billAddress1 && (strpos(strtolower($billAddress1), 'shipping') !== false || strpos(strtolower($billAddress2), 'shipping') !== false)) {
-                                        $billAddress1 = null;
-                                        $billAddress2 = null;
-                                        $billCity = null;
-                                        $billZip = null;
-                                        $billCountry = null;
-                                        $billCompany = null;
-                                    }
-                                @endphp
                                 <p class="name">{{ $billFirstName }} {{ $billLastName }}</p>
                                 <p class="info"><i class="fas fa-envelope"></i> {{ $billEmail }}</p>
                                 <p class="info"><i class="fas fa-phone"></i> {{ $billPhone }}</p>
-                                @if ($billAddress1)
-                                    <p class="info address-detail">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <span>
-                                            {{ $billAddress1 }}{{ $billAddress2 ? ', ' . $billAddress2 : '' }}<br>
-                                            {{ $billCity }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }}{{ $billZip ? ' ' . $billZip : '' }}<br>
-                                            {{ $billCountry }}
-                                        </span>
-                                    </p>
-                                @endif
+                                <p class="info address-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>
+                                        {{ $billAddress1 }}{{ $billAddress2 ? ', ' . $billAddress2 : '' }}<br>
+                                        {{ $billCity }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }}{{ $billZip ? ' ' . $billZip : '' }}<br>
+                                        {{ $billCountry }}
+                                    </span>
+                                </p>
                                 @if ($billCompany)
                                     <p class="info"><i class="fas fa-building"></i> {{ $billCompany }}</p>
                                 @endif
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    @endif
+
+                    <div class="{{ (!$isSameAddress && $billAddress1) ? 'col-md-6' : 'col-md-12' }}">
                         <div class="address-box-card">
                             <div class="address-box-header">
                                 <i class="fas fa-truck icon"></i>
                                 <h5>{{ __('Shipping Address') }}</h5>
                             </div>
                             <div class="address-box-body">
-                                @php
-                                    $ship = json_decode($order->shipping_info, true) ?: [];
-                                    $shipFirstName = $ship['ship_first_name'] ?? ($ship['bill_first_name'] ?? '');
-                                    $shipLastName = $ship['ship_last_name'] ?? ($ship['bill_last_name'] ?? '');
-                                    $shipEmail = $ship['ship_email'] ?? ($ship['bill_email'] ?? '');
-                                    $shipPhone = $ship['ship_phone'] ?? ($ship['bill_phone'] ?? '');
-                                    $shipAddress1 = $ship['ship_address1'] ?? ($ship['bill_address1'] ?? '');
-                                    $shipAddress2 = $ship['ship_address2'] ?? ($ship['bill_address2'] ?? '');
-                                    $shipCity = $ship['ship_city'] ?? ($ship['bill_city'] ?? '');
-                                    $shipZip = $ship['ship_zip'] ?? ($ship['bill_zip'] ?? '');
-                                    $shipCountry = $ship['ship_country'] ?? ($ship['bill_country'] ?? '');
-                                    $shipCompany = $ship['ship_company'] ?? ($ship['bill_company'] ?? '');
-                                @endphp
                                 <p class="name">{{ $shipFirstName }} {{ $shipLastName }}</p>
                                 <p class="info"><i class="fas fa-envelope"></i> {{ $shipEmail }}</p>
                                 <p class="info"><i class="fas fa-phone"></i> {{ $shipPhone }}</p>
