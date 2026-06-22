@@ -656,7 +656,32 @@
             "image": "cropped_colors\/chenille-cream.jpg"
         }
     ],
-    "headboardHeights": [],
+    "headboardHeights": [
+        {
+            "category": "Headboard Height\n*",
+            "name": "54\" (4.5ft) - Custom Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "60\" (5ft) - Standard Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "66\" (5.5ft) - Custom Height",
+            "price": 100,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "72\" (6ft) - Custom Height",
+            "price": 100,
+            "image": null
+        }
+    ],
     "mattressOptions": [
         {
             "category": "Add a Mattress (Single)\n\t\t\t\t\t*",

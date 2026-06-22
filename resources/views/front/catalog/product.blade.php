@@ -1886,7 +1886,7 @@
                                                             $stockRaw = $option->stock ?? '';
                                                             $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
                                                             $images   = json_decode($option->variation_images, true) ?: [];
-                                                            $firstImg = !empty($images) ? (filter_var($images[0], FILTER_VALIDATE_URL) ? $images[0] : asset('assets/img/' . $images[0])) : '';
+                                                            $firstImg = (!empty($images) && $images[0]) ? (filter_var($images[0], FILTER_VALIDATE_URL) ? $images[0] : asset('assets/img/' . $images[0])) : '';
                                                         @endphp
                                                         <option value="{{ $option->name }}"
                                                             data-type="{{ $attribute->id }}"

@@ -74,6 +74,7 @@ class IvyOttomanBedSeeder extends Seeder
         $insertAttr('Size', $data['sizes'] ?? []);
         $insertAttr('Fabric & Colour', $data['fabricColours'] ?? []);
         $insertAttr('Piping Colour', $data['pipingColours'] ?? []);
+        $insertAttr('Headboard Height', $data['headboardHeights'] ?? []);
         $insertAttr('Mattress Options', $data['mattressOptions'] ?? []);
 
         // Gallery
