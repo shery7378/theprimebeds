@@ -186,6 +186,42 @@ $(function ($) {
     },
   });
 
+  // most-selling-slider Area Start
+  var $most_selling_slider = $(".most-selling-slider");
+  $most_selling_slider.owlCarousel({
+    navText: [],
+    nav: true,
+    dots: false,
+    autoplay: true,
+    autoplayHoverPause: true,
+    autoplayTimeout: 3000,
+    smartSpeed: 1200,
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    margin: 15,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      576: {
+        items: 2,
+      },
+      768: {
+        items: 3,
+      },
+      992: {
+        items: 4,
+      },
+      1200: {
+        items: 4,
+      },
+      1400: {
+        items: 5,
+      },
+    },
+  });
+
   // newproduct-slider Area Start
   var $newproduct_slider = $(".features-slider");
   $newproduct_slider.owlCarousel({

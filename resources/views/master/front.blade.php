@@ -73,6 +73,7 @@
         .bestseller-slider .owl-nav,
         .newproduct-slider .owl-nav,
         .toprated-slider .owl-nav,
+        .most-selling-slider .owl-nav,
         .home-blog-slider .owl-nav {
             display: none !important;
         }
