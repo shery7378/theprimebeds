@@ -1,0 +1,81 @@
+{
+    "url": "https://theluxurybedcompany.com/product/imperial-1000-pillowtop-mattress/",
+    "title": "Imperial 1000 Pillowtop Mattress (Medium)",
+    "price": "\u00a3399.00",
+    "description": "Medium mattress with 1000 pocket springs and a cool gel pillowtop for balanced support and gentle cushioning.",
+    "bullets": [],
+    "sizes": [
+        {
+            "category": "Size\n*",
+            "name": "Select an option",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "Single",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "Small Double",
+            "price": 100,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "Double",
+            "price": 200,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "King",
+            "price": 300,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "Super King",
+            "price": 400,
+            "image": null
+        },
+        {
+            "category": "Size\n*",
+            "name": "Emperor\t(+\u00a31,000.00)",
+            "price": 1,
+            "image": null
+        }
+    ],
+    "fabricColours": [],
+    "pipingColours": [],
+    "headboardHeights": [],
+    "mattressOptions": [],
+    "otherAddOns": [],
+    "dimensions": {
+        "Single": "36\u2033 | 75\u2033",
+        "Small Double": "48\u2033 | 75\u2033",
+        "Double": "54\u2033 | 75\u2033",
+        "King": "60\u2033 | 78\u2033",
+        "Super King": "72\u2033 | 78\u2033",
+        "Emperor": "84\u2033 | 84\u2033"
+    },
+    "specs": {
+        "Product price:": "\u00a3399.00",
+        "Total options:": "\u00a30.00",
+        "Order total:": "\u00a3399.00",
+        "SIZE": "WIDTH",
+        "Firmness": "Medium"
+    },
+    "productImages": [
+        "storage/products/luxlogo.webp",
+        "storage/products/Imperial-1000-Pocket-Pillowtop-2-700x700.jpg.webp",
+        "storage/products/Imperial-1000-Pocket-Pillowtop-1-700x700.jpg.webp",
+        "storage/products/Imperial-1000-Pocket-Pillowtop-3-700x700.jpg.webp",
+        "storage/products/Isabella-Storage-Footstool-1-150x150.jpg.webp",
+        "storage/products/Oxford-2000-Pocket-Mattress-1-150x150.jpg.webp"
+    ],
+    "sku": 40221,
+    "brand": ""
+}

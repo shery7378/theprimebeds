@@ -791,6 +791,14 @@ Route::group(["middleware" => ["adminlocalize", "demo"]], function () {
         Route::post('/merchant/product-pricing/submit', 'Back\MerchantReviewController@submitPrice')->name('back.merchant.submit_price');
         Route::delete('/merchant/product-pricing/delete/{id}', 'Back\MerchantReviewController@deletePrice')->name('back.merchant.delete_price');
         Route::get('/merchant/all-proposals', 'Back\MerchantReviewController@allProposals')->name('back.merchant.all_proposals');
+
+        // -------- ARTISAN TOOLS --------
+        Route::get('/artisan-tools', 'Back\ArtisanController@index')->name('back.artisan.index');
+        Route::post('/artisan-tools/migrate', 'Back\ArtisanController@migrate')->name('back.artisan.migrate');
+        Route::post('/artisan-tools/rollback', 'Back\ArtisanController@migrateRollback')->name('back.artisan.rollback');
+        Route::post('/artisan-tools/fresh', 'Back\ArtisanController@migrateFresh')->name('back.artisan.fresh');
+        Route::post('/artisan-tools/seed', 'Back\ArtisanController@runSeeder')->name('back.artisan.seed');
+        Route::post('/artisan-tools/seed-all', 'Back\ArtisanController@runAllSeeders')->name('back.artisan.seed.all');
     });
 });
 
