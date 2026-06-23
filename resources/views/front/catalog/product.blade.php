@@ -1879,9 +1879,9 @@
                                                 <i class="fas fa-check-circle" style="color: #000; font-size: 18px;"></i>
                                             </div>
                                             <div class="custom-accordion-body" style="padding: 0 20px 20px 20px; display: none;">
-                                                <select class="attribute_option" id="attr-{{ $attribute->id }}" style="width: 100%;">
+                                                <select class="attribute_option" id="attr-{{ $attribute->id }}" style="display: none;">
                                                     <option value="">{{ __('Select') }} {{ $attribute->name }}</option>
-                                                    @foreach (($attribute->options ?? collect())->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE) as $option)
+                                                    @foreach (($attribute->options ?? collect()) as $option)
                                                         @php
                                                             $stockRaw = $option->stock ?? '';
                                                             $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
@@ -1899,6 +1899,37 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                
+                                                <div class="custom-option-grid" style="display: flex; gap: 10px; padding: 10px 0; flex-wrap: wrap; max-height: 350px; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; -webkit-overflow-scrolling: touch;">
+                                                    @foreach (($attribute->options ?? collect()) as $option)
+                                                        @php
+                                                            $stockRaw = $option->stock ?? '';
+                                                            $isOut    = is_numeric($stockRaw) && (int) $stockRaw === 0;
+                                                            $images   = json_decode($option->variation_images, true) ?: [];
+                                                            $firstImg = (!empty($images) && $images[0]) ? (filter_var($images[0], FILTER_VALIDATE_URL) ? $images[0] : asset('assets/img/' . $images[0])) : '';
+                                                        @endphp
+                                                        <div class="custom-option-card {{ $isOut ? 'out-of-stock' : '' }}" 
+                                                             data-value="{{ $option->name }}" 
+                                                             data-select-id="attr-{{ $attribute->id }}"
+                                                             style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 120px; border: 1px solid #eaeaea; border-radius: 8px; padding: 15px 10px; cursor: {{ $isOut ? 'not-allowed' : 'pointer' }}; opacity: {{ $isOut ? '0.5' : '1' }}; transition: all 0.2s; background: #fff;">
+                                                            
+                                                            @if($firstImg)
+                                                                <img src="{{ $firstImg }}" alt="{{ $option->name }}" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 15px;">
+                                                            @endif
+                                                            
+                                                            <div class="custom-radio-circle" style="width: 18px; height: 18px; border: 1px solid #999; border-radius: 50%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                                                <i class="fas fa-check custom-radio-check" style="font-size: 10px; color: #fff; display: none;"></i>
+                                                            </div>
+                                                            
+                                                            <div style="font-size: 13px; color: #333; text-align: center; line-height: 1.3; word-wrap: break-word; width: 100%;">{{ $option->name }}</div>
+                                                            
+                                                            @if($option->price > 0)
+                                                                <div style="font-size: 13px; font-weight: 600; color: #000; margin-top: 5px;">+{{ PriceHelper::setCurrencyPrice($option->price) }}</div>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
                                                 <span class="invalid-msg" style="display:none; color:red; font-size:12px; margin-top:5px;"><i class="fas fa-exclamation-circle me-1"></i>{{ __('Please select') }} {{ $attribute->name }}</span>
                                             </div>
                                         </div>
@@ -2769,24 +2800,32 @@ document.addEventListener('DOMContentLoaded', function() {
 @endsection
 
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-        function formatState (state) {
-            if (!state.id) { return state.text; }
-            var img = $(state.element).data('image');
-            if(!img) return state.text;
-            var $state = $(
-                '<span style="display:flex; align-items:center;"><img src="' + img + '" class="img-flag" style="height:36px; width:36px; object-fit:contain; margin-right:12px; border-radius:4px; border:1px solid #eee;" /> ' + state.text + '</span>'
-            );
-            return $state;
-        };
-        
-        $('.attribute_option').select2({
-            templateResult: formatState,
-            templateSelection: formatState,
-            minimumResultsForSearch: Infinity,
-            width: '100%'
+        // Handle clicks on custom option cards
+        $(document).on('click', '.custom-option-card', function() {
+            if($(this).hasClass('out-of-stock')) return;
+            
+            let selectId = $(this).data('select-id');
+            let value = $(this).data('value');
+            let $select = $('#' + selectId);
+            
+            // Visual Updates for the group
+            $(this).siblings().css('border', '1px solid #eaeaea').css('background', '#fff');
+            $(this).siblings().find('.custom-radio-circle').css('background', 'transparent').css('border-color', '#999');
+            $(this).siblings().find('.custom-radio-check').hide();
+            
+            // Visual Update for selected card
+            $(this).css('border', '1px solid #000').css('background', '#fafafa');
+            $(this).find('.custom-radio-circle').css('background', '#000').css('border-color', '#000');
+            $(this).find('.custom-radio-check').show();
+            
+            // Update hidden select and trigger change to fire price calculation
+            $select.val(value).trigger('change');
+            
+            // Update accordion header to show selection
+            let accordionHeader = $(this).closest('.custom-accordion-item').find('.custom-accordion-header');
+            accordionHeader.find('.fa-check-circle').css('color', '#4cd137');
         });
     });
 </script>
