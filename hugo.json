@@ -1,8 +1,8 @@
 {
-    "url": "https://theluxurybedcompany.us/product/sono-signature-bed/?srsltid=AfmBOoqD3Uk3nLUbcBW9Nt4ve8vXlLPY36oeFDwgMw7LhklNaVJ84bq0",
-    "title": "Sono Signature Bed",
-    "price": "$3,999.00",
-    "description": "12-month manufacturer\u2019s warranty for peace of mind\nHeadboard comes split into several pieces as standard for easier access (twin size not split)\nChoose your size, in any colour & fabric \u2013 customise your dream bed below\n\nThe Sono Signature Bed features an Art Deco geometric headboard with a matching high footend and low padded sides, all fully upholstered for timeless luxury.",
+    "url": "https://theluxurybedcompany.us/product/hugo-bed/?srsltid=AfmBOoq4ZynAVI2vJVffIid7vULdWlss1ZHcsqEySchQkpEzXnHct46G",
+    "title": "Hugo Bed",
+    "price": "$2,999.00",
+    "description": "12-month manufacturer\u2019s warranty for peace of mind\nHeadboard comes split into several pieces as standard for easier access (twin size not split)\nChoose your size, in any colour & fabric \u2013 customise your dream bed below\n\nThe Hugo Bed features a tall four-panel headboard with a matching high footboard and lower padded side rails, creating a bold yet space-friendly design.",
     "bullets": [
         "12-month manufacturer\u2019s warranty for peace of mind",
         "Headboard comes split into several pieces as standard for easier access (twin size not split)",
@@ -382,44 +382,32 @@
         },
         {
             "category": "Headboard Height\n*",
-            "name": "72\" (6ft) - Custom Height",
+            "name": "60\" (5ft) - Custom Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "66\" (5.5ft) - Custom Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "72\" (6ft) - Standard Height",
             "price": 0,
             "image": null
         },
         {
             "category": "Headboard Height\n*",
             "name": "78\" (6.5ft) - Custom Height",
-            "price": 0,
-            "image": null
-        },
-        {
-            "category": "Headboard Height\n*",
-            "name": "84\" (7ft) - Standard Height",
-            "price": 0,
-            "image": null
-        },
-        {
-            "category": "Headboard Height\n*",
-            "name": "90\" (7.5ft) - Custom Height",
             "price": 200,
             "image": null
         },
         {
             "category": "Headboard Height\n*",
-            "name": "96\" (8ft) - Custom Height",
+            "name": "84\" (7ft) - Custom Height",
             "price": 200,
-            "image": null
-        },
-        {
-            "category": "Headboard Height\n*",
-            "name": "102\" (8.5ft) - Custom Height",
-            "price": 400,
-            "image": null
-        },
-        {
-            "category": "Headboard Height\n*",
-            "name": "108\" (9ft) - Custom Height",
-            "price": 400,
             "image": null
         },
         {
@@ -502,31 +490,30 @@
     "dimensions": {
         "Twin": "N/A | N/A",
         "Twin XL": "N/A | N/A",
-        "Full": "84 | 64 (74 HB width)",
-        "Queen": "89 | 70 (90 HB width)",
-        "King": "89 | 86 (114 HB width)",
-        "California King": "93 | 82 (110 HB width)",
-        "Wyoming King": "93 | 94 (122 HB width)"
+        "Full": "83 | 63",
+        "Queen": "87 | 69",
+        "King": "87 | 85",
+        "California King": "91 | 81"
     },
     "specs": {
-        "84": "30",
-        "Product price:": "$3,999.00",
+        "72": "21",
+        "Product price:": "$2,999.00",
         "Total options:": "$0.00",
-        "Order total:": "$3,999.00",
+        "Order total:": "$2,999.00",
         "BED SIZE": "LENGTH (IN)",
         "HEADBOARD HEIGHT (IN)": "FOOTBOARD HEIGHT (IN)",
         "Add-Ons": "Lift Up Storage",
         "Bed Base": "High Footend, Low Sides",
-        "Headboard Features": "Extra Wide, Panels",
         "Headboard Style": "Lines",
+        "Headboard Features": "Panels",
         "Size": "California King, Full, King, Queen"
     },
     "productImages": [
-        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-1-700x700.jpg.webp",
-        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-2-700x700.jpg.webp",
-        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-3-700x700.jpg.webp",
-        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-4-700x700.jpg.webp"
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Hugo-Bed-700x700.png",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Hugo-Bed-2-700x700.png",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Hugo-Bed-3-700x700.png",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Hugo-Bed-4-700x700.png"
     ],
-    "sku": 88733,
+    "sku": 107508,
     "brand": ""
 }
