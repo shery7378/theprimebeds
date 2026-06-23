@@ -1,0 +1,532 @@
+{
+    "url": "https://theluxurybedcompany.us/product/sono-signature-bed/?srsltid=AfmBOoqD3Uk3nLUbcBW9Nt4ve8vXlLPY36oeFDwgMw7LhklNaVJ84bq0",
+    "title": "Sono Signature Bed",
+    "price": "$3,999.00",
+    "description": "12-month manufacturer\u2019s warranty for peace of mind\nHeadboard comes split into several pieces as standard for easier access (twin size not split)\nChoose your size, in any colour & fabric \u2013 customise your dream bed below\n\nThe Sono Signature Bed features an Art Deco geometric headboard with a matching high footend and low padded sides, all fully upholstered for timeless luxury.",
+    "bullets": [
+        "12-month manufacturer\u2019s warranty for peace of mind",
+        "Headboard comes split into several pieces as standard for easier access (twin size not split)",
+        "Choose your size, in any colour & fabric \u2013 customise your dream bed below"
+    ],
+    "sizes": [
+        {
+            "category": "Size\n*",
+            "name": "Full",
+            "price": 0,
+            "image": "https://theluxurybedcompany.com/wp-content/uploads/2025/03/03-DOUBLE.png"
+        },
+        {
+            "category": "Size\n*",
+            "name": "Queen",
+            "price": 199,
+            "image": "https://theluxurybedcompany.com/wp-content/uploads/2025/03/04-KING.png"
+        },
+        {
+            "category": "Size\n*",
+            "name": "California King",
+            "price": 399,
+            "image": "https://theluxurybedcompany.com/wp-content/uploads/2025/03/05-SUPER-KING.png"
+        },
+        {
+            "category": "Size\n*",
+            "name": "King",
+            "price": 599,
+            "image": "https://theluxurybedcompany.com/wp-content/uploads/2025/03/06-EMPEROR.png"
+        },
+        {
+            "category": "Size\n*",
+            "name": "Wyoming King",
+            "price": 1199,
+            "image": "https://theluxurybedcompany.com/wp-content/uploads/2025/03/06-EMPEROR.png"
+        }
+    ],
+    "fabricColours": [
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Baby Pink",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-baby-pink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Beige",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-beige.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Black",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-black.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Charcoal",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-charcoal.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Coffee",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-coffee.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Cream",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-cream.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Emerald",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-emerald.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Grey",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-grey.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Ice Blue",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-ice-blue.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Mole",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-mole.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Mushroom",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-mushroom.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Putty",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-putty.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Royal Blue",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-royal-blue.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Silver",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-silver.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Soft (Plush) Velvet - Turmeric",
+            "price": 0,
+            "image": "cropped_colors/soft-plush-velvet-turmeric.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Beige",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-beige.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Black",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-black.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Cream",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-cream.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Grey",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-grey.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Mink",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-mink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Pink",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-pink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Silver",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-silver.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - Slate Grey",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-slate-grey.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Naples (Plain Velvet) - White",
+            "price": 0,
+            "image": "cropped_colors/naples-plain-velvet-white.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Ice",
+            "price": 0,
+            "image": "cropped_colors/arlington-ice.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Silver",
+            "price": 0,
+            "image": "cropped_colors/arlington-silver.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Pearl",
+            "price": 0,
+            "image": "cropped_colors/arlington-pearl.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Wheat",
+            "price": 0,
+            "image": "cropped_colors/arlington-wheat.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Mink",
+            "price": 0,
+            "image": "cropped_colors/arlington-mink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Steel",
+            "price": 0,
+            "image": "cropped_colors/arlington-steel.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Candyfloss",
+            "price": 0,
+            "image": "cropped_colors/arlington-candyfloss.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Peacock",
+            "price": 0,
+            "image": "cropped_colors/arlington-peacock.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Arlington - Marine",
+            "price": 0,
+            "image": "cropped_colors/arlington-marine.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Dove",
+            "price": 0,
+            "image": "cropped_colors/teddy-dove.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Ivory (Cream)",
+            "price": 0,
+            "image": "cropped_colors/teddy-ivory-cream.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Latte",
+            "price": 0,
+            "image": "cropped_colors/teddy-latte.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Powder",
+            "price": 0,
+            "image": "cropped_colors/teddy-powder.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Royal",
+            "price": 0,
+            "image": "cropped_colors/teddy-royal.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Teddy - Teal",
+            "price": 0,
+            "image": "cropped_colors/teddy-teal.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Charcoal",
+            "price": 0,
+            "image": "cropped_colors/velvetto-charcoal.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Mink",
+            "price": 0,
+            "image": "cropped_colors/velvetto-mink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Silver",
+            "price": 0,
+            "image": "cropped_colors/velvetto-silver.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Sky Blue",
+            "price": 0,
+            "image": "cropped_colors/velvetto-sky-blue.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Stone",
+            "price": 0,
+            "image": "cropped_colors/velvetto-stone.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - White",
+            "price": 0,
+            "image": "cropped_colors/velvetto-white.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Velvetto - Pink",
+            "price": 0,
+            "image": "cropped_colors/velvetto-pink.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Textured Velvet - Armour",
+            "price": 0,
+            "image": "cropped_colors/textured-velvet-armour.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Textured Velvet - Denim",
+            "price": 0,
+            "image": "cropped_colors/textured-velvet-denim.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Textured Velvet - Ivory",
+            "price": 0,
+            "image": "cropped_colors/textured-velvet-ivory.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Chenille - Black",
+            "price": 0,
+            "image": "cropped_colors/chenille-black.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Chenille - Cream",
+            "price": 0,
+            "image": "cropped_colors/chenille-cream.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Crushed Velvet - Black",
+            "price": 0,
+            "image": "cropped_colors/crushed-velvet-black.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Crushed Velvet - Cream",
+            "price": 0,
+            "image": "cropped_colors/crushed-velvet-cream.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Crushed Velvet - Ice/Light Silver",
+            "price": 0,
+            "image": "cropped_colors/crushed-velvet-icelight-silver.jpg"
+        },
+        {
+            "category": "Fabric & Colour\n*",
+            "name": "Crushed Velvet - White",
+            "price": 0,
+            "image": "cropped_colors/crushed-velvet-white.jpg"
+        }
+    ],
+    "pipingColours": [],
+    "headboardHeights": [
+        {
+            "category": "Headboard Height\n*",
+            "name": "Select an option",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "72\" (6ft) - Custom Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "78\" (6.5ft) - Custom Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "84\" (7ft) - Standard Height",
+            "price": 0,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "90\" (7.5ft) - Custom Height",
+            "price": 200,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "96\" (8ft) - Custom Height",
+            "price": 200,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "102\" (8.5ft) - Custom Height",
+            "price": 400,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "108\" (9ft) - Custom Height",
+            "price": 400,
+            "image": null
+        },
+        {
+            "category": "Headboard Height\n*",
+            "name": "Specific Custom Height",
+            "price": 0,
+            "image": null
+        }
+    ],
+    "mattressOptions": [
+        {
+            "category": "Add a Mattress (Full)\n\t\t\t\t\t*",
+            "name": "No Mattress",
+            "price": 0,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/11/no.png"
+        },
+        {
+            "category": "Add a Mattress (Full)\n\t\t\t\t\t*",
+            "name": "Oxford 2000 (Medium-Firm)",
+            "price": 1699,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/11/Oxford-2000-Pocket-Pristine-Beds-2481243294-RT.jpg"
+        },
+        {
+            "category": "Add a Mattress (Full)\n\t\t\t\t\t*",
+            "name": "Cloud 3000 (Soft)",
+            "price": 2099,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2025/02/cloud-3000-thumbnail-1-scaled.jpg"
+        },
+        {
+            "category": "Add a Mattress (Full)\n\t\t\t\t\t*",
+            "name": "Celebration 2000 (Soft)",
+            "price": 2499,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/11/CELEBRATION-2000-Pristine-Beds-2481243254-RT.jpg"
+        },
+        {
+            "category": "Add a Mattress (Full)\n\t\t\t\t\t*",
+            "name": "Bamboo 5000 (Soft)",
+            "price": 2599,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2025/04/Bamboo-5000-Thumbnail.jpg"
+        },
+        {
+            "category": "Add a Mattress (King)\n\t\t\t\t\t*",
+            "name": "Oxford 2000 Pocket",
+            "price": 1899,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/11/Oxford-2000-Pocket-Pristine-Beds-2481243294-RT.jpg"
+        },
+        {
+            "category": "Add a Mattress (King)\n\t\t\t\t\t*",
+            "name": "Cloud 3000",
+            "price": 2299,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2025/02/cloud-3000-thumbnail-1-scaled.jpg"
+        },
+        {
+            "category": "Add a Mattress (King)\n\t\t\t\t\t*",
+            "name": "Luxury Celebration 2000",
+            "price": 2699,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/11/CELEBRATION-2000-Pristine-Beds-2481243254-RT.jpg"
+        },
+        {
+            "category": "Add a Mattress (King)\n\t\t\t\t\t*",
+            "name": "Bamboo 5000",
+            "price": 2799,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2025/04/Bamboo-5000-Thumbnail.jpg"
+        }
+    ],
+    "otherAddOns": [
+        {
+            "category": "Add Lift Up Storage\n\t\t\t\t\t*",
+            "name": "No",
+            "price": 0,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/12/no-storage-base-board.png"
+        },
+        {
+            "category": "Add Lift Up Storage\n\t\t\t\t\t*",
+            "name": "Yes",
+            "price": 499,
+            "image": "https://theluxurybedcompany.us/wp-content/uploads/2024/12/lift-up-storage.png"
+        }
+    ],
+    "dimensions": {
+        "Twin": "N/A | N/A",
+        "Twin XL": "N/A | N/A",
+        "Full": "84 | 64 (74 HB width)",
+        "Queen": "89 | 70 (90 HB width)",
+        "King": "89 | 86 (114 HB width)",
+        "California King": "93 | 82 (110 HB width)",
+        "Wyoming King": "93 | 94 (122 HB width)"
+    },
+    "specs": {
+        "84": "30",
+        "Product price:": "$3,999.00",
+        "Total options:": "$0.00",
+        "Order total:": "$3,999.00",
+        "BED SIZE": "LENGTH (IN)",
+        "HEADBOARD HEIGHT (IN)": "FOOTBOARD HEIGHT (IN)",
+        "Add-Ons": "Lift Up Storage",
+        "Bed Base": "High Footend, Low Sides",
+        "Headboard Features": "Extra Wide, Panels",
+        "Headboard Style": "Lines",
+        "Size": "California King, Full, King, Queen"
+    },
+    "productImages": [
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-1-700x700.jpg.webp",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-2-700x700.jpg.webp",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-3-700x700.jpg.webp",
+        "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Sono-Signature-Bed-Compress-4-700x700.jpg.webp"
+    ],
+    "sku": 88733,
+    "brand": ""
+}
