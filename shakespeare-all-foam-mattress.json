@@ -1,0 +1,77 @@
+{
+  "url": "https://theluxurybedcompany.com/product/shakespeare-all-foam-mattress/",
+  "title": "Shakespeare All Foam Mattress (Firm)",
+  "price": "£399.00",
+  "description": "",
+  "bullets": [],
+  "sizes": [
+    {
+      "category": "Size\n*",
+      "name": "Select an option",
+      "price": 0,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Single",
+      "price": 0,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Small Double",
+      "price": 100,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Double",
+      "price": 200,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "King",
+      "price": 300,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Super King",
+      "price": 400,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Emperor\t(+£1,000.00)",
+      "price": 1000,
+      "image": null
+    }
+  ],
+  "fabricColours": [],
+  "pipingColours": [],
+  "headboardHeights": [],
+  "mattressOptions": [],
+  "otherAddOns": [],
+  "dimensions": {
+    "Single": "36″ | 75″",
+    "Small Double": "48″ | 75″",
+    "Double": "54″ | 75″",
+    "King": "60″ | 78″",
+    "Super King": "72″ | 78″",
+    "Emperor": "84″ | 84″"
+  },
+  "specs": {
+    "Product price:": "£399.00",
+    "Total options:": "£0.00",
+    "Order total:": "£399.00",
+    "SIZE": "WIDTH",
+    "Firmness": "Firm"
+  },
+  "productImages": [
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Shakespeare-All-Foam-No-Springs-with-Cool-Gel-1-700x700.jpg.webp",
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Shakespeare-All-Foam-No-Springs-with-Cool-Gel-2-700x700.jpg.webp"
+  ],
+  "sku": 40258,
+  "brand": ""
+}
