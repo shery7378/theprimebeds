@@ -1,0 +1,79 @@
+{
+  "url": "https://theluxurybedcompany.com/product/oxford-2000-pocket-mattress/",
+  "title": "Oxford 2000 Mattress (Medium-Firm)",
+  "price": "£499.00",
+  "description": "Medium-firm mattress with 2000 pocket springs, cool gel comfort and a soft, breathable Tencel cover.",
+  "bullets": [],
+  "sizes": [
+    {
+      "category": "Size\n*",
+      "name": "Select an option",
+      "price": 0,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Single",
+      "price": 0,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Small Double",
+      "price": 100,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Double",
+      "price": 200,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "King",
+      "price": 300,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Super King",
+      "price": 400,
+      "image": null
+    },
+    {
+      "category": "Size\n*",
+      "name": "Emperor\t(+£1,000.00)",
+      "price": 1000,
+      "image": null
+    }
+  ],
+  "fabricColours": [],
+  "pipingColours": [],
+  "headboardHeights": [],
+  "mattressOptions": [],
+  "otherAddOns": [],
+  "dimensions": {
+    "Single": "36″ | 75″",
+    "Small Double": "48″ | 75″",
+    "Double": "54″ | 75″",
+    "King": "60″ | 78″",
+    "Super King": "72″ | 78″",
+    "Emperor": "84″ | 84″"
+  },
+  "specs": {
+    "Product price:": "£499.00",
+    "Total options:": "£0.00",
+    "Order total:": "£499.00",
+    "SIZE": "WIDTH",
+    "Firmness": "Medium-Firm"
+  },
+  "productImages": [
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Oxford-2000-Pocket-Mattress-1-700x700.jpg.webp",
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Oxford-2000-Pocket-Mattress-2-700x700.jpg.webp",
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Oxford-2000-Pocket-Mattress-3-700x700.jpg.webp",
+    "https://theluxurybedcompany.com/wp-content/uploads/2024/11/Oxford-2000-Pocket-Mattress-4-700x700.jpg.webp"
+  ],
+  "sku": 40230,
+  "brand": ""
+}
