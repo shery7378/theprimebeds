@@ -483,6 +483,139 @@
 
 </div>
 
+<div class="row mt-5" id="pagination_container" style="display: none;">
+    <div class="col-12 d-flex justify-content-center">
+        {{ $items->appends(request()->input())->links() }}
+    </div>
+</div>
 
+<div class="row mt-4" id="infinite_scroll_loading" style="display: none;">
+    <div class="col-12 text-center" style="padding: 40px 0;">
+        <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--primary-color);"></i>
+        <p class="mt-2" style="color: #718096; font-size: 14px;">{{ __('Loading more products...') }}</p>
+    </div>
+</div>
+
+<script>
+(function() {
+    if (window.catalogInfiniteObserver) {
+        window.catalogInfiniteObserver.disconnect();
+    }
+    if (window.onCatalogScroll) {
+        window.removeEventListener('scroll', window.onCatalogScroll);
+    }
+
+    let loading = false;
+    let mainDiv = document.getElementById('main_div');
+    let loadingIndicator = document.getElementById('infinite_scroll_loading');
+    
+    function getNextUrl() {
+        let nextLink = document.querySelector('#pagination_container .pagination a[rel="next"]');
+        return nextLink ? nextLink.href : null;
+    }
+
+    let nextUrl = getNextUrl();
+
+    function loadMore() {
+        if (loading || !nextUrl) return;
+        loading = true;
+        loadingIndicator.style.display = 'block';
+
+        $.ajax({
+            url: nextUrl,
+            type: 'GET',
+            timeout: 10000, // 10 second timeout
+            success: function(data) {
+                try {
+                    let temp = document.createElement('div');
+                    temp.innerHTML = data;
+                    
+                    let newItems = temp.querySelectorAll('#main_div > div');
+                    newItems.forEach(item => {
+                        mainDiv.appendChild(item);
+                    });
+                    
+                    if (typeof lazy === 'function') {
+                        lazy();
+                    }
+                    
+                    let newPagination = temp.querySelector('#pagination_container');
+                    if (newPagination) {
+                        document.getElementById('pagination_container').innerHTML = newPagination.innerHTML;
+                        nextUrl = getNextUrl();
+                    } else {
+                        nextUrl = null;
+                    }
+                    
+                    if (!nextUrl) {
+                        loadingIndicator.style.display = 'none';
+                        if (window.catalogInfiniteObserver) window.catalogInfiniteObserver.disconnect();
+                        window.removeEventListener('scroll', window.onCatalogScroll);
+                    }
+                    
+                    let showingBadge = document.querySelector('.catalog-count-badge');
+                    if (showingBadge) {
+                        let count = 0;
+                        for (let i = 0; i < mainDiv.children.length; i++) {
+                            if (!mainDiv.children[i].classList.contains('catalog-empty-state')) {
+                                count++;
+                            }
+                        }
+                        showingBadge.innerHTML = 'Showing ' + count + ' products';
+                    }
+                } catch(e) {
+                    console.error("Infinite scroll processing error: ", e);
+                    if (typeof dangerNotification === 'function') {
+                        dangerNotification("Error loading products: " + e.message);
+                    }
+                }
+
+                loading = false;
+                checkScroll();
+            },
+            error: function(xhr, status, error) {
+                console.error("Infinite scroll AJAX error: ", status, error);
+                loading = false;
+                loadingIndicator.style.display = 'none';
+                document.getElementById('pagination_container').style.display = 'flex';
+                if (typeof dangerNotification === 'function') {
+                    dangerNotification("Connection error. Please use the pagination links.");
+                }
+            }
+        });
+    }
+
+    function checkScroll() {
+        if (!nextUrl || loading || !loadingIndicator) return;
+        let rect = loadingIndicator.getBoundingClientRect();
+        if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) + 600) {
+            loadMore();
+        }
+    }
+
+    if (nextUrl && loadingIndicator) {
+        loadingIndicator.style.display = 'block';
+        
+        window.catalogInfiniteObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadMore();
+                }
+            });
+        }, {
+            rootMargin: '600px'
+        });
+        
+        window.catalogInfiniteObserver.observe(loadingIndicator);
+        
+        window.onCatalogScroll = function() {
+            checkScroll();
+        };
+        window.addEventListener('scroll', window.onCatalogScroll);
+        
+        setTimeout(checkScroll, 500);
+    }
+})();
+</script>
 
 <script type="text/javascript" src="{{ asset('assets/front/js/catalog.js') }}"></script>
