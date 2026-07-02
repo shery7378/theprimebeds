@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             Cloud3000MattressSeeder::class,
             CrosbyBedSeeder::class,
             DolsieBedSeeder::class,
+            DelilahBedSeeder::class,
             EchoXBedSeeder::class,
             EllieDivanBedSeeder::class,
             EmersonKidsBedSeeder::class,
