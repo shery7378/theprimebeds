@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
             OpulenceBedSeeder::class,
             Oxford2000MattressSeeder::class,
             RaeKidsBedSeeder::class,
+            ReynoldsResidenceBedSeeder::class,
             RichardsonRoyaleBedSeeder::class,
             RichardsonRoyaleDivanBedSeeder::class,
             RichardsonRoyaleOttomanBedSeeder::class,
