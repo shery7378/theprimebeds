@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             Imperial1000PillowtopMattressSeeder::class,
             IndulgenceOttomanBedSeeder::class,
             InvictaLuxeKidsBedSeeder::class,
+            IvyBedSeeder::class,
             IssyBedSeeder::class,
             IssyKidsBedSeeder::class,
             IvyOttomanBedSeeder::class,
