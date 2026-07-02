@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AlexanderBedSeeder::class,
             AlexanderKidsBedSeeder::class,
             AllureBedSeeder::class,
+            AlwynBedSeeder::class,
             Ambassador2000PillowtopMattressSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
