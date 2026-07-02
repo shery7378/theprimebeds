@@ -82,6 +82,7 @@ class DatabaseSeeder extends Seeder
             RichardsonRoyaleDivanBedSeeder::class,
             RichardsonRoyaleOttomanBedSeeder::class,
             RobynBedSeeder::class,
+            RoselynBedSeeder::class,
             RoselynKidsBedSeeder::class,
             RosieBedSeeder::class,
             RosieDivanBedSeeder::class,
