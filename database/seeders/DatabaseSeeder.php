@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
             ArielBedSeeder::class,
+            AveryBedSeeder::class,
             AvaGraceBedSeeder::class,
             AvaGraceDivanBedSeeder::class,
             AvaGraceOttomanBedSeeder::class,
