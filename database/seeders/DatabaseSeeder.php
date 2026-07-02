@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             AriBedSeeder::class,
             EmersonBedSeeder::class,
             IsabellaBedSeeder::class,
+            LyonHybridBedSeeder::class,
             Ambassador2000PillowtopMattressSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
