@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
             DolsieBedSeeder::class,
             DelilahBedSeeder::class,
             EchoXBedSeeder::class,
+            EchoBedSeeder::class,
             EllieDivanBedSeeder::class,
             EloiseBedSeeder::class,
             EmersonKidsBedSeeder::class,
