@@ -4,7 +4,7 @@
     @foreach ($items as $item)
     <div class="product-card p-col">
         <a class="product-thumb" href="{{route('front.product',$item->slug)}}">
-            <img class="lazy" alt="Product" src="{{url('assets/img/'.$item->thumbnail)}}" style=""></a>
+            <img class="lazy" alt="Product" src="{{ filter_var($item->thumbnail, FILTER_VALIDATE_URL) ? $item->thumbnail : url('assets/img/'.$item->thumbnail) }}" style=""></a>
         <div class="product-card-body">
             <h3 class="product-title"><a href="{{route('front.product',$item->slug)}}">
                 {{ Str::limit($item->name, 35) }}

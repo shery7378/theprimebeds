@@ -337,7 +337,7 @@
                         @if($discPct)
                             <div class="product-badge product-badge2 bg-info">-{{ $discPct }}</div>
                         @endif
-                        <img class="lazy" src="{{ url('assets/img/' . $item->thumbnail) }}" alt="{{ $item->name }}">
+                        <img class="lazy" src="{{ filter_var($item->thumbnail, FILTER_VALIDATE_URL) ? $item->thumbnail : url('assets/img/' . $item->thumbnail) }}" alt="{{ $item->name }}">
                         <div class="product-button-group">
                             <a class="product-button wishlist_store"
                                 href="{{ route('user.wishlist.store', $item->id) }}"
@@ -380,7 +380,7 @@
                     {{-- Thumbnail --}}
                     <a class="pc__thumb-link" href="{{ route('front.product', $item->slug) }}">
                         <div class="pc-list__thumb">
-                            <img class="lazy" src="{{ url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
+                            <img class="lazy" src="{{ filter_var($item->thumbnail, FILTER_VALIDATE_URL) ? $item->thumbnail : url('assets/img/'.$item->thumbnail) }}" alt="{{ $item->name }}">
 
                             {{-- Left Action Buttons --}}
                             <div class="pc__actions">
