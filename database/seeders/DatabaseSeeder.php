@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             MidlandBedSeeder::class,
             BostonXBedSeeder::class,
             WestinBedSeeder::class,
+            BostonBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
