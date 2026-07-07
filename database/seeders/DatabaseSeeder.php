@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             SonoGlassBedSeeder::class,
             HyattBedSeeder::class,
             ManorhouseBedSeeder::class,
+            MerrickBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
