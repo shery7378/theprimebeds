@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             MountValeBedSeeder::class,
             VermontBedSeeder::class,
             BellagioBedSeeder::class,
+            GrandeurBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
