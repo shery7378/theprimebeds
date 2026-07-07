@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
             GrandeurBedSeeder::class,
             GrantleyBedSeeder::class,
             MarilynOttomanBedSeeder::class,
+            EllieOttomanBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
