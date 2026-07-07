@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             IndulgenceHybridBedSeeder::class,
             MerryDeluxeBedSeeder::class,
             PerriBedSeeder::class,
+            IvyDivanBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
