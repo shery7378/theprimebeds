@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             TaraLuxeBedSeeder::class,
             Ambassador2000PillowtopMattressSeeder::class,
             AmbassadorBedSeeder::class,
+            IndulgenceHybridBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
