@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             MerrickBedSeeder::class,
             FontaineBedSeeder::class,
             MountValeBedSeeder::class,
+            VermontBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
