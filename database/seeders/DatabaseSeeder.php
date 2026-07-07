@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             LylaLouiseBedSeeder::class,
             TaraLuxeBedSeeder::class,
             Ambassador2000PillowtopMattressSeeder::class,
+            AmbassadorBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
