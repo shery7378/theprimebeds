@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             FontaineBedSeeder::class,
             MountValeBedSeeder::class,
             VermontBedSeeder::class,
+            BellagioBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
