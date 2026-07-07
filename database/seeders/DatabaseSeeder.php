@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             Ambassador2000PillowtopMattressSeeder::class,
             AmbassadorBedSeeder::class,
             IndulgenceHybridBedSeeder::class,
+            MerryDeluxeBedSeeder::class,
             AmbassadorDivanBedSeeder::class,
             AmbassadorOttomanBedSeeder::class,
             AriXBedSeeder::class,
